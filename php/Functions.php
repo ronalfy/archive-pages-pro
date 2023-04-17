@@ -2,10 +2,10 @@
 /**
  * Helper functions for the plugin.
  *
- * @package HAS
+ * @package APP
  */
 
-namespace DLXPlugins\HAS;
+namespace DLXPlugins\APP;
 
 /**
  * Class Functions
@@ -75,10 +75,10 @@ class Functions {
 				case 'url':
 					return esc_url( $attributes[ $attribute ] );
 				case 'default':
-					return new \WP_Error( 'has_dlx_unknown_type', __( 'Unknown type.', 'highlight-and-share' ) );
+					return new \WP_Error( 'has_dlx_unknown_type', __( 'Unknown type.', 'archive-pages-pro' ) );
 			}
 		}
-		return new \WP_Error( 'has_dlx_attribute_not_found', __( 'Attribute not found.', 'highlight-and-share' ) );
+		return new \WP_Error( 'has_dlx_attribute_not_found', __( 'Attribute not found.', 'archive-pages-pro' ) );
 	}
 
 	/**
@@ -103,7 +103,7 @@ class Functions {
 	 * @return string URL to admin screen. Output is not escaped.
 	 */
 	public static function get_settings_url( $tab = '', $sub_tab = '' ) {
-		$options_url = admin_url( 'options-general.php?page=highlight-and-share' );
+		$options_url = admin_url( 'options-general.php?page=archive-pages-pro' );
 		if ( ! empty( $tab ) ) {
 			$options_url = add_query_arg( array( 'tab' => sanitize_title( $tab ) ), $options_url );
 			if ( ! empty( $sub_tab ) ) {
@@ -122,35 +122,6 @@ class Functions {
 		$css[] = 'display';
 		$css[] = 'visibility';
 		return $css;
-	}
-
-	/**
-	 * Retrieve a post's URL
-	 *
-	 * Retrieve a post's URL (may be shortened)
-	 *
-	 * @since 1.1
-	 *
-	 * @param int $post_id Post ID to retrieve the URL for.
-	 * @return string $url URL to the post
-	 */
-	public static function get_content_url( $post_id ) {
-		$settings          = Options::get_plugin_options();
-		$enable_shortlinks = isset( $settings['shortlinks'] ) ? (bool) $settings['shortlinks'] : false;
-		$url               = get_permalink( $post_id );
-		if ( $enable_shortlinks ) {
-			$url = wp_get_shortlink( $post_id );
-		}
-
-		/**
-		 * Filter: has_content_url
-		 *
-		 * Modify the post or page URL that Highlight and Share uses for sharing.
-		 *
-		 * @param string Post or Page URL (may be shortened).
-		 * @param int    The post or page ID.
-		 */
-		return apply_filters( 'has_content_url', $url, $post_id );
 	}
 
 	/**
@@ -213,111 +184,12 @@ class Functions {
 	}
 
 	/**
-	 * Get all fonts used for the blocks.
-	 *
-	 * @param array $blocks Array of blocks/innerblocks.
-	 */
-	public static function get_block_fonts( $blocks, $fonts = array() ) {
-		$devices = array(
-			'desktop',
-			'mobile',
-			'tablet',
-		);
-		if ( ! empty( $blocks ) ) {
-			foreach ( $blocks as $block ) {
-				if ( 'has/click-to-share' === $block['blockName'] ) {
-					$quote_font = $block['attrs']['typographyQuote'] ?? false;
-					$cts_font   = $block['attrs']['typographyShareText'] ?? false;
-					if ( $quote_font ) {
-						foreach ( $devices as $device ) {
-							$font      = $quote_font[ $device ];
-							$font_slug = $font['fontFamilySlug'];
-							if ( ! isset( $fonts[ $font_slug ] ) ) {
-								$fonts[ $font_slug ] = $font;
-							}
-						}
-					}
-					if ( $cts_font ) {
-						foreach ( $devices as $device ) {
-							$font      = $cts_font[ $device ];
-							$font_slug = $font['fontFamilySlug'];
-							if ( ! isset( $fonts[ $font_slug ] ) ) {
-								$fonts[ $font_slug ] = $font;
-							}
-						}
-					}
-				}
-				if ( ! empty( $block['innerBlocks'] ) ) {
-					self::get_block_fonts( $block['innerBlocks'], $fonts );
-				}
-			}
-		}
-		return $fonts;
-	}
-
-	/**
-	 * Check if Adobe Fonts are enabled or not.
-	 *
-	 * @return bool True if enabled, false if not.
-	 */
-	public static function is_adobe_fonts_enabled() {
-		$block_editor_options = Options::get_block_editor_options( true );
-		$adobe_project_id     = $block_editor_options['adobe_project_id'] ?? '';
-		$adobe_fonts          = $block_editor_options['adobe_fonts'] ?? false;
-		$adobe_fonts_enabled  = $block_editor_options['enable_adobe_fonts'] ?? false;
-
-		if ( $adobe_fonts_enabled && ! empty( $adobe_fonts ) && ! empty( $adobe_project_id ) ) {
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Get's a user's IP address (or at least tries to).
-	 */
-	public static function get_user_ip() {
-		if ( array_key_exists( 'HTTP_X_FORWARDED_FOR', $_SERVER ) && ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
-			if ( strpos( $_SERVER['HTTP_X_FORWARDED_FOR'], ',' ) > 0 ) {
-				$addr = explode( ',', $_SERVER['HTTP_X_FORWARDED_FOR'] );
-				return trim( $addr[0] );
-			} else {
-				return $_SERVER['HTTP_X_FORWARDED_FOR'];
-			}
-		} else {
-			return $_SERVER['REMOTE_ADDR'];
-		}
-	}
-
-	/**
-	 * Take a _ separated field and convert to camelcase.
-	 *
-	 * @param string $field Field to convert to camelcase.
-	 *
-	 * @return string camelCased field.
-	 */
-	public static function to_camelcase( string $field ) {
-		return str_replace( '_', '', lcfirst( ucwords( $field, '_' ) ) );
-	}
-
-	/**
-	 * Take a camelcase field and converts it to underline case.
-	 *
-	 * @param string $field Field to convert to camelcase.
-	 *
-	 * @return string $field Field name in camelCase..
-	 */
-	public static function to_underlines( string $field ) {
-		$field = strtolower( preg_replace( '/([a-z])([A-Z])/', '$1_$2', $field ) );
-		return $field;
-	}
-
-	/**
 	 * Return the plugin slug.
 	 *
 	 * @return string plugin slug.
 	 */
 	public static function get_plugin_slug() {
-		return dirname( plugin_basename( HIGHLIGHT_AND_SHARE_FILE ) );
+		return dirname( plugin_basename( ARCHIVE_PAGES_PRO_FILE ) );
 	}
 
 	/**
@@ -326,7 +198,7 @@ class Functions {
 	 * @return string base file for the plugin.
 	 */
 	public static function get_plugin_file() {
-		return plugin_basename( HIGHLIGHT_AND_SHARE_FILE );
+		return plugin_basename( ARCHIVE_PAGES_PRO_FILE );
 	}
 
 	/**
@@ -335,157 +207,7 @@ class Functions {
 	 * @return float version for the plugin.
 	 */
 	public static function get_plugin_version() {
-		return HIGHLIGHT_AND_SHARE_VERSION;
-	}
-
-	/**
-	 * Get the plugin author name.
-	 */
-	public static function get_plugin_author() {
-		/**
-		 * Filer the output of the plugin Author.
-		 *
-		 * Potentially change branding of the plugin.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param string Plugin Author name.
-		 */
-		$plugin_author = apply_filters( 'has_dlx_plugin_author', 'MediaRon LLC' );
-		return $plugin_author;
-	}
-
-	/**
-	 * Return the Plugin author URI.
-	 */
-	public static function get_plugin_author_uri() {
-		/**
-		 * Filer the output of the plugin Author URI.
-		 *
-		 * Potentially change branding of the plugin.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param string Plugin Author URI.
-		 */
-		$plugin_author = apply_filters( 'has_dlx_plugin_author_uri', 'https://mediaron.com' );
-		return $plugin_author;
-	}
-
-	/**
-	 * Return the plugin name for the plugin.
-	 *
-	 * @return string Plugin name.
-	 */
-	public static function get_plugin_name() {
-		/**
-		 * Filer the output of the plugin name.
-		 *
-		 * Potentially change branding of the plugin.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param string Plugin name.
-		 */
-		return apply_filters( 'has_dlx_plugin_name', __( 'Highlight and Share', 'highlight-and-share' ) );
-	}
-
-	/**
-	 * Return the plugin description for the plugin.
-	 *
-	 * @return string plugin description.
-	 */
-	public static function get_plugin_description() {
-		/**
-		 * Filer the output of the plugin name.
-		 *
-		 * Potentially change branding of the plugin.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param string Plugin description.
-		 */
-		return apply_filters( 'has_dlx_plugin_description', __( 'An alert and notification block inspired by Bootstrap, Material UI, and Chakra UI.', 'highlight-and-share' ) );
-	}
-
-	/**
-	 * Retrieve the plugin URI.
-	 */
-	public static function get_plugin_uri() {
-		/**
-		 * Filer the output of the plugin URI.
-		 *
-		 * Potentially change branding of the plugin.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param string Plugin URI.
-		 */
-		return apply_filters( 'has_dlx_plugin_uri', 'https://dlxplugins.com/plugins/highlight-and-share' );
-	}
-
-	/**
-	 * Retrieve the plugin support URI.
-	 */
-	public static function get_plugin_support_uri() {
-		/**
-		 * Filer the output of the plugin support URI.
-		 *
-		 * Potentially change branding of the plugin.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param string Plugin Support URI.
-		 */
-		return apply_filters( 'has_dlx_plugin_support_uri', 'https://dlxplugins.com/support/' );
-	}
-
-	/**
-	 * Retrieve the plugin documentation URI.
-	 */
-	public static function get_plugin_docs_uri() {
-		/**
-		 * Filer the output of the plugin docs URI.
-		 *
-		 * Potentially change branding of the plugin.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param string Plugin Docs URI.
-		 */
-		return apply_filters( 'has_dlx_plugin_docs_uri', 'https://has.dlxplugins.com/' );
-	}
-
-	/**
-	 * Retrieve the plugin documentation URI.
-	 */
-	public static function get_plugin_ratings_uri() {
-		/**
-		 * Filer the output of the plugin ratings URI.
-		 *
-		 * Potentially change branding of the plugin.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param string Plugin ratings URI.
-		 */
-		return apply_filters( 'has_dlx_plugin_docs_uri', 'https://dlxplugins.com/support/' );
-	}
-
-	/**
-	 * Retrieve the plugin title.
-	 */
-	public static function get_plugin_title() {
-		/**
-		 * Filer the output of the plugin title.
-		 *
-		 * Potentially change branding of the plugin.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param string Plugin Menu Name.
-		 */
-		return apply_filters( 'has_dlx_plugin_menu_title', self::get_plugin_name() );
+		return ARCHIVE_PAGES_PRO_VERSION;
 	}
 
 	/**
@@ -657,7 +379,7 @@ class Functions {
 	 * @return string The new path.
 	 */
 	public static function get_plugin_dir( $path = '' ) {
-		$dir = rtrim( plugin_dir_path( HIGHLIGHT_AND_SHARE_FILE ), '/' );
+		$dir = rtrim( plugin_dir_path( ARCHIVE_PAGES_PRO_FILE ), '/' );
 		if ( ! empty( $path ) && is_string( $path ) ) {
 			$dir .= '/' . ltrim( $path, '/' );
 		}
@@ -672,7 +394,7 @@ class Functions {
 	 * @return string URL to to the file.
 	 */
 	public static function get_plugin_url( $path = '' ) {
-		$dir = rtrim( plugin_dir_url( HIGHLIGHT_AND_SHARE_FILE ), '/' );
+		$dir = rtrim( plugin_dir_url( ARCHIVE_PAGES_PRO_FILE ), '/' );
 		if ( ! empty( $path ) && is_string( $path ) ) {
 			$dir .= '/' . ltrim( $path, '/' );
 		}

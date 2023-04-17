@@ -25,24 +25,24 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => 'dev-master',
-    'version' => 'dev-master',
+    'pretty_version' => 'dev-development',
+    'version' => 'dev-development',
     'aliases' => 
     array (
     ),
-    'reference' => 'e19ee7697db895cd75bd9c2f260df51c75eb7c48',
-    'name' => 'dlxplugins/highlight-and-share',
+    'reference' => 'e863bd48ee6226fee50f6af3ab43c048be41e68b',
+    'name' => 'dlxplugins/archive-pages-pro',
   ),
   'versions' => 
   array (
-    'dlxplugins/highlight-and-share' => 
+    'dlxplugins/archive-pages-pro' => 
     array (
-      'pretty_version' => 'dev-master',
-      'version' => 'dev-master',
+      'pretty_version' => 'dev-development',
+      'version' => 'dev-development',
       'aliases' => 
       array (
       ),
-      'reference' => 'e19ee7697db895cd75bd9c2f260df51c75eb7c48',
+      'reference' => 'e863bd48ee6226fee50f6af3ab43c048be41e68b',
     ),
   ),
 );

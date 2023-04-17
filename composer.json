@@ -1,6 +1,6 @@
 {
-    "name": "dlxplugins/highlight-and-share",
-    "description": "An easy-to-use content highlighter.",
+    "name": "dlxplugins/archive-pages-pro",
+    "description": "Easily map custom post type archives, term archives, 404 pages, and user archives to a page.",
     "type": "project",
     "license": "GPL",
     "authors": [
@@ -15,7 +15,7 @@
     },
       "autoload": {
         "psr-4": {
-            "DLXPlugins\\HAS\\": "php/"
+            "DLXPlugins\\APP\\": "php/"
         }
     }
 }

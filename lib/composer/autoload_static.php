@@ -9,12 +9,12 @@ class ComposerStaticInitf687c17cff0f481f8e019006b201c903
     public static $prefixLengthsPsr4 = array (
         'D' => 
         array (
-            'DLXPlugins\\HAS\\' => 15,
+            'DLXPlugins\\APP\\' => 15,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'DLXPlugins\\HAS\\' => 
+        'DLXPlugins\\APP\\' => 
         array (
             0 => __DIR__ . '/../..' . '/php',
         ),
