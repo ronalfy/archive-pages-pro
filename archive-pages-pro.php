@@ -57,6 +57,86 @@ class Archive_Pages_Pro {
 	 */
 	public function plugins_loaded() {
 
+		// Enqueue scripts.
+		$enqueue = new Enqueue();
+		$enqueue->run();
+
+		// Init REST.
+		$rest = new REST();
+		$rest->run();
+
+		add_action( 'admin_init', array( $this, 'init_settings_api' ) );
+		//add_action( 'pre_get_posts', array( $this, 'maybe_override_archive' ) );
+
+		// Output admin notices once when saving archive mapping.
+		//add_action( 'admin_notices', array( $this, 'admin_notices' ) );
+
+		// 404 page detection.
+		//add_filter( 'template_include', array( $this, 'maybe_force_404_template' ), 1 );
+	}
+
+	/**
+	 * Initialize options
+	 *
+	 * Initialize page settings, fields, and sections and their callbacks
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @see init
+	 */
+	public function init_settings_api() {
+
+		// Get taxonomies.
+		$taxonomies = get_taxonomies(
+			array(
+				'public' => true,
+			),
+			'objects'
+		);
+		foreach ( $taxonomies as $taxonomy ) {
+			add_action( "{$taxonomy->name}_edit_form", array( $this, 'map_term_interface' ) );
+		}
+		add_action( 'edit_term', array( $this, 'save_mapped_term' ) );
+
+		add_settings_section(
+			'archive-pages-pro',
+			false,
+			array( $this, 'settings_section' ),
+			'reading'
+		);
+
+		add_settings_field(
+			'archive-pages-pro',
+			__( 'Archive Pages Pro', 'post-type-archive-mapping' ),
+			array( $this, 'add_settings_reading' ),
+			'reading',
+			'archive-pages-pro'
+		);
+	}
+
+	/**
+	 * Output settings HTML
+	 *
+	 * Output any HTML required to go into a settings section
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @see init_admin_settings
+	 */
+	public function settings_section() {
+	}
+
+	/**
+	 * Add post type options to Settings->Reading screen.
+	 *
+	 * @param array $args Post Type arguments.
+	 */
+	public function add_settings_reading( $args ) {
+		?>
+		<div id="app-reading">Loading...</div>
+		<?php
 	}
 
 	/**
@@ -73,11 +153,16 @@ class Archive_Pages_Pro {
 	}
 }
 
-add_action( 'plugins_loaded', __NAMESPACE__ . '\archive_pages_pro_instantiate' );
+add_action( 'plugins_loaded', __NAMESPACE__ . '\archive_pages_pro_instantiate', 9 );
 /**
  * Instantiate the APP class.
  */
 function archive_pages_pro_instantiate() {
+
+	// Disable post type mapping in custom query blocks.
+	//add_filter( 'ptam_archive_mapping_disabled', '__return_true' );
+
+	// Set up our plugin.
 	$app_instance = Archive_Pages_Pro::get_instance();
 	$app_instance->plugins_loaded();
 }

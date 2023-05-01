@@ -1,0 +1,115 @@
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/resolve-url-loader/index.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/scss/admin.scss ***!
+  \*****************************************************************************************************************************************************************************************************************/
+@keyframes app-pub-spin {
+  100% {
+    transform: rotate(360deg); } }
+
+/* Admin Interface Wrapper */
+#app-pub-content {
+  padding-top: 18px; }
+
+/* Admin loading icon */
+.app-pub-load-static-svg svg {
+  animation: app-pub-spin;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; }
+
+/* Url Wrapper Input */
+.app-url-input {
+  display: inline-block;
+  max-width: 400px;
+  width: 100%;
+  flex-wrap: wrap;
+  position: relative; }
+  .app-url-input .components-base-control .components-base-control__label {
+    font-size: 16px;
+    display: block;
+    width: 100%; }
+  .app-url-input .apppub-suggestions-wrapper {
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    max-height: 250px;
+    overflow-y: auto; }
+    .app-url-input .apppub-suggestions-wrapper .app-url-input__suggestion {
+      position: relative;
+      border: 1px solid #ddd;
+      border-radius: 0;
+      width: 100%;
+      background: #FFF;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: left;
+      padding: 5px 20px 5px 40px; }
+      .app-url-input .apppub-suggestions-wrapper .app-url-input__suggestion svg {
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        top: calc(50% - 8px);
+        left: 10px; }
+        .app-url-input .apppub-suggestions-wrapper .app-url-input__suggestion svg path {
+          fill: unset; }
+      .app-url-input .apppub-suggestions-wrapper .app-url-input__suggestion.is-selected {
+        background: #f1f1f1;
+        border-color: var(--wp-admin-theme-color); }
+      .app-url-input .apppub-suggestions-wrapper .app-url-input__suggestion .apppub-search-item {
+        display: block;
+        margin-right: 8px;
+        white-space: pre-wrap;
+        overflow-wrap: break-word; }
+      .app-url-input .apppub-suggestions-wrapper .app-url-input__suggestion .apppub-search-item-title {
+        display: block;
+        margin-bottom: 0.2em;
+        font-weight: 500;
+        position: relative;
+        overflow: hidden;
+        text-overflow: ellipsis; }
+      .app-url-input .apppub-suggestions-wrapper .app-url-input__suggestion .apppub-search-item-info {
+        word-break: break-all;
+        display: block;
+        color: #757575;
+        font-size: .9em;
+        line-height: 1.3; }
+
+.app-pub-url-input__wrapper label {
+  display: block;
+  width: 100%;
+  font-weight: 600;
+  margin-bottom: 5px; }
+
+.app-pub-url-input__wrapper .app-pub-url-input__suggestion {
+  background: #FFF;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-size: 13px;
+  padding: 11px 36px 11px 16px;
+  width: 100%; }
+
+.app-pub-url-input__wrapper .app-pub-url-input__input-wrapper {
+  position: relative;
+  width: 100%; }
+  .app-pub-url-input__wrapper .app-pub-url-input__input-wrapper input[type="text"] {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 13px;
+    padding: 11px 36px 11px 16px;
+    width: 100%; }
+  .app-pub-url-input__wrapper .app-pub-url-input__input-wrapper .app-pub-url-input__input {
+    line-height: 1; }
+  .app-pub-url-input__wrapper .app-pub-url-input__input-wrapper .components-spinner {
+    position: absolute;
+    right: 36px;
+    height: 24px;
+    top: calc(50% - 15px); }
+  .app-pub-url-input__wrapper .app-pub-url-input__input-wrapper .components-button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%; }
+
+
+/*# sourceMappingURL=app-admin.css.map*/
