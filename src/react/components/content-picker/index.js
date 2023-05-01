@@ -311,9 +311,10 @@ const ContentPicker = ( props ) => {
 									{ currentSuggestion.label }
 								</span>
 								<Button
+									variant="primary"
 									icon="no"
 									iconSize={ 18 }
-									label={ __( 'Remove Current Suggestion', 'archive-pages-pro' ) }
+									label={ __( 'Remove Current Selection', 'archive-pages-pro' ) }
 									onClick={ () => {
 										setCurrentSuggestion( null );
 									} }
@@ -345,7 +346,7 @@ const ContentPicker = ( props ) => {
 								<Spinner />
 							}
 							<Button
-								icon="editor-break"
+								icon="search"
 								iconSize={ 18 }
 								label={ __( 'Search for a Page', 'archive-pages-pro' ) }
 								onClick={ () => {

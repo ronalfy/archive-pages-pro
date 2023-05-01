@@ -19503,9 +19503,10 @@ var ContentPicker = function ContentPicker(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     className: "app-pub-url-input__suggestion-label"
   }, currentSuggestion.label), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    variant: "primary",
     icon: "no",
     iconSize: 18,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Remove Current Suggestion', 'archive-pages-pro'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Remove Current Selection', 'archive-pages-pro'),
     onClick: function onClick() {
       setCurrentSuggestion(null);
     }
@@ -19522,7 +19523,7 @@ var ContentPicker = function ContentPicker(props) {
     "aria-autocomplete": "list",
     ref: inputRef
   }), loading && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    icon: "editor-break",
+    icon: "search",
     iconSize: 18,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Search for a Page', 'archive-pages-pro'),
     onClick: function onClick() {

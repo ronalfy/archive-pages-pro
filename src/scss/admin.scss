@@ -49,6 +49,7 @@
 			align-items: center;
 			text-align: left;
 			padding: 5px 20px 5px 40px;
+			transition: all 0.4s ease-in-out;
 
 			svg {
 				position: absolute;
@@ -59,6 +60,11 @@
 				path {
 					fill: unset;
 				}
+			}
+
+			&:hover {
+				background: #f1f1f1;
+				border-color: var( --wp-admin-theme-color );
 			}
 
 			&.is-selected {
@@ -103,11 +109,19 @@
 		border: 1px solid #ddd;
 		border-radius: 3px;
 		font-size: 13px;
-		padding: 11px 36px 11px 16px;
+		padding: 11px 16px 11px 16px;
 		width: 100%;
+	}
+	.app-pub-url-input__suggestion-item {
+		.components-button {
+			margin-left: 8px;
+		}
 	}
 	.app-pub-url-input__input-wrapper {
 		position: relative;
+		display: grid;
+		grid-template-columns: 1fr 36px;
+		grid-gap: 10px;
 		width: 100%;
 		input[type="text"] {
 			border: 1px solid #ddd;
@@ -121,16 +135,36 @@
 		}
 		.components-spinner {
 			position: absolute;
-			right: 36px;
+			right: 48px;
 			height: 24px;
 			top: calc(50% - 15px);
 		}
-		.components-button {
-			position: absolute;
-			right: 0;
-			top: 0;
-			height: 100%;
+		.app-pub-url-input__input ~ .components-button {
+			position: relative;
+			box-shadow: unset;
+			border: unset;
+			background: unset;
 		}
 	}
-	
+}
+
+.app-pub-url-input__input ~ .components-button,
+.app-pub-url-input__suggestion-item .components-button {
+	position: relative;
+
+	.components-tooltip {
+		display: inline-block;
+		background: #333;
+		color: #FFF;
+		padding: 8px 12px;
+		border-radius: 3px;
+		font-size: 12px;
+		position: absolute;
+		top: calc(50% - 8px);
+		right: 10px;
+		min-width: 150px;
+		height: auto;
+		transition: opacity .2s ease-in-out;
+		cursor: pointer;
+	}
 }
