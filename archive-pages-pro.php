@@ -36,6 +36,20 @@ class Archive_Pages_Pro {
 	private static $instance = null;
 
 	/**
+	 * The current page number.
+	 *
+	 * @var int $paged The current page number.
+	 */
+	protected static $paged = null;
+
+	/**
+	 * Holds the paged reset argument.
+	 *
+	 * @var bool $paged_reset
+	 */
+	protected static $paged_reset = false;
+
+	/**
 	 * Return an instance of the class
 	 *
 	 * Return an instance of the Highlight and Share Class.
@@ -65,8 +79,12 @@ class Archive_Pages_Pro {
 		$rest = new REST();
 		$rest->run();
 
+		// Init Yoast.
+		$yoast = new Yoast();
+		$yoast->run();
+
 		add_action( 'admin_init', array( $this, 'init_settings_api' ) );
-		//add_action( 'pre_get_posts', array( $this, 'maybe_override_archive' ) );
+		add_action( 'pre_get_posts', array( $this, 'maybe_override_archive' ) );
 
 		// Output admin notices once when saving archive mapping.
 		//add_action( 'admin_notices', array( $this, 'admin_notices' ) );
@@ -188,21 +206,100 @@ class Archive_Pages_Pro {
 			return;
 		}
 
-		// Parse the post types into data attributes.
-		$post_types_data = array();
-		foreach ( $post_types as $post_type ) {
-			$post_types_data[] = array(
-				'value' => $post_type->name,
-				'label' => $post_type->label,
-			);
+		?>
+		<div id="app-reading"><?php esc_html_e( 'Loading...', 'archive-pages-pro' ); ?></div>
+		<?php
+	}
+
+	/**
+	 * Override an archive page based on passed query arguments.
+	 *
+	 * @param WP_Query $query The query to check.
+	 */
+	public function maybe_override_archive( $query ) {
+		if ( is_admin() ) {
+			return $query;
+		}
+		// Maybe Redirect.
+		if ( is_page() ) {
+			$object_id = get_queried_object_id();
+			$post_meta = get_post_meta( $object_id, '_post_type_mapped', true );
+			if ( $post_meta ) {
+				if ( $post_meta && ! get_query_var( 'redirected' ) ) {
+					wp_safe_redirect( get_post_type_archive_link( $post_meta ) );
+					exit;
+				}
+			} else {
+				if ( get_query_var( 'paged' ) ) {
+					$query->set( 'paged', get_query_var( 'paged' ) );
+				}
+				return;
+			}
 		}
 
-		// Map to a data attribute.
-		$post_types_data = wp_json_encode( $post_types_data );
+		// trigger this once after running the main query.
+		if ( true === self::$paged_reset ) {
+			$query->set( 'paged', self::$paged );
+			set_query_var( 'paged', self::$paged );
 
-		?>
-		<div id="app-reading" data-post-types="<?php echo esc_attr( $post_types_data ); ?>"><?php esc_html_e( 'Loading...', 'archive-pages-pro' ); ?></div>
-		<?php
+			self::$paged_reset = false;
+		}
+
+		$post_types = get_option( 'post-type-archive-mapping', array() );
+		if ( empty( $post_types ) && is_admin() && ! is_tax() ) {
+			return;
+		}
+
+		// trigger this the first time to get the current page.
+		if ( is_null( self::$paged ) ) {
+			self::$paged = get_query_var( 'paged' );
+		}
+		if ( is_array( $post_types ) && ! empty( $post_types ) ) {
+			foreach ( $post_types as $post_type => $post_id ) {
+				if ( is_post_type_archive( $post_type ) && 'default' !== $post_id && $query->is_main_query() ) {
+					$post_id = absint( $post_id );
+					$post_id = apply_filters( 'wpml_object_id', $post_id, 'page', true );
+					$query->set( 'post_type', 'page' );
+					$query->set( 'page_id', $post_id );
+					$query->set( 'redirected', true );
+					$query->set( 'original_archive_type', 'page' );
+					$query->set( 'original_archive_id', $post_type );
+					$query->set( 'term_tax', '' );
+					$query->set( 'paged', self::$paged );
+					$query->is_archive           = false;
+					$query->is_single            = true;
+					$query->is_singular          = true;
+					$query->is_post_type_archive = false;
+					self::$paged_reset           = true;
+				}
+			}
+		}
+		if ( is_tax() || $query->is_category || $query->is_tag ) {
+			$post_id = get_term_meta( get_queried_object_id(), '_term_archive_mapping', true );
+			$term    = get_queried_object();
+			if ( $post_id && 'default' !== $post_id ) {
+				$post_id = absint( $post_id );
+				$query->set( 'post_type', 'page' );
+				$query->set( 'page_id', $post_id );
+				$query->set( 'redirected', true );
+				$query->set( 'paged', self::$paged );
+				$query->set( 'original_archive_type', 'term' );
+				$query->set( 'original_archive_id', absint( $term->term_id ) );
+				$query->set( 'term_tax', sanitize_text_field( $term->taxonomy ) );
+				$query->is_page              = true;
+				$query->is_archive           = false;
+				$query->is_category          = false;
+				$query->is_tag               = false;
+				$query->is_tax               = false;
+				$query->is_single            = true;
+				$query->is_singular          = true;
+				$query->is_post_type_archive = false;
+				$query->queried_object_id    = $post_id;
+
+				$query->queried_object = get_post( $post_id, OBJECT );
+				self::$paged_reset     = true;
+			}
+		}
 	}
 
 	/**
