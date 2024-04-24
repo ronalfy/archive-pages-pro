@@ -5,9 +5,9 @@
 	"main": "index.js",
 	"sideEffects": false,
 	"scripts": {
-		"start": "webpack --watch --env mode=development",
-		"dev": "webpack --mode development --env mode=development",
-		"build": "webpack --mode production --env mode=production"
+		"start": "wp-scripts start --env mode=development",
+		"build": "wp-scripts build --env mode=production",
+		"zip": "wp-scripts plugin-zip"
 	},
 	"repository": {
 		"type": "git",
@@ -33,6 +33,7 @@
 		"@wordpress/escape-html": "^2.15.0",
 		"@wordpress/eslint-plugin": "^10.0.1",
 		"@wordpress/i18n": "^4.11.0",
+		"@wordpress/scripts": "^27.7.0",
 		"axios": "^0.26.1",
 		"babel-loader": "^8.2.5",
 		"babel-plugin-lodash": "^3.3.4",
@@ -45,6 +46,7 @@
 		"grunt": "^1.5.3",
 		"grunt-contrib-compress": "^2.0.0",
 		"hex-to-rgba": "^2.0.1",
+		"lucide-react": "^0.372.0",
 		"mini-css-extract-plugin": "^2.6.1",
 		"node-sass": "^8.0.0",
 		"prettier": "^2.7.1",
@@ -62,6 +64,5 @@
 		"webpack": "^5.76.2",
 		"webpack-cli": "^4.10.0",
 		"webpack-remove-empty-scripts": "^0.7.3"
-	},
-	"dependencies": {}
+	}
 }

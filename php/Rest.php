@@ -51,6 +51,7 @@ class Rest {
 	 * @param array $request The REST Request data.
 	 **/
 	public function rest_get_pages( $request ) {
+		$output      = get_option( 'post-type-archive-mapping', array() );
 		$search = sanitize_text_field( urldecode( $request['search'] ) );
 		// Get EDD Query.
 		$args = array(
@@ -74,10 +75,14 @@ class Rest {
 		if ( $app_query->have_posts() ) {
 			while ( $app_query->have_posts() ) {
 				$app_query->the_post();
+				$post_title = get_the_title();
+				if ( empty( $post_title ) ) {
+					$post_title = __( '(no title)', 'archive-pages-pro' );
+				}
 				$app_data[] = array(
-					'value'     => get_the_ID(),
-					'label'     => get_the_title(),
-					'permalink' => get_the_permalink(),
+					'value'     => absint( get_the_ID() ),
+					'label'     => sanitize_text_field( $post_title ),
+					'permalink' => esc_url( get_the_permalink() ),
 				);
 			}
 		}

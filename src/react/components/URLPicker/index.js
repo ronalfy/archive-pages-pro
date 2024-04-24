@@ -1,9 +1,9 @@
+import axios from 'axios';
 /**
  * External dependencies
  */
-import React, { useState, useEffect, createRef, useCallback } from 'react';
+import React, { useState, useEffect, createRef } from 'react';
 import classNames from 'classnames';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 
 /**
@@ -15,17 +15,30 @@ import { speak } from '@wordpress/a11y';
 import {
 	Button,
 	Spinner,
+	Tooltip,
 } from '@wordpress/components';
 import { useInstanceId, useDebounce } from '@wordpress/compose';
+import { isURL, filterURLForDisplay, addQueryArgs  } from '@wordpress/url';
+
+import {
+	Search,
+	CornerDownLeft,
+	XCircle,
+	ExternalLink,
+	Link,
+	File,
+	FileText,
+
+} from 'lucide-react';
 
 /**
- * Content Picker for app Downloads.
+ * URL Selector for Media Library.
  *
  * @param {Object} props Incoming props.
  *
  * @return {React.Component} UrlInput component.
  */
-const ContentPicker = ( props ) => {
+const URLPicker = ( props ) => {
 	/**
 	 * Create Refs for inputs.
 	 */
@@ -33,12 +46,11 @@ const ContentPicker = ( props ) => {
 
 	const restEndPoint = props.restEndpoint;
 	const restNonce = props.restNonce;
-	const itemIcon = props.itemIcon;
 
 	/**
 	 * Set Unique Instance ID.
 	 */
-	const generatedUniqueId = useInstanceId( ContentPicker, 'app' );
+	const generatedUniqueId = useInstanceId( URLPicker, 'app' );
 
 	/**
 	 * Set State.
@@ -53,6 +65,8 @@ const ContentPicker = ( props ) => {
 	const [ selectedSuggestionIndex, setSelectedSuggestionIndex ] = useState( null );
 	const [ suggestionListboxId, setSuggestionListboxId ] = useState( '' );
 	const [ suggestionValue, setSuggestionValue ] = useState( '' );
+	const [ isInitialRequest, setIsInitialRequest ] = useState( true );
+	const [ savedSuggestionValue, setSavedSuggestionValue ] = useState( props.savedValue );
 	const [ uniqueInstanceId, setUniqueInstanceId ] = useState(
 		`url-input-control-${ generatedUniqueId }`
 	);
@@ -62,6 +76,11 @@ const ContentPicker = ( props ) => {
 	 * Debounceing for delay.
 	 */
 	const debouncedRequest = useDebounce( ( value ) => {
+		if ( isInitialRequest ) {
+			// Prevent duplicate requests.
+			setIsInitialRequest( false );
+			return;
+		}
 		updateSuggestions( value );
 	}, 200 );
 
@@ -69,6 +88,22 @@ const ContentPicker = ( props ) => {
 	 * Effect.
 	 */
 	useEffect( () => {
+		/**
+		 * Run once. Set the suggestion value and current suggestion to saved value, then reset saved value.
+		 */
+		if ( '' !== savedSuggestionValue ) {
+			setSuggestionValue( savedSuggestionValue );
+			const newSuggestion = {
+				mapped: 'default' === props.mappedPageId ? 0 : parseInt( props.mappedPageId ),
+				label: props.savedTitle,
+				slug: '',
+				value: '',
+				permalink: '',
+			};
+			setSavedSuggestionValue( '' );
+			setCurrentSuggestion( newSuggestion );
+			return;
+		}
 		if ( '' !== suggestionValue ) {
 			debouncedRequest( suggestionValue );
 		}
@@ -78,7 +113,7 @@ const ContentPicker = ( props ) => {
 	 * Set Focus to input.
 	 */
 	useEffect( () => {
-		if ( inputRef.current && props.hasInititialFocus ) {
+		if ( inputRef.current && ( props.hasInititialFocus || '' === suggestionValue ) ) {
 			inputRef.current.focus();
 		}
 	}, [ inputRef ] );
@@ -100,6 +135,7 @@ const ContentPicker = ( props ) => {
 	const onFocus = ( event ) => {
 		event.preventDefault();
 		if ( null === selectedSuggestion && '' !== suggestionValue ) {
+			// If initial request, do not do anything or show anything.
 			debouncedRequest( suggestionValue );
 		}
 	};
@@ -241,10 +277,9 @@ const ContentPicker = ( props ) => {
 		value = value.trim();
 
 		// Allow a suggestions request if:
-		// - there are at least 2 characters in the search input (except manual searches where
+		// - there are at least 1 characters in the search input (except manual searches where
 		//   search input length is not required to trigger a fetch)
-		// - this is a direct entry (eg: a URL)
-		if ( ! isInitialSuggestions && value.length < 2 ) {
+		if ( ! isInitialSuggestions && value.length < 1 ) {
 			// todo - cancel any pending requests
 			setSuggestions( [] );
 			setShowSuggestions( false );
@@ -263,6 +298,7 @@ const ContentPicker = ( props ) => {
 		}
 		setCurrentSuggestionRequest( abortController );
 
+		// Perform async ajax request.
 		// Perform async ajax request.
 		( async() => {
 			try {
@@ -284,7 +320,12 @@ const ContentPicker = ( props ) => {
 						setCurrentSuggestionRequest( null );
 						const { data } = response.data;
 						setSuggestions( data );
-						setShowSuggestions( true );
+						const mappedValue = currentSuggestion?.mapped || 0;
+						if ( data.length === 1 && data[ 0 ].value === mappedValue ) {
+							setShowSuggestions( false );
+						} else {
+							setShowSuggestions( true );
+						}
 					} ).catch( ( error ) => {
 					} ).then( () => {
 						setLoading( false );
@@ -294,41 +335,61 @@ const ContentPicker = ( props ) => {
 		} )();
 	};
 
+	// Convert url encoded permalink.
+	const suggestionPermalink = addQueryArgs(
+		appSettingsReading.editPostUrl,
+		{
+			post: currentSuggestion?.mapped || 0,
+			action: 'edit',
+		}
+	);
 	return (
-		<div className="app-url-input">
-			<div className="app-pub-url-input__wrapper">
-				<label
-					htmlFor={ uniqueInstanceId }
-					className="app-pub-url-input__label"
-				>
-					{ props.label }
-				</label>
-				<div className="app-pub-url-input__input-wrapper">
+		<div className="photo-block-url-input">
+			<div className="photo-block-pub-url-input__wrapper">
+				<div className="photo-block-pub-url-input__input-wrapper">
 					{ null !== currentSuggestion && (
-						<div className="app-pub-url-input__suggestion">
-							<div className="app-pub-url-input__suggestion-item">
-								<span className="app-pub-url-input__suggestion-label">
-									{ currentSuggestion.label }
+						<div className="photo-block-pub-url-input__suggestion">
+							<div className="photo-block-pub-url-input__suggestion-item">
+								<span className="photo-block-pub-url-input__suggestion-label">
+									<Tooltip
+										text={ __( 'Edit Post in New Tab', 'archive-pages-pro' ) }
+									>
+										<Button
+											variant="link"
+											icon={ <ExternalLink /> }
+											iconSize={ 18 }
+											iconPosition="right"
+											label={ __( 'Open in new tab', 'archive-pages-pro' ) }
+											href={ suggestionPermalink }
+											target="_blank"
+											rel="noopener noreferrer"
+										>
+											{ currentSuggestion.label }
+										</Button>
+									</Tooltip>
 								</span>
 								<Button
-									variant="primary"
-									icon="no"
+									variant="secondary"
+									icon={ <XCircle /> }
+									className="button-reset"
 									iconSize={ 18 }
 									label={ __( 'Remove Current Selection', 'archive-pages-pro' ) }
-									onClick={ () => {
+									onClick={ ( e ) => {
+										setSuggestionValue( '' );
 										setCurrentSuggestion( null );
+										props.onItemSelect( e, 'default' );
 									} }
 								/>
 							</div>
 						</div>
 					) }
 					{ null === currentSuggestion && (
-						<>
+						<div className="photo-block-pub-url-search-wrapper">
 							<input
 								type="text"
-								placeholder={ __( 'Search for a Page', 'archive-pages-pro' ) }
+								placeholder={ __( 'Search by Page Name', 'archive-pages-pro' ) }
 								id={ uniqueInstanceId }
-								className="app-pub-url-input__input"
+								className="photo-block-pub-url-input__input"
 								value={ suggestionValue }
 								onChange={ onChange }
 								onFocus={ onFocus }
@@ -342,66 +403,94 @@ const ContentPicker = ( props ) => {
 								ref={ inputRef }
 							/>
 							{
-								loading &&
-								<Spinner />
+								loading && (
+									<div className="photo-block-pub-url-input__loading">
+										<Spinner />
+									</div>
+								)
 							}
-							<Button
-								icon="search"
-								iconSize={ 18 }
-								label={ __( 'Search for a Page', 'archive-pages-pro' ) }
-								onClick={ () => {
-									setShowSuggestions( true );
-								} }
-							/>
-						</>
+							{
+								( ! loading ) && (
+									<>
+										<Button
+											className="photo-block-pub-url-input__search-button"
+											icon={ <Search /> }
+											iconSize={ 18 }
+											label={ __( 'Search for a Page', 'archive-pages-pro' ) }
+											onClick={ () => {
+												setShowSuggestions( true );
+											} }
+										/>
+									</>
+								)
+							}
+						</div>
 					) }
 
 				</div>
 			</div>
-			{ showSuggestions && !! suggestions.length && (
+			{ ( showSuggestions && !! suggestions.length ) && (
 				<div
-					className="apppub-suggestions-wrapper"
+					className="photo-block-suggestions-wrapper"
 				>
 					<div
 						role="listbox"
 						id={ suggestionListboxId }
-						className="app-url-input__suggestions"
+						className="photo-block-url-input__suggestions"
 					>
-						{ suggestions.map( ( suggestion, index ) => {
-							const suggestionId = `apppub-suggested-value-${ suggestion.value }`;
-							const suggestionClass = classNames(
-								'app-url-input__suggestion',
-								{
-									'is-selected': suggestion.value === selectedSuggestion,
-								}
-							);
+						<div className="photo-block-url-input__suggestions-close-wrapper">
+							<Button
+								variant="secondary"
+								icon={ <XCircle /> }
+								iconSize={ 18 }
+								iconPosition="left"
+								label={ __( 'Close Suggestions', 'archive-pages-pro' ) }
+								onClick={ () => {
+									setShowSuggestions( false );
+									inputRef?.current?.focus();
+								} }
+								className="photo-block-url-input__close-suggestions button-reset"
+							/>
+						</div>
+						<div className="photo-block-url-input__suggestions-wrapper">
+							{ suggestions.map( ( suggestion, index ) => {
+								const suggestionId = `photo-block-suggested-value-${ suggestion.value }`;
+								const suggestionClass = classNames(
+									'photo-block-url-input__suggestion',
+									{
+										'is-selected': suggestion.value === selectedSuggestion,
+									}
+								);
 
-							return (
-								<Button
-									key={ suggestionId }
-									id={ suggestionId }
-									value={ suggestion.value }
-									role="option"
-									aria-selected={ suggestion.value === selectedSuggestion }
-									className={ suggestionClass }
-									onClick={ ( e ) => {
-										setSelectedSuggestion( parseInt( e.target.value ) );
-										setSelectedSuggestionIndex( index );
-										setCurrentSuggestion( suggestion );
-										setShowSuggestions( false );
-										props.onItemSelect( e, suggestion );
-									} }
-									icon={ itemIcon }
-									iconSize={ 2 }
-									iconPosition="left"
-								>
-									<span className="apppub-search-item">
-										<span className="apppub-search-item-title">{ suggestion.label }</span>
-										<span className="apppub-search-item-info">{ suggestion.permalink }</span>
-									</span>
-								</Button>
-							);
-						} ) }
+								return (
+									<Button
+										key={ suggestionId }
+										id={ suggestionId }
+										value={ suggestion.value }
+										role="option"
+										aria-selected={ suggestion.value === selectedSuggestion }
+										className={ suggestionClass }
+										onClick={ ( e ) => {
+											setSelectedSuggestion( parseInt( e.target.value ) );
+											setSelectedSuggestionIndex( index );
+											// Add mapped value to suggestion.
+											suggestion.mapped = suggestion.value;
+											setCurrentSuggestion( suggestion );
+											setShowSuggestions( false );
+											props.onItemSelect( e, suggestion.value );
+										} }
+										icon={ 'post' === suggestion.type ? <FileText /> : <File /> }
+										iconSize={ 2 }
+										iconPosition="left"
+									>
+										<span className="photo-block-search-item">
+											<span className="photo-block-search-item-title">{ suggestion.label }</span>
+											<span className="photo-block-search-item-info">{ suggestion.permalink }</span>
+										</span>
+									</Button>
+								);
+							} ) }
+						</div>
 					</div>
 				</div>
 			) }
@@ -409,14 +498,14 @@ const ContentPicker = ( props ) => {
 	);
 };
 
-ContentPicker.defaultProps = {
+URLPicker.defaultProps = {
 	label: __( 'Page', 'archive-pages-pro' ),
 	onItemSelect: () => {},
 	hasInititialFocus: false,
 	itemIcon: <></>,
 };
 
-ContentPicker.propTypes = {
+URLPicker.propTypes = {
 	restEndpoint: PropTypes.string.isRequired,
 	restNonce: PropTypes.string.isRequired,
 	label: PropTypes.string.isRequired,
@@ -425,4 +514,4 @@ ContentPicker.propTypes = {
 	itemIcon: PropTypes.element.isRequired,
 };
 
-export default ContentPicker;
+export default URLPicker;

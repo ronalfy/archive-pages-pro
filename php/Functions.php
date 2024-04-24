@@ -184,6 +184,30 @@ class Functions {
 	}
 
 	/**
+	 * Get the post types for the plugin.
+	 *
+	 * @see get_post_types
+	 *
+	 * @return array Post types.
+	 */
+	public static function get_post_types() {
+		$post_type_args = array(
+			'public'      => true,
+			'has_archive' => true,
+			'_builtin'    => false,
+		);
+
+		/**
+		 * Filter: archive_pages_pro_post_type_args.
+		 *
+		 * @param array $post_type_args Post type arguments.
+		 */
+		$post_type_args = apply_filters( 'archive_pages_pro_post_type_args', $post_type_args );
+		$post_types     = get_post_types( $post_type_args, 'objects' );
+		return $post_types;
+	}
+
+	/**
 	 * Return the plugin slug.
 	 *
 	 * @return string plugin slug.
@@ -419,4 +443,3 @@ class Functions {
 		return $highest_priority;
 	}
 }
-

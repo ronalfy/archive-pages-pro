@@ -5,12 +5,6 @@
 		"wpApiSettings": true,
 		"window": true,
 		"document": true,
-		"hasSettingsAdmin": "readonly",
-		"hasAppearanceAdmin": "readonly",
-		"hasBlockEditorAdmin": "readonly",
-		"hasEmailsAdmin":"readonly",
-		"has_gutenberg": "readonly",
-		"highlight_and_share": "readonly",
 		"React": "readonly",
 		"appSettingsReading": "readonly"
 	},

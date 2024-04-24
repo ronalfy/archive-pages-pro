@@ -108,11 +108,57 @@ class Archive_Pages_Pro {
 
 		add_settings_field(
 			'archive-pages-pro',
-			__( 'Archive Pages Pro', 'post-type-archive-mapping' ),
+			__( 'Map Archives', 'archive-pages-pro' ),
 			array( $this, 'add_settings_reading' ),
 			'reading',
 			'archive-pages-pro'
 		);
+		// Register post type mapping settings.
+		register_setting(
+			'reading',
+			'post-type-archive-mapping',
+			array(
+				'sanitize_callback' => array( $this, 'post_type_save' ),
+			)
+		);
+		register_setting(
+			'reading',
+			'post-type-archive-mapping-404',
+			array(
+				'sanitize_callback' => 'absint',
+			)
+		);
+	}
+
+	/**
+	 * Save post meta if selected on the reading screen.
+	 *
+	 * @param array $args Post Type arguments.
+	 */
+	public function post_type_save( $args ) {
+		if ( ! is_array( $args ) ) {
+			return $args;
+		}
+		global $wpdb;
+		$query = "delete from {$wpdb->postmeta} where meta_key = '_post_type_mapped'";
+		$wpdb->query( $query ); // phpcs:ignore
+		foreach ( $args as $post_type => $page_id ) {
+			$maybe_mapped = get_post_meta( $page_id, '_term_mapped', true );
+			if ( $maybe_mapped ) {
+				update_option(
+					'ptam_error_message',
+					sprintf(
+						/* Translators: %s is the page title */
+						__( 'The page %s to map to a post type archive is already mapped to a term.', 'archive-pages-pro' ),
+						esc_html( get_the_title( $page_id ) )
+					)
+				);
+				unset( $args[ $post_type ] );
+			} else {
+				update_post_meta( $page_id, '_post_type_mapped', $post_type );
+			}
+		}
+		return $args;
 	}
 
 	/**
@@ -134,8 +180,28 @@ class Archive_Pages_Pro {
 	 * @param array $args Post Type arguments.
 	 */
 	public function add_settings_reading( $args ) {
+		$post_types = Functions::get_post_types();
+		if ( ! $post_types ) {
+			?>
+			<p><?php esc_html_e( 'No public post types found.', 'archive-pages-pro' ); ?></p>
+			<?php
+			return;
+		}
+
+		// Parse the post types into data attributes.
+		$post_types_data = array();
+		foreach ( $post_types as $post_type ) {
+			$post_types_data[] = array(
+				'value' => $post_type->name,
+				'label' => $post_type->label,
+			);
+		}
+
+		// Map to a data attribute.
+		$post_types_data = wp_json_encode( $post_types_data );
+
 		?>
-		<div id="app-reading">Loading...</div>
+		<div id="app-reading" data-post-types="<?php echo esc_attr( $post_types_data ); ?>"><?php esc_html_e( 'Loading...', 'archive-pages-pro' ); ?></div>
 		<?php
 	}
 
