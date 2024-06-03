@@ -38,11 +38,10 @@ class Yoast {
 	 * Modify the canonical URL.
 	 *
 	 * @param string $canonical The current canonical URL.
-	 * @param object $object    The current object.
 	 *
 	 * @return string Updated canonical URL.
 	 */
-	public function modify_canonical_url( $canonical, $object ) {
+	public function modify_canonical_url( $canonical ) {
 		$archive_type = get_query_var( 'original_archive_type' );
 		$archive_id   = get_query_var( 'original_archive_id' );
 
@@ -118,21 +117,33 @@ class Yoast {
 	 * @return string description.
 	 */
 	public function opengraph_desc( $description ) {
-		$archive_type  = get_query_var( 'original_archive_type' );
-		$archive_id    = get_query_var( 'original_archive_id' );
-		$yoast_options = get_option( 'wpseo_titles' );
+		$archive_type = get_query_var( 'original_archive_type' );
+		$archive_id   = get_query_var( 'original_archive_id' );
+
 		if ( 'page' === $archive_type ) {
-			$post_type = $archive_id;
-			if ( isset( $yoast_options[ 'metadesc-' . $post_type ] ) ) {
-				return $yoast_options[ 'metadesc-' . $post_type ];
+			$yoast_titles = get_option( 'wpseo_titles' );
+			$post_type    = $archive_id;
+			if ( isset( $yoast_titles[ 'metadesc-' . $post_type ] ) ) {
+				return $yoast_titles[ 'metadesc-' . $post_type ];
 			}
 		}
 		if ( 'term' === $archive_type ) {
+			$yoast_tax_meta = get_option( 'wpseo_taxonomy_meta' );
+
 			$term_id          = absint( $archive_id );
 			$term             = get_term_by( 'id', $term_id, get_query_var( 'term_tax' ) );
 			$term_description = get_term_field( 'description', $term_id );
-			if ( is_wp_error( $term_description ) ) {
+
+			// Get Yoast term description meta.
+			$yoast_term_description = '';
+			if ( isset( $yoast_tax_meta[ get_query_var( 'term_tax' ) ][ $term_id ]['wpseo_desc'] ) ) {
+				$yoast_term_description = $yoast_tax_meta[ get_query_var( 'term_tax' ) ][ $term_id ]['wpseo_desc'];
+			}
+			if ( is_wp_error( $term_description ) && '' === $yoast_term_description ) {
 				return $description;
+			}
+			if ( '' !== $yoast_term_description ) {
+				return $yoast_term_description;
 			}
 			return wp_strip_all_tags( $term_description );
 		}
@@ -176,7 +187,27 @@ class Yoast {
 			$post_type      = $archive_id;
 			$post_type_data = get_post_type_object( $post_type );
 
+			// Get post type mapped options.
+			$post_type_mapped = get_option( 'post-type-archive-mapping', array() );
+			$mapped_id        = absint( $post_type_mapped[ $archive_id ] );
+
+			// Get archive title from post type object.
 			$title = isset( $post_type_data->labels->name ) ? apply_filters( 'post_type_archive_title', $post_type_data->labels->name, $post_type ) : $title;
+
+			// Get the title for the post type archive from yoast settings.
+			$yoast_options = get_option( 'wpseo_titles' );
+			if ( isset( $yoast_options[ 'title-' . $post_type ] ) ) {
+				$title_format = $yoast_options[ 'title-' . $post_type ];
+
+				// Replace title format with actual title.
+				if ( class_exists( 'WPSEO_Replace_Vars' ) ) {
+					$replace_vars = \YoastSEO()->classes->get( \WPSEO_Replace_Vars::class );
+					$maybe_title  = $replace_vars->replace( $title_format, get_post( $mapped_id ) );
+					if ( null !== $maybe_title ) {
+						$title = $maybe_title;
+					}
+				}
+			}
 			return $title;
 		}
 		if ( 'term' === $archive_type ) {
@@ -186,6 +217,22 @@ class Yoast {
 				return $title;
 			}
 			$title = apply_filters( 'single_term_title', $term->name );
+
+			// Get the title from Yoast meta settings.
+			$yoast_options = get_option( 'wpseo_titles' );
+			if ( isset( $yoast_options[ 'title-tax-' . get_query_var( 'term_tax' ) ] ) ) {
+				$title_format = $yoast_options[ 'title-tax-' . get_query_var( 'term_tax' ) ];
+
+				// Replace title format with actual title.
+				if ( class_exists( 'WPSEO_Replace_Vars' ) ) {
+					$replace_vars = \YoastSEO()->classes->get( \WPSEO_Replace_Vars::class );
+					$maybe_title  = $replace_vars->replace( $title_format, $term );
+					if ( null !== $maybe_title ) {
+						$title = $maybe_title;
+					}
+				}
+			}
+
 			return $title;
 		}
 		return $title;
