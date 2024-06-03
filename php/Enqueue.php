@@ -17,6 +17,75 @@ class Enqueue {
 	 */
 	public function run() {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_settings_reading_script' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_term_edit_script' ) );
+	}
+
+	/**
+	 * Enqueue the term edit page scripts.
+	 *
+	 * @param string $hook The current page hook.
+	 */
+	public function enqueue_term_edit_script( string $hook ) {
+		if ( 'term.php' !== $hook ) {
+			return;
+		}
+
+		// Term ID will be in GET variable.
+		$term_id = filter_input( INPUT_GET, 'tag_ID', FILTER_VALIDATE_INT );
+		$term    = get_term( $term_id );
+		if ( is_wp_error( $term ) ) {
+			return;
+		}
+
+		// Get term meta.
+		$post_id = get_term_meta( $term_id, '_term_archive_mapping', true );
+		if ( ! $post_id ) {
+			$post_id = 'default';
+		}
+
+		$return = array(
+			'value'      => $post_id,
+			'label'      => sanitize_text_field( $term->name ),
+			'mapped'     => $post_id, /* can be page id or 'default' */
+			'title'      => sanitize_text_field( get_the_title( $post_id ) ),
+			'archiveUrl' => get_term_link( $term->term_id ),
+		);
+
+		// Enqueue main script.
+		$deps = require_once Functions::get_plugin_dir( 'build/app-term-edit.asset.php' );
+		wp_enqueue_script(
+			'app-term-edit',
+			Functions::get_plugin_url( 'build/app-term-edit.js' ),
+			$deps['dependencies'],
+			$deps['version'],
+			true
+		);
+
+		wp_enqueue_style(
+			'app-settings-reading-css',
+			Functions::get_plugin_url( 'build/app-settings-reading.css' ),
+			array(),
+			$deps['version'],
+			'all'
+		);
+
+		// Localize vars.
+		wp_localize_script(
+			'app-term-edit',
+			'appTermEdit',
+			array(
+				'termData'  => $return,
+				'restUrl'   => rest_url( 'dlxplugins/app/v1/search/pages' ),
+				'restNonce' => wp_create_nonce( 'wp_rest' ),
+			)
+		);
+		wp_localize_script(
+			'app-term-edit',
+			'appSettingsReading', /* needed in URLPicker component */
+			array(
+				'editPostUrl' => admin_url( 'post.php' ),
+			)
+		);
 	}
 
 	/**

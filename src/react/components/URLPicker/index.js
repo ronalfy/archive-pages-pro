@@ -47,6 +47,7 @@ const URLPicker = ( props ) => {
 	const restEndPoint = props.restEndpoint;
 	const restNonce = props.restNonce;
 
+	console.log( props );
 	/**
 	 * Set Unique Instance ID.
 	 */
@@ -292,6 +293,8 @@ const URLPicker = ( props ) => {
 		setSelectedSuggestion( null );
 		setLoading( true );
 
+		
+
 		const abortController = new AbortController();
 		if ( null !== currentSuggestionRequest ) {
 			currentSuggestionRequest.abort();
@@ -301,7 +304,7 @@ const URLPicker = ( props ) => {
 		// Perform async ajax request.
 		// Perform async ajax request.
 		( async() => {
-			try {
+			console.log( restEndPoint );
 				setLoading( true );
 				await axios
 					.post(
@@ -327,11 +330,11 @@ const URLPicker = ( props ) => {
 							setShowSuggestions( true );
 						}
 					} ).catch( ( error ) => {
+						console.log( error );
 					} ).then( () => {
 						setLoading( false );
 					} );
-			} catch ( error ) {
-			}
+			
 		} )();
 	};
 

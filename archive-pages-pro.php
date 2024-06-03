@@ -86,11 +86,36 @@ class Archive_Pages_Pro {
 		add_action( 'admin_init', array( $this, 'init_settings_api' ) );
 		add_action( 'pre_get_posts', array( $this, 'maybe_override_archive' ) );
 
-		// Output admin notices once when saving archive mapping.
-		//add_action( 'admin_notices', array( $this, 'admin_notices' ) );
-
 		// 404 page detection.
-		//add_filter( 'template_include', array( $this, 'maybe_force_404_template' ), 1 );
+		add_filter( 'template_include', array( $this, 'maybe_force_404_template' ), 1 );
+	}
+
+	/**
+	 * This is a catch-all. Any 404 error not caught will be directed here.
+	 * If a 404 error is caught, will load the page template instead.
+	 *
+	 * @param string $template The regular template.
+	 *
+	 * @return string $template The updated template.
+	 */
+	public function maybe_force_404_template( $template ) {
+		if ( is_404() ) {
+			$page_id_404 = absint( get_option( 'post-type-archive-mapping-404', 0 ) );
+			if ( $page_id_404 > 0 ) {
+				$args = array(
+					'post_type'      => 'page',
+					'page_id'        => $page_id_404,
+					'post_status'    => 'publish',
+					'posts_per_page' => 1,
+				);
+				/* I wise woman once told me to never use query_posts. Like NEVER. I had no choice here. */
+				query_posts( // phpcs:ignore
+					$args
+				);
+				return get_page_template();
+			}
+		}
+		return $template;
 	}
 
 	/**
@@ -146,6 +171,43 @@ class Archive_Pages_Pro {
 				'sanitize_callback' => 'absint',
 			)
 		);
+	}
+
+	/**
+	 * Map Term Archives to Posts Options.
+	 *
+	 * @param object $tag The term object.
+	 * @param string $taxonomy The taxonomy.
+	 */
+	public function map_term_interface( $tag, $taxonomy = '' ) {
+		$post_id = get_term_meta( $tag->term_id, '_term_archive_mapping', true );
+		if ( ! $post_id ) {
+			$post_id = -1;
+		}
+		$term_permalink = get_term_link( $tag->term_id, $taxonomy );
+		?>
+		<h2><?php esc_html_e( 'Map Term Archive', 'archive-pages-pro' ); ?> (<a href="<?php echo esc_url( $term_permalink ); ?>" target="_blank" rel="noreferer noopener"><?php echo esc_html( $tag->name ); ?></a>)</h2>
+		<p class="description"><?php esc_html_e( 'Map a term archive to a page.', 'archive-pages-pro' ); ?></p>
+		<div id="app-term-mapping"><?php esc_html_e( 'Loading...', 'archive-pages-pro' ); ?></div>
+		<?php
+	}
+
+	/**
+	 * Map a saved term to a term ID.
+	 *
+	 * @param int $term_id The term ID to map.
+	 */
+	public function save_mapped_term( $term_id ) {
+		if ( current_user_can( 'edit_term', $term_id ) ) {
+			$maybe_post_id = filter_input( INPUT_POST, 'term_post_type', FILTER_VALIDATE_INT );
+			if ( ! $maybe_post_id ) {
+				delete_post_meta( $maybe_post_id, '_term_mapped' );
+				delete_term_meta( $term_id, '_term_archive_mapping' );
+			} elseif ( $maybe_post_id ) {
+				update_post_meta( $maybe_post_id, '_term_mapped', $term_id );
+				update_term_meta( $term_id, '_term_archive_mapping', $maybe_post_id );
+			}
+		}
 	}
 
 	/**
@@ -245,7 +307,7 @@ class Archive_Pages_Pro {
 			self::$paged_reset = false;
 		}
 
-		$post_types = get_option( 'post-type-archive-mapping', array() );
+		$post_types = get_option( 'post-type-archive-mapping', array() ); // old option name for compatibility with Custom Query Blocks (PTAM).
 		if ( empty( $post_types ) && is_admin() && ! is_tax() ) {
 			return;
 		}
@@ -323,7 +385,7 @@ add_action( 'plugins_loaded', __NAMESPACE__ . '\archive_pages_pro_instantiate', 
 function archive_pages_pro_instantiate() {
 
 	// Disable post type mapping in custom query blocks.
-	//add_filter( 'ptam_archive_mapping_disabled', '__return_true' );
+	add_filter( 'ptam_archive_mapping_disabled', '__return_true' );
 
 	// Set up our plugin.
 	$app_instance = Archive_Pages_Pro::get_instance();

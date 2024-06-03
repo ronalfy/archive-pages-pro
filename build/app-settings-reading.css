@@ -38,6 +38,13 @@ button.button-reset.show-cursor {
   margin-top: 4px;
 }
 
+svg.lucide {
+  fill: none;
+}
+svg.lucide path, svg.lucide circle {
+  fill: none;
+}
+
 .components-tooltip {
   display: inline-block;
   background: #333;

@@ -6,7 +6,8 @@
 		"window": true,
 		"document": true,
 		"React": "readonly",
-		"appSettingsReading": "readonly"
+		"appSettingsReading": "readonly",
+		"appTermEdit": "readonly"
 	},
 	"env": {
 		"browser": true,

@@ -2163,68 +2163,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./src/react/components/SettingsReadingPostType/index.js":
-/*!***************************************************************!*\
-  !*** ./src/react/components/SettingsReadingPostType/index.js ***!
-  \***************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/link-2.js");
-/* harmony import */ var _components_URLPicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/URLPicker */ "./src/react/components/URLPicker/index.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
-
-
-// post-type-archive-mapping is the name of the input field so that the data is saved with the settings API and for backwards compatibility with Custom Query Blocks.
-var SettingsReadingPostType = function SettingsReadingPostType(_ref) {
-  var postType = _ref.postType;
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(postType.mapped),
-    _useState2 = _slicedToArray(_useState, 2),
-    mappedValue = _useState2[0],
-    setMappedValue = _useState2[1];
-  return /*#__PURE__*/React.createElement("div", {
-    className: "settings-reading__post-type",
-    key: postType.value
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Map Post Type:', 'archive-pages-pro'), " ", /*#__PURE__*/React.createElement("a", {
-    href: postType.archiveUrl,
-    target: "_blank",
-    rel: "noreferrer noopener"
-  }, postType.label)), /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("input", {
-    type: "hidden",
-    name: "post-type-archive-mapping[".concat(postType.value, "]"),
-    value: mappedValue
-  })), /*#__PURE__*/React.createElement(_components_URLPicker__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    restNonce: appSettingsReading.restNonce,
-    restEndpoint: appSettingsReading.pageRestUrl,
-    itemIcon: /*#__PURE__*/React.createElement(lucide_react__WEBPACK_IMPORTED_MODULE_3__["default"], null),
-    onItemSelect: function onItemSelect(e, id_or_default) {
-      setMappedValue(id_or_default);
-    },
-    mappedPageId: postType.mapped,
-    savedValue: postType.title,
-    savedTitle: postType.title
-  }));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SettingsReadingPostType);
-
-/***/ }),
-
 /***/ "./src/react/components/URLPicker/index.js":
 /*!*************************************************!*\
   !*** ./src/react/components/URLPicker/index.js ***!
@@ -2758,10 +2696,10 @@ URLPicker.propTypes = {
 
 /***/ }),
 
-/***/ "./src/react/views/settings-reading/settings-reading.js":
-/*!**************************************************************!*\
-  !*** ./src/react/views/settings-reading/settings-reading.js ***!
-  \**************************************************************/
+/***/ "./src/react/views/term-edit/term-edit.js":
+/*!************************************************!*\
+  !*** ./src/react/views/term-edit/term-edit.js ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2773,9 +2711,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/link-2.js");
-/* harmony import */ var _components_SettingsReadingPostType__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/SettingsReadingPostType */ "./src/react/components/SettingsReadingPostType/index.js");
-/* harmony import */ var _components_URLPicker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/URLPicker */ "./src/react/components/URLPicker/index.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/link-2.js");
+/* harmony import */ var _components_URLPicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/URLPicker */ "./src/react/components/URLPicker/index.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -2786,41 +2723,33 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
-
-var postTypes = appSettingsReading.postTypes;
-var mapped404PageTitle = appSettingsReading.pageTitle404;
-var SettingsReading = function SettingsReading() {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(parseInt(appSettingsReading.pageId404)),
+var TermEdit = function TermEdit() {
+  var _appTermEdit$termData, _appTermEdit$termData2, _appTermEdit$termData3;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(parseInt((_appTermEdit$termData = appTermEdit.termData) === null || _appTermEdit$termData === void 0 ? void 0 : _appTermEdit$termData.value)),
     _useState2 = _slicedToArray(_useState, 2),
-    mapped404Value = _useState2[0],
-    setMapped404Value = _useState2[1];
+    mappedTermValue = _useState2[0],
+    setMappedTermValue = _useState2[1];
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "settings-reading"
-  }, postTypes.map(function (postType) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_SettingsReadingPostType__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      key: postType.value,
-      postType: postType
-    });
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "settings-reading__post-type"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Map 404 Page:', 'archive-pages-pro')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    className: "settings-term-edit"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "settings-term-edit__wrapper"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "hidden",
-    name: "post-type-archive-mapping-404",
-    value: mapped404Value
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_URLPicker__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    restNonce: appSettingsReading.restNonce,
-    restEndpoint: appSettingsReading.pageRestUrl,
-    itemIcon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_4__["default"], null),
+    name: "term_post_type",
+    value: mappedTermValue
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_URLPicker__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    restNonce: appTermEdit.restNonce,
+    restEndpoint: appTermEdit.restUrl,
+    itemIcon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_3__["default"], null),
     onItemSelect: function onItemSelect(e, id_or_default) {
-      setMapped404Value(id_or_default);
+      setMappedTermValue(id_or_default);
     },
-    mappedPageId: mapped404Value,
-    savedValue: mapped404PageTitle,
-    savedTitle: mapped404PageTitle
+    mappedPageId: mappedTermValue,
+    savedValue: (_appTermEdit$termData2 = appTermEdit.termData) === null || _appTermEdit$termData2 === void 0 ? void 0 : _appTermEdit$termData2.title,
+    savedTitle: (_appTermEdit$termData3 = appTermEdit.termData) === null || _appTermEdit$termData3 === void 0 ? void 0 : _appTermEdit$termData3.title
   })));
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SettingsReading);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TermEdit);
 
 /***/ }),
 
@@ -4515,36 +4444,24 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-var __webpack_exports__ = {};
-/*!***************************************************!*\
-  !*** ./src/react/views/settings-reading/index.js ***!
-  \***************************************************/
+/*!********************************************!*\
+  !*** ./src/react/views/term-edit/index.js ***!
+  \********************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
-/* harmony import */ var _settings_reading__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./settings-reading */ "./src/react/views/settings-reading/settings-reading.js");
+/* harmony import */ var _term_edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./term-edit */ "./src/react/views/term-edit/term-edit.js");
 
 
 
-var container = document.getElementById('app-reading');
+var container = document.getElementById('app-term-mapping');
 if (null !== container) {
   var root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(container);
-  root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().StrictMode), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_settings_reading__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
+  root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().StrictMode), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_term_edit__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
 }
-})();
-
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
-(() => {
-"use strict";
-/*!******************************************************!*\
-  !*** ./src/react/views/settings-reading/styles.scss ***!
-  \******************************************************/
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
 })();
 
 /******/ })()
 ;
-//# sourceMappingURL=app-settings-reading.js.map
+//# sourceMappingURL=app-term-edit.js.map

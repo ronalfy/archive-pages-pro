@@ -4,6 +4,12 @@
 		margin-top: 4px;
 	}
 }
+svg.lucide {
+	fill: none;
+	path, circle {
+		fill: none;
+	}
+}
 .components-tooltip {
 	display: inline-block;
 	background: #333;

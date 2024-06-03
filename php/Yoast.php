@@ -53,11 +53,10 @@ class Yoast {
 			$post_type = $archive_id;
 			$canonical = esc_url_raw( get_post_type_archive_link( $post_type ) );
 		}
-		// if ( 'term' === $archive_type ) {
-		// $term_id = absint( $archive_id );
-		// $url     = rawurlencode( get_term_link( $term_id ) );
-		// return $url;
-		// }
+		if ( 'term' === $archive_type ) {
+			$term_id   = absint( $archive_id );
+			$canonical = esc_url_raw( get_term_link( $term_id ) );
+		}
 		return $canonical;
 	}
 
@@ -76,7 +75,7 @@ class Yoast {
 		$post_type_mapped = get_option( 'post-type-archive-mapping', array() );
 
 		// Check if archive ID is in the mapped post types.
-		if ( isset( $post_type_mapped[ $archive_id ] ) ) {
+		if ( 'page' === $archive_type && isset( $post_type_mapped[ $archive_id ] ) ) {
 			// Get the post type label.
 			$post_type = get_post_type_object( $archive_id );
 			$mapped_id = absint( $post_type_mapped[ $archive_id ] );
@@ -90,7 +89,23 @@ class Yoast {
 			}
 		}
 
-		// Check to see if we have a mapped post type.
+		if ( 'term' === $archive_type ) {
+			$term_id = absint( $archive_id );
+			$term    = get_term_by( 'id', $term_id, get_query_var( 'term_tax' ) );
+			if ( false !== $term && ! is_wp_error( $term ) ) {
+				// Get mapped term page.
+				$term_page_id = get_term_meta( $term_id, '_term_archive_mapping', true );
+				if ( $term_page_id ) {
+					$term_page_id = absint( $term_page_id );
+					foreach ( $links as $index => &$link ) {
+						if ( $term_page_id === $link['id'] ) {
+							$link['url']  = get_term_link( $term_id );
+							$link['text'] = $term->name;
+						}
+					}
+				}
+			}
+		}
 
 		return $links;
 	}
