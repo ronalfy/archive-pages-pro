@@ -61,6 +61,13 @@ class Rest {
 			's'              => $search,
 			'orderby'        => 'title',
 			'order'          => 'ASC',
+			/* meta query to exclude the pages that are already mapped */
+			'meta_query'     => array(
+				array(
+					'key'     => '_post_type_mapped',
+					'compare' => 'NOT EXISTS',
+				),
+			),
 		);
 		if ( empty( $search ) ) {
 			$args['orderby'] = 'date';
