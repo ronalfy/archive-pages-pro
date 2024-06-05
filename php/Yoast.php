@@ -111,21 +111,34 @@ class Yoast {
 			$author_id = absint( $archive_id );
 			$author    = get_userdata( $author_id );
 
+			/**
+			 * Filter the author base for the breadcrumb.
+			 *
+			 * @param string $breadcrumb_base The author base.
+			 *
+			 * @since 1.0.0
+			 */
+			$breadcrumb_base = apply_filters(
+				'archive_pages_pro_yoast_breadcrumb_author_base',
+				__( 'Authors', 'archive-pages-pro' )
+			);
+
 			// Fill out the author archive link data.
 			$author_link = array(
 				/* author archives don't have a base URL */
 				'url'  => '',
 				/* get the text (i.e., Author) */
-				'text' => __( 'Authors', 'archive-pages-pro' ),
+				'text' => sanitize_text_field( $breadcrumb_base ),
 				'id'   => 0,
 			);
 
 			// Add the author link to the breadcrumbs.
 			if ( false !== $author && ! is_wp_error( $author ) ) {
 				// Get user mapped page ID.
-				$author_page_id = 187; // get_user_meta( $author_id, '_author_archive_mapping', true );
+				$author_page_id = get_user_meta( $author_id, 'app_archive_page_id', true );
 
-				if ( $author_page_id ) {
+				if ( $author_page_id && '0' !== $author_page_id ) {
+					$author_page_id = absint( $author_page_id );
 					// Add author link to the second position.
 					array_splice( $links, 1, 0, array( $author_link ) );
 
