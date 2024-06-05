@@ -471,7 +471,7 @@ class Archive_Pages_Pro {
 		}
 
 		$post_types = get_option( 'post-type-archive-mapping', array() ); // old option name for compatibility with Custom Query Blocks (PTAM).
-		if ( empty( $post_types ) && is_admin() && ! is_tax() ) {
+		if ( empty( $post_types ) && is_admin() && ! is_tax() && ! is_author() ) {
 			return;
 		}
 
