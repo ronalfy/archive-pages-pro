@@ -106,6 +106,40 @@ class Yoast {
 			}
 		}
 
+		// Author archives.
+		if ( 'author' === $archive_type ) {
+			$author_id = absint( $archive_id );
+			$author    = get_userdata( $author_id );
+
+			// Fill out the author archive link data.
+			$author_link = array(
+				/* author archives don't have a base URL */
+				'url'  => '',
+				/* get the text (i.e., Author) */
+				'text' => __( 'Authors', 'archive-pages-pro' ),
+				'id'   => 0,
+			);
+
+			// Add the author link to the breadcrumbs.
+			if ( false !== $author && ! is_wp_error( $author ) ) {
+				// Get user mapped page ID.
+				$author_page_id = 187; // get_user_meta( $author_id, '_author_archive_mapping', true );
+
+				if ( $author_page_id ) {
+					// Add author link to the second position.
+					array_splice( $links, 1, 0, array( $author_link ) );
+
+					foreach ( $links as $index => &$link ) {
+						if ( $author_page_id === $link['id'] ) {
+							$link['url']  = get_author_posts_url( $author_id );
+							$link['text'] = $author->display_name;
+							$link['id']   = $author_page_id;
+						}
+					}
+				}
+			}
+		}
+
 		return $links;
 	}
 

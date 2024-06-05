@@ -12,6 +12,7 @@ module.exports = ( env ) => {
 			entry: {
 				'app-settings-reading': [ './src/react/views/settings-reading/index.js', './src/react/views/settings-reading/styles.scss' ],
 				'app-term-edit': './src/react/views/term-edit/index.js',
+				'app-profile-edit': './src/react/views/profile-edit/index.js',
 			},
 		},
 	];

@@ -16,8 +16,15 @@ class Enqueue {
 	 * Class Runner.
 	 */
 	public function run() {
+		// Enqueue settings->reading script.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_settings_reading_script' ) );
+
+		// Enqueue scripts on term edit page.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_term_edit_script' ) );
+
+		// Enqueue scripts on user profile/edit page.
+		add_action( 'admin_print_scripts-user-edit.php', array( $this, 'enqueue_profile_edit_script' ) );
+		add_action( 'admin_print_scripts-profile.php', array( $this, 'enqueue_profile_edit_script' ) );
 	}
 
 	/**
@@ -85,6 +92,63 @@ class Enqueue {
 			array(
 				'editPostUrl' => admin_url( 'post.php' ),
 			)
+		);
+	}
+
+	/**
+	 * Enqueue the profile edit screen scripts.
+	 *
+	 * @param string $hook The current page hook.
+	 */
+	public function enqueue_profile_edit_script( string $hook ) {
+		if ( ! current_user_can( 'edit_others_posts' ) ) {
+			return;
+		}
+
+		// User ID will be in GET variable or current user.
+		$user_id = Functions::get_user_id();
+		$user    = get_user_by( 'id', $user_id );
+		if ( is_wp_error( $user ) || false === $user ) {
+			return;
+		}
+
+		// Get user meta.
+		$post_id = get_user_meta( $user_id, 'app_archive_page_id', true );
+		if ( ! $post_id ) {
+			$post_id = 0;
+		}
+
+		// Enqueue main script.
+		$deps = require_once Functions::get_plugin_dir( 'build/app-profile-edit.asset.php' );
+		wp_enqueue_script(
+			'app-profile-edit',
+			Functions::get_plugin_url( 'build/app-profile-edit.js' ),
+			$deps['dependencies'],
+			$deps['version'],
+			true
+		);
+
+		// Get user nicename/slug.
+
+		// Localize vars.
+		wp_localize_script(
+			'app-profile-edit',
+			'appSettingsReading', /* needed in URLPicker component */
+			array(
+				'pageIdProfile'    => $post_id,
+				'pageTitleProfile' => sanitize_text_field( get_the_title( $post_id ) ),
+				'restEndpoint'          => rest_url( 'dlxplugins/app/v1/search/pages' ),
+				'restNonce'        => wp_create_nonce( 'wp_rest' ),
+				'nicename'         => sanitize_text_field( $user->user_nicename ),
+			)
+		);
+
+		wp_enqueue_style(
+			'app-settings-reading-css',
+			Functions::get_plugin_url( 'build/app-settings-reading.css' ),
+			array(),
+			$deps['version'],
+			'all'
 		);
 	}
 

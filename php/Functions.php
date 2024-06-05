@@ -42,6 +42,21 @@ class Functions {
 	}
 
 	/**
+	 * Gets a user ID for the user.
+	 *
+	 * @return int user_id
+	 */
+	public static function get_user_id() {
+		// Get user ID.
+		$user_id = filter_input( INPUT_GET, 'user_id', FILTER_VALIDATE_INT );
+		if ( ( 0 === $user_id || null === $user_id ) && IS_PROFILE_PAGE ) {
+			$current_user = wp_get_current_user();
+			$user_id      = $current_user->ID;
+		}
+		return $user_id;
+	}
+
+	/**
 	 * Sanitize an attribute based on type.
 	 *
 	 * @param array  $attributes Array of attributes.

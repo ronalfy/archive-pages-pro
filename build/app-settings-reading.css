@@ -239,4 +239,14 @@ svg.lucide path, svg.lucide circle {
   color: #FFF;
 }
 
+.form-table .form-field label.components-base-control__label {
+  font-size: 1em;
+  font-weight: 600;
+  margin: 1.33em 0;
+  text-transform: capitalize;
+}
+.form-table .form-field .components-base-control.regular-text {
+  font-size: 14px;
+}
+
 /*# sourceMappingURL=app-settings-reading.css.map*/

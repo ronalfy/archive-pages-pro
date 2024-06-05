@@ -88,6 +88,143 @@ class Archive_Pages_Pro {
 
 		// 404 page detection.
 		add_filter( 'template_include', array( $this, 'maybe_force_404_template' ), 1 );
+
+		// Author profile pages in the admin do not support the settings API, so let's add the fields manually.
+		add_action( 'show_user_profile', array( $this, 'add_profile_interface' ), 1 );
+		add_action( 'edit_user_profile', array( $this, 'add_profile_interface' ), 1 );
+
+		add_action( 'personal_options_update', array( $this, 'save_user_profile_options' ) );
+		add_action( 'edit_user_profile_update', array( $this, 'save_user_profile_options' ) );
+
+		// Display an error message for the top of the user profile page (if applicable).
+		add_action( 'admin_notices', array( $this, 'display_user_profile_error_message' ) );
+	}
+
+	/**
+	 * Display an error message on the user profile page.
+	 */
+	public function display_user_profile_error_message() {
+		$error_message = get_option( 'app_error_message' );
+		if ( $error_message ) {
+			?>
+			<div class="notice notice-error is-dismissible">
+				<p><?php echo esc_html( $error_message ); ?></p>
+			</div>
+			<?php
+			delete_option( 'app_error_message' );
+		}
+	}
+
+	/**
+	 * Save user profile options.
+	 *
+	 * @param int $user_id The user ID.
+	 */
+	public function save_user_profile_options( $user_id ) {
+		if ( ! current_user_can( 'edit_user', $user_id ) ) {
+			return;
+		}
+		if ( ! \wp_verify_nonce( filter_input( INPUT_POST, '_wpnonce' ), 'update-user_' . $user_id ) ) {
+			return;
+		}
+
+		// todo - check if nicename is the same as the passed user_id
+		// todo - check if nicename is a reserved term.
+		// todo - check if sanitized_title is run and return an error if they don't match.
+		// todo - check if nicename already exists.
+
+		$app_user_options = filter_input( INPUT_POST, 'app-user-profile', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_REQUIRE_ARRAY );
+		if ( ! $app_user_options ) {
+			return;
+		}
+
+		// Let's get the page ID that is currently mapped. Note if it's `default`, the page should be stripped.
+		$maybe_mapped_page_id = sanitize_text_field( $app_user_options['page_id'] );
+		if ( '0' === $maybe_mapped_page_id ) {
+			delete_user_meta( $user_id, 'app_archive_page_id' );
+		} else {
+			$maybe_mapped_page_id = absint( $maybe_mapped_page_id );
+			$maybe_mapped_page_id = apply_filters( 'wpml_object_id', $maybe_mapped_page_id, 'page', true );
+			update_user_meta( $user_id, 'app_archive_page_id', $maybe_mapped_page_id );
+		}
+
+		$maybe_new_author_slug = sanitize_text_field( trim( $app_user_options['slug'] ) );
+		$maybe_user            = get_user_by( 'slug', $maybe_new_author_slug );
+
+		// Let's check if the user exists and is not the current user.
+		if ( $maybe_user && $maybe_user->ID !== $user_id ) {
+			update_option( 'app_error_message', esc_html__( 'The author slug you entered is already in use. Please enter a different slug.', 'archive-pages-pro' ) );
+			return;
+		} elseif ( $maybe_user ) {
+			// If slugs are the same, exit.
+			if ( $maybe_user && $maybe_user->ID === $user_id ) {
+				return;
+			}
+		}
+
+		// Get the sanitized author slug.
+		$sanitized_author_slug = sanitize_title( trim( $maybe_new_author_slug ) );
+
+		// If they don't match, return a malformed slug error.
+		if ( $sanitized_author_slug !== $maybe_new_author_slug ) {
+			update_option( 'app_error_message', esc_html__( 'The author slug you entered is malformed. Please enter a valid slug.', 'archive-pages-pro' ) );
+			return;
+		}
+
+		/**
+		 * Filter the sanitized author slug.
+		 *
+		 * This filter is run before the sanity checks are run.
+		 *
+		 * @param string $sanitized_author_slug The sanitized author slug.
+		 * @param int    $user_id               The user ID.
+		 * @param string $maybe_new_author_slug The original slug passed via POST.
+		 *
+		 * @since 1.0.0
+		 */
+		$sanitized_author_slug = apply_filters(
+			'archive_pages_pro_pre_save_author_slug',
+			$sanitized_author_slug,
+			$user_id,
+			$maybe_new_author_slug
+		);
+
+		// If the slug is empty, return early.
+		if ( empty( $sanitized_author_slug ) ) {
+			update_option( 'app_error_message', esc_html__( 'The author slug you entered is empty. Please enter a valid slug.', 'archive-pages-pro' ) );
+			return;
+		}
+
+		$reserved_slugs = array( 'admin', 'administrator', 'login', 'user', 'profile', 'edit', 'author', 'author-slug' );
+
+		/**
+		 * Filter the reserved slugs.
+		 *
+		 * @param array $reserved_slugs The reserved slugs.
+		 *
+		 * @since 1.0.0
+		 */
+		$reserved_slugs = apply_filters( 'archive_pages_pro_reserved_slugs', $reserved_slugs );
+
+		// If the slug is reserved, return a reserved slug error.
+		if ( in_array( $sanitized_author_slug, $reserved_slugs, true ) ) {
+			update_option( 'app_error_message', esc_html__( 'The author slug you entered is reserved. Please enter a different slug.', 'archive-pages-pro' ) );
+			return;
+		}
+
+		// Update the user nicename.
+		$user = get_user_by( 'id', $user_id );
+		if ( $user ) {
+			$user->user_nicename = $sanitized_author_slug;
+
+			/**
+			 * Perform an action prior to saving the user.
+			 *
+			 * @since 1.0.0
+			 */
+			do_action( 'archive_pages_pro_pre_save_user', $user );
+			wp_update_user( $user );
+		}
 	}
 
 	/**
@@ -274,6 +411,32 @@ class Archive_Pages_Pro {
 	}
 
 	/**
+	 * Map Term Archives to Posts Options.
+	 *
+	 * @param mixed $user_id_or_object The user ID or user object.
+	 */
+	public function add_profile_interface( $user_id_or_object ) {
+		if ( is_object( $user_id_or_object ) ) {
+			$user_id = $user_id_or_object->ID;
+		} else {
+			$user_id = $user_id_or_object;
+		}
+		$author_permalink = get_author_posts_url( $user_id );
+		?>
+		<table class="form-table" role="presentation">
+			<tbody>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Author Archive', 'archive-pages-pro' ); ?></th>
+					<td>
+						<div id="app-author-mapping"><?php esc_html_e( 'Loading...', 'archive-pages-pro' ); ?></div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<?php
+	}
+
+	/**
 	 * Override an archive page based on passed query arguments.
 	 *
 	 * @param WP_Query $query The query to check.
@@ -353,6 +516,34 @@ class Archive_Pages_Pro {
 				$query->is_category          = false;
 				$query->is_tag               = false;
 				$query->is_tax               = false;
+				$query->is_single            = true;
+				$query->is_singular          = true;
+				$query->is_post_type_archive = false;
+				$query->queried_object_id    = $post_id;
+
+				$query->queried_object = get_post( $post_id, OBJECT );
+				self::$paged_reset     = true;
+			}
+		}
+
+		// Map author archive to page.
+		if ( is_author() || $query->is_author || $query->is_author_archive ) {
+			$author_name = get_query_var( 'author_name' );
+			$author      = get_user_by( 'slug', $author_name );
+			$author_id   = $author->ID;
+			$post_id     = get_user_meta( $author_id, 'app_archive_page_id', true );
+			if ( $post_id && ( 'default' !== $post_id && '0' !== $post_id ) ) {
+				$post_id = absint( $post_id );
+				$query->set( 'post_type', 'page' );
+				$query->set( 'page_id', $post_id );
+				$query->set( 'redirected', true );
+				$query->set( 'paged', self::$paged );
+				$query->set( 'original_archive_type', 'author' );
+				$query->set( 'original_archive_id', absint( $author_id ) );
+				$query->is_page              = true;
+				$query->is_archive           = false;
+				$query->is_author            = false;
+				$query->is_author_archive    = false;
 				$query->is_single            = true;
 				$query->is_singular          = true;
 				$query->is_post_type_archive = false;
