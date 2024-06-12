@@ -4194,6 +4194,10 @@ html {
   line-height: 1.3;
   margin-left: 8px;
 }
+.dlx-admin__row h3:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
 
 button.dlx-app__btn-danger {
   background: #fff;

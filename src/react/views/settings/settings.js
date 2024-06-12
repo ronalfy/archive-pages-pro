@@ -176,10 +176,9 @@ const Settings = ( props ) => {
 						<tbody>
 							<tr>
 								<th scope="row">
-									{ __( 'Post Types', 'archive-pages-pro' ) }
+									{ __( 'Archive Mapping', 'archive-pages-pro' ) }
 								</th>
 								<td>
-									{ getPostTypes() }
 									<div className="dlx-admin__row">
 										<Controller
 											name="enablePostTypeArchiveMapping"
@@ -196,6 +195,46 @@ const Settings = ( props ) => {
 											) }
 										/>
 									</div>
+									<div className="dlx-admin__row">
+										<Controller
+											name="enableTermMapping"
+											control={ control }
+											render={ ( { field: { onChange } } ) => (
+												<ToggleControl
+													label={ __( 'Enable Term Mapping', 'archive-pages-pro' ) }
+													checked={ getValues( 'enableTermMapping' ) }
+													onChange={ ( boolValue ) => {
+														onChange( boolValue );
+													} }
+													help={ __( 'Disabling this will turn off page mapping for term archives.', 'archive-pages-pro' ) }
+												/>
+											) }
+										/>
+									</div>
+									<div className="dlx-admin__row">
+										<Controller
+											name="enableAuthorMapping"
+											control={ control }
+											render={ ( { field: { onChange } } ) => (
+												<ToggleControl
+													label={ __( 'Enable Author Mapping', 'archive-pages-pro' ) }
+													checked={ getValues( 'enableAuthorMapping' ) }
+													onChange={ ( boolValue ) => {
+														onChange( boolValue );
+													} }
+													help={ __( 'Disabling this will turn off page mapping for author archives.', 'archive-pages-pro' ) }
+												/>
+											) }
+										/>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">
+									{ __( 'Post Types', 'archive-pages-pro' ) }
+								</th>
+								<td>
+									{ getPostTypes() }
 								</td>
 							</tr>
 						</tbody>
