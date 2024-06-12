@@ -8,7 +8,9 @@
 		"React": "readonly",
 		"appSettingsReading": "readonly",
 		"appTermEdit": "readonly",
-		"pageTitleProfile": "readonly"
+		"pageTitleProfile": "readonly",
+		"dlxAppLicense": "readonly",
+		"dlxAppSettings": "readonly"
 	},
 	"env": {
 		"browser": true,

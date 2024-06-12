@@ -2,174 +2,9 @@
 @import './button-resets.scss';
 @import './breakpoints-mixin.scss';
 
-@keyframes app-pub-spin {
+@keyframes dlx-gbhacks-rotate {
 	100% {
 		transform: rotate(360deg);
-	}
-}
-/* Admin Interface Wrapper */
-#app-pub-content {
-	padding-top: 18px;
-}
-/* Admin loading icon */
-.app-pub-load-static-svg {
-	svg {
-		animation: app-pub-spin;
-		animation-duration: 1.5s;
-		animation-iteration-count: infinite;
-		animation-timing-function: linear;
-	}
-}
-
-/* Url Wrapper Input */
-.app-url-input {
-	display: inline-block;
-	max-width: 400px;
-	width: 100%;
-	flex-wrap: wrap;
-	position: relative;
-	.components-base-control {
-		.components-base-control__label {
-			font-size: 16px;
-			display: block;
-			width: 100%;
-		}
-	}
-	.apppub-suggestions-wrapper {
-		width: 100%;
-		position: absolute;
-		top: 100%;
-		left: 0;
-		max-height: 250px;
-		overflow-y: auto;
-		.app-url-input__suggestion {
-			position: relative;
-			border: 1px solid #ddd;
-			border-radius: 0;
-			width: 100%;
-			background: #FFF;
-			display: flex;
-			justify-content: flex-start;
-			align-items: center;
-			text-align: left;
-			padding: 5px 20px 5px 40px;
-			transition: all 0.4s ease-in-out;
-
-			svg {
-				position: absolute;
-				width: 24px;
-				height: 24px;
-				top: calc(50% - 8px);
-				left: 10px;
-				path {
-					fill: unset;
-				}
-			}
-
-			&:hover {
-				background: #f1f1f1;
-				border-color: var( --wp-admin-theme-color );
-			}
-
-			&.is-selected {
-				background: #f1f1f1;
-				border-color: var( --wp-admin-theme-color );
-			}
-
-			.apppub-search-item {
-				display: block;
-				margin-right: 8px;
-				white-space: pre-wrap;
-				overflow-wrap: break-word;
-			}
-			.apppub-search-item-title {
-				display: block;
-				margin-bottom: 0.2em;
-				font-weight: 500;
-				position: relative;
-				overflow: hidden;
-   				text-overflow: ellipsis;
-			}
-			.apppub-search-item-info {
-				word-break: break-all;
-				display: block;
-				color: #757575;
-				font-size: .9em;
-				line-height: 1.3;
-			}
-		}
-	}
-}
-.app-pub-url-input__wrapper {
-	
-	label {
-		display: block;
-		width: 100%;
-		font-weight: 600;
-		margin-bottom: 5px;
-	}
-	.app-pub-url-input__suggestion {
-		background: #FFF;
-		border: 1px solid #ddd;
-		border-radius: 3px;
-		font-size: 13px;
-		padding: 11px 16px 11px 16px;
-		width: 100%;
-	}
-	.app-pub-url-input__suggestion-item {
-		.components-button {
-			margin-left: 8px;
-		}
-	}
-	.app-pub-url-input__input-wrapper {
-		position: relative;
-		display: grid;
-		grid-template-columns: 1fr 36px;
-		grid-gap: 10px;
-		width: 100%;
-		input[type="text"] {
-			border: 1px solid #ddd;
-			border-radius: 3px;
-			font-size: 13px;
-			padding: 11px 36px 11px 16px;
-			width: 100%;
-		}
-		.app-pub-url-input__input {
-			line-height: 1;
-		}
-		.components-spinner {
-			position: absolute;
-			right: 48px;
-			height: 24px;
-			top: calc(50% - 15px);
-		}
-		.app-pub-url-input__input ~ .components-button {
-			position: relative;
-			box-shadow: unset;
-			border: unset;
-			background: unset;
-		}
-	}
-}
-
-.app-pub-url-input__input ~ .components-button,
-.app-pub-url-input__suggestion-item .components-button {
-	position: relative;
-
-	.components-tooltip {
-		display: inline-block;
-		background: #333;
-		color: #FFF;
-		padding: 8px 12px;
-		border-radius: 3px;
-		font-size: 12px;
-		position: absolute;
-		top: calc(50% - 8px);
-		right: 10px;
-		min-width: 150px;
-		height: auto;
-		transition: opacity .2s ease-in-out;
-		cursor: pointer;
 	}
 }
 
@@ -210,7 +45,7 @@
 }
 
 /* Admin container and header */
-.dlx-app-admin-wrap {
+.dlx-gb-extras-admin-wrap {
 	position: relative;
 	padding: 0;
 	margin: 0;
@@ -220,7 +55,7 @@
 		padding: 1.5rem;
 		margin: 0 auto;
 
-		.dlx-app-logo-wrapper {
+		.dlx-gb-extras-logo-wrapper {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
@@ -234,12 +69,12 @@
 		}
 	}
 
-	.dlx-app-admin-body-wrapper {
+	.dlx-gb-extras-admin-body-wrapper {
 		max-width: 69.5rem;
 		margin: 0 auto;
 		padding: 2.4em 20px;
 	}
-	.dlx-app-body__content {
+	.dlx-gb-extras-body__content {
 		padding: 10px 35px;
 		background: #f0f0f1;
 		border: 1px solid #c3c4c7;
@@ -249,18 +84,11 @@
 		margin-bottom: 40px;
 	}
 }
-.dlx-app-admin-buttons {
+.dlx-gb-extras-admin-buttons {
 	display: flex;
     justify-content: space-between;
     align-items: center;
-    button {
-		padding: 16px 20px;
-		height: unset;
-
-		&.is-primary {
-			color: #FFF;
-		}
-	}
+    padding-top: 25px;
 }
 
 /* Button styles stolen from QuotesDLX */
@@ -301,7 +129,7 @@
 		justify-content: flex-end;
 	}
 	button,
-	.dlx-app__btn-primary {
+	.has__btn-primary {
 		width: 100%;
 		text-align: center;
 		margin-bottom: 0px;
@@ -325,7 +153,7 @@
 			transition: all 0.4s ease-in-out;
 		}
 	}
-	.dlx-app__btn-primary {
+	.has__btn-primary {
 		display: block;
 		width: 100%;
 
@@ -410,7 +238,7 @@ html {
 	}
 }
 
-.dlx-app-admin-buttons button {
+.dlx-gb-extras-admin-buttons button {
 	margin-right: 20px;
 	&:last-child {
 		margin-right: 0;
@@ -431,7 +259,7 @@ html {
 	&.is-saving,
 	&.is-resetting{
 		svg {
-			animation: app-pub-spin;
+			animation: dlx-gbhacks-rotate;
 			animation-duration: 1.2s;
 			animation-iteration-count: infinite;
 			animation-timing-function: linear;
@@ -446,7 +274,7 @@ html {
 /**
  * Snackbar styles.
  */
- .dlx-app-snackbar.components-snackbar {
+ .dlx-gb-extras-snackbar.components-snackbar {
 	position: fixed;
 	top: 32px;
 	right: 0;
@@ -468,56 +296,56 @@ html {
 		line-height: 0;
 	}
 
-	&.dlx-app-snackbar-loading {
+	&.dlx-gb-extras-snackbar-loading {
 		svg {
-			animation: app-pub-spin;
+			animation: dlx-gbhacks-rotate;
 			animation-duration: 1.2s;
 			animation-iteration-count: infinite;
 			animation-timing-function: linear;
 		}
 	}
-	&.dlx-app-snackbar-success {
+	&.dlx-gb-extras-snackbar-success {
 		background: #14720D;
 		color: #FFF;
 	}
-	&.dlx-app-snackbar-error,
-	&.dlx-app-snackbar-critical {
+	&.dlx-gb-extras-snackbar-error,
+	&.dlx-gb-extras-snackbar-critical {
 		background: #820000;
 		color: #FFF;
 	}
-	&.dlx-app-snackbar-warning {
+	&.dlx-gb-extras-snackbar-warning {
 		background: #FFC107;
 		color: #000;
 	}
  }
 
  :root {
-	--dlx-app-admin--color-notice--info: #e3f3f7;
-	--dlx-app-admin--color-notice--info-alt: #3a8dc4;
-	--dlx-app-admin--color-notice--success: #eaf5ea;
-	--dlx-app-admin--color-notice--success-alt: #49a939;
-	--dlx-app-admin--color-notice--warning: #fef6e1;
-	--dlx-app-admin--color-notice--warning-alt: #e8a931;
-	--dlx-app-admin--color-notice--error: #f5e5e4;
-	--dlx-app-admin--color-notice--error-alt: #bc2b2c;
+	--dlxgbhacks-admin--color-notice--info: #e3f3f7;
+	--dlxgbhacks-admin--color-notice--info-alt: #3a8dc4;
+	--dlxgbhacks-admin--color-notice--success: #eaf5ea;
+	--dlxgbhacks-admin--color-notice--success-alt: #49a939;
+	--dlxgbhacks-admin--color-notice--warning: #fef6e1;
+	--dlxgbhacks-admin--color-notice--warning-alt: #e8a931;
+	--dlxgbhacks-admin--color-notice--error: #f5e5e4;
+	--dlxgbhacks-admin--color-notice--error-alt: #bc2b2c;
 }
 
 
 /* Error Notices */
-.dlx-app-admin__notice {
+.dlxgbhacks-admin__notice {
 	margin: 10px 0;
 
-	&.dlx-app-admin__notice--has-icon {
+	&.dlxgbhacks-admin__notice--has-icon {
 		.components-notice__content {
 			display: grid;
 			grid-template-columns: 32px 1fr 1px;
 			align-items: center;
 		}
 
-		&.dlx-app-admin__notice-appearance--inline .components-notice__content {
+		&.dlxgbhacks-admin__notice-appearance--inline .components-notice__content {
 			display: flex;
 
-			.dlx-app-admin__notice-icon {
+			.dlxgbhacks-admin__notice-icon {
 				margin-right: 8px;
 			}
 		}
@@ -530,13 +358,13 @@ html {
 		color: #FFF;
 	}
 
-	.dlx-app-admin__notice-message {
+	.dlxgbhacks-admin__notice-message {
 		font-size: 1.2em;
 		line-height: 1.4;
 		font-weight: 500;
 	}
 
-	&.dlx-app-admin__notice-appearance--block .components-notice {
+	&.dlxgbhacks-admin__notice-appearance--block .components-notice {
 		border-left: 4px solid transparent;
 		padding: 15px 20px;
 		padding-left: 15px;
@@ -545,7 +373,7 @@ html {
 		margin-right: 0;
 	}
 
-	&.dlx-app-admin__notice-appearance--inline .components-notice {
+	&.dlxgbhacks-admin__notice-appearance--inline .components-notice {
 		padding-left: 0;
 		margin-left: 0;
 		margin-right: 0;
@@ -558,22 +386,22 @@ html {
 		height: 24px;
 	}
 
-	&.dlx-app-admin__notice-type--error:not(.dlx-app-admin__notice-appearance--inline) {
-		background-color: var(--dlx-app-admin--color-notice--error);
+	&.dlxgbhacks-admin__notice-type--error:not(.dlxgbhacks-admin__notice-appearance--inline) {
+		background-color: var(--dlxgbhacks-admin--color-notice--error);
 
 		.components-notice {
-			border-left-color: var(--dlx-app-admin--color-notice--error-alt);
+			border-left-color: var(--dlxgbhacks-admin--color-notice--error-alt);
 		}
 		svg {
-			color: var(--dlx-app-admin--color-notice--error-alt);
+			color: var(--dlxgbhacks-admin--color-notice--error-alt);
 		}
 		svg path {
-			fill: var(--dlx-app-admin--color-notice--error-alt);
+			fill: var(--dlxgbhacks-admin--color-notice--error-alt);
 		}
 	}
 
-	&.dlx-app-admin__notice-type--error.dlx-app-admin__notice-appearance--inline {
-		.dlx-app-admin__notice-message {
+	&.dlxgbhacks-admin__notice-type--error.dlxgbhacks-admin__notice-appearance--inline {
+		.dlxgbhacks-admin__notice-message {
 			color: #FFF;
 			fill: #FFF;
 		}
@@ -589,48 +417,48 @@ html {
 		}
 	}
 
-	&.dlx-app-admin__notice-type--success {
-		background-color: var(--dlx-app-admin--color-notice--success);
+	&.dlxgbhacks-admin__notice-type--success {
+		background-color: var(--dlxgbhacks-admin--color-notice--success);
 
 		.components-notice {
-			border-left-color: var(--dlx-app-admin--color-notice--success-alt);
+			border-left-color: var(--dlxgbhacks-admin--color-notice--success-alt);
 		}
 
 		svg path {
-			fill: var(--dlx-app-admin--color-notice--success-alt);
+			fill: var(--dlxgbhacks-admin--color-notice--success-alt);
 		}
 	}
 
-	&.dlx-app-admin__notice-type--info {
-		background-color: var(--dlx-app-admin--color-notice--info);
+	&.dlxgbhacks-admin__notice-type--info {
+		background-color: var(--dlxgbhacks-admin--color-notice--info);
 
 		.components-notice {
-			border-left-color: var(--dlx-app-admin--color-notice--info-alt);
+			border-left-color: var(--dlxgbhacks-admin--color-notice--info-alt);
 		}
 
-		.dlx-app-admin__notice-icon {
+		.dlxgbhacks-admin__notice-icon {
 			svg:not(.lucide) path {
-				fill: var(--dlx-app-admin--color-notice--info-alt);
+				fill: var(--dlxgbhacks-admin--color-notice--info-alt);
 			}
 			svg.lucide {
-				color: var(--dlx-app-admin--color-notice--info-alt);
+				color: var(--dlxgbhacks-admin--color-notice--info-alt);
 			}
 		}
 
 		svg:not(.lucide) path {
-			fill: var(--dlx-app-admin--color-notice--info-alt);
+			fill: var(--dlxgbhacks-admin--color-notice--info-alt);
 		}
 	}
 
-	&.dlx-app-admin__notice-type--warning {
-		background-color: var(--dlx-app-admin--color-notice--warning);
+	&.dlxgbhacks-admin__notice-type--warning {
+		background-color: var(--dlxgbhacks-admin--color-notice--warning);
 
 		.components-notice {
-			border-left-color: var(--dlx-app-admin--color-notice--warning-alt);
+			border-left-color: var(--dlxgbhacks-admin--color-notice--warning-alt);
 		}
 
 		svg path {
-			fill: var(--dlx-app-admin--color-notice--warning-alt);
+			fill: var(--dlxgbhacks-admin--color-notice--warning-alt);
 		}
 	}
 }
@@ -727,11 +555,11 @@ html {
 			top: 0;
 			z-index: 1;
 
-			span.dlx-app--show-hide--label {
+			span.dlx-gb-extras--show-hide--label {
 				display: none;
 			}
 
-			.dlx-app--show-hide--icon {
+			.dlx-gb-extras--show-hide--icon {
 				position: relative;
 
 				svg {
@@ -750,7 +578,7 @@ html {
 }
 
 /* License Table */
-.dlx-app-table {
+.dlx-gb-extras-table {
 	box-sizing: border-box;
 	border: 0;
 	border-collapse: collapse;
@@ -786,7 +614,7 @@ html {
 	height: 32px;
 }
 
-#dlx-app-license-show-hide {
+#dlx-gb-extras-license-show-hide {
 	&:hover {
 		& ~ label {
 			svg path {
@@ -807,7 +635,7 @@ html {
 	
 }
 
-.components-button.button-reset.app-icon {
+.components-button.button-reset.has-icon {
 	color: gray;
 	min-width: 48px;
 }
@@ -829,7 +657,7 @@ html {
 	}
 }
 
-button.dlx-app__btn-danger  {
+button.dlx-gbhacks__btn-danger  {
 	background: #fff;
 	color: #822700;
 	border-color: #822700;
@@ -844,7 +672,7 @@ div.can-revoke {
 	justify-content: flex-end;
 }
 .dlx-admin__license--wrapper  {
-	.dlx-app__btn-danger {
+	.dlx-gbhacks__btn-danger {
 		text-align: right;
 	}
 	.dlx-admin__tabs--content-actions {
@@ -852,10 +680,10 @@ div.can-revoke {
 	}
 }
 
-.app-error {
+.has-error {
 	input.components-text-control__input {
-		border: 1px solid var(--dlx-app-admin--color-notice--error-alt);
-		background-color: var(--dlx-app-admin--color-notice--error);
+		border: 1px solid var(--dlxgbhacks-admin--color-notice--error-alt);
+		background-color: var(--dlxgbhacks-admin--color-notice--error);
 	}
 }
 
@@ -882,9 +710,8 @@ div.can-revoke {
 		fill: none !important;
 	}
 
-	a.dlx-app__btn-secondary,
+	a.dlx__btn-secondary,
 	a.components-button,
-	&.dlx-app__btn-primary,
 	button {
 		background: #fff;
 		color: #017e01;
@@ -911,7 +738,7 @@ div.can-revoke {
 			border-color: #006400;
 		}
 
-		&.app-error {
+		&.has-error {
 			border: 1px solid #bc2b2c;
 			box-shadow: none !important; /* override core style */
 
@@ -920,7 +747,7 @@ div.can-revoke {
 			}
 		}
 
-		&.dlx-app__btn-white {
+		&.dlx__btn-white {
 			background: #fff;
 			color: #333;
 			border-color: #111;
@@ -932,7 +759,7 @@ div.can-revoke {
 			}
 		}
 
-		&.dlx-app__btn-secondary {
+		&.dlx__btn-secondary {
 			background: #FFF;
 			color: #333;
 			border-color: #111;
@@ -948,7 +775,7 @@ div.can-revoke {
 			}
 		}
 
-		&.dlx-app__btn-link {
+		&.dlx__btn-link {
 			all: unset;
 			cursor: pointer;
 			color: #9949cf;
@@ -956,7 +783,7 @@ div.can-revoke {
 			text-decoration: underline;
 		}
 
-		&.dlx-app__btn-danger {
+		&.dlx__btn-danger {
 			background: #fff;
 			color: #822700;
 			border-color: #822700;
@@ -996,7 +823,7 @@ div.can-revoke {
 			}
 		}
 
-		&.dlx-app__btn--icon-right {
+		&.dlx__btn--icon-right {
 			&.is-saving {
 				display: flex;
 				justify-content: center;
@@ -1006,7 +833,7 @@ div.can-revoke {
 					width: 24px;
 					height: 24px;
 					margin-left: 8px;
-					animation: app-pub-spin 1s linear infinite;
+					animation: dlx-rotate 1s linear infinite;
 
 					path {
 						fill: currentColor;
@@ -1038,7 +865,7 @@ div.can-revoke {
 				svg {
 					width: 24px;
 					height: 24px;
-					animation: app-pub-spin 1s linear infinite;
+					animation: dlx-rotate 1s linear infinite;
 
 					path {
 						fill: #822700;
@@ -1055,4 +882,14 @@ div.can-revoke {
 .dlx-admin-panel-area > h2 ~ p {
 	font-size: 16px;
 	line-height: 1.3;
+}
+
+/* Fancybox content */
+
+#dlx-gb-extras-preview {
+	max-width: 600px;
+	margin: 0 auto;
+}
+.fancybox__container {
+	z-index: 9999; /* so we're over the admin menus */
 }

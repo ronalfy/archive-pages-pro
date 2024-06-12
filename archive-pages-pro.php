@@ -18,6 +18,7 @@ namespace DLXPlugins\APP;
 
 define( 'ARCHIVE_PAGES_PRO_VERSION', '1.0.0' );
 define( 'ARCHIVE_PAGES_PRO_FILE', __FILE__ );
+define( 'ARCHIVE_PAGES_PRO_PRODUCT_ID', 0 );
 
 // Support for site-level autoloading.
 if ( file_exists( __DIR__ . '/lib/autoload.php' ) ) {
@@ -82,6 +83,10 @@ class Archive_Pages_Pro {
 		// Init Yoast.
 		$yoast = new Yoast();
 		$yoast->run();
+
+		// Init admin.
+		$admin = new Admin();
+		$admin->run();
 
 		add_action( 'admin_init', array( $this, 'init_settings_api' ) );
 		add_action( 'pre_get_posts', array( $this, 'maybe_override_archive' ) );
