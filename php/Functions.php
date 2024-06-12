@@ -42,6 +42,61 @@ class Functions {
 	}
 
 	/**
+	 * Get the post type data.
+	 *
+	 * @return array|bool Post type data.
+	 */
+	public static function get_post_type_data() {
+		$args = array(
+			'show_ui' => true,
+			'public'  => true,
+		);
+		/**
+		 * Filter the default post type args.
+		 *
+		 * @param array $args Default post type args.
+		 */
+		$args       = apply_filters( 'archive_pages_pro_post_type_args', $args );
+		$post_types = get_post_types(
+			$args,
+			'objects'
+		);
+		$excluded   = array( 'attachment', 'revision', 'nav_menu_item', 'gblocks_templates', 'post', 'page', 'gblocks_global_style' );
+		/**
+		 * Filter the post types to exclude.
+		 *
+		 * @param array $excluded Post types to exclude.
+		 */
+		$excluded = apply_filters( 'archive_pages_pro_excluded_post_types', $excluded );
+
+		foreach ( $excluded as $exclude ) {
+			if ( isset( $post_types[ $exclude ] ) ) {
+				unset( $post_types[ $exclude ] );
+			}
+		}
+		$options              = Options::get_options();
+		$post_types_with_data = array();
+		foreach ( $post_types  as $post_type ) {
+			$post_type_object = get_post_type_object( $post_type->name );
+			if ( ! $post_type_object ) {
+				continue;
+			}
+
+			$data = array(
+				'name'                  => $options['post_types'][ $post_type_object->name ]['name'] ?? $post_type_object->name,
+				'label'                 => $options['post_types'][ $post_type_object->name ]['label'] ?? $post_type_object->label,
+				'is_public'             => $options['post_types'][ $post_type_object->name ]['public'] ?? (bool) $post_type_object->public,
+				'enable_has_archive'    => $options['post_types'][ $post_type_object->name ]['enable_has_archive'] ?? (bool) $post_type_object->has_archive,
+				'enable_show_in_rest'   => $options['post_types'][ $post_type_object->name ]['enable_show_in_rest'] ?? (bool) $post_type_object->show_in_rest,
+				'enable_with_front'     => $options['post_types'][ $post_type_object->name ]['enable_with_front'] ?? (bool) $post_type_object->rewrite['with_front'],
+				'enable_page_templates' => $options['post_types'][ $post_type_object->name ]['enable_page_templates'] ?? false,
+			);
+			$post_types_with_data[ $post_type_object->name ] = $data;
+		}
+		return $post_types_with_data;
+	}
+
+	/**
 	 * Gets a user ID for the user.
 	 *
 	 * @return int user_id

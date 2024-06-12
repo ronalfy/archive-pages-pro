@@ -3347,7 +3347,7 @@ var Settings = function Settings(props) {
         enablePostTypeArchiveMapping: adminOptions.enablePostTypeArchiveMapping,
         enableTermMapping: adminOptions.enableTermMapping,
         enableAuthorMapping: adminOptions.enableAuthorMapping,
-        postTypes: []
+        postTypes: postTypes !== null && postTypes !== void 0 ? postTypes : []
       }
     }),
     control = _useForm.control,
@@ -3404,6 +3404,98 @@ var Settings = function Settings(props) {
       }
     });
   };
+  var getPostTypes = function getPostTypes() {
+    // If there are no post types, return early.
+    if (!postTypes) {
+      return null;
+    }
+    return Object.values(getValues('postTypes')).map(function (postType) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "dlx-admin__row",
+        key: postType.name
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, postType.label), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_4__.Controller, {
+        name: "postTypes.".concat(postType.name, ".enable_page_templates"),
+        control: control,
+        render: function render(_ref) {
+          var _ref$field = _ref.field,
+            _onChange = _ref$field.onChange,
+            value = _ref$field.value;
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable Page Templates'),
+            checked: value,
+            onChange: function onChange(boolValue) {
+              _onChange(boolValue);
+            },
+            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable page templates for this post type.', 'archive-pages-pro')
+          });
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_4__.Controller, {
+        name: "postTypes.".concat(postType.name, ".enable_show_in_rest"),
+        control: control,
+        render: function render(_ref2) {
+          var _ref2$field = _ref2.field,
+            _onChange2 = _ref2$field.onChange,
+            value = _ref2$field.value;
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Show in REST API', 'archive-pages-pro'),
+            checked: value,
+            onChange: function onChange(boolValue) {
+              _onChange2(boolValue);
+            },
+            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable this post type to show in the REST API. This is useful for enabling the block editor for a post type.', 'archive-pages-pro')
+          });
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_4__.Controller, {
+        name: "postTypes.".concat(postType.name, ".enable_with_front"),
+        control: control,
+        render: function render(_ref3) {
+          var _ref3$field = _ref3.field,
+            _onChange3 = _ref3$field.onChange,
+            value = _ref3$field.value;
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable a Front Base for the Post Type', 'archive-pages-pro'),
+            checked: value,
+            onChange: function onChange(boolValue) {
+              _onChange3(boolValue);
+            },
+            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('If you have a permalink like /blog/, then unless the post type specifies, the /blog/ will be its base. Disable this option if you do not want to use a base for your post type permalinks.', 'archive-pages-pro')
+          });
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_4__.Controller, {
+        name: "postTypes.".concat(postType.name, ".enable_has_archive"),
+        control: control,
+        render: function render(_ref4) {
+          var _ref4$field = _ref4.field,
+            _onChange4 = _ref4$field.onChange,
+            value = _ref4$field.value;
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable a Post Type Archive', 'archive-pages-pro'),
+            checked: value,
+            onChange: function onChange(boolValue) {
+              _onChange4(boolValue);
+            },
+            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable this if you would like your post type to have an archive.', 'archive-pages-pro')
+          });
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_4__.Controller, {
+        name: "postTypes.".concat(postType.name, ".enable_block_editor"),
+        control: control,
+        render: function render(_ref5) {
+          var _ref5$field = _ref5.field,
+            _onChange5 = _ref5$field.onChange,
+            value = _ref5$field.value;
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Bypass the Classic Editor', 'archive-pages-pro'),
+            checked: value,
+            onChange: function onChange(boolValue) {
+              _onChange5(boolValue);
+            },
+            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable this to force a post type to use the block editor.', 'archive-pages-pro')
+          });
+        }
+      }));
+    });
+  };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "dlx-app-admin-content-heading"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
@@ -3418,18 +3510,18 @@ var Settings = function Settings(props) {
     className: "form-table form-table-row-sections"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
     scope: "row"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Post Types', 'archive-pages-pro')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Post Types', 'archive-pages-pro')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, getPostTypes(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "dlx-admin__row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_4__.Controller, {
     name: "enablePostTypeArchiveMapping",
     control: control,
-    render: function render(_ref) {
-      var _onChange = _ref.field.onChange;
+    render: function render(_ref6) {
+      var _onChange6 = _ref6.field.onChange;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable Post Type Mapping', 'archive-pages-pro'),
-        checked: getValues('enableAdobeFonts'),
+        checked: getValues('enablePostTypeArchiveMapping'),
         onChange: function onChange(boolValue) {
-          _onChange(boolValue);
+          _onChange6(boolValue);
         },
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Disabling this will turn off page mapping for post type archives.', 'archive-pages-pro')
       });

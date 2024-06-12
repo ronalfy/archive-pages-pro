@@ -378,18 +378,7 @@ class Admin {
 			);
 
 			// Get all show in menu post types.
-			$post_types = get_post_types(
-				array(
-					'show_ui' => true,
-				),
-				'objects'
-			);
-			$excluded   = array( 'attachment', 'revision', 'nav_menu_item', 'gblocks_templates', 'gblocks_global_style' );
-			foreach ( $excluded as $exclude ) {
-				if ( isset( $post_types[ $exclude ] ) ) {
-					unset( $post_types[ $exclude ] );
-				}
-			}
+			$post_types = Functions::get_post_type_data();
 
 			wp_localize_script(
 				'dlx-app-settings',
@@ -400,7 +389,7 @@ class Admin {
 					'resetNonce'   => wp_create_nonce( 'dlx-app-settings-reset-options' ),
 					'previewNonce' => wp_create_nonce( 'dlx-app-settings-preview' ),
 					'ajaxurl'      => admin_url( 'admin-ajax.php' ),
-					'postTypes'    => $post_types,
+					'postTypes'    => json_decode( wp_json_encode( $post_types ), true ),
 					'options'      => $options,
 				)
 			);
