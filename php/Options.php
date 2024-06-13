@@ -101,10 +101,14 @@ class Options {
 	public static function get_defaults() {
 
 		$defaults = array(
-			'enablePostTypeArchiveMapping' => true,
-			'enableTermMapping'            => true,
-			'enableAuthorMapping'		  => true,
-			'post_types' => array(),
+			'enablePostTypeArchiveMapping'  => true,
+			'enableTermMapping'             => true,
+			'enableAuthorMapping'           => true,
+			'enable404Mapping'              => true,
+			'post_types'                    => array(),
+			'taxonomies'                    => array(),
+			'authorBase'                    => '',
+			'enableCustomFieldsRestSupport' => false,
 		);
 		return $defaults;
 	}

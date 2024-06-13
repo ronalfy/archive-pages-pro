@@ -97,6 +97,61 @@ class Functions {
 	}
 
 	/**
+	 * Get the post type data.
+	 *
+	 * @return array|bool Post type data.
+	 */
+	public static function get_taxonomy_data() {
+		$args = array(
+			'public' => true,
+		);
+
+		/**
+		 * Filter the default post type args.
+		 *
+		 * @param array $args Default post type args.
+		 */
+		$args       = apply_filters( 'archive_pages_pro_taxonomy_args', $args );
+		$taxonomies = get_taxonomies(
+			$args,
+			'objects'
+		);
+		$excluded   = array( 'category', 'tag' );
+		/**
+		 * Filter the post types to exclude.
+		 *
+		 * @param array $excluded Post types to exclude.
+		 */
+		$excluded = apply_filters( 'archive_pages_pro_excluded_taxonomies', $excluded );
+
+		foreach ( $excluded as $exclude ) {
+			if ( isset( $taxonomies[ $exclude ] ) ) {
+				unset( $taxonomies[ $exclude ] );
+			}
+		}
+		$options              = Options::get_options();
+		$taxonomies_with_data = array();
+		foreach ( $taxonomies  as $taxonomy ) {
+			$taxonomy_object = get_taxonomy( $taxonomy->name );
+			if ( ! $taxonomy_object ) {
+				continue;
+			}
+
+			$data                                    = array(
+				'name'                  => $options['taxonomies'][ $taxonomy->name ]['name'] ?? $taxonomy->name,
+				'label'                 => $options['taxonomies'][ $taxonomy->name ]['label'] ?? $taxonomy->label,
+				'is_public'             => $options['taxonomies'][ $taxonomy->name ]['public'] ?? (bool) $taxonomy->public,
+				'enable_has_archive'    => $options['taxonomies'][ $taxonomy->name ]['enable_has_archive'] ?? (bool) $taxonomy->has_archive,
+				'enable_show_in_rest'   => $options['taxonomies'][ $taxonomy->name ]['enable_show_in_rest'] ?? (bool) $taxonomy->show_in_rest,
+				'enable_with_front'     => $options['taxonomies'][ $taxonomy->name ]['enable_with_front'] ?? (bool) $taxonomy->rewrite['with_front'],
+				'enable_page_templates' => $options['taxonomies'][ $taxonomy->name ]['enable_page_templates'] ?? false,
+			);
+			$taxonomies_with_data[ $taxonomy->name ] = $data;
+		}
+		return $taxonomies_with_data;
+	}
+
+	/**
 	 * Gets a user ID for the user.
 	 *
 	 * @return int user_id

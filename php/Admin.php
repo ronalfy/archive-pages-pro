@@ -437,8 +437,8 @@ class Admin {
 						</h2>
 					</div>
 					<div class="header__btn-wrap">
-						<a href="<?php echo esc_url( 'https://docs.dlxplugins.com/v/archive-pages-pro/' ); ?>" target="_blank" rel="noopener noreferrer" class="has__btn-primary"><?php esc_html_e( 'Docs', 'archive-pages-pro' ); ?></a>
-						<a href="<?php echo esc_url( 'https://dlxplugins.com/support/' ); ?>" target="_blank" rel="noopener noreferrer" class="has__btn-primary"><?php esc_html_e( 'Support', 'archive-pages-pro' ); ?></a>
+						<a href="<?php echo esc_url( 'https://docs.dlxplugins.com/v/archive-pages-pro/' ); ?>" target="_blank" rel="noopener noreferrer" class="dlx-app__btn-primary"><?php esc_html_e( 'Docs', 'archive-pages-pro' ); ?></a>
+						<a href="<?php echo esc_url( 'https://dlxplugins.com/support/' ); ?>" target="_blank" rel="noopener noreferrer" class="dlx-app__btn-primary"><?php esc_html_e( 'Support', 'archive-pages-pro' ); ?></a>
 					</div>
 				</div>
 			</header>
@@ -458,7 +458,7 @@ class Admin {
 			}
 			?>
 			<main class="dlx-app-admin-body-wrapper">
-				<div class="has-admin-container-body">
+				<div class="dlx-app-admin-container-body">
 					<nav class="nav-tab-wrapper">
 						<a  class="<?php echo esc_attr( implode( ' ', $settings_tab_class ) ); ?>" href="<?php echo esc_url( Functions::get_settings_url() ); ?>"><?php esc_html_e( 'Settings', 'archive-pages-pro' ); ?></a>
 						<a  class="<?php echo esc_attr( implode( ' ', $license_tab_class ) ); ?>" href="<?php echo esc_url( Functions::get_settings_url( 'license' ) ); ?>"><?php esc_html_e( 'License', 'archive-pages-pro' ); ?></a>
