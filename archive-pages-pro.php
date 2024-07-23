@@ -103,6 +103,60 @@ class Archive_Pages_Pro {
 
 		// Display an error message for the top of the user profile page (if applicable).
 		add_action( 'admin_notices', array( $this, 'display_user_profile_error_message' ) );
+
+		// Change the author base if set.
+		add_filter( 'init', array( $this, 'change_author_base' ) );
+		add_filter( 'author_rewrite_rules', array( $this, 'change_author_rewrites' ) );
+	}
+
+	/**
+	 * Change the author base if set.
+	 */
+	public function change_author_base() {
+		global $wp_rewrite;
+		$options     = Options::get_options();
+		$author_base = sanitize_title( $options['authorBase'] );
+
+		// Convert author_base to underlines.
+		$author_base = str_replace( '-', '_', $author_base );
+
+		// Make sure it isn't empty.
+		if ( '' === $author_base ) {
+			return;
+		}
+
+		if ( $author_base ) {
+			$wp_rewrite->author_base = $author_base;
+		}
+	}
+
+	/**
+	 * Change the author rewrites if set.
+	 *
+	 * @param array $author_rewrite The author rewrite rules.
+	 *
+	 * @return array $author_rewrite The modified author rewrite rules.
+	 */
+	public function change_author_rewrites( $author_rewrite ) {
+		$options     = Options::get_options(); // Assuming Options::get_options() retrieves your plugin options
+		$author_base = sanitize_title( $options['authorBase'] );
+
+		// Convert author_base to underscores (if needed).
+		$author_base = str_replace( '-', '_', $author_base );
+
+		// Ensure it's not empty.
+		if ( '' === $author_base ) {
+			return $author_rewrite;
+		}
+
+		// Create new rewrite rules array.
+		$new_author_rewrite_rules                              = array();
+		$new_author_rewrite_rules[ "$author_base/([^/]+)/?$" ] = 'index.php?author_name=$matches[1]';
+		$new_author_rewrite_rules[ "$author_base/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$" ] = 'index.php?author_name=$matches[1]&feed=$matches[2]';
+		$new_author_rewrite_rules[ "$author_base/([^/]+)/(feed|rdf|rss|rss2|atom)/?$" ]      = 'index.php?author_name=$matches[1]&feed=$matches[2]';
+		$new_author_rewrite_rules[ "$author_base/([^/]+)/page/?([0-9]{1,})/?$" ]             = 'index.php?author_name=$matches[1]&paged=$matches[2]';
+
+		return $new_author_rewrite_rules;
 	}
 
 	/**
@@ -463,10 +517,10 @@ class Archive_Pages_Pro {
 			return $query;
 		}
 
-		$options = Options::get_options();
+		$options                   = Options::get_options();
 		$post_type_mapping_enabled = (bool) $options['enablePostTypeArchiveMapping'];
-		$term_mapping_enabled = (bool) $options['enableTermMapping'];
-		$author_mapping_enabled = (bool) $options['enableAuthorMapping'];
+		$term_mapping_enabled      = (bool) $options['enableTermMapping'];
+		$author_mapping_enabled    = (bool) $options['enableAuthorMapping'];
 
 		// Maybe Redirect.
 		if ( is_page() && $post_type_mapping_enabled ) {

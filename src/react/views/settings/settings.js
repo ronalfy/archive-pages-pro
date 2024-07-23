@@ -5,6 +5,7 @@ import {
 	TextControl,
 	SelectControl,
 } from '@wordpress/components';
+import { cleanForSlug } from '@wordpress/url';
 import { __ } from '@wordpress/i18n';
 import { useForm, Controller, useWatch, useFormState } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -30,6 +31,7 @@ const Settings = ( props ) => {
 		reset,
 		setError,
 		trigger,
+		setValue,
 	} = useForm( {
 		defaultValues: {
 			enablePostTypeArchiveMapping: adminOptions.enablePostTypeArchiveMapping,
@@ -337,15 +339,35 @@ const Settings = ( props ) => {
 										<Controller
 											name="authorBase"
 											control={ control }
+											rules={ {
+												pattern: /^[a-zA-Z0-9_-]*$/,
+											} }
 											render={ ( { field: { onChange } } ) => (
-												<TextControl
-													label={ __( 'Author Base', 'archive-pages-pro' ) }
-													value={ getValues( 'authorBase' ) }
-													onChange={ ( value ) => {
-														onChange( value );
-													} }
-													help={ __( 'The base for author archives. Default is "author". Leave this blank for no override of the author base.', 'archive-pages-pro' ) }
-												/>
+												<>
+													<TextControl
+														label={ __( 'Author Base', 'archive-pages-pro' ) }
+														value={ getValues( 'authorBase' ) }
+														onChange={ ( value ) => {
+															onChange( value );
+														} }
+														help={ __( 'The base for author archives. Default is "author". Leave this blank for no override of the author base.', 'archive-pages-pro' ) }
+														onBlur={ () => {
+															setValue( 'authorBase', cleanForSlug( getValues( 'authorBase' ).toLowerCase() ) );
+															trigger( 'authorBase' );
+														} }
+													/>
+													{
+														errors?.authorBase?.type === 'pattern' && (
+															<Notice
+																message={ __( 'The author base must contain only letters, numbers, underscores, and hyphens.', 'archive-pages-pro' ) }
+																status="error"
+																politeness="assertive"
+																inline={ true }
+																icon={ () => <FontAwesomeIcon icon={ TriangleExclamation } style={ { color: 'currentColor' } } /> }
+															/>
+														)
+													}
+												</>
 											) }
 										/>
 									</div>

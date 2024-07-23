@@ -3309,13 +3309,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.mjs");
-/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.mjs");
-/* harmony import */ var _components_Notice__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/Notice */ "./src/react/components/Notice/index.js");
-/* harmony import */ var _components_SaveResetButtons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/SaveResetButtons */ "./src/react/components/SaveResetButtons/index.js");
+/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/url */ "@wordpress/url");
+/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.mjs");
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.mjs");
+/* harmony import */ var _components_Notice__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/Notice */ "./src/react/components/Notice/index.js");
+/* harmony import */ var _components_SaveResetButtons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/SaveResetButtons */ "./src/react/components/SaveResetButtons/index.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -3323,6 +3325,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 // eslint-disable-next-line no-unused-vars
+
 
 
 
@@ -3343,7 +3346,7 @@ var Settings = function Settings(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(adminOptions.licenseValid),
     _useState2 = _slicedToArray(_useState, 1),
     licenseValid = _useState2[0];
-  var _useForm = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_4__.useForm)({
+  var _useForm = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_5__.useForm)({
       defaultValues: {
         enablePostTypeArchiveMapping: adminOptions.enablePostTypeArchiveMapping,
         enableTermMapping: adminOptions.enableTermMapping,
@@ -3363,11 +3366,12 @@ var Settings = function Settings(props) {
     getValues = _useForm.getValues,
     reset = _useForm.reset,
     setError = _useForm.setError,
-    trigger = _useForm.trigger;
-  var formValues = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_4__.useWatch)({
+    trigger = _useForm.trigger,
+    setValue = _useForm.setValue;
+  var formValues = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_5__.useWatch)({
     control: control
   });
-  var _useFormState = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_4__.useFormState)({
+  var _useFormState = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_5__.useFormState)({
       control: control
     }),
     errors = _useFormState.errors,
@@ -3381,14 +3385,14 @@ var Settings = function Settings(props) {
       return null;
     }
     if ('valid' === licenseValid) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Thank you for supporting this plugin. Your license key is active and you are receiving updates and support.', 'archive-pages-pro'),
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Thank you for supporting this plugin. Your license key is active and you are receiving updates and support.', 'archive-pages-pro'),
         status: "success",
         politeness: "assertive",
         inline: false,
         icon: function icon() {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_3__.FontAwesomeIcon, {
-            icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__.faCircleCheck,
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__.FontAwesomeIcon, {
+            icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faCircleCheck,
             style: {
               color: 'currentColor'
             }
@@ -3396,15 +3400,15 @@ var Settings = function Settings(props) {
         }
       });
     }
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Your license key is not active. Please activate your license key to receive updates and support.', 'archive-pages-pro'),
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Your license key is not active. Please activate your license key to receive updates and support.', 'archive-pages-pro'),
       status: "warning",
       politeness: "assertive",
       inline: false,
       icon: function icon() {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_3__.FontAwesomeIcon, {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__.FontAwesomeIcon, {
           size: "1x",
-          icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__.faTriangleExclamation,
+          icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faTriangleExclamation,
           style: {
             color: 'currentColor'
           }
@@ -3415,15 +3419,15 @@ var Settings = function Settings(props) {
   var getPostTypes = function getPostTypes() {
     // If there are no post types, return early.
     if (postTypes.length === 0) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('There are no public post types to configure. Please note that core post types are removed from this list.', 'archive-pages-pro'),
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('There are no public post types to configure. Please note that core post types are removed from this list.', 'archive-pages-pro'),
         status: "info",
         politeness: "assertive",
         inline: false,
         icon: function icon() {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_3__.FontAwesomeIcon, {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__.FontAwesomeIcon, {
             size: "1x",
-            icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__.faInfoCircle,
+            icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faInfoCircle,
             style: {
               color: 'currentColor'
             }
@@ -3435,7 +3439,7 @@ var Settings = function Settings(props) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "dlx-admin__row",
         key: postType.name
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, postType.label), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_4__.Controller, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, postType.label), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_5__.Controller, {
         name: "postTypes.".concat(postType.name, ".enable_page_templates"),
         control: control,
         render: function render(_ref) {
@@ -3443,15 +3447,15 @@ var Settings = function Settings(props) {
             _onChange = _ref$field.onChange,
             value = _ref$field.value;
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable Page Templates'),
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable Page Templates'),
             checked: value,
             onChange: function onChange(boolValue) {
               _onChange(boolValue);
             },
-            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable page templates for this post type.', 'archive-pages-pro')
+            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable page templates for this post type.', 'archive-pages-pro')
           });
         }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_4__.Controller, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_5__.Controller, {
         name: "postTypes.".concat(postType.name, ".enable_show_in_rest"),
         control: control,
         render: function render(_ref2) {
@@ -3459,15 +3463,15 @@ var Settings = function Settings(props) {
             _onChange2 = _ref2$field.onChange,
             value = _ref2$field.value;
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Show in REST API', 'archive-pages-pro'),
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Show in REST API', 'archive-pages-pro'),
             checked: value,
             onChange: function onChange(boolValue) {
               _onChange2(boolValue);
             },
-            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable this post type to show in the REST API. This is useful for enabling the block editor for a post type.', 'archive-pages-pro')
+            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable this post type to show in the REST API. This is useful for enabling the block editor for a post type.', 'archive-pages-pro')
           });
         }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_4__.Controller, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_5__.Controller, {
         name: "postTypes.".concat(postType.name, ".enable_with_front"),
         control: control,
         render: function render(_ref3) {
@@ -3475,15 +3479,15 @@ var Settings = function Settings(props) {
             _onChange3 = _ref3$field.onChange,
             value = _ref3$field.value;
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable a Front Base for the Post Type', 'archive-pages-pro'),
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable a Front Base for the Post Type', 'archive-pages-pro'),
             checked: value,
             onChange: function onChange(boolValue) {
               _onChange3(boolValue);
             },
-            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('If you have a permalink like /blog/, then unless the post type specifies, the /blog/ will be its base. Disable this option if you do not want to use a base for your post type permalinks.', 'archive-pages-pro')
+            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('If you have a permalink like /blog/, then unless the post type specifies, the /blog/ will be its base. Disable this option if you do not want to use a base for your post type permalinks.', 'archive-pages-pro')
           });
         }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_4__.Controller, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_5__.Controller, {
         name: "postTypes.".concat(postType.name, ".enable_has_archive"),
         control: control,
         render: function render(_ref4) {
@@ -3491,15 +3495,15 @@ var Settings = function Settings(props) {
             _onChange4 = _ref4$field.onChange,
             value = _ref4$field.value;
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable a Post Type Archive', 'archive-pages-pro'),
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable a Post Type Archive', 'archive-pages-pro'),
             checked: value,
             onChange: function onChange(boolValue) {
               _onChange4(boolValue);
             },
-            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable this if you would like your post type to have an archive.', 'archive-pages-pro')
+            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable this if you would like your post type to have an archive.', 'archive-pages-pro')
           });
         }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_4__.Controller, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_5__.Controller, {
         name: "postTypes.".concat(postType.name, ".enable_block_editor"),
         control: control,
         render: function render(_ref5) {
@@ -3507,12 +3511,12 @@ var Settings = function Settings(props) {
             _onChange5 = _ref5$field.onChange,
             value = _ref5$field.value;
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Bypass the Classic Editor', 'archive-pages-pro'),
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Bypass the Classic Editor', 'archive-pages-pro'),
             checked: value,
             onChange: function onChange(boolValue) {
               _onChange5(boolValue);
             },
-            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable this to force a post type to use the block editor.', 'archive-pages-pro')
+            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable this to force a post type to use the block editor.', 'archive-pages-pro')
           });
         }
       }));
@@ -3521,15 +3525,15 @@ var Settings = function Settings(props) {
   var getTaxonomies = function getTaxonomies() {
     // If there are no post types, return early.
     if (taxonomies.length === 0) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('There are no taxonomies to configure. Please note that core taxonomies are not included.', 'archive-pages-pro'),
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('There are no taxonomies to configure. Please note that core taxonomies are not included.', 'archive-pages-pro'),
         status: "info",
         politeness: "assertive",
         inline: false,
         icon: function icon() {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_3__.FontAwesomeIcon, {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__.FontAwesomeIcon, {
             size: "1x",
-            icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__.faInfoCircle,
+            icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faInfoCircle,
             style: {
               color: 'currentColor'
             }
@@ -3541,7 +3545,7 @@ var Settings = function Settings(props) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "dlx-admin__row",
         key: taxonomy.name
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, taxonomy.label), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_4__.Controller, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, taxonomy.label), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_5__.Controller, {
         name: "taxonomies.".concat(taxonomy.name, ".enable_show_in_rest"),
         control: control,
         render: function render(_ref6) {
@@ -3549,15 +3553,15 @@ var Settings = function Settings(props) {
             _onChange6 = _ref6$field.onChange,
             value = _ref6$field.value;
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Show in REST API', 'archive-pages-pro'),
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Show in REST API', 'archive-pages-pro'),
             checked: value,
             onChange: function onChange(boolValue) {
               _onChange6(boolValue);
             },
-            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable this post type to show in the REST API. This is useful for enabling the block editor for a taxoomy.', 'archive-pages-pro')
+            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable this post type to show in the REST API. This is useful for enabling the block editor for a taxoomy.', 'archive-pages-pro')
           });
         }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_4__.Controller, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_5__.Controller, {
         name: "taxonomies.".concat(taxonomy.name, ".enable_with_front"),
         control: control,
         render: function render(_ref7) {
@@ -3565,15 +3569,15 @@ var Settings = function Settings(props) {
             _onChange7 = _ref7$field.onChange,
             value = _ref7$field.value;
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable a Front Base for the Taxonomy', 'archive-pages-pro'),
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable a Front Base for the Taxonomy', 'archive-pages-pro'),
             checked: value,
             onChange: function onChange(boolValue) {
               _onChange7(boolValue);
             },
-            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('If you have a permalink like /blog/, then unless the taxonomy specifies, the /blog/ will be its base. Disable this option if you do not want to use a base for your taxonomy term permalinks.', 'archive-pages-pro')
+            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('If you have a permalink like /blog/, then unless the taxonomy specifies, the /blog/ will be its base. Disable this option if you do not want to use a base for your taxonomy term permalinks.', 'archive-pages-pro')
           });
         }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_4__.Controller, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_5__.Controller, {
         name: "taxonomies.".concat(taxonomy.name, ".disable_archive"),
         control: control,
         render: function render(_ref8) {
@@ -3581,12 +3585,12 @@ var Settings = function Settings(props) {
             _onChange8 = _ref8$field.onChange,
             value = _ref8$field.value;
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Disable Taxonomy Archive', 'archive-pages-pro'),
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Disable Taxonomy Archive', 'archive-pages-pro'),
             checked: value,
             onChange: function onChange(boolValue) {
               _onChange8(boolValue);
             },
-            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Disable this if you would not like your taxonomy to have an archive.', 'archive-pages-pro')
+            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Disable this if you would not like your taxonomy to have an archive.', 'archive-pages-pro')
           });
         }
       }));
@@ -3596,9 +3600,9 @@ var Settings = function Settings(props) {
     className: "dlx-app-admin-content-heading"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     className: "dlx-app-content-heading-text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Settings for Archive Pages Pro', 'archive-pages-pro'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Settings for Archive Pages Pro', 'archive-pages-pro'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Configure the settings below for various additions to Archive Pages Pro.', 'archive-pages-pro')), getPrompt()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Configure the settings below for various additions to Archive Pages Pro.', 'archive-pages-pro')), getPrompt()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
     onSubmit: handleSubmit(function (formData) {})
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     id: "dlx-app-admin-table"
@@ -3606,111 +3610,132 @@ var Settings = function Settings(props) {
     className: "form-table form-table-row-sections"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
     scope: "row"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Archive Mapping', 'archive-pages-pro')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Archive Mapping', 'archive-pages-pro')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "dlx-admin__row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_4__.Controller, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_5__.Controller, {
     name: "enablePostTypeArchiveMapping",
     control: control,
     render: function render(_ref9) {
       var _onChange9 = _ref9.field.onChange;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable Post Type Mapping', 'archive-pages-pro'),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable Post Type Mapping', 'archive-pages-pro'),
         checked: getValues('enablePostTypeArchiveMapping'),
         onChange: function onChange(boolValue) {
           _onChange9(boolValue);
         },
-        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Disabling this will turn off page mapping for post type archives.', 'archive-pages-pro')
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Disabling this will turn off page mapping for post type archives.', 'archive-pages-pro')
       });
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "dlx-admin__row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_4__.Controller, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_5__.Controller, {
     name: "enableTermMapping",
     control: control,
     render: function render(_ref10) {
       var _onChange10 = _ref10.field.onChange;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable Term Mapping', 'archive-pages-pro'),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable Term Mapping', 'archive-pages-pro'),
         checked: getValues('enableTermMapping'),
         onChange: function onChange(boolValue) {
           _onChange10(boolValue);
         },
-        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Disabling this will turn off page mapping for term archives.', 'archive-pages-pro')
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Disabling this will turn off page mapping for term archives.', 'archive-pages-pro')
       });
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "dlx-admin__row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_4__.Controller, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_5__.Controller, {
     name: "enable404Mapping",
     control: control,
     render: function render(_ref11) {
       var _onChange11 = _ref11.field.onChange;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable 404 Mapping', 'archive-pages-pro'),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable 404 Mapping', 'archive-pages-pro'),
         checked: getValues('enable404Mapping'),
         onChange: function onChange(boolValue) {
           _onChange11(boolValue);
         },
-        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Disabling this will turn off page mapping for 404 pages.', 'archive-pages-pro')
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Disabling this will turn off page mapping for 404 pages.', 'archive-pages-pro')
       });
     }
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
     scope: "row"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Author Mapping', 'archive-pages-pro')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Author Mapping', 'archive-pages-pro')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "dlx-admin__row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_4__.Controller, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_5__.Controller, {
     name: "enableAuthorMapping",
     control: control,
     render: function render(_ref12) {
       var _onChange12 = _ref12.field.onChange;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable Author Mapping', 'archive-pages-pro'),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable Author Mapping', 'archive-pages-pro'),
         checked: getValues('enableAuthorMapping'),
         onChange: function onChange(boolValue) {
           _onChange12(boolValue);
         },
-        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Disabling this will turn off page mapping for author archives.', 'archive-pages-pro')
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Disabling this will turn off page mapping for author archives.', 'archive-pages-pro')
       });
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "dlx-admin__row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_4__.Controller, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_5__.Controller, {
     name: "authorBase",
     control: control,
+    rules: {
+      pattern: /^[a-zA-Z0-9_-]*$/
+    },
     render: function render(_ref13) {
+      var _errors$authorBase;
       var _onChange13 = _ref13.field.onChange;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Author Base', 'archive-pages-pro'),
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Author Base', 'archive-pages-pro'),
         value: getValues('authorBase'),
         onChange: function onChange(value) {
           _onChange13(value);
         },
-        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('The base for author archives. Default is "author". Leave this blank for no override of the author base.', 'archive-pages-pro')
-      });
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('The base for author archives. Default is "author". Leave this blank for no override of the author base.', 'archive-pages-pro'),
+        onBlur: function onBlur() {
+          setValue('authorBase', (0,_wordpress_url__WEBPACK_IMPORTED_MODULE_2__.cleanForSlug)(getValues('authorBase').toLowerCase()));
+          trigger('authorBase');
+        }
+      }), (errors === null || errors === void 0 ? void 0 : (_errors$authorBase = errors.authorBase) === null || _errors$authorBase === void 0 ? void 0 : _errors$authorBase.type) === 'pattern' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('The author base must contain only letters, numbers, underscores, and hyphens.', 'archive-pages-pro'),
+        status: "error",
+        politeness: "assertive",
+        inline: true,
+        icon: function icon() {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__.FontAwesomeIcon, {
+            icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faTriangleExclamation,
+            style: {
+              color: 'currentColor'
+            }
+          });
+        }
+      }));
     }
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
     scope: "row"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Custom Fields Overrides', 'archive-pages-pro')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Custom Fields Overrides', 'archive-pages-pro')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "dlx-admin__row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_4__.Controller, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_5__.Controller, {
     name: "enableCustomFieldsRestSupport",
     control: control,
     render: function render(_ref14) {
       var _onChange14 = _ref14.field.onChange;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable Custom Fields REST API Support', 'archive-pages-pro'),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable Custom Fields REST API Support', 'archive-pages-pro'),
         checked: getValues('enableCustomFields'),
         onChange: function onChange(boolValue) {
           _onChange14(boolValue);
         },
-        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Some blocks with dynamic data have trouble searching for custom fields that are not enabled for the REST API.', 'archive-pages-pro')
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Some blocks with dynamic data have trouble searching for custom fields that are not enabled for the REST API.', 'archive-pages-pro')
       });
     }
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
     scope: "row"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Post Type Overrides', 'archive-pages-pro')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, getPostTypes())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Post Type Overrides', 'archive-pages-pro')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, getPostTypes())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
     scope: "row"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Taxonomy Overrides', 'archive-pages-pro')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, getTaxonomies())))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_SaveResetButtons__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Taxonomy Overrides', 'archive-pages-pro')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, getTaxonomies())))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_SaveResetButtons__WEBPACK_IMPORTED_MODULE_8__["default"], {
     formValues: formValues,
     setError: setError,
     reset: reset,
@@ -7440,6 +7465,17 @@ module.exports = window["wp"]["components"];
 
 "use strict";
 module.exports = window["wp"]["i18n"];
+
+/***/ }),
+
+/***/ "@wordpress/url":
+/*!*****************************!*\
+  !*** external ["wp","url"] ***!
+  \*****************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = window["wp"]["url"];
 
 /***/ }),
 

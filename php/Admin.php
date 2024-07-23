@@ -235,6 +235,8 @@ class Admin {
 		// Update options.
 		Options::update_options( $form_data );
 
+		\flush_rewrite_rules();
+
 		// Send success message.
 		wp_send_json_success(
 			array(
