@@ -103,7 +103,8 @@ class Functions {
 	 */
 	public static function get_taxonomy_data() {
 		$args = array(
-			'public' => true,
+			'public'   => true,
+			'_builtin' => false,
 		);
 
 		/**
@@ -116,7 +117,7 @@ class Functions {
 			$args,
 			'objects'
 		);
-		$excluded   = array( 'category', 'tag' );
+		$excluded   = array( 'category', 'post_tag', 'post_format' );
 		/**
 		 * Filter the post types to exclude.
 		 *
@@ -138,13 +139,12 @@ class Functions {
 			}
 
 			$data                                    = array(
-				'name'                  => $options['taxonomies'][ $taxonomy->name ]['name'] ?? $taxonomy->name,
-				'label'                 => $options['taxonomies'][ $taxonomy->name ]['label'] ?? $taxonomy->label,
-				'is_public'             => $options['taxonomies'][ $taxonomy->name ]['public'] ?? (bool) $taxonomy->public,
-				'enable_has_archive'    => $options['taxonomies'][ $taxonomy->name ]['enable_has_archive'] ?? (bool) $taxonomy->has_archive,
-				'enable_show_in_rest'   => $options['taxonomies'][ $taxonomy->name ]['enable_show_in_rest'] ?? (bool) $taxonomy->show_in_rest,
-				'enable_with_front'     => $options['taxonomies'][ $taxonomy->name ]['enable_with_front'] ?? (bool) $taxonomy->rewrite['with_front'],
-				'enable_page_templates' => $options['taxonomies'][ $taxonomy->name ]['enable_page_templates'] ?? false,
+				'name'                => $options['taxonomies'][ $taxonomy->name ]['name'] ?? $taxonomy->name,
+				'label'               => $options['taxonomies'][ $taxonomy->name ]['label'] ?? $taxonomy->label,
+				'is_public'           => $options['taxonomies'][ $taxonomy->name ]['public'] ?? (bool) $taxonomy->public,
+				'disable_archive'     => $options['taxonomies'][ $taxonomy->name ]['disable_archive'] ?? false,
+				'enable_show_in_rest' => $options['taxonomies'][ $taxonomy->name ]['enable_show_in_rest'] ?? (bool) $taxonomy->show_in_rest,
+				'enable_with_front'   => $options['taxonomies'][ $taxonomy->name ]['enable_with_front'] ?? (bool) $taxonomy->rewrite['with_front'],
 			);
 			$taxonomies_with_data[ $taxonomy->name ] = $data;
 		}

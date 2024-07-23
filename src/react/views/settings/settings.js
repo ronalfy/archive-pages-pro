@@ -40,6 +40,9 @@ const Settings = ( props ) => {
 			enableCustomFieldsRestSupport: adminOptions.enableCustomFieldsRestSupport,
 			taxonomies: taxonomies ?? [],
 			postTypes: postTypes ?? [],
+			getNonce: dlxAppSettings.getNonce,
+			saveNonce: dlxAppSettings.saveNonce,
+			resetNonce: dlxAppSettings.resetNonce,
 		},
 	} );
 	const formValues = useWatch( { control } );
@@ -77,7 +80,7 @@ const Settings = ( props ) => {
 
 	const getPostTypes = () => {
 		// If there are no post types, return early.
-		if ( ! postTypes ) {
+		if ( postTypes.length === 0 ) {
 			return (
 				<Notice
 					message={ __( 'There are no public post types to configure. Please note that core post types are removed from this list.', 'archive-pages-pro' ) }
@@ -172,10 +175,10 @@ const Settings = ( props ) => {
 
 	const getTaxonomies = () => {
 		// If there are no post types, return early.
-		if ( ! taxonomies ) {
+		if ( taxonomies.length === 0 ) {
 			return (
 				<Notice
-					message={ __( 'There are no taxonomies to configure.', 'archive-pages-pro' ) }
+					message={ __( 'There are no taxonomies to configure. Please note that core taxonomies are not included.', 'archive-pages-pro' ) }
 					status="info"
 					politeness="assertive"
 					inline={ false }
@@ -219,16 +222,16 @@ const Settings = ( props ) => {
 						) }
 					/>
 					<Controller
-						name={ `taxonomies.${ taxonomy.name }.enable_has_archive` }
+						name={ `taxonomies.${ taxonomy.name }.disable_archive` }
 						control={ control }
 						render={ ( { field: { onChange, value } } ) => (
 							<ToggleControl
-								label={ __( 'Enable a Taxonomy Archive', 'archive-pages-pro' ) }
+								label={ __( 'Disable Taxonomy Archive', 'archive-pages-pro' ) }
 								checked={ value }
 								onChange={ ( boolValue ) => {
 									onChange( boolValue );
 								} }
-								help={ __( 'Enable this if you would like your taxonomy to have an archive.', 'archive-pages-pro' ) }
+								help={ __( 'Disable this if you would not like your taxonomy to have an archive.', 'archive-pages-pro' ) }
 							/>
 						) }
 					/>
@@ -298,7 +301,7 @@ const Settings = ( props ) => {
 											render={ ( { field: { onChange } } ) => (
 												<ToggleControl
 													label={ __( 'Enable 404 Mapping', 'archive-pages-pro' ) }
-													checked={ getValues( 'enableAuthorMapping' ) }
+													checked={ getValues( 'enable404Mapping' ) }
 													onChange={ ( boolValue ) => {
 														onChange( boolValue );
 													} }

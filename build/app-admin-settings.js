@@ -3352,7 +3352,10 @@ var Settings = function Settings(props) {
         authorBase: adminOptions.authorBase,
         enableCustomFieldsRestSupport: adminOptions.enableCustomFieldsRestSupport,
         taxonomies: taxonomies !== null && taxonomies !== void 0 ? taxonomies : [],
-        postTypes: postTypes !== null && postTypes !== void 0 ? postTypes : []
+        postTypes: postTypes !== null && postTypes !== void 0 ? postTypes : [],
+        getNonce: dlxAppSettings.getNonce,
+        saveNonce: dlxAppSettings.saveNonce,
+        resetNonce: dlxAppSettings.resetNonce
       }
     }),
     control = _useForm.control,
@@ -3411,7 +3414,7 @@ var Settings = function Settings(props) {
   };
   var getPostTypes = function getPostTypes() {
     // If there are no post types, return early.
-    if (!postTypes) {
+    if (postTypes.length === 0) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_5__["default"], {
         message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('There are no public post types to configure. Please note that core post types are removed from this list.', 'archive-pages-pro'),
         status: "info",
@@ -3517,9 +3520,9 @@ var Settings = function Settings(props) {
   };
   var getTaxonomies = function getTaxonomies() {
     // If there are no post types, return early.
-    if (!taxonomies) {
+    if (taxonomies.length === 0) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('There are no taxonomies to configure.', 'archive-pages-pro'),
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('There are no taxonomies to configure. Please note that core taxonomies are not included.', 'archive-pages-pro'),
         status: "info",
         politeness: "assertive",
         inline: false,
@@ -3571,19 +3574,19 @@ var Settings = function Settings(props) {
           });
         }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_4__.Controller, {
-        name: "taxonomies.".concat(taxonomy.name, ".enable_has_archive"),
+        name: "taxonomies.".concat(taxonomy.name, ".disable_archive"),
         control: control,
         render: function render(_ref8) {
           var _ref8$field = _ref8.field,
             _onChange8 = _ref8$field.onChange,
             value = _ref8$field.value;
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable a Taxonomy Archive', 'archive-pages-pro'),
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Disable Taxonomy Archive', 'archive-pages-pro'),
             checked: value,
             onChange: function onChange(boolValue) {
               _onChange8(boolValue);
             },
-            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable this if you would like your taxonomy to have an archive.', 'archive-pages-pro')
+            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Disable this if you would not like your taxonomy to have an archive.', 'archive-pages-pro')
           });
         }
       }));
@@ -3644,7 +3647,7 @@ var Settings = function Settings(props) {
       var _onChange11 = _ref11.field.onChange;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable 404 Mapping', 'archive-pages-pro'),
-        checked: getValues('enableAuthorMapping'),
+        checked: getValues('enable404Mapping'),
         onChange: function onChange(boolValue) {
           _onChange11(boolValue);
         },

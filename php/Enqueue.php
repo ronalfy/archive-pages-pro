@@ -137,7 +137,7 @@ class Enqueue {
 			array(
 				'pageIdProfile'    => $post_id,
 				'pageTitleProfile' => sanitize_text_field( get_the_title( $post_id ) ),
-				'restEndpoint'          => rest_url( 'dlxplugins/app/v1/search/pages' ),
+				'restEndpoint'     => rest_url( 'dlxplugins/app/v1/search/pages' ),
 				'restNonce'        => wp_create_nonce( 'wp_rest' ),
 				'nicename'         => sanitize_text_field( $user->user_nicename ),
 			)
@@ -162,6 +162,7 @@ class Enqueue {
 			return;
 		}
 
+		$options     = Options::get_options();
 		$output      = get_option( 'post-type-archive-mapping', array() );
 		$page_id_404 = get_option( 'post-type-archive-mapping-404', 0 );
 
@@ -229,12 +230,14 @@ class Enqueue {
 			'app-settings-reading',
 			'appSettingsReading',
 			array(
-				'postTypes'    => $post_type_return,
-				'pageId404'    => $page_id_404,
-				'pageTitle404' => $page_title_404,
-				'pageRestUrl'  => rest_url( 'dlxplugins/app/v1/search/pages' ),
-				'restNonce'    => wp_create_nonce( 'wp_rest' ),
-				'editPostUrl'  => admin_url( 'post.php' ),
+				'postTypes'                     => $post_type_return,
+				'pageId404'                     => $page_id_404,
+				'pageTitle404'                  => $page_title_404,
+				'pageRestUrl'                   => rest_url( 'dlxplugins/app/v1/search/pages' ),
+				'restNonce'                     => wp_create_nonce( 'wp_rest' ),
+				'editPostUrl'                   => admin_url( 'post.php' ),
+				'postTypeArchiveMappingEnabled' => (bool) $options['enablePostTypeArchiveMapping'],
+				'enable404Mapping'             => (bool) $options['enable404Mapping'],
 			)
 		);
 	}

@@ -133,6 +133,11 @@ class Archive_Pages_Pro {
 			return;
 		}
 
+		$options = Options::get_options();
+		if ( ! (bool) $options['enableAuthorMapping'] ) {
+			return;
+		}
+
 		// todo - check if nicename is the same as the passed user_id
 		// todo - check if nicename is a reserved term.
 		// todo - check if sanitized_title is run and return an error if they don't match.
@@ -241,6 +246,11 @@ class Archive_Pages_Pro {
 	 * @return string $template The updated template.
 	 */
 	public function maybe_force_404_template( $template ) {
+		$options = Options::get_options();
+		if ( ! (bool) $options['enable404Mapping'] ) {
+			return $template;
+		}
+
 		if ( is_404() ) {
 			$page_id_404 = absint( get_option( 'post-type-archive-mapping-404', 0 ) );
 			if ( $page_id_404 > 0 ) {
@@ -271,6 +281,7 @@ class Archive_Pages_Pro {
 	 * @see init
 	 */
 	public function init_settings_api() {
+		$options = Options::get_options();
 
 		// Get taxonomies.
 		$taxonomies = get_taxonomies(
@@ -279,10 +290,12 @@ class Archive_Pages_Pro {
 			),
 			'objects'
 		);
-		foreach ( $taxonomies as $taxonomy ) {
-			add_action( "{$taxonomy->name}_edit_form", array( $this, 'map_term_interface' ) );
+		if ( (bool) $options['enableTermMapping'] ) {
+			foreach ( $taxonomies as $taxonomy ) {
+				add_action( "{$taxonomy->name}_edit_form", array( $this, 'map_term_interface' ) );
+			}
+			add_action( 'edit_term', array( $this, 'save_mapped_term' ) );
 		}
-		add_action( 'edit_term', array( $this, 'save_mapped_term' ) );
 
 		add_settings_section(
 			'archive-pages-pro',
@@ -291,14 +304,16 @@ class Archive_Pages_Pro {
 			'reading'
 		);
 
-		add_settings_field(
-			'archive-pages-pro',
-			__( 'Map Archives', 'archive-pages-pro' ),
-			array( $this, 'add_settings_reading' ),
-			'reading',
-			'archive-pages-pro'
-		);
-		// Register post type mapping settings.
+		if ( (bool) $options['enablePostTypeArchiveMapping'] || (bool) $options['enable404Mapping'] ) {
+			add_settings_field(
+				'archive-pages-pro',
+				__( 'Map Archives', 'archive-pages-pro' ),
+				array( $this, 'add_settings_reading' ),
+				'reading',
+				'archive-pages-pro'
+			);
+		}
+
 		register_setting(
 			'reading',
 			'post-type-archive-mapping',
@@ -306,6 +321,7 @@ class Archive_Pages_Pro {
 				'sanitize_callback' => array( $this, 'post_type_save' ),
 			)
 		);
+
 		register_setting(
 			'reading',
 			'post-type-archive-mapping-404',
@@ -402,14 +418,6 @@ class Archive_Pages_Pro {
 	 * @param array $args Post Type arguments.
 	 */
 	public function add_settings_reading( $args ) {
-		$post_types = Functions::get_post_types();
-		if ( ! $post_types ) {
-			?>
-			<p><?php esc_html_e( 'No public post types found.', 'archive-pages-pro' ); ?></p>
-			<?php
-			return;
-		}
-
 		?>
 		<div id="app-reading"><?php esc_html_e( 'Loading...', 'archive-pages-pro' ); ?></div>
 		<?php
@@ -421,6 +429,10 @@ class Archive_Pages_Pro {
 	 * @param mixed $user_id_or_object The user ID or user object.
 	 */
 	public function add_profile_interface( $user_id_or_object ) {
+		$options = Options::get_options();
+		if ( ! (bool) $options['enableAuthorMapping'] ) {
+			return;
+		}
 		if ( is_object( $user_id_or_object ) ) {
 			$user_id = $user_id_or_object->ID;
 		} else {
@@ -450,8 +462,14 @@ class Archive_Pages_Pro {
 		if ( is_admin() ) {
 			return $query;
 		}
+
+		$options = Options::get_options();
+		$post_type_mapping_enabled = (bool) $options['enablePostTypeArchiveMapping'];
+		$term_mapping_enabled = (bool) $options['enableTermMapping'];
+		$author_mapping_enabled = (bool) $options['enableAuthorMapping'];
+
 		// Maybe Redirect.
-		if ( is_page() ) {
+		if ( is_page() && $post_type_mapping_enabled ) {
 			$object_id = get_queried_object_id();
 			$post_meta = get_post_meta( $object_id, '_post_type_mapped', true );
 			if ( $post_meta ) {
@@ -484,7 +502,7 @@ class Archive_Pages_Pro {
 		if ( is_null( self::$paged ) ) {
 			self::$paged = get_query_var( 'paged' );
 		}
-		if ( is_array( $post_types ) && ! empty( $post_types ) ) {
+		if ( is_array( $post_types ) && ! empty( $post_types ) && $post_type_mapping_enabled ) {
 			foreach ( $post_types as $post_type => $post_id ) {
 				if ( is_post_type_archive( $post_type ) && 'default' !== $post_id && $query->is_main_query() ) {
 					$post_id = absint( $post_id );
@@ -504,7 +522,7 @@ class Archive_Pages_Pro {
 				}
 			}
 		}
-		if ( is_tax() || $query->is_category || $query->is_tag ) {
+		if ( ( is_tax() || $query->is_category || $query->is_tag ) && $term_mapping_enabled ) {
 			$post_id = get_term_meta( get_queried_object_id(), '_term_archive_mapping', true );
 			$term    = get_queried_object();
 			if ( $post_id && 'default' !== $post_id ) {
@@ -532,7 +550,7 @@ class Archive_Pages_Pro {
 		}
 
 		// Map author archive to page.
-		if ( is_author() || $query->is_author || $query->is_author_archive ) {
+		if ( ( is_author() || $query->is_author || $query->is_author_archive ) && $author_mapping_enabled ) {
 			$author_name = get_query_var( 'author_name' );
 			$author      = get_user_by( 'slug', $author_name );
 			$author_id   = $author->ID;

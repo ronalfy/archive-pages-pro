@@ -224,25 +224,10 @@ class Admin {
 			);
 		}
 
-		// If no font data, assume empty array.
-		if ( ! isset( $form_data['allowedGoogleFonts'] ) ) {
-			$form_data['allowedGoogleFonts'] = array();
-		}
-
-		$form_enabled_post_types = $form_data['enabledPostTypes'] ?? array();
-		$enabled_post_types      = array();
-
-		// Loop through enabled post types to save them in the right format.
-		foreach ( $form_enabled_post_types as $post_type => $enabled ) {
-			$post_type = trim( sanitize_text_field( $post_type ) );
-			if ( is_numeric( $post_type ) ) {
-				continue;
-			}
-			$enabled_post_types[ $post_type ] = filter_var( $enabled, FILTER_VALIDATE_BOOLEAN );
-		}
-
-		// Assign back.
-		$form_data['enabledPostTypes'] = $enabled_post_types;
+		// Unset nonce data from form.
+		unset( $form_data['saveNonce'] );
+		unset( $form_data['resetNonce'] );
+		unset( $form_data['getNonce'] );
 
 		// Get array values.
 		$form_data = Functions::sanitize_array_recursive( $form_data );
@@ -390,6 +375,7 @@ class Admin {
 					'previewNonce' => wp_create_nonce( 'dlx-app-settings-preview' ),
 					'ajaxurl'      => admin_url( 'admin-ajax.php' ),
 					'postTypes'    => json_decode( wp_json_encode( $post_types ), true ),
+					'taxonomies'  => json_decode( wp_json_encode( Functions::get_taxonomy_data() ), true ),
 					'options'      => $options,
 				)
 			);

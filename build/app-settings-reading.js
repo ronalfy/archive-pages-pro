@@ -2795,14 +2795,20 @@ var SettingsReading = function SettingsReading() {
     _useState2 = _slicedToArray(_useState, 2),
     mapped404Value = _useState2[0],
     setMapped404Value = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(appSettingsReading.postTypeArchiveMappingEnabled),
+    _useState4 = _slicedToArray(_useState3, 1),
+    enablePostTypeMapping = _useState4[0];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(appSettingsReading.enable404Mapping),
+    _useState6 = _slicedToArray(_useState5, 1),
+    enable404Mapping = _useState6[0];
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "settings-reading"
-  }, postTypes.map(function (postType) {
+  }, enablePostTypeMapping && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, postTypes.map(function (postType) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_SettingsReadingPostType__WEBPACK_IMPORTED_MODULE_2__["default"], {
       key: postType.value,
       postType: postType
     });
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  })), enable404Mapping && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "settings-reading__post-type"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Map 404 Page:', 'archive-pages-pro')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "hidden",
