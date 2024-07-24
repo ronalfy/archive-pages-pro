@@ -367,6 +367,9 @@ class Admin {
 			// Get all show in menu post types.
 			$post_types = Functions::get_post_type_data();
 
+			// Get object types to show for custom fields.
+			$object_types = Functions::get_post_types( true );
+
 			wp_localize_script(
 				'dlx-app-settings',
 				'dlxAppSettings',
@@ -379,6 +382,8 @@ class Admin {
 					'postTypes'    => json_decode( wp_json_encode( $post_types ), true ),
 					'taxonomies'  => json_decode( wp_json_encode( Functions::get_taxonomy_data() ), true ),
 					'options'      => $options,
+					'customFields' => json_decode( wp_json_encode( $options['customFields'] ), true ),
+					'objectTypes' => json_decode( wp_json_encode( $object_types ), true ),
 				)
 			);
 		} elseif ( 'license' === $current_tab ) {

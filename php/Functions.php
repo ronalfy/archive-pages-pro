@@ -315,12 +315,18 @@ class Functions {
 	 *
 	 * @return array Post types.
 	 */
-	public static function get_post_types() {
+	public static function get_post_types( $all = false ) {
 		$post_type_args = array(
 			'public'      => true,
 			'has_archive' => true,
-			'_builtin'    => false,
+			'_builtin'    => $all,
 		);
+
+		// If all, remove has_archive from the args.
+		if ( $all ) {
+			unset( $post_type_args['has_archive'] );
+			unset( $post_type_args['public'] );
+		}
 
 		/**
 		 * Filter: archive_pages_pro_post_type_args.

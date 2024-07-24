@@ -109,6 +109,7 @@ class Options {
 			'taxonomies'                    => array(),
 			'authorBase'                    => '',
 			'enableCustomFieldsRestSupport' => false,
+			'customFields'                  => array(),
 		);
 		return $defaults;
 	}

@@ -1,10 +1,12 @@
 // eslint-disable-next-line no-unused-vars
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useState, useMemo } from 'react';
 import {
 	ToggleControl,
 	TextControl,
 	SelectControl,
+	Button,
 } from '@wordpress/components';
+import { DataViews } from '@wordpress/dataviews';
 import { cleanForSlug } from '@wordpress/url';
 import { __ } from '@wordpress/i18n';
 import { useForm, Controller, useWatch, useFormState } from 'react-hook-form';
@@ -20,9 +22,21 @@ import SaveResetButtons from '../../components/SaveResetButtons';
 const adminOptions = dlxAppSettings.options;
 const postTypes = dlxAppSettings.postTypes;
 const taxonomies = dlxAppSettings.taxonomies;
+const customFields = dlxAppSettings.customFields;
+const objectTypes = dlxAppSettings.objectTypes;
+
+const customFieldDataView = {
+	type: 'table',
+	page: 1,
+	filters: [],
+	fields: [ 'customField', 'objectType', 'variableType' ],
+	layout: {},
+};
 
 const Settings = ( props ) => {
 	const [ licenseValid ] = useState( adminOptions.licenseValid );
+
+	const [ customFieldsView, setCustomFieldsView ] = useState( customFieldDataView );
 
 	const {
 		control,
@@ -40,6 +54,7 @@ const Settings = ( props ) => {
 			enable404Mapping: adminOptions.enable404Mapping,
 			authorBase: adminOptions.authorBase,
 			enableCustomFieldsRestSupport: adminOptions.enableCustomFieldsRestSupport,
+			customFields: customFields ?? [],
 			taxonomies: taxonomies ?? [],
 			postTypes: postTypes ?? [],
 			getNonce: dlxAppSettings.getNonce,
@@ -51,6 +66,10 @@ const Settings = ( props ) => {
 	const { errors, isDirty, dirtyFields } = useFormState( {
 		control,
 	} );
+
+	const customFieldsData = useMemo( () => {
+		return customFieldsView;
+	}, [ customFieldsView ] );
 
 	// Retrieve a prompt based on the license status.
 	const getPrompt = () => {
@@ -175,6 +194,101 @@ const Settings = ( props ) => {
 		} );
 	};
 
+	/**
+	 * Retrieve saved custom fields.
+	 *
+	 * @return {Array} An array of custom fields.
+	 */
+	const getCustomFields = () => {
+		const customFieldObject = [
+			{
+				id: 'customField',
+				header: __( 'Custom Field', 'archive-pages-pro' ),
+				render: ( { item } ) => {
+					return item.customField;
+				},
+				enableSorting: true,
+				enableHiding: false,
+			},
+			{
+				id: 'objectType',
+				header: __( 'Object Type', 'archive-pages-pro' ),
+				render: ( { item } ) => {
+					return item.objectType;
+				},
+				enableSorting: false,
+				enableHiding: false,
+			},
+			{
+				id: 'variableType',
+				header: __( 'Variable Type', 'archive-pages-pro' ),
+				render: ( { item } ) => {
+					return item.variableType;
+				},
+				enableSorting: false,
+				enableHiding: false,
+			},
+		];
+		return customFieldObject;
+	};
+
+	/**
+	 * Retrieve saved custom fields for data retrieval.
+	 *
+	 * @return {Array} An array of custom fields.
+	 */
+	const getCustomFieldsData = ( customFieldsDataView ) => {
+		
+		const sort = customFieldsDataView?.sort ?? {};
+		const filters = customFieldsDataView?.filters ?? [];
+		const page = customFieldsDataView?.page ?? 1;
+		const search = customFieldsDataView?.search ?? '';
+		const itemsPerPage = customFieldsDataView?.paginationInfo?.itemsPerPage ?? 10;
+
+		// If there are no custom fields, return early.
+		if ( customFields.length === 0 ) {
+			return [];
+		}
+		let customFieldData = [];
+		Object.values( getValues( 'customFields' ) ).forEach( ( customField ) => {
+			const customFieldObject = {
+				customField: customField.customField,
+				objectType: customField.objectType,
+				variableType: customField.variableType,
+			};
+			customFieldData.push( customFieldObject );
+		} );
+
+		// Apply sort (if enabled).
+		if ( sort ) {
+			const sortOrder = sort.direction;
+			const sortField = sort.field;
+
+			customFieldData.sort( ( a, b ) => {
+				if ( sortOrder === 'asc' ) {
+					return a[ sortField ] > b[ sortField ] ? 1 : -1;
+				}
+				return a[ sortField ] < b[ sortField ] ? 1 : -1;
+			} );
+		}
+
+		// Apply search (if enabled).
+		if ( search ) {
+			customFieldData = customFieldData.filter( ( item ) => {
+				return Object.values( item ).some( ( field ) => {
+					const customFieldItem = item.customField;
+
+					// Search cusom field iem.
+					if ( customFieldItem ) {
+						return customFieldItem.toString().toLowerCase().includes( search.toLowerCase() );
+					}
+					return false;
+				} );
+			} );
+		}
+		return customFieldData;
+	};
+
 	const getTaxonomies = () => {
 		// If there are no post types, return early.
 		if ( taxonomies.length === 0 ) {
@@ -241,6 +355,8 @@ const Settings = ( props ) => {
 			);
 		} );
 	};
+
+	const customFieldRecords = getCustomFieldsData( customFieldsData );
 	return (
 		<>
 			<div className="dlx-app-admin-content-heading">
@@ -385,7 +501,7 @@ const Settings = ( props ) => {
 											render={ ( { field: { onChange } } ) => (
 												<ToggleControl
 													label={ __( 'Enable Custom Fields REST API Support', 'archive-pages-pro' ) }
-													checked={ getValues( 'enableCustomFields' ) }
+													checked={ getValues( 'enableCustomFieldsRestSupport' ) }
 													onChange={ ( boolValue ) => {
 														onChange( boolValue );
 													} }
@@ -394,6 +510,115 @@ const Settings = ( props ) => {
 											) }
 										/>
 									</div>
+									{
+										( getValues( 'enableCustomFieldsRestSupport' ) && getCustomFieldsData( customFieldsData ).length > 0 ) && (
+											<DataViews
+												data={ customFieldRecords }
+												fields={ getCustomFields() }
+												view={ customFieldDataView }
+												paginationInfo={ {
+													totalItems: getCustomFieldsData( customFieldsData ).length,
+													itemsPerPage: 10,
+												} }
+												onChangeView={ ( view ) => {
+													setCustomFieldsView( view );
+												} }
+												search={ true }
+											/>
+										)
+									}
+									{
+										getValues( 'enableCustomFieldsRestSupport' ) && (
+											<>
+												<div className="dlx-admin__row">
+													<Controller
+														name="customFieldsInput.customField"
+														control={ control }
+														render={ ( { field: { onChange, value } } ) => (
+															<TextControl
+																label={ __( 'Custom Field Name', 'archive-pages-pro' ) }
+																value={ value }
+																onChange={ ( newValue ) => {
+																	onChange( newValue );
+																} }
+																help={ __( 'The name of the custom field to enable for the REST API.', 'archive-pages-pro' ) }
+															/>
+														) }
+													/>
+													<Controller
+														name="customFieldsInput.objectType"
+														control={ control }
+														render={ ( { field: { onChange, value } } ) => (
+															<SelectControl
+																label={ __( 'Object Type', 'archive-pages-pro' ) }
+																value={ value }
+																onChange={ ( newValue ) => {
+																	onChange( newValue );
+																} }
+																options={
+																	Object.values( objectTypes ).map( ( objectType ) => {
+																		return {
+																			value: objectType.name,
+																			label: objectType.label,
+																		};
+																	} )
+																}
+																help={ __( 'The type of object that this custom field is attached to.', 'archive-pages-pro' ) }
+															/>
+														) }
+													/>
+													<Controller
+														name="customFieldsInput.variableType"
+														control={ control }
+														render={ ( { field: { onChange, value } } ) => (
+															<SelectControl
+																label={ __( 'Variable Type', 'archive-pages-pro' ) }
+																value={ value }
+																onChange={ ( newValue ) => {
+																	onChange( newValue );
+																} }
+																options={
+																	[
+																		{
+																			value: 'string',
+																			label: __( 'String', 'archive-pages-pro' ),
+																		},
+																		{
+																			value: 'number',
+																			label: __( 'Number', 'archive-pages-pro' ),
+																		},
+																		{
+																			value: 'boolean',
+																			label: __( 'Boolean', 'archive-pages-pro' ),
+																		},
+																	]
+																}
+																help={ __( 'The data type for the custom field. Only strings, numbers, and booleans are supported.', 'archive-pages-pro' ) }
+															/>
+														) }
+													/>
+													<Button
+														variant="secondary"
+														onClick={ () => {
+															const newCustomField = getValues( 'customFields' );
+															const customFieldsInput = getValues( 'customFieldsInput' );
+															newCustomField.push( customFieldsInput );
+															setValue( 'customFields', newCustomField );
+
+															// Clear the input fields.
+															setValue( 'customFieldsInput', {
+																customField: '',
+																objectType: '',
+																variableType: '',
+															} );
+														} }
+													>
+														{ __( 'Add Custom Field', 'archive-pages-pro' ) }
+													</Button>
+												</div>
+											</>
+										)
+									}
 								</td>
 							</tr>
 							<tr>
