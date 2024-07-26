@@ -4170,14 +4170,14 @@ var Settings = function Settings(props) {
           });
         }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_6__.Controller, {
-        name: "taxonomies.".concat(taxonomy.name, ".disable_archive"),
+        name: "taxonomies.".concat(taxonomy.name, ".enable_has_archive"),
         control: control,
         render: function render(_ref8) {
           var _ref8$field = _ref8.field,
             _onChange8 = _ref8$field.onChange,
             value = _ref8$field.value;
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Disable Taxonomy Archive', 'archive-pages-pro'),
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable Taxonomy Archive', 'archive-pages-pro'),
             checked: value,
             onChange: function onChange(boolValue) {
               _onChange8(boolValue);

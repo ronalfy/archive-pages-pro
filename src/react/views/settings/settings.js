@@ -238,11 +238,11 @@ const Settings = ( props ) => {
 						) }
 					/>
 					<Controller
-						name={ `taxonomies.${ taxonomy.name }.disable_archive` }
+						name={ `taxonomies.${ taxonomy.name }.enable_has_archive` }
 						control={ control }
 						render={ ( { field: { onChange, value } } ) => (
 							<ToggleControl
-								label={ __( 'Disable Taxonomy Archive', 'archive-pages-pro' ) }
+								label={ __( 'Enable Taxonomy Archive', 'archive-pages-pro' ) }
 								checked={ value }
 								onChange={ ( boolValue ) => {
 									onChange( boolValue );

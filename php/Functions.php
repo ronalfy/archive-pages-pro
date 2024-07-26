@@ -138,11 +138,17 @@ class Functions {
 				continue;
 			}
 
+			// Does taxonomy have an archive?
+			$has_archive = false;
+			if ( isset( $taxonomy_object->rewrite['slug'] ) && ! empty( $taxonomy_object->rewrite['slug'] ) ) {
+				$has_archive = true;
+			}
+
 			$data                                    = array(
 				'name'                => $options['taxonomies'][ $taxonomy->name ]['name'] ?? $taxonomy->name,
 				'label'               => $options['taxonomies'][ $taxonomy->name ]['label'] ?? $taxonomy->label,
 				'is_public'           => $options['taxonomies'][ $taxonomy->name ]['public'] ?? (bool) $taxonomy->public,
-				'disable_archive'     => $options['taxonomies'][ $taxonomy->name ]['disable_archive'] ?? false,
+				'enable_has_archive'     => $options['taxonomies'][ $taxonomy->name ]['enable_has_archive'] ?? $has_archive,
 				'enable_show_in_rest' => $options['taxonomies'][ $taxonomy->name ]['enable_show_in_rest'] ?? (bool) $taxonomy->show_in_rest,
 				'enable_with_front'   => $options['taxonomies'][ $taxonomy->name ]['enable_with_front'] ?? (bool) $taxonomy->rewrite['with_front'],
 			);
