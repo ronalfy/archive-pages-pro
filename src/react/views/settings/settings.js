@@ -9,6 +9,7 @@ import {
 import { cleanForSlug } from '@wordpress/url';
 import { __ } from '@wordpress/i18n';
 import { useForm, Controller, useWatch, useFormState } from 'react-hook-form';
+import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTriangleExclamation as TriangleExclamation, faCircleCheck as CircleCheck, faInfoCircle as Info } from '@fortawesome/free-solid-svg-icons';
 
@@ -37,6 +38,7 @@ const Settings = ( props ) => {
 		setError,
 		trigger,
 		setValue,
+		clearErrors,
 	} = useForm( {
 		defaultValues: {
 			enablePostTypeArchiveMapping: adminOptions.enablePostTypeArchiveMapping,
@@ -422,18 +424,38 @@ const Settings = ( props ) => {
 												<div className="dlx-admin__row">
 													<Controller
 														name="customFieldsInput.customField"
+														rules={ {
+															pattern: /^[a-zA-Z0-9_-]*$/,
+														} }
+														className={
+															classnames( {
+																'has-error': errors?.customFieldsInput?.customField?.type === 'pattern',
+															} )
+														}
 														control={ control }
 														render={ ( { field: { onChange, value } } ) => (
 															<TextControl
 																label={ __( 'Custom Field Name', 'archive-pages-pro' ) }
 																value={ value }
 																onChange={ ( newValue ) => {
+																	clearErrors( 'customFieldsInput.customField' );
 																	onChange( newValue );
 																} }
 																help={ __( 'The name of the custom field to enable for the REST API.', 'archive-pages-pro' ) }
 															/>
 														) }
 													/>
+													{
+														errors?.customFieldsInput?.customField?.type === 'pattern' && (
+															<Notice
+																message={ __( 'The custom field name must contain only letters, numbers, underscores, and hyphens.', 'archive-pages-pro' ) }
+																status="error"
+																politeness="assertive"
+																inline={ true }
+																icon={ () => <FontAwesomeIcon icon={ TriangleExclamation } style={ { color: 'currentColor' } } /> }
+															/>
+														)
+													}
 													<Controller
 														name="customFieldsInput.objectType"
 														control={ control }
@@ -488,18 +510,23 @@ const Settings = ( props ) => {
 													/>
 													<Button
 														variant="secondary"
-														onClick={ () => {
-															const newCustomField = getValues( 'customFields' );
-															const customFieldsInput = getValues( 'customFieldsInput' );
-															newCustomField.push( customFieldsInput );
-															setValue( 'customFields', newCustomField );
-															setCustomFieldValues( newCustomField );
-															// Clear the input fields.
-															setValue( 'customFieldsInput', {
-																customField: '',
-																objectType: 'post',
-																variableType: 'string',
-															} );
+														onClick={ async () => {
+															const result = await trigger( 'customFieldsInput.customField' );
+															if ( result ) {
+																if ( ! errors?.customFieldsInput?.customField ) {
+																	const newCustomField = getValues( 'customFields' );
+																	const customFieldsInput = getValues( 'customFieldsInput' );
+																	newCustomField.push( customFieldsInput );
+																	setValue( 'customFields', newCustomField );
+																	setCustomFieldValues( newCustomField );
+																	// Clear the input fields.
+																	setValue( 'customFieldsInput', {
+																		customField: '',
+																		objectType: 'post',
+																		variableType: 'string',
+																	} );
+																}
+															}
 														} }
 													>
 														{ __( 'Add Custom Field', 'archive-pages-pro' ) }
