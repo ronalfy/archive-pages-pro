@@ -83,13 +83,13 @@ class Functions {
 			}
 
 			$data = array(
-				'name'                  => $options['post_types'][ $post_type_object->name ]['name'] ?? $post_type_object->name,
-				'label'                 => $options['post_types'][ $post_type_object->name ]['label'] ?? $post_type_object->label,
-				'is_public'             => $options['post_types'][ $post_type_object->name ]['public'] ?? (bool) $post_type_object->public,
-				'enable_has_archive'    => $options['post_types'][ $post_type_object->name ]['enable_has_archive'] ?? (bool) $post_type_object->has_archive,
-				'enable_show_in_rest'   => $options['post_types'][ $post_type_object->name ]['enable_show_in_rest'] ?? (bool) $post_type_object->show_in_rest,
-				'enable_with_front'     => $options['post_types'][ $post_type_object->name ]['enable_with_front'] ?? (bool) $post_type_object->rewrite['with_front'],
-				'enable_page_templates' => $options['post_types'][ $post_type_object->name ]['enable_page_templates'] ?? false,
+				'name'                  => $options['postTypes'][ $post_type_object->name ]['name'] ?? $post_type_object->name,
+				'label'                 => $options['postTypes'][ $post_type_object->name ]['label'] ?? $post_type_object->label,
+				'is_public'             => $options['postTypes'][ $post_type_object->name ]['public'] ?? (bool) $post_type_object->public,
+				'enable_has_archive'    => $options['postTypes'][ $post_type_object->name ]['enable_has_archive'] ?? (bool) $post_type_object->has_archive,
+				'enable_show_in_rest'   => $options['postTypes'][ $post_type_object->name ]['enable_show_in_rest'] ?? (bool) $post_type_object->show_in_rest,
+				'enable_with_front'     => $options['postTypes'][ $post_type_object->name ]['enable_with_front'] ?? (bool) $post_type_object->rewrite['with_front'],
+				'enable_page_templates' => $options['postTypes'][ $post_type_object->name ]['enable_page_templates'] ?? false,
 			);
 			$post_types_with_data[ $post_type_object->name ] = $data;
 		}

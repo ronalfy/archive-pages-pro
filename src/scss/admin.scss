@@ -857,7 +857,7 @@ div.can-revoke {
 	}
 }
 
-.app-error {
+.has-error {
 	input.components-text-control__input {
 		border: 1px solid var(--dlx-app-admin--color-notice--error-alt);
 		background-color: var(--dlx-app-admin--color-notice--error);
@@ -1069,4 +1069,10 @@ div.can-revoke {
 }
 .app-custom-fields-actions {
 	margin-top: 8px;
+}
+.app-custom-fields-modal-row button {
+	margin-right: 12px;
+	&:last-child {
+		margin-right: 0;
+	}
 }

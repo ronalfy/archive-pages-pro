@@ -10,6 +10,7 @@ const objectTypes = dlxAppSettings.objectTypes;
 const CustomFieldsView = ( { data, onChange } ) => {
 	const [ customFields, setCustomFields ] = useState( data );
 	const [ launchModal, setLaunchModal ] = useState( false );
+	const [ launchDeleteConfirmation, setLaunchDeleteConfirmation ] = useState( false );
 
 	const {
 		control,
@@ -38,6 +39,42 @@ const CustomFieldsView = ( { data, onChange } ) => {
 
 	return (
 		<>
+			{ launchDeleteConfirmation && (
+				<Modal
+					title={ __( 'Delete Custom Field', 'archive-pages-pro' ) }
+					onRequestClose={ () => setLaunchDeleteConfirmation( false ) }
+				>
+					<div className="app-custom-fields-modal">
+						<p>
+							{ __( 'Are you sure you want to delete this custom field?', 'archive-pages-pro' ) }
+						</p>
+						<div className="app-custom-fields-modal-row">
+							<Button
+								variant="primary"
+								isDestructive={ true }
+								onClick={ () => {
+									// Set items.
+									setCustomFields( launchDeleteConfirmation );
+									onChange( launchDeleteConfirmation );
+
+									// Close modal.
+									setLaunchDeleteConfirmation( false );
+								} }
+							>
+								{ __( 'Delete Custom Field', 'archive-pages-pro' ) }
+							</Button>
+							<Button
+								variant="secondary"
+								onClick={ () => {
+									setLaunchDeleteConfirmation( false );
+								} }
+							>
+								{ __( 'Close', 'archive-pages-pro' ) }
+							</Button>
+						</div>
+					</div>
+				</Modal>
+			) }
 			{ launchModal && (
 				<Modal
 					title={ __( 'Edit Custom Field', 'archive-pages-pro' ) }
@@ -127,7 +164,7 @@ const CustomFieldsView = ( { data, onChange } ) => {
 						<div className="app-custom-fields-modal-row">
 							<Button
 								variant="secondary"
-								onClick={ async () => {
+								onClick={ async() => {
 									const result = await trigger( 'customField' );
 									if ( result ) {
 										if ( ! errors?.customField ) {
@@ -197,7 +234,7 @@ const CustomFieldsView = ( { data, onChange } ) => {
 												// Noew go through the object values and find a match.
 												const customFieldValues = newCustomFields[ key ];
 
-												if ( customFieldValues.customField === field.customField ) {
+												if ( customFieldValues.customField === field.customField && customFieldValues.objectType === field.objectType ) {
 													delete newCustomFields[ key ];
 												}
 											} );
@@ -208,9 +245,7 @@ const CustomFieldsView = ( { data, onChange } ) => {
 												newCusomFieldArray.push( value );
 											} );
 
-											// Set items.
-											setCustomFields( newCusomFieldArray );
-											onChange( newCusomFieldArray );
+											setLaunchDeleteConfirmation( newCusomFieldArray );
 										} }
 									>
 										{ __( 'Delete', 'archive-pages-pro' ) }

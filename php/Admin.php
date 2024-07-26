@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Admin class.
  *
@@ -12,6 +13,7 @@ namespace DLXPlugins\APP;
  * Admin class.
  */
 class Admin {
+
 
 	/**
 	 * Class runner.
@@ -375,21 +377,29 @@ class Admin {
 			// Get object types to show for custom fields.
 			$object_types = Functions::get_post_types( true );
 
+			// Get current theme.
+			$theme = wp_get_theme();
+
+			// Get page templates in theme.
+			$page_templates = $theme->get_page_templates( null, 'page' );
+
 			wp_localize_script(
 				'dlx-app-settings',
 				'dlxAppSettings',
 				array(
-					'getNonce'     => wp_create_nonce( 'dlx-app-settings-get-options' ),
-					'saveNonce'    => wp_create_nonce( 'dlx-app-settings-save-options' ),
-					'resetNonce'   => wp_create_nonce( 'dlx-app-settings-reset-options' ),
-					'previewNonce' => wp_create_nonce( 'dlx-app-settings-preview' ),
-					'ajaxurl'      => admin_url( 'admin-ajax.php' ),
-					'postTypes'    => json_decode( wp_json_encode( $post_types ), true ),
-					'taxonomies'  => json_decode( wp_json_encode( Functions::get_taxonomy_data() ), true ),
-					'options'      => $options,
-					'customFields' => json_decode( wp_json_encode( $options['customFields'] ), true ),
-					'objectTypes' => json_decode( wp_json_encode( $object_types ), true ),
+					'getNonce'           => wp_create_nonce( 'dlx-app-settings-get-options' ),
+					'saveNonce'          => wp_create_nonce( 'dlx-app-settings-save-options' ),
+					'resetNonce'         => wp_create_nonce( 'dlx-app-settings-reset-options' ),
+					'previewNonce'       => wp_create_nonce( 'dlx-app-settings-preview' ),
+					'ajaxurl'            => admin_url( 'admin-ajax.php' ),
+					'postTypes'          => json_decode( wp_json_encode( $post_types ), true ),
+					'taxonomies'         => json_decode( wp_json_encode( Functions::get_taxonomy_data() ), true ),
+					'options'            => $options,
+					'customFields'       => json_decode( wp_json_encode( $options['customFields'] ), true ),
+					'objectTypes'        => json_decode( wp_json_encode( $object_types ), true ),
 					'settingsReadingUrl' => admin_url( 'options-reading.php#archive-pages-pro-settings-reading' ),
+					'isBlockTheme'       => wp_is_block_theme(),
+					'hasPageTemplates'   => ! empty( $page_templates ),
 				)
 			);
 		} elseif ( 'license' === $current_tab ) {
@@ -459,19 +469,19 @@ class Admin {
 			<main class="dlx-app-admin-body-wrapper">
 				<div class="dlx-app-admin-container-body">
 					<nav class="nav-tab-wrapper">
-						<a  class="<?php echo esc_attr( implode( ' ', $settings_tab_class ) ); ?>" href="<?php echo esc_url( Functions::get_settings_url() ); ?>"><?php esc_html_e( 'Settings', 'archive-pages-pro' ); ?></a>
-						<a  class="<?php echo esc_attr( implode( ' ', $license_tab_class ) ); ?>" href="<?php echo esc_url( Functions::get_settings_url( 'license' ) ); ?>"><?php esc_html_e( 'License', 'archive-pages-pro' ); ?></a>
+						<a class="<?php echo esc_attr( implode( ' ', $settings_tab_class ) ); ?>" href="<?php echo esc_url( Functions::get_settings_url() ); ?>"><?php esc_html_e( 'Settings', 'archive-pages-pro' ); ?></a>
+						<a class="<?php echo esc_attr( implode( ' ', $license_tab_class ) ); ?>" href="<?php echo esc_url( Functions::get_settings_url( 'license' ) ); ?>"><?php esc_html_e( 'License', 'archive-pages-pro' ); ?></a>
 					</nav>
 				</div>
 				<div class="dlx-app-body__content">
 					<?php
 					if ( null === $current_tab || 'settings' === $current_tab ) {
 						?>
-							<div id="dlx-app-settings"></div>
+						<div id="dlx-app-settings"></div>
 						<?php
 					} elseif ( 'license' === $current_tab ) {
 						?>
-							<div id="dlx-app-license"></div>
+						<div id="dlx-app-license"></div>
 						<?php
 					}
 					?>

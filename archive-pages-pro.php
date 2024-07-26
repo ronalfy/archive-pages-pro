@@ -110,13 +110,19 @@ class Archive_Pages_Pro {
 
 		// Set up page templates if available for each enabled post type.
 		add_action( 'admin_init', array( $this, 'init_page_templates_meta_box' ), 100 );
+
+		// Set up post save action for saving a page template.
+		add_action( 'save_post', array( $this, 'save_page_template' ), 10, 2 );
+
+		// Locate a template if templates are available.
+		add_filter( 'template_include', array( $this, 'locate_page_template' ) );
 	}
 
 	/**
 	 * Initialize post type arguments.
 	 */
 	public function init_page_templates_meta_box() {
-		$options = Options::get_options();
+		$options    = Options::get_options();
 		$post_types = $options['postTypes'];
 
 		if ( ! is_array( $post_types ) ) {
@@ -155,18 +161,91 @@ class Archive_Pages_Pro {
 	}
 
 	/**
+	 * Save the page template.
+	 *
+	 * @param int     $post_id The post ID.
+	 * @param WP_Post $post The post object.
+	 */
+	public function save_page_template( $post_id, $post ) {
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return;
+		}
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			return;
+		}
+		if ( \wp_is_post_revision( $post_id ) ) {
+			return;
+		}
+
+		// Get the page template.
+		$page_template = sanitize_text_field( filter_input( INPUT_POST, 'app_page_template', \FILTER_SANITIZE_SPECIAL_CHARS ) );
+
+		// Save the page template.
+		update_post_meta( $post_id, '_app_page_template', $page_template );
+	}
+
+	public function locate_page_template( $template ) {
+		$current_post_type = get_post_type();
+		$options = Options::get_options();
+		$post_types = $options['postTypes'];
+
+		if ( ! is_array( $post_types ) ) {
+			return $template;
+		}
+
+		// Check if it's a block theme.
+		if ( wp_is_block_theme() ) {
+			return $template;
+		}
+
+		// Get post type options.
+		$post_type_args = isset( $post_types[ $current_post_type ] ) ? $post_types[ $current_post_type ] : array();
+		if ( ! is_array( $post_type_args ) || empty( $post_type_args ) ) {
+			return $template;
+		}
+
+		$enable_page_templates = (bool) $post_type_args['enable_page_templates'];
+
+		if ( ! $enable_page_templates ) {
+			return $template;
+		}
+
+		// Get the page template.
+		$page_template = get_post_meta( get_the_ID(), '_app_page_template', true );
+
+		// If the page template is empty, return the template.
+		if ( empty( $page_template ) ) {
+			return $template;
+		}
+
+		// Get the current theme stylesheet directory.
+		$theme_dir = get_stylesheet_directory();
+
+		// Check if the page template exists.
+		$page_template_path = $theme_dir . '/' . $page_template;
+
+		// If the page template path doesn't exist, return the template.
+		if ( ! file_exists( $page_template_path ) ) {
+			return $template;
+		}
+
+		// Return the page template path.
+		return $page_template_path;
+	}
+
+	/**
 	 * Display the page template meta box.
 	 *
 	 * @param WP_Post $post The post object.
 	 */
 	public function page_template_meta_box( $post ) {
 		$options = Options::get_options();
-		
+
 		// Get current theme.
 		$theme = wp_get_theme();
 
 		// Get page templates in theme.
-		$page_templates = $theme->get_page_templates( null, 'page' );
+		$page_templates   = $theme->get_page_templates( null, 'page' );
 		$current_template = get_post_meta( $post->ID, '_app_page_template', true );
 		if ( empty( $page_templates ) ) {
 			return;

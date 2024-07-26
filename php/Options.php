@@ -105,7 +105,7 @@ class Options {
 			'enableTermMapping'             => true,
 			'enableAuthorMapping'           => true,
 			'enable404Mapping'              => true,
-			'postTypes'                    => array(),
+			'postTypes'                     => array(),
 			'taxonomies'                    => array(),
 			'authorBase'                    => '',
 			'enableCustomFieldsRestSupport' => false,

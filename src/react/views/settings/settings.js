@@ -18,6 +18,7 @@ import SendCommand from '../../utils/SendCommand';
 import Notice from '../../components/Notice';
 import SaveResetButtons from '../../components/SaveResetButtons';
 import CustomFieldsView from '../../components/CustomFieldsView';
+import CustomFieldsInput from '../../components/CustomFieldsInput';
 
 // Get admin options.
 const adminOptions = dlxAppSettings.options;
@@ -424,128 +425,24 @@ const Settings = ( props ) => {
 									</div>
 									{
 										( getValues( 'enableCustomFieldsRestSupport' ) ) && (
-											<CustomFieldsView
-												data={ customFieldValues }
-												onChange={ ( newCustomFields ) => {
-													setValue( 'customFields', newCustomFields );
-												} }
-											/>
+											<div className="dlx-admin__row">
+												<CustomFieldsView
+													data={ customFieldValues }
+													onChange={ ( newCustomFields ) => {
+														setValue( 'customFields', newCustomFields );
+													} }
+												/>
+											</div>
 										)
 									}
 									{
 										getValues( 'enableCustomFieldsRestSupport' ) && (
 											<>
-												<div className="dlx-admin__row">
-													<Controller
-														name="customFieldsInput.customField"
-														rules={ {
-															pattern: /^[a-zA-Z0-9_-]*$/,
-														} }
-														className={
-															classnames( {
-																'has-error': errors?.customFieldsInput?.customField?.type === 'pattern',
-															} )
-														}
-														control={ control }
-														render={ ( { field: { onChange, value } } ) => (
-															<TextControl
-																label={ __( 'Custom Field Name', 'archive-pages-pro' ) }
-																value={ value }
-																onChange={ ( newValue ) => {
-																	clearErrors( 'customFieldsInput.customField' );
-																	onChange( newValue );
-																} }
-																help={ __( 'The name of the custom field to enable for the REST API.', 'archive-pages-pro' ) }
-															/>
-														) }
-													/>
-													{
-														errors?.customFieldsInput?.customField?.type === 'pattern' && (
-															<Notice
-																message={ __( 'The custom field name must contain only letters, numbers, underscores, and hyphens.', 'archive-pages-pro' ) }
-																status="error"
-																politeness="assertive"
-																inline={ true }
-																icon={ () => <FontAwesomeIcon icon={ TriangleExclamation } style={ { color: 'currentColor' } } /> }
-															/>
-														)
-													}
-													<Controller
-														name="customFieldsInput.objectType"
-														control={ control }
-														render={ ( { field: { onChange, value } } ) => (
-															<SelectControl
-																label={ __( 'Object Type', 'archive-pages-pro' ) }
-																value={ value ?? 'post' }
-																onChange={ ( newValue ) => {
-																	onChange( newValue );
-																} }
-																options={
-																	Object.values( objectTypes ).map( ( objectType ) => {
-																		return {
-																			value: objectType.name,
-																			label: objectType.label,
-																		};
-																	} )
-																}
-																help={ __( 'The type of object that this custom field is attached to.', 'archive-pages-pro' ) }
-															/>
-														) }
-													/>
-													<Controller
-														name="customFieldsInput.variableType"
-														control={ control }
-														render={ ( { field: { onChange, value } } ) => (
-															<SelectControl
-																label={ __( 'Variable Type', 'archive-pages-pro' ) }
-																value={ value ?? 'string' }
-																onChange={ ( newValue ) => {
-																	onChange( newValue );
-																} }
-																options={
-																	[
-																		{
-																			value: 'string',
-																			label: __( 'String', 'archive-pages-pro' ),
-																		},
-																		{
-																			value: 'number',
-																			label: __( 'Number', 'archive-pages-pro' ),
-																		},
-																		{
-																			value: 'boolean',
-																			label: __( 'Boolean', 'archive-pages-pro' ),
-																		},
-																	]
-																}
-																help={ __( 'The data type for the custom field. Only strings, numbers, and booleans are supported.', 'archive-pages-pro' ) }
-															/>
-														) }
-													/>
-													<Button
-														variant="secondary"
-														onClick={ async () => {
-															const result = await trigger( 'customFieldsInput.customField' );
-															if ( result ) {
-																if ( ! errors?.customFieldsInput?.customField ) {
-																	const newCustomField = getValues( 'customFields' );
-																	const customFieldsInput = getValues( 'customFieldsInput' );
-																	newCustomField.push( customFieldsInput );
-																	setValue( 'customFields', newCustomField );
-																	setCustomFieldValues( newCustomField );
-																	// Clear the input fields.
-																	setValue( 'customFieldsInput', {
-																		customField: '',
-																		objectType: 'post',
-																		variableType: 'string',
-																	} );
-																}
-															}
-														} }
-													>
-														{ __( 'Add Custom Field', 'archive-pages-pro' ) }
-													</Button>
-												</div>
+												<CustomFieldsInput
+													data={ customFieldValues }
+													formSetValue={ setValue }
+													setCustomFieldValues={ setCustomFieldValues }
+												/>
 											</>
 										)
 									}

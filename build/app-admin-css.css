@@ -783,7 +783,7 @@ div.can-revoke {
   padding-top: 0;
 }
 
-.app-error input.components-text-control__input {
+.has-error input.components-text-control__input {
   border: 1px solid var(--dlx-app-admin--color-notice--error-alt);
   background-color: var(--dlx-app-admin--color-notice--error);
 }
@@ -1018,6 +1018,13 @@ div.can-revoke {
 
 .app-custom-fields-actions {
   margin-top: 8px;
+}
+
+.app-custom-fields-modal-row button {
+  margin-right: 12px;
+}
+.app-custom-fields-modal-row button:last-child {
+  margin-right: 0;
 }
 
 /*# sourceMappingURL=app-admin-css.css.map*/
