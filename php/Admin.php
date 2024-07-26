@@ -229,6 +229,11 @@ class Admin {
 		unset( $form_data['resetNonce'] );
 		unset( $form_data['getNonce'] );
 
+		// If custom fields isn't set, set it.
+		if ( ! isset( $form_data['customFields'] ) ) {
+			$form_data['customFields'] = array();
+		}
+
 		// Get array values.
 		$form_data = Functions::sanitize_array_recursive( $form_data );
 

@@ -6,7 +6,6 @@ import {
 	SelectControl,
 	Button,
 } from '@wordpress/components';
-import { DataViews } from '@wordpress/dataviews';
 import { cleanForSlug } from '@wordpress/url';
 import { __ } from '@wordpress/i18n';
 import { useForm, Controller, useWatch, useFormState } from 'react-hook-form';
@@ -17,6 +16,7 @@ import { faTriangleExclamation as TriangleExclamation, faCircleCheck as CircleCh
 import SendCommand from '../../utils/SendCommand';
 import Notice from '../../components/Notice';
 import SaveResetButtons from '../../components/SaveResetButtons';
+import CustomFieldsView from '../../components/CustomFieldsView';
 
 // Get admin options.
 const adminOptions = dlxAppSettings.options;
@@ -25,18 +25,9 @@ const taxonomies = dlxAppSettings.taxonomies;
 const customFields = dlxAppSettings.customFields;
 const objectTypes = dlxAppSettings.objectTypes;
 
-const customFieldDataView = {
-	type: 'table',
-	page: 1,
-	filters: [],
-	fields: [ 'customField', 'objectType', 'variableType' ],
-	layout: {},
-};
-
 const Settings = ( props ) => {
 	const [ licenseValid ] = useState( adminOptions.licenseValid );
-
-	const [ customFieldsView, setCustomFieldsView ] = useState( customFieldDataView );
+	const [ customFieldValues, setCustomFieldValues ] = useState( customFields );
 
 	const {
 		control,
@@ -54,22 +45,23 @@ const Settings = ( props ) => {
 			enable404Mapping: adminOptions.enable404Mapping,
 			authorBase: adminOptions.authorBase,
 			enableCustomFieldsRestSupport: adminOptions.enableCustomFieldsRestSupport,
-			customFields: customFields ?? [],
+			customFields: customFields ?? {},
 			taxonomies: taxonomies ?? [],
 			postTypes: postTypes ?? [],
 			getNonce: dlxAppSettings.getNonce,
 			saveNonce: dlxAppSettings.saveNonce,
 			resetNonce: dlxAppSettings.resetNonce,
+			customFieldsInput: {
+				customField: '',
+				objectType: 'post',
+				variableType: 'string',
+			},
 		},
 	} );
 	const formValues = useWatch( { control } );
 	const { errors, isDirty, dirtyFields } = useFormState( {
 		control,
 	} );
-
-	const customFieldsData = useMemo( () => {
-		return customFieldsView;
-	}, [ customFieldsView ] );
 
 	// Retrieve a prompt based on the license status.
 	const getPrompt = () => {
@@ -194,101 +186,6 @@ const Settings = ( props ) => {
 		} );
 	};
 
-	/**
-	 * Retrieve saved custom fields.
-	 *
-	 * @return {Array} An array of custom fields.
-	 */
-	const getCustomFields = () => {
-		const customFieldObject = [
-			{
-				id: 'customField',
-				header: __( 'Custom Field', 'archive-pages-pro' ),
-				render: ( { item } ) => {
-					return item.customField;
-				},
-				enableSorting: true,
-				enableHiding: false,
-			},
-			{
-				id: 'objectType',
-				header: __( 'Object Type', 'archive-pages-pro' ),
-				render: ( { item } ) => {
-					return item.objectType;
-				},
-				enableSorting: false,
-				enableHiding: false,
-			},
-			{
-				id: 'variableType',
-				header: __( 'Variable Type', 'archive-pages-pro' ),
-				render: ( { item } ) => {
-					return item.variableType;
-				},
-				enableSorting: false,
-				enableHiding: false,
-			},
-		];
-		return customFieldObject;
-	};
-
-	/**
-	 * Retrieve saved custom fields for data retrieval.
-	 *
-	 * @return {Array} An array of custom fields.
-	 */
-	const getCustomFieldsData = ( customFieldsDataView ) => {
-		
-		const sort = customFieldsDataView?.sort ?? {};
-		const filters = customFieldsDataView?.filters ?? [];
-		const page = customFieldsDataView?.page ?? 1;
-		const search = customFieldsDataView?.search ?? '';
-		const itemsPerPage = customFieldsDataView?.paginationInfo?.itemsPerPage ?? 10;
-
-		// If there are no custom fields, return early.
-		if ( customFields.length === 0 ) {
-			return [];
-		}
-		let customFieldData = [];
-		Object.values( getValues( 'customFields' ) ).forEach( ( customField ) => {
-			const customFieldObject = {
-				customField: customField.customField,
-				objectType: customField.objectType,
-				variableType: customField.variableType,
-			};
-			customFieldData.push( customFieldObject );
-		} );
-
-		// Apply sort (if enabled).
-		if ( sort ) {
-			const sortOrder = sort.direction;
-			const sortField = sort.field;
-
-			customFieldData.sort( ( a, b ) => {
-				if ( sortOrder === 'asc' ) {
-					return a[ sortField ] > b[ sortField ] ? 1 : -1;
-				}
-				return a[ sortField ] < b[ sortField ] ? 1 : -1;
-			} );
-		}
-
-		// Apply search (if enabled).
-		if ( search ) {
-			customFieldData = customFieldData.filter( ( item ) => {
-				return Object.values( item ).some( ( field ) => {
-					const customFieldItem = item.customField;
-
-					// Search cusom field iem.
-					if ( customFieldItem ) {
-						return customFieldItem.toString().toLowerCase().includes( search.toLowerCase() );
-					}
-					return false;
-				} );
-			} );
-		}
-		return customFieldData;
-	};
-
 	const getTaxonomies = () => {
 		// If there are no post types, return early.
 		if ( taxonomies.length === 0 ) {
@@ -356,7 +253,6 @@ const Settings = ( props ) => {
 		} );
 	};
 
-	const customFieldRecords = getCustomFieldsData( customFieldsData );
 	return (
 		<>
 			<div className="dlx-app-admin-content-heading">
@@ -511,19 +407,12 @@ const Settings = ( props ) => {
 										/>
 									</div>
 									{
-										( getValues( 'enableCustomFieldsRestSupport' ) && getCustomFieldsData( customFieldsData ).length > 0 ) && (
-											<DataViews
-												data={ customFieldRecords }
-												fields={ getCustomFields() }
-												view={ customFieldDataView }
-												paginationInfo={ {
-													totalItems: getCustomFieldsData( customFieldsData ).length,
-													itemsPerPage: 10,
+										( getValues( 'enableCustomFieldsRestSupport' ) ) && (
+											<CustomFieldsView
+												data={ customFieldValues }
+												onChange={ ( newCustomFields ) => {
+													setValue( 'customFields', newCustomFields );
 												} }
-												onChangeView={ ( view ) => {
-													setCustomFieldsView( view );
-												} }
-												search={ true }
 											/>
 										)
 									}
@@ -551,7 +440,7 @@ const Settings = ( props ) => {
 														render={ ( { field: { onChange, value } } ) => (
 															<SelectControl
 																label={ __( 'Object Type', 'archive-pages-pro' ) }
-																value={ value }
+																value={ value ?? 'post' }
 																onChange={ ( newValue ) => {
 																	onChange( newValue );
 																} }
@@ -573,7 +462,7 @@ const Settings = ( props ) => {
 														render={ ( { field: { onChange, value } } ) => (
 															<SelectControl
 																label={ __( 'Variable Type', 'archive-pages-pro' ) }
-																value={ value }
+																value={ value ?? 'string' }
 																onChange={ ( newValue ) => {
 																	onChange( newValue );
 																} }
@@ -604,12 +493,12 @@ const Settings = ( props ) => {
 															const customFieldsInput = getValues( 'customFieldsInput' );
 															newCustomField.push( customFieldsInput );
 															setValue( 'customFields', newCustomField );
-
+															setCustomFieldValues( newCustomField );
 															// Clear the input fields.
 															setValue( 'customFieldsInput', {
 																customField: '',
-																objectType: '',
-																variableType: '',
+																objectType: 'post',
+																variableType: 'string',
 															} );
 														} }
 													>
