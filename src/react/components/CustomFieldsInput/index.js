@@ -46,10 +46,15 @@ const CustomFieldsInput = ( { data, setCustomFieldValues, formSetValue } ) => {
 	 */
 	const onSubmit = async( formData ) => {
 		if ( ! errors?.customField ) {
-			const newCustomField = customFields;
+			const newCustomField = [ ...customFields ];
 
-			// Make sure there aren't any duplicates.
-			const customFieldExists = newCustomField.find( ( field ) => field.customField === formData.customField && field.objectType === formData.objectType );
+			// Make sure there aren't any duplicates in array.
+			const customFieldExists = newCustomField.find( ( field ) => {
+				if ( field === undefined ) {
+					return false;
+				}
+				return field.customField === formData.customField && field.objectType === formData.objectType;
+			} );
 			if ( customFieldExists ) {
 				setError( 'customField', {
 					type: 'duplicate',

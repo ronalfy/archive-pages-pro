@@ -116,6 +116,55 @@ class Archive_Pages_Pro {
 
 		// Locate a template if templates are available.
 		add_filter( 'template_include', array( $this, 'locate_page_template' ) );
+
+		// Add custom fields to REST API.
+		add_action( 'rest_api_init', array( $this, 'add_custom_fields_to_rest' ) );
+	}
+
+	/**
+	 * Add custom fields to the REST API.
+	 */
+	public function add_custom_fields_to_rest() {
+		$options          = Options::get_options();
+		$rest_api_enabled = (bool) $options['enableCustomFieldsRestSupport'];
+
+		if ( ! $rest_api_enabled ) {
+			return;
+		}
+
+		// Get custom fields, make sure we have a non-empty array.
+		$custom_fields = $options['customFields'];
+		if ( ! is_array( $custom_fields ) || empty( $custom_fields ) ) {
+			return;
+		}
+
+		// Go through each custom field and add it to the REST API.
+		foreach ( $custom_fields as $index => $custom_field ) {
+			$custom_field_name          = sanitize_title( $custom_field['customField'] );
+			$custom_field_object_type   = sanitize_key( $custom_field['objectType'] );
+			$custom_field_variable_type = sanitize_key( $custom_field['variableType'] );
+
+			// Check if previously registered.
+			if ( metadata_exists( $custom_field_object_type, 0, $custom_field_name ) ) {
+				continue;
+			}
+
+			// Add the custom field to the REST API.
+			register_rest_field(
+				$custom_field_object_type,
+				$custom_field_name,
+				array(
+					'get_callback' => function ( $callback_object ) use ( $custom_field_name ) {
+						return get_post_meta( $callback_object['id'], $custom_field_name, true );
+					},
+					'schema'       => array(
+						'description' => 'Custom field for ' . $custom_field_name,
+						'type'        => $custom_field_variable_type,
+						'context'     => array( 'view' ),
+					),
+				)
+			);
+		}
 	}
 
 	/**

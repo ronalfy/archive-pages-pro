@@ -395,7 +395,7 @@ class Admin {
 					'postTypes'          => json_decode( wp_json_encode( $post_types ), true ),
 					'taxonomies'         => json_decode( wp_json_encode( Functions::get_taxonomy_data() ), true ),
 					'options'            => $options,
-					'customFields'       => json_decode( wp_json_encode( $options['customFields'] ), true ),
+					'customFields'       =>$options['customFields'] ?? array(),
 					'objectTypes'        => json_decode( wp_json_encode( $object_types ), true ),
 					'settingsReadingUrl' => admin_url( 'options-reading.php#archive-pages-pro-settings-reading' ),
 					'isBlockTheme'       => wp_is_block_theme(),

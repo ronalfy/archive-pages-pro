@@ -48,7 +48,7 @@ const Settings = ( props ) => {
 			enable404Mapping: adminOptions.enable404Mapping,
 			authorBase: adminOptions.authorBase,
 			enableCustomFieldsRestSupport: adminOptions.enableCustomFieldsRestSupport,
-			customFields: customFields ?? {},
+			customFields: customFields ?? [],
 			taxonomies: taxonomies ?? [],
 			postTypes: postTypes ?? [],
 			getNonce: dlxAppSettings.getNonce,

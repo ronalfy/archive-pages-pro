@@ -169,12 +169,12 @@ const CustomFieldsView = ( { data, onChange } ) => {
 									if ( result ) {
 										if ( ! errors?.customField ) {
 											const updateIndex = launchModal.index;
-											const newCustomFields = { ...customFields };
+											const newCustomFields = customFields;
 											newCustomFields[ updateIndex ] = getValues();
 
 											// Re-index into array.
 											const newCustomFieldsArray = [];
-											Object.values( newCustomFields ).forEach( ( value ) => {
+											newCustomFields.forEach( ( value ) => {
 												newCustomFieldsArray.push( value );
 											} );
 
@@ -187,7 +187,7 @@ const CustomFieldsView = ( { data, onChange } ) => {
 									}
 								} }
 							>
-								{ __( 'Add Custom Field', 'archive-pages-pro' ) }
+								{ __( 'Edit Custom Field', 'archive-pages-pro' ) }
 							</Button>
 						</div>
 					</div>
@@ -202,7 +202,7 @@ const CustomFieldsView = ( { data, onChange } ) => {
 					</tr>
 				</thead>
 				<tbody>
-					{ Object.values( customFields ).map( ( field, index ) => (
+					{ customFields.map( ( field, index ) => (
 						<tr key={ index }>
 							<td>
 								{ field.customField }
@@ -227,10 +227,10 @@ const CustomFieldsView = ( { data, onChange } ) => {
 										variant="link"
 										isDestructive={ true }
 										onClick={ () => {
-											const newCustomFields = { ...customFields };
+											const newCustomFields = [ ...customFields ];
 
 											// Find matching field.
-											Object.keys( newCustomFields ).forEach( ( key ) => {
+											newCustomFields.forEach( ( customField, key ) => {
 												// Noew go through the object values and find a match.
 												const customFieldValues = newCustomFields[ key ];
 
@@ -239,13 +239,12 @@ const CustomFieldsView = ( { data, onChange } ) => {
 												}
 											} );
 
-											// Re-index into array.
-											const newCusomFieldArray = [];
-											Object.values( newCustomFields ).forEach( ( value ) => {
-												newCusomFieldArray.push( value );
+											// Re-index the array.
+											const newCustomFieldsArray = [];
+											newCustomFields.forEach( ( value ) => {
+												newCustomFieldsArray.push( value );
 											} );
-
-											setLaunchDeleteConfirmation( newCusomFieldArray );
+											setLaunchDeleteConfirmation( newCustomFieldsArray );
 										} }
 									>
 										{ __( 'Delete', 'archive-pages-pro' ) }
