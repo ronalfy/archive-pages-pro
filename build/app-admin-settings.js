@@ -3912,7 +3912,11 @@ var Settings = function Settings(props) {
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Disabling this will turn off page mapping for post type archives.', 'archive-pages-pro')
       });
     }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+    className: "description"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+    href: dlxAppSettings.settingsReadingUrl
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('View Settings > Reading to map archives', 'archive-pages-pro')))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "dlx-admin__row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_6__.Controller, {
     name: "enableTermMapping",
@@ -3944,7 +3948,11 @@ var Settings = function Settings(props) {
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Disabling this will turn off page mapping for 404 pages.', 'archive-pages-pro')
       });
     }
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+    className: "description"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+    href: dlxAppSettings.settingsReadingUrl
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('View Settings > Reading to map 404 archives', 'archive-pages-pro')))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
     scope: "row"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Author Mapping', 'archive-pages-pro')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "dlx-admin__row"

@@ -107,6 +107,82 @@ class Archive_Pages_Pro {
 		// Change the author base if set.
 		add_filter( 'init', array( $this, 'change_author_base' ) );
 		add_filter( 'author_rewrite_rules', array( $this, 'change_author_rewrites' ) );
+
+		// Set up page templates if available for each enabled post type.
+		add_action( 'admin_init', array( $this, 'init_page_templates_meta_box' ), 100 );
+	}
+
+	/**
+	 * Initialize post type arguments.
+	 */
+	public function init_page_templates_meta_box() {
+		$options = Options::get_options();
+		$post_types = $options['postTypes'];
+
+		if ( ! is_array( $post_types ) ) {
+			return;
+		}
+
+		// Check if it's a block theme.
+		if ( wp_is_block_theme() ) {
+			return;
+		}
+
+		// Get current theme.
+		$theme = wp_get_theme();
+
+		// Get page templates in theme.
+		$page_templates = $theme->get_page_templates( null, 'page' );
+		if ( empty( $page_templates ) ) {
+			return;
+		}
+
+		// Go through each post type and set up the arguments.
+		foreach ( $post_types as $post_type ) {
+			$enable_page_templates = (bool) $post_type['enable_page_templates'];
+			if ( ! $enable_page_templates ) {
+				continue;
+			}
+			add_meta_box(
+				'app_page_template',
+				__( 'Page Template', 'archive-pages-pro' ),
+				array( $this, 'page_template_meta_box' ),
+				$post_type,
+				'side',
+				'high'
+			);
+		}
+	}
+
+	/**
+	 * Display the page template meta box.
+	 *
+	 * @param WP_Post $post The post object.
+	 */
+	public function page_template_meta_box( $post ) {
+		$options = Options::get_options();
+		
+		// Get current theme.
+		$theme = wp_get_theme();
+
+		// Get page templates in theme.
+		$page_templates = $theme->get_page_templates( null, 'page' );
+		$current_template = get_post_meta( $post->ID, '_app_page_template', true );
+		if ( empty( $page_templates ) ) {
+			return;
+		}
+		?>
+		<label for="app_page_template"><?php esc_html_e( 'Page Template', 'archive-pages-pro' ); ?></label>
+		<select name="app_page_template" id="app_page_template" class="widefat">
+			<option value="default"><?php esc_html_e( 'Default Template', 'archive-pages-pro' ); ?></option>
+			<?php
+			foreach ( $page_templates as $template_slug => $template_label ) {
+				$selected = selected( $current_template, $template_slug, false );
+				echo '<option value="' . esc_attr( $template_slug ) . '" ' . $selected . '>' . esc_html( $template_label ) . '</option>';
+			}
+			?>
+		</select>
+		<?php
 	}
 
 	/**

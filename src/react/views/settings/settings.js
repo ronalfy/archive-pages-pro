@@ -7,7 +7,7 @@ import {
 	Button,
 } from '@wordpress/components';
 import { cleanForSlug } from '@wordpress/url';
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import { useForm, Controller, useWatch, useFormState } from 'react-hook-form';
 import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -293,6 +293,13 @@ const Settings = ( props ) => {
 												/>
 											) }
 										/>
+										<p className="description">
+											<a
+												href={ dlxAppSettings.settingsReadingUrl }
+											>
+												{ __( 'View Settings > Reading to map archives', 'archive-pages-pro' ) }
+											</a>
+										</p>
 									</div>
 									<div className="dlx-admin__row">
 										<Controller
@@ -325,6 +332,13 @@ const Settings = ( props ) => {
 												/>
 											) }
 										/>
+										<p className="description">
+											<a
+												href={ dlxAppSettings.settingsReadingUrl }
+											>
+												{ __( 'View Settings > Reading to map 404 archives', 'archive-pages-pro' ) }
+											</a>
+										</p>
 									</div>
 								</td>
 							</tr>

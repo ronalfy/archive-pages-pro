@@ -389,6 +389,7 @@ class Admin {
 					'options'      => $options,
 					'customFields' => json_decode( wp_json_encode( $options['customFields'] ), true ),
 					'objectTypes' => json_decode( wp_json_encode( $object_types ), true ),
+					'settingsReadingUrl' => admin_url( 'options-reading.php#archive-pages-pro-settings-reading' ),
 				)
 			);
 		} elseif ( 'license' === $current_tab ) {

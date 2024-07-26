@@ -2802,7 +2802,8 @@ var SettingsReading = function SettingsReading() {
     _useState6 = _slicedToArray(_useState5, 1),
     enable404Mapping = _useState6[0];
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "settings-reading"
+    className: "settings-reading",
+    id: "archive-pages-pro-settings-reading"
   }, enablePostTypeMapping && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, postTypes.map(function (postType) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_SettingsReadingPostType__WEBPACK_IMPORTED_MODULE_2__["default"], {
       key: postType.value,

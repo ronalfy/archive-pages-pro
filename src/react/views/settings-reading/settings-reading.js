@@ -12,7 +12,7 @@ const SettingsReading = () => {
 	const [ enablePostTypeMapping ] = useState( appSettingsReading.postTypeArchiveMappingEnabled );
 	const [ enable404Mapping ] = useState( appSettingsReading.enable404Mapping );
 	return (
-		<div className="settings-reading">
+		<div className="settings-reading" id="archive-pages-pro-settings-reading">
 			{
 				enablePostTypeMapping && (
 					<>
