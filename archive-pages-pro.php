@@ -184,10 +184,17 @@ class Archive_Pages_Pro {
 		update_post_meta( $post_id, '_app_page_template', $page_template );
 	}
 
+	/**
+	 * Locate the page template.
+	 *
+	 * @param string $template The template.
+	 *
+	 * @return string $template The updated template.
+	 */
 	public function locate_page_template( $template ) {
 		$current_post_type = get_post_type();
-		$options = Options::get_options();
-		$post_types = $options['postTypes'];
+		$options           = Options::get_options();
+		$post_types        = $options['postTypes'];
 
 		if ( ! is_array( $post_types ) ) {
 			return $template;
