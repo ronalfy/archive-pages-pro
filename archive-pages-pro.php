@@ -126,12 +126,20 @@ class Archive_Pages_Pro {
 		// Modify post type args.
 		add_filter( 'register_post_type_args', array( $this, 'modify_post_type_args' ), 10, 2 );
 
+		// Modify tax args.
+		add_filter( 'register_taxonomy_args', array( $this, 'modify_taxonomy_args' ), 10, 2 );
+
 		// Allow post types for block editor.
 		add_filter( 'use_block_editor_for_post', array( $this, 'enable_blocks_for_post_types' ), 10, 2 );
 	}
 
 	/**
 	 * Enable blocks for post types.
+	 *
+	 * @param bool    $block_editor_enabled Whether the block editor is enabled.
+	 * @param WP_Post $post The post object.
+	 *
+	 * @return bool $block_editor_enabled Whether the block editor is enabled.
 	 */
 	public function enable_blocks_for_post_types( $block_editor_enabled, $post ) {
 		$options = Options::get_options();
@@ -164,6 +172,64 @@ class Archive_Pages_Pro {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Modify the tax args.
+	 *
+	 * @param array  $args     The taxonomy arguments.
+	 * @param string $taxonomy The taxonomy.
+	 */
+	public function modify_taxonomy_args( $args, $taxonomy ) {
+		$options    = Options::get_options();
+		$taxonomies = $options['taxonomies'];
+		if ( ! is_array( $taxonomies ) || empty( $taxonomies ) ) {
+			return;
+		}
+
+		// Check if taxonomy is in array.
+		if ( ! isset( $taxonomies[ $taxonomy ] ) ) {
+			return $args;
+		}
+
+		$taxonomy_data = $taxonomies[ $taxonomy ];
+
+		// Go through taxonomies and add/disable support for custom fields.
+		$enable_overrides   = (bool) $taxonomy_data['enable_overrides'];
+		$enable_rest_api    = (bool) $taxonomy_data['enable_show_in_rest'];
+		$enable_with_front  = (bool) $taxonomy_data['enable_with_front'];
+		$enable_has_archive = (bool) $taxonomy_data['enable_has_archive'];
+
+		// If overrides aren't enabled, return the args.
+		if ( ! $enable_overrides ) {
+			return $args;
+		}
+
+		// Add or remove REST API.
+		if ( $enable_rest_api ) {
+			$args['show_in_rest'] = true;
+		} else {
+			$args['show_in_rest'] = false;
+		}
+
+		// Add or remove with_front.
+		if ( $enable_with_front ) {
+			$args['rewrite']['with_front'] = true;
+		} else {
+			$args['rewrite']['with_front'] = false;
+		}
+
+		// Add or remove has_archive.
+		if ( ! $enable_has_archive ) {
+			$args['public']             = false;
+			$args['publicly_queryable'] = false;
+			$args['show_ui']            = true;
+			$args['show_in_nav_menus']  = false;
+			$args['show_in_rest']       = true;
+			$args['query_var']          = false;
+		}
+		// Do nothing yet for has_archive as it's not an on/off switch.
+		return $args;
 	}
 
 	/**
@@ -551,7 +617,7 @@ class Archive_Pages_Pro {
 	 * @return array $author_rewrite The modified author rewrite rules.
 	 */
 	public function change_author_rewrites( $author_rewrite ) {
-		$options     = Options::get_options(); // Assuming Options::get_options() retrieves your plugin options
+		$options     = Options::get_options();
 		$author_base = sanitize_title( $options['authorBase'] );
 
 		// Convert author_base to underscores (if needed).
@@ -604,11 +670,6 @@ class Archive_Pages_Pro {
 		if ( ! (bool) $options['enableAuthorMapping'] ) {
 			return;
 		}
-
-		// todo - check if nicename is the same as the passed user_id
-		// todo - check if nicename is a reserved term.
-		// todo - check if sanitized_title is run and return an error if they don't match.
-		// todo - check if nicename already exists.
 
 		$app_user_options = filter_input( INPUT_POST, 'app-user-profile', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_REQUIRE_ARRAY );
 		if ( ! $app_user_options ) {

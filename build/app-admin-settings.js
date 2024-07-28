@@ -4181,17 +4181,33 @@ var Settings = function Settings(props) {
         className: "dlx-admin__row",
         key: taxonomy.name
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, taxonomy.label), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_6__.Controller, {
-        name: "taxonomies.".concat(taxonomy.name, ".enable_show_in_rest"),
+        name: "taxonomies.".concat(taxonomy.name, ".enable_overrides"),
         control: control,
         render: function render(_ref8) {
           var _ref8$field = _ref8.field,
             _onChange8 = _ref8$field.onChange,
             value = _ref8$field.value;
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Show in REST API', 'archive-pages-pro'),
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable Overrides', 'archive-pages-pro'),
             checked: value,
             onChange: function onChange(boolValue) {
               _onChange8(boolValue);
+            },
+            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable this to override the default settings for this taxonomy.', 'archive-pages-pro')
+          });
+        }
+      }), getValues("taxonomies.".concat(taxonomy.name, ".enable_overrides")) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_6__.Controller, {
+        name: "taxonomies.".concat(taxonomy.name, ".enable_show_in_rest"),
+        control: control,
+        render: function render(_ref9) {
+          var _ref9$field = _ref9.field,
+            _onChange9 = _ref9$field.onChange,
+            value = _ref9$field.value;
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Show in REST API', 'archive-pages-pro'),
+            checked: value,
+            onChange: function onChange(boolValue) {
+              _onChange9(boolValue);
             },
             help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable this post type to show in the REST API. This is useful for enabling the block editor for a taxoomy.', 'archive-pages-pro')
           });
@@ -4199,15 +4215,15 @@ var Settings = function Settings(props) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_6__.Controller, {
         name: "taxonomies.".concat(taxonomy.name, ".enable_with_front"),
         control: control,
-        render: function render(_ref9) {
-          var _ref9$field = _ref9.field,
-            _onChange9 = _ref9$field.onChange,
-            value = _ref9$field.value;
+        render: function render(_ref10) {
+          var _ref10$field = _ref10.field,
+            _onChange10 = _ref10$field.onChange,
+            value = _ref10$field.value;
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
             label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable a Front Base for the Taxonomy', 'archive-pages-pro'),
             checked: value,
             onChange: function onChange(boolValue) {
-              _onChange9(boolValue);
+              _onChange10(boolValue);
             },
             help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('If you have a permalink like /blog/, then unless the taxonomy specifies, the /blog/ will be its base. Disable this option if you do not want to use a base for your taxonomy term permalinks.', 'archive-pages-pro')
           });
@@ -4215,20 +4231,20 @@ var Settings = function Settings(props) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_6__.Controller, {
         name: "taxonomies.".concat(taxonomy.name, ".enable_has_archive"),
         control: control,
-        render: function render(_ref10) {
-          var _ref10$field = _ref10.field,
-            _onChange10 = _ref10$field.onChange,
-            value = _ref10$field.value;
+        render: function render(_ref11) {
+          var _ref11$field = _ref11.field,
+            _onChange11 = _ref11$field.onChange,
+            value = _ref11$field.value;
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
             label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable Taxonomy Archive', 'archive-pages-pro'),
             checked: value,
             onChange: function onChange(boolValue) {
-              _onChange10(boolValue);
+              _onChange11(boolValue);
             },
             help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Disable this if you would not like your taxonomy to have an archive.', 'archive-pages-pro')
           });
         }
-      }));
+      })));
     });
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -4250,13 +4266,13 @@ var Settings = function Settings(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_6__.Controller, {
     name: "enablePostTypeArchiveMapping",
     control: control,
-    render: function render(_ref11) {
-      var _onChange11 = _ref11.field.onChange;
+    render: function render(_ref12) {
+      var _onChange12 = _ref12.field.onChange;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable Post Type Mapping', 'archive-pages-pro'),
         checked: getValues('enablePostTypeArchiveMapping'),
         onChange: function onChange(boolValue) {
-          _onChange11(boolValue);
+          _onChange12(boolValue);
         },
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Disabling this will turn off page mapping for post type archives.', 'archive-pages-pro')
       });
@@ -4270,13 +4286,13 @@ var Settings = function Settings(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_6__.Controller, {
     name: "enableTermMapping",
     control: control,
-    render: function render(_ref12) {
-      var _onChange12 = _ref12.field.onChange;
+    render: function render(_ref13) {
+      var _onChange13 = _ref13.field.onChange;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable Term Mapping', 'archive-pages-pro'),
         checked: getValues('enableTermMapping'),
         onChange: function onChange(boolValue) {
-          _onChange12(boolValue);
+          _onChange13(boolValue);
         },
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Disabling this will turn off page mapping for term archives.', 'archive-pages-pro')
       });
@@ -4286,13 +4302,13 @@ var Settings = function Settings(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_6__.Controller, {
     name: "enable404Mapping",
     control: control,
-    render: function render(_ref13) {
-      var _onChange13 = _ref13.field.onChange;
+    render: function render(_ref14) {
+      var _onChange14 = _ref14.field.onChange;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable 404 Mapping', 'archive-pages-pro'),
         checked: getValues('enable404Mapping'),
         onChange: function onChange(boolValue) {
-          _onChange13(boolValue);
+          _onChange14(boolValue);
         },
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Disabling this will turn off page mapping for 404 pages.', 'archive-pages-pro')
       });
@@ -4308,13 +4324,13 @@ var Settings = function Settings(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_6__.Controller, {
     name: "enableAuthorMapping",
     control: control,
-    render: function render(_ref14) {
-      var _onChange14 = _ref14.field.onChange;
+    render: function render(_ref15) {
+      var _onChange15 = _ref15.field.onChange;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable Author Mapping', 'archive-pages-pro'),
         checked: getValues('enableAuthorMapping'),
         onChange: function onChange(boolValue) {
-          _onChange14(boolValue);
+          _onChange15(boolValue);
         },
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Disabling this will turn off page mapping for author archives.', 'archive-pages-pro')
       });
@@ -4327,14 +4343,14 @@ var Settings = function Settings(props) {
     rules: {
       pattern: /^[a-zA-Z0-9_-]*$/
     },
-    render: function render(_ref15) {
+    render: function render(_ref16) {
       var _errors$authorBase;
-      var _onChange15 = _ref15.field.onChange;
+      var _onChange16 = _ref16.field.onChange;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Author Base', 'archive-pages-pro'),
         value: getValues('authorBase'),
         onChange: function onChange(value) {
-          _onChange15(value);
+          _onChange16(value);
         },
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('The base for author archives. Default is "author". Leave this blank for no override of the author base.', 'archive-pages-pro'),
         onBlur: function onBlur() {
@@ -4363,13 +4379,13 @@ var Settings = function Settings(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_6__.Controller, {
     name: "enableCustomFieldsRestSupport",
     control: control,
-    render: function render(_ref16) {
-      var _onChange16 = _ref16.field.onChange;
+    render: function render(_ref17) {
+      var _onChange17 = _ref17.field.onChange;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable Custom Fields REST API Support', 'archive-pages-pro'),
         checked: getValues('enableCustomFieldsRestSupport'),
         onChange: function onChange(boolValue) {
-          _onChange16(boolValue);
+          _onChange17(boolValue);
         },
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Some blocks with dynamic data have trouble searching for custom fields that are not enabled for the REST API.', 'archive-pages-pro')
       });
@@ -4392,13 +4408,13 @@ var Settings = function Settings(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_6__.Controller, {
     name: "enablePostOverrides",
     control: control,
-    render: function render(_ref17) {
-      var _onChange17 = _ref17.field.onChange;
+    render: function render(_ref18) {
+      var _onChange18 = _ref18.field.onChange;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable Post Overrides', 'archive-pages-pro'),
         checked: getValues('enablePostOverrides'),
         onChange: function onChange(boolValue) {
-          _onChange17(boolValue);
+          _onChange18(boolValue);
         },
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable this to override the default settings for posts.', 'archive-pages-pro')
       });
@@ -4408,13 +4424,13 @@ var Settings = function Settings(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_6__.Controller, {
     name: "postTemplatesEnabled",
     control: control,
-    render: function render(_ref18) {
-      var _onChange18 = _ref18.field.onChange;
+    render: function render(_ref19) {
+      var _onChange19 = _ref19.field.onChange;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable Page Templates for Posts', 'archive-pages-pro'),
         checked: getValues('postTemplatesEnabled'),
         onChange: function onChange(boolValue) {
-          _onChange18(boolValue);
+          _onChange19(boolValue);
         },
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Allow posts to have page templates.', 'archive-pages-pro')
       });
@@ -4424,13 +4440,13 @@ var Settings = function Settings(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_6__.Controller, {
     name: "postCustomFieldsEnabled",
     control: control,
-    render: function render(_ref19) {
-      var _onChange19 = _ref19.field.onChange;
+    render: function render(_ref20) {
+      var _onChange20 = _ref20.field.onChange;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable Custom Fields for Posts', 'archive-pages-pro'),
         checked: getValues('postCustomFieldsEnabled'),
         onChange: function onChange(boolValue) {
-          _onChange19(boolValue);
+          _onChange20(boolValue);
         },
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Allow posts to have custom fields.', 'archive-pages-pro')
       });
@@ -4442,13 +4458,13 @@ var Settings = function Settings(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_6__.Controller, {
     name: "enablePageOverrides",
     control: control,
-    render: function render(_ref20) {
-      var _onChange20 = _ref20.field.onChange;
+    render: function render(_ref21) {
+      var _onChange21 = _ref21.field.onChange;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable Page Overrides', 'archive-pages-pro'),
         checked: getValues('enablePageOverrides'),
         onChange: function onChange(boolValue) {
-          _onChange20(boolValue);
+          _onChange21(boolValue);
         },
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable this to override the default settings for pages.', 'archive-pages-pro')
       });
@@ -4458,13 +4474,13 @@ var Settings = function Settings(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_6__.Controller, {
     name: "pageCustomFieldsEnabled",
     control: control,
-    render: function render(_ref21) {
-      var _onChange21 = _ref21.field.onChange;
+    render: function render(_ref22) {
+      var _onChange22 = _ref22.field.onChange;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable Custom Fields for Pages', 'archive-pages-pro'),
         checked: getValues('pageCustomFieldsEnabled'),
         onChange: function onChange(boolValue) {
-          _onChange21(boolValue);
+          _onChange22(boolValue);
         },
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Allow pages to have custom fields.', 'archive-pages-pro')
       });

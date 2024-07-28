@@ -154,6 +154,7 @@ class Functions {
 				'enable_has_archive'  => $options['taxonomies'][ $taxonomy->name ]['enable_has_archive'] ?? $has_archive,
 				'enable_show_in_rest' => $options['taxonomies'][ $taxonomy->name ]['enable_show_in_rest'] ?? (bool) $taxonomy->show_in_rest,
 				'enable_with_front'   => $options['taxonomies'][ $taxonomy->name ]['enable_with_front'] ?? (bool) $taxonomy->rewrite['with_front'],
+				'enable_overrides'    => $options['taxonomies'][ $taxonomy->name ]['enable_overrides'] ?? false,
 			);
 			$taxonomies_with_data[ $taxonomy->name ] = $data;
 		}
@@ -321,6 +322,8 @@ class Functions {
 	 * Get the post types for the plugin.
 	 *
 	 * @see get_post_types
+	 *
+	 * @param bool $all Whether to get all post types or not.
 	 *
 	 * @return array Post types.
 	 */

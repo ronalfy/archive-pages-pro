@@ -249,47 +249,67 @@ const Settings = ( props ) => {
 				>
 					<h3>{ taxonomy.label }</h3>
 					<Controller
-						name={ `taxonomies.${ taxonomy.name }.enable_show_in_rest` }
+						name={ `taxonomies.${ taxonomy.name }.enable_overrides` }
 						control={ control }
 						render={ ( { field: { onChange, value } } ) => (
 							<ToggleControl
-								label={ __( 'Show in REST API', 'archive-pages-pro' ) }
+								label={ __( 'Enable Overrides', 'archive-pages-pro' ) }
 								checked={ value }
 								onChange={ ( boolValue ) => {
 									onChange( boolValue );
 								} }
-								help={ __( 'Enable this post type to show in the REST API. This is useful for enabling the block editor for a taxoomy.', 'archive-pages-pro' ) }
+								help={ __( 'Enable this to override the default settings for this taxonomy.', 'archive-pages-pro' ) }
 							/>
 						) }
 					/>
-					<Controller
-						name={ `taxonomies.${ taxonomy.name }.enable_with_front` }
-						control={ control }
-						render={ ( { field: { onChange, value } } ) => (
-							<ToggleControl
-								label={ __( 'Enable a Front Base for the Taxonomy', 'archive-pages-pro' ) }
-								checked={ value }
-								onChange={ ( boolValue ) => {
-									onChange( boolValue );
-								} }
-								help={ __( 'If you have a permalink like /blog/, then unless the taxonomy specifies, the /blog/ will be its base. Disable this option if you do not want to use a base for your taxonomy term permalinks.', 'archive-pages-pro' ) }
-							/>
-						) }
-					/>
-					<Controller
-						name={ `taxonomies.${ taxonomy.name }.enable_has_archive` }
-						control={ control }
-						render={ ( { field: { onChange, value } } ) => (
-							<ToggleControl
-								label={ __( 'Enable Taxonomy Archive', 'archive-pages-pro' ) }
-								checked={ value }
-								onChange={ ( boolValue ) => {
-									onChange( boolValue );
-								} }
-								help={ __( 'Disable this if you would not like your taxonomy to have an archive.', 'archive-pages-pro' ) }
-							/>
-						) }
-					/>
+					{
+						getValues( `taxonomies.${ taxonomy.name }.enable_overrides` ) && (
+							<>
+								<Controller
+									name={ `taxonomies.${ taxonomy.name }.enable_show_in_rest` }
+									control={ control }
+									render={ ( { field: { onChange, value } } ) => (
+										<ToggleControl
+											label={ __( 'Show in REST API', 'archive-pages-pro' ) }
+											checked={ value }
+											onChange={ ( boolValue ) => {
+												onChange( boolValue );
+											} }
+											help={ __( 'Enable this post type to show in the REST API. This is useful for enabling the block editor for a taxoomy.', 'archive-pages-pro' ) }
+										/>
+									) }
+								/>
+								<Controller
+									name={ `taxonomies.${ taxonomy.name }.enable_with_front` }
+									control={ control }
+									render={ ( { field: { onChange, value } } ) => (
+										<ToggleControl
+											label={ __( 'Enable a Front Base for the Taxonomy', 'archive-pages-pro' ) }
+											checked={ value }
+											onChange={ ( boolValue ) => {
+												onChange( boolValue );
+											} }
+											help={ __( 'If you have a permalink like /blog/, then unless the taxonomy specifies, the /blog/ will be its base. Disable this option if you do not want to use a base for your taxonomy term permalinks.', 'archive-pages-pro' ) }
+										/>
+									) }
+								/>
+								<Controller
+									name={ `taxonomies.${ taxonomy.name }.enable_has_archive` }
+									control={ control }
+									render={ ( { field: { onChange, value } } ) => (
+										<ToggleControl
+											label={ __( 'Enable Taxonomy Archive', 'archive-pages-pro' ) }
+											checked={ value }
+											onChange={ ( boolValue ) => {
+												onChange( boolValue );
+											} }
+											help={ __( 'Disable this if you would not like your taxonomy to have an archive.', 'archive-pages-pro' ) }
+										/>
+									) }
+								/>
+							</>
+						)
+					}
 				</div>
 			);
 		} );
