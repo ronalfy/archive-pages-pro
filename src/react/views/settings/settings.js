@@ -59,6 +59,11 @@ const Settings = ( props ) => {
 				objectType: 'post',
 				variableType: 'string',
 			},
+			postTemplatesEnabled: dlxAppSettings.postTemplatesEnabled,
+			postCustomFieldsEnabled: dlxAppSettings.postCustomFieldsEnabled,
+			pageCustomFieldsEnabled: dlxAppSettings.pageCustomFieldsEnabled,
+			enablePostOverrides: dlxAppSettings.enablePostOverrides,
+			enablePageOverrides: dlxAppSettings.enablePageOverrides,
 		},
 	} );
 	const formValues = useWatch( { control } );
@@ -115,75 +120,109 @@ const Settings = ( props ) => {
 				>
 					<h3>{ postType.label }</h3>
 					<Controller
-						name={ `postTypes.${ postType.name }.enable_page_templates` }
+						name={ `postTypes.${ postType.name }.enable_overrides` }
 						control={ control }
 						render={ ( { field: { onChange, value } } ) => (
 							<ToggleControl
-								label={ __( 'Enable Page Templates' ) }
+								label={ __( 'Enable Overrides', 'archive-pages-pro' ) }
 								checked={ value }
 								onChange={ ( boolValue ) => {
 									onChange( boolValue );
 								} }
-								help={ __( 'Enable page templates for this post type.', 'archive-pages-pro' ) }
+								help={ __( 'Enable this to override the default settings for this post type.', 'archive-pages-pro' ) }
 							/>
 						) }
 					/>
-					<Controller
-						name={ `postTypes.${ postType.name }.enable_show_in_rest` }
-						control={ control }
-						render={ ( { field: { onChange, value } } ) => (
-							<ToggleControl
-								label={ __( 'Show in REST API', 'archive-pages-pro' ) }
-								checked={ value }
-								onChange={ ( boolValue ) => {
-									onChange( boolValue );
-								} }
-								help={ __( 'Enable this post type to show in the REST API. This is useful for enabling the block editor for a post type.', 'archive-pages-pro' ) }
-							/>
-						) }
-					/>
-					<Controller
-						name={ `postTypes.${ postType.name }.enable_with_front` }
-						control={ control }
-						render={ ( { field: { onChange, value } } ) => (
-							<ToggleControl
-								label={ __( 'Enable a Front Base for the Post Type', 'archive-pages-pro' ) }
-								checked={ value }
-								onChange={ ( boolValue ) => {
-									onChange( boolValue );
-								} }
-								help={ __( 'If you have a permalink like /blog/, then unless the post type specifies, the /blog/ will be its base. Disable this option if you do not want to use a base for your post type permalinks.', 'archive-pages-pro' ) }
-							/>
-						) }
-					/>
-					<Controller
-						name={ `postTypes.${ postType.name }.enable_has_archive` }
-						control={ control }
-						render={ ( { field: { onChange, value } } ) => (
-							<ToggleControl
-								label={ __( 'Enable a Post Type Archive', 'archive-pages-pro' ) }
-								checked={ value }
-								onChange={ ( boolValue ) => {
-									onChange( boolValue );
-								} }
-								help={ __( 'Enable this if you would like your post type to have an archive.', 'archive-pages-pro' ) }
-							/>
-						) }
-					/>
-					<Controller
-						name={ `postTypes.${ postType.name }.enable_block_editor` }
-						control={ control }
-						render={ ( { field: { onChange, value } } ) => (
-							<ToggleControl
-								label={ __( 'Bypass the Classic Editor', 'archive-pages-pro' ) }
-								checked={ value }
-								onChange={ ( boolValue ) => {
-									onChange( boolValue );
-								} }
-								help={ __( 'Enable this to force a post type to use the block editor.', 'archive-pages-pro' ) }
-							/>
-						) }
-					/>
+					{
+						getValues( `postTypes.${ postType.name }.enable_overrides` ) && (
+							<>
+								<Controller
+									name={ `postTypes.${ postType.name }.enable_page_templates` }
+									control={ control }
+									render={ ( { field: { onChange, value } } ) => (
+										<ToggleControl
+											label={ __( 'Enable Page Templates' ) }
+											checked={ value }
+											onChange={ ( boolValue ) => {
+												onChange( boolValue );
+											} }
+											help={ __( 'Enable page templates for this post type.', 'archive-pages-pro' ) }
+										/>
+									) }
+								/>
+								<Controller
+									name={ `postTypes.${ postType.name }.enable_show_in_rest` }
+									control={ control }
+									render={ ( { field: { onChange, value } } ) => (
+										<ToggleControl
+											label={ __( 'Show in REST API', 'archive-pages-pro' ) }
+											checked={ value }
+											onChange={ ( boolValue ) => {
+												onChange( boolValue );
+											} }
+											help={ __( 'Enable this post type to show in the REST API. This is useful for enabling the block editor for a post type.', 'archive-pages-pro' ) }
+										/>
+									) }
+								/>
+								<Controller
+									name={ `postTypes.${ postType.name }.enable_with_front` }
+									control={ control }
+									render={ ( { field: { onChange, value } } ) => (
+										<ToggleControl
+											label={ __( 'Enable a Front Base for the Post Type', 'archive-pages-pro' ) }
+											checked={ value }
+											onChange={ ( boolValue ) => {
+												onChange( boolValue );
+											} }
+											help={ __( 'If you have a permalink like /blog/, then unless the post type specifies, the /blog/ will be its base. Disable this option if you do not want to use a base for your post type permalinks.', 'archive-pages-pro' ) }
+										/>
+									) }
+								/>
+								<Controller
+									name={ `postTypes.${ postType.name }.enable_has_archive` }
+									control={ control }
+									render={ ( { field: { onChange, value } } ) => (
+										<ToggleControl
+											label={ __( 'Enable a Post Type Archive', 'archive-pages-pro' ) }
+											checked={ value }
+											onChange={ ( boolValue ) => {
+												onChange( boolValue );
+											} }
+											help={ __( 'Enable this if you would like your post type to have an archive.', 'archive-pages-pro' ) }
+										/>
+									) }
+								/>
+								<Controller
+									name={ `postTypes.${ postType.name }.enable_custom_fields` }
+									control={ control }
+									render={ ( { field: { onChange, value } } ) => (
+										<ToggleControl
+											label={ __( 'Enable Custom Fields', 'archive-pages-pro' ) }
+											checked={ value }
+											onChange={ ( boolValue ) => {
+												onChange( boolValue );
+											} }
+											help={ __( 'Enable this to allow this post type to have custom fields.', 'archive-pages-pro' ) }
+										/>
+									) }
+								/>
+								<Controller
+									name={ `postTypes.${ postType.name }.enable_block_editor` }
+									control={ control }
+									render={ ( { field: { onChange, value } } ) => (
+										<ToggleControl
+											label={ __( 'Enable the Block Editor', 'archive-pages-pro' ) }
+											checked={ value }
+											onChange={ ( boolValue ) => {
+												onChange( boolValue );
+											} }
+											help={ __( 'Enable this to force a post type to use the block editor.', 'archive-pages-pro' ) }
+										/>
+									) }
+								/>
+							</>
+						)
+					}
 				</div>
 			);
 		} );
@@ -443,6 +482,112 @@ const Settings = ( props ) => {
 													formSetValue={ setValue }
 													setCustomFieldValues={ setCustomFieldValues }
 												/>
+											</>
+										)
+									}
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">
+									{ __( 'Post Overrides', 'archive-pages-pro' ) }
+								</th>
+								<td>
+									<div className="dlx-admin__row">
+										<Controller
+											name="enablePostOverrides"
+											control={ control }
+											render={ ( { field: { onChange } } ) => (
+												<ToggleControl
+													label={ __( 'Enable Post Overrides', 'archive-pages-pro' ) }
+													checked={ getValues( 'enablePostOverrides' ) }
+													onChange={ ( boolValue ) => {
+														onChange( boolValue );
+													} }
+													help={ __( 'Enable this to override the default settings for posts.', 'archive-pages-pro' ) }
+												/>
+											) }
+										/>
+									</div>
+									{
+										getValues( 'enablePostOverrides' ) && (
+											<>
+												<div className="dlx-admin__row">
+													<Controller
+														name="postTemplatesEnabled"
+														control={ control }
+														render={ ( { field: { onChange } } ) => (
+															<ToggleControl
+																label={ __( 'Enable Page Templates for Posts', 'archive-pages-pro' ) }
+																checked={ getValues( 'postTemplatesEnabled' ) }
+																onChange={ ( boolValue ) => {
+																	onChange( boolValue );
+																} }
+																help={ __( 'Allow posts to have page templates.', 'archive-pages-pro' ) }
+															/>
+														) }
+													/>
+												</div>
+												<div className="dlx-admin__row">
+													<Controller
+														name="postCustomFieldsEnabled"
+														control={ control }
+														render={ ( { field: { onChange } } ) => (
+															<ToggleControl
+																label={ __( 'Enable Custom Fields for Posts', 'archive-pages-pro' ) }
+																checked={ getValues( 'postCustomFieldsEnabled' ) }
+																onChange={ ( boolValue ) => {
+																	onChange( boolValue );
+																} }
+																help={ __( 'Allow posts to have custom fields.', 'archive-pages-pro' ) }
+															/>
+														) }
+													/>
+												</div>
+											</>
+										)
+									}
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">
+									{ __( 'Page Overrides', 'archive-pages-pro' ) }
+								</th>
+								<td>
+									<div className="dlx-admin__row">
+										<Controller
+											name="enablePageOverrides"
+											control={ control }
+											render={ ( { field: { onChange } } ) => (
+												<ToggleControl
+													label={ __( 'Enable Page Overrides', 'archive-pages-pro' ) }
+													checked={ getValues( 'enablePageOverrides' ) }
+													onChange={ ( boolValue ) => {
+														onChange( boolValue );
+													} }
+													help={ __( 'Enable this to override the default settings for pages.', 'archive-pages-pro' ) }
+												/>
+											) }
+										/>
+									</div>
+									{
+										getValues( 'enablePageOverrides' ) && (
+											<>
+												<div className="dlx-admin__row">
+													<Controller
+														name="pageCustomFieldsEnabled"
+														control={ control }
+														render={ ( { field: { onChange } } ) => (
+															<ToggleControl
+																label={ __( 'Enable Custom Fields for Pages', 'archive-pages-pro' ) }
+																checked={ getValues( 'pageCustomFieldsEnabled' ) }
+																onChange={ ( boolValue ) => {
+																	onChange( boolValue );
+																} }
+																help={ __( 'Allow pages to have custom fields.', 'archive-pages-pro' ) }
+															/>
+														) }
+													/>
+												</div>
 											</>
 										)
 									}

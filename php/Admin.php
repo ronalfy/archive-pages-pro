@@ -383,23 +383,50 @@ class Admin {
 			// Get page templates in theme.
 			$page_templates = $theme->get_page_templates( null, 'page' );
 
+			// Get post post type and see if it has custom fields enabled.
+			$post_custom_fields_enabled = false;
+			$post_custom_field_option   = $options['postCustomFieldsEnabled'];
+			if ( null === $post_custom_field_option ) {
+				if ( \post_type_supports( 'post', 'custom-fields' ) ) {
+					$post_custom_fields_enabled = true;
+				}
+			} else {
+				$post_custom_fields_enabled = (bool) $post_custom_field_option;
+			}
+
+			// Get page post type and see if it has custom fields enabled.
+			$page_custom_fields_enabled = false;
+			$page_custom_field_option   = $options['pageCustomFieldsEnabled'];
+			if ( null === $page_custom_field_option ) {
+				if ( \post_type_supports( 'page', 'custom-fields' ) ) {
+					$page_custom_fields_enabled = true;
+				}
+			} else {
+				$page_custom_fields_enabled = (bool) $page_custom_field_option;
+			}
+
 			wp_localize_script(
 				'dlx-app-settings',
 				'dlxAppSettings',
 				array(
-					'getNonce'           => wp_create_nonce( 'dlx-app-settings-get-options' ),
-					'saveNonce'          => wp_create_nonce( 'dlx-app-settings-save-options' ),
-					'resetNonce'         => wp_create_nonce( 'dlx-app-settings-reset-options' ),
-					'previewNonce'       => wp_create_nonce( 'dlx-app-settings-preview' ),
-					'ajaxurl'            => admin_url( 'admin-ajax.php' ),
-					'postTypes'          => json_decode( wp_json_encode( $post_types ), true ),
-					'taxonomies'         => json_decode( wp_json_encode( Functions::get_taxonomy_data() ), true ),
-					'options'            => $options,
-					'customFields'       =>$options['customFields'] ?? array(),
-					'objectTypes'        => json_decode( wp_json_encode( $object_types ), true ),
-					'settingsReadingUrl' => admin_url( 'options-reading.php#archive-pages-pro-settings-reading' ),
-					'isBlockTheme'       => wp_is_block_theme(),
-					'hasPageTemplates'   => ! empty( $page_templates ),
+					'getNonce'                => wp_create_nonce( 'dlx-app-settings-get-options' ),
+					'saveNonce'               => wp_create_nonce( 'dlx-app-settings-save-options' ),
+					'resetNonce'              => wp_create_nonce( 'dlx-app-settings-reset-options' ),
+					'previewNonce'            => wp_create_nonce( 'dlx-app-settings-preview' ),
+					'ajaxurl'                 => admin_url( 'admin-ajax.php' ),
+					'postTypes'               => json_decode( wp_json_encode( $post_types ), true ),
+					'taxonomies'              => json_decode( wp_json_encode( Functions::get_taxonomy_data() ), true ),
+					'options'                 => $options,
+					'customFields'            => $options['customFields'] ?? array(),
+					'objectTypes'             => json_decode( wp_json_encode( $object_types ), true ),
+					'settingsReadingUrl'      => admin_url( 'options-reading.php#archive-pages-pro-settings-reading' ),
+					'isBlockTheme'            => wp_is_block_theme(),
+					'hasPageTemplates'        => ! empty( $page_templates ),
+					'postCustomFieldsEnabled' => $post_custom_fields_enabled,
+					'postTemplatesEnabled'    => (bool) $options['postTemplatesEnabled'],
+					'pageCustomFieldsEnabled' => $page_custom_fields_enabled,
+					'enablePostOverrides'     => (bool) $options['enablePostOverrides'],
+					'enablePageOverrides'     => (bool) $options['enablePageOverrides'],
 				)
 			);
 		} elseif ( 'license' === $current_tab ) {

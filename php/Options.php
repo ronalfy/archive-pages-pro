@@ -110,6 +110,11 @@ class Options {
 			'authorBase'                    => '',
 			'enableCustomFieldsRestSupport' => false,
 			'customFields'                  => array(),
+			'enablePostOverrides'           => false,
+			'enablePageOverrides'           => false,
+			'postTemplatesEnabled'          => false,
+			'postCustomFieldsEnabled'       => null,
+			'pageCustomFieldsEnabled'       => null,
 		);
 		return $defaults;
 	}

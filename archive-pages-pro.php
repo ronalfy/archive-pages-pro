@@ -119,6 +119,157 @@ class Archive_Pages_Pro {
 
 		// Add custom fields to REST API.
 		add_action( 'rest_api_init', array( $this, 'add_custom_fields_to_rest' ) );
+
+		// Add post type support for post types.
+		add_action( 'init', array( $this, 'add_post_type_support' ), 1000 );
+
+		// Modify post type args.
+		add_filter( 'register_post_type_args', array( $this, 'modify_post_type_args' ), 10, 2 );
+
+		// Allow post types for block editor.
+		add_filter( 'use_block_editor_for_post', array( $this, 'enable_blocks_for_post_types' ), 10, 2 );
+	}
+
+	/**
+	 * Enable blocks for post types.
+	 */
+	public function enable_blocks_for_post_types( $block_editor_enabled, $post ) {
+		$options = Options::get_options();
+
+		// Get post type data.
+		$post_types = $options['postTypes'];
+
+		// Make sure it's an array and not empty.
+		if ( ! is_array( $post_types ) || empty( $post_types ) ) {
+			return $block_editor_enabled;
+		}
+
+		// Get the post type.
+		$post_type = isset( $post_types[ $post->post_type ] ) ? $post_types[ $post->post_type ] : array();
+
+		if ( ! is_array( $post_type ) || empty( $post_type ) ) {
+			return $block_editor_enabled;
+		}
+
+		// Check if overrides are enabled for this post type.
+		$enable_overrides = (bool) $post_type['enable_overrides'] ?? false;
+		if ( ! $enable_overrides ) {
+			return $block_editor_enabled;
+		}
+
+		// Check if blocks are enabled for this post type.
+		$enable_blocks = (bool) $post_type['enable_block_editor'] ?? false;
+		if ( $enable_blocks ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Modify post type args with overrides.
+	 *
+	 * @param array  $args      The post type arguments.
+	 * @param string $post_type The post type.
+	 *
+	 * @return array $args The modified post type arguments.
+	 */
+	public function modify_post_type_args( $args, $post_type ) {
+		$options    = Options::get_options();
+		$post_types = $options['postTypes'];
+		if ( ! is_array( $post_types ) || empty( $post_types ) ) {
+			return;
+		}
+
+		// Check if post type is in array.
+		if ( ! isset( $post_types[ $post_type ] ) ) {
+			return $args;
+		}
+
+		$post_type_data = $post_types[ $post_type ];
+
+		// Go through post types and add/disable support for custom fields.
+		$enable_overrides   = (bool) $post_type_data['enable_overrides'];
+		$enable_rest_api    = (bool) $post_type_data['enable_show_in_rest'];
+		$enable_with_front  = (bool) $post_type_data['enable_with_front'];
+		$enable_has_archive = (bool) $post_type_data['enable_has_archive'];
+
+		// If overrides aren't enabled, return the args.
+		if ( ! $enable_overrides ) {
+			return $args;
+		}
+
+		// Add or remove REST API.
+		if ( $enable_rest_api ) {
+			$args['show_in_rest'] = true;
+		} else {
+			$args['show_in_rest'] = false;
+		}
+
+		// Add or remove with_front.
+		if ( $enable_with_front ) {
+			$args['rewrite']['with_front'] = true;
+		} else {
+			$args['rewrite']['with_front'] = false;
+		}
+
+		// Add or remove has_archive.
+		if ( $enable_has_archive ) {
+			$args['has_archive'] = true;
+		} else {
+			$args['has_archive'] = false;
+		}
+		return $args;
+	}
+
+	/**
+	 * Add post type support for post types.
+	 */
+	public function add_post_type_support() {
+		$options = Options::get_options();
+
+		// Check if we're adding custom fields to posts.
+		$post_custom_fields_enabled = (bool) $options['postCustomFieldsEnabled'];
+		if ( $post_custom_fields_enabled ) {
+			add_post_type_support( 'post', 'custom-fields' );
+			add_filter( 'acf/settings/remove_wp_meta_box', '__return_false' );
+		} else {
+			remove_post_type_support( 'post', 'custom-fields' );
+		}
+
+		// Check if we're adding custom fields to pages.
+		$page_overrides_enabled = (bool) $options['enablePageOverrides'];
+		if ( $page_overrides_enabled ) {
+			$page_custom_fields_enabled = (bool) $options['pageCustomFieldsEnabled'];
+			if ( $page_custom_fields_enabled ) {
+				add_post_type_support( 'page', 'custom-fields' );
+				add_filter( 'acf/settings/remove_wp_meta_box', '__return_false' );
+			} else {
+				remove_post_type_support( 'page', 'custom-fields' );
+			}
+		}
+
+		// Get post type arguments and set up the supports.
+		$post_types = $options['postTypes'];
+		if ( ! is_array( $post_types ) || empty( $post_types ) ) {
+			return;
+		}
+
+		// Go through post types and add/disable support for custom fields.
+		foreach ( $post_types as $post_type_name => $post_type_data ) {
+			$enable_overrides = (bool) $post_type_data['enable_overrides'];
+			if ( ! $enable_overrides ) {
+				continue;
+			}
+			$enable_custom_fields = (bool) $post_type_data['enable_custom_fields'];
+
+			// Add or remove custom field for post type.
+			if ( $enable_custom_fields ) {
+				add_post_type_support( $post_type_name, 'custom-fields' );
+			} else {
+				remove_post_type_support( $post_type_name, 'custom-fields' );
+			}
+		}
 	}
 
 	/**
@@ -149,19 +300,15 @@ class Archive_Pages_Pro {
 				continue;
 			}
 
-			// Add the custom field to the REST API.
-			register_rest_field(
-				$custom_field_object_type,
+			register_meta(
+				'post',
 				$custom_field_name,
 				array(
-					'get_callback' => function ( $callback_object ) use ( $custom_field_name ) {
-						return get_post_meta( $callback_object['id'], $custom_field_name, true );
-					},
-					'schema'       => array(
-						'description' => 'Custom field for ' . $custom_field_name,
-						'type'        => $custom_field_variable_type,
-						'context'     => array( 'view' ),
-					),
+					'object_subtype' => $custom_field_object_type,
+					'type'           => $custom_field_variable_type,
+					'show_in_rest'   => true,
+					'single'         => true,
+
 				)
 			);
 		}
@@ -173,6 +320,20 @@ class Archive_Pages_Pro {
 	public function init_page_templates_meta_box() {
 		$options    = Options::get_options();
 		$post_types = $options['postTypes'];
+
+		// Get the post post type settings for templates.
+		$post_overrides_enabled = (bool) $options['enablePostOverrides'];
+		$post_templates_enabled = (bool) $options['postTemplatesEnabled'];
+		if ( $post_templates_enabled && $post_overrides_enabled ) {
+			add_meta_box(
+				'app_page_template',
+				__( 'Page Template', 'archive-pages-pro' ),
+				array( $this, 'page_template_meta_box' ),
+				'post',
+				'side',
+				'high'
+			);
+		}
 
 		if ( ! is_array( $post_types ) ) {
 			return;
@@ -194,8 +355,9 @@ class Archive_Pages_Pro {
 
 		// Go through each post type and set up the arguments.
 		foreach ( $post_types as $post_type ) {
-			$enable_page_templates = (bool) $post_type['enable_page_templates'];
-			if ( ! $enable_page_templates ) {
+			$enable_post_type_overrides = (bool) $post_type['enable_overrides'];
+			$enable_page_templates      = (bool) $post_type['enable_page_templates'];
+			if ( ! $enable_page_templates || ! $enable_post_type_overrides ) {
 				continue;
 			}
 			add_meta_box(
@@ -228,6 +390,9 @@ class Archive_Pages_Pro {
 
 		// Get the page template.
 		$page_template = sanitize_text_field( filter_input( INPUT_POST, 'app_page_template', \FILTER_SANITIZE_SPECIAL_CHARS ) );
+		if ( empty( $page_template ) ) {
+			return;
+		}
 
 		// Save the page template.
 		update_post_meta( $post_id, '_app_page_template', $page_template );
@@ -245,7 +410,7 @@ class Archive_Pages_Pro {
 		$options           = Options::get_options();
 		$post_types        = $options['postTypes'];
 
-		if ( ! is_array( $post_types ) ) {
+		if ( ! is_array( $post_types ) && 'post' !== $current_post_type ) {
 			return $template;
 		}
 
@@ -254,9 +419,46 @@ class Archive_Pages_Pro {
 			return $template;
 		}
 
+		// If it's a post, get the post type.
+		if ( 'post' === $current_post_type ) {
+			$enable_post_overrides = (bool) $options['enablePostOverrides'];
+
+			if ( ! $enable_post_overrides ) {
+				return $template;
+			}
+
+			// Get the page template.
+			$page_template = get_post_meta( get_the_ID(), '_app_page_template', true );
+
+			// If the page template is empty, return the template.
+			if ( empty( $page_template ) ) {
+				return $template;
+			}
+
+			// Get the current theme stylesheet directory.
+			$theme_dir = get_stylesheet_directory();
+
+			// Check if the page template exists.
+			$page_template_path = $theme_dir . '/' . $page_template;
+
+			// If the page template path doesn't exist, return the template.
+			if ( ! file_exists( $page_template_path ) ) {
+				return $template;
+			}
+
+			// Return the page template path.
+			return $page_template_path;
+		}
+
 		// Get post type options.
 		$post_type_args = isset( $post_types[ $current_post_type ] ) ? $post_types[ $current_post_type ] : array();
 		if ( ! is_array( $post_type_args ) || empty( $post_type_args ) ) {
+			return $template;
+		}
+
+		// If overrides aren't enabled, return the template.
+		$enable_overrides = (bool) $post_type_args['enable_overrides'];
+		if ( ! $enable_overrides ) {
 			return $template;
 		}
 

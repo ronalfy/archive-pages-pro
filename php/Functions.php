@@ -86,10 +86,13 @@ class Functions {
 				'name'                  => $options['postTypes'][ $post_type_object->name ]['name'] ?? $post_type_object->name,
 				'label'                 => $options['postTypes'][ $post_type_object->name ]['label'] ?? $post_type_object->label,
 				'is_public'             => $options['postTypes'][ $post_type_object->name ]['public'] ?? (bool) $post_type_object->public,
+				'enable_overrides'      => $options['postTypes'][ $post_type_object->name ]['enable_overrides'] ?? false,
 				'enable_has_archive'    => $options['postTypes'][ $post_type_object->name ]['enable_has_archive'] ?? (bool) $post_type_object->has_archive,
 				'enable_show_in_rest'   => $options['postTypes'][ $post_type_object->name ]['enable_show_in_rest'] ?? (bool) $post_type_object->show_in_rest,
 				'enable_with_front'     => $options['postTypes'][ $post_type_object->name ]['enable_with_front'] ?? (bool) $post_type_object->rewrite['with_front'],
 				'enable_page_templates' => $options['postTypes'][ $post_type_object->name ]['enable_page_templates'] ?? false,
+				'enable_block_editor'   => $options['postTypes'][ $post_type_object->name ]['enable_block_editor'] ?? true,
+				'enable_custom_fields'  => $options['postTypes'][ $post_type_object->name ]['enable_custom_fields'] ?? \post_type_supports( $post_type_object->name, 'custom-fields' ),
 			);
 			$post_types_with_data[ $post_type_object->name ] = $data;
 		}
@@ -148,7 +151,7 @@ class Functions {
 				'name'                => $options['taxonomies'][ $taxonomy->name ]['name'] ?? $taxonomy->name,
 				'label'               => $options['taxonomies'][ $taxonomy->name ]['label'] ?? $taxonomy->label,
 				'is_public'           => $options['taxonomies'][ $taxonomy->name ]['public'] ?? (bool) $taxonomy->public,
-				'enable_has_archive'     => $options['taxonomies'][ $taxonomy->name ]['enable_has_archive'] ?? $has_archive,
+				'enable_has_archive'  => $options['taxonomies'][ $taxonomy->name ]['enable_has_archive'] ?? $has_archive,
 				'enable_show_in_rest' => $options['taxonomies'][ $taxonomy->name ]['enable_show_in_rest'] ?? (bool) $taxonomy->show_in_rest,
 				'enable_with_front'   => $options['taxonomies'][ $taxonomy->name ]['enable_with_front'] ?? (bool) $taxonomy->rewrite['with_front'],
 			);
