@@ -51,7 +51,7 @@ class Rest {
 	 * @param array $request The REST Request data.
 	 **/
 	public function rest_get_pages( $request ) {
-		$output      = get_option( 'post-type-archive-mapping', array() );
+		$output = get_option( 'post-type-archive-mapping', array() );
 		$search = sanitize_text_field( urldecode( $request['search'] ) );
 		// Get EDD Query.
 		$args = array(
@@ -59,7 +59,7 @@ class Rest {
 			'post_status'    => 'publish',
 			'posts_per_page' => 20,
 			's'              => $search,
-			'orderby'        => 'title',
+			'orderby'        => 'relevance',
 			'order'          => 'ASC',
 			/* meta query to exclude the pages that are already mapped */
 			'meta_query'     => array(
