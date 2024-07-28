@@ -488,10 +488,6 @@ class Admin {
 			if ( 'license' === $current_tab ) {
 				$license_tab_class[] = 'nav-tab-active';
 			}
-			$help_tab_class = array( 'nav-tab' );
-			if ( 'help' === $current_tab ) {
-				$help_tab_class[] = 'nav-tab-active';
-			}
 			?>
 			<main class="dlx-app-admin-body-wrapper">
 				<div class="dlx-app-admin-container-body">
