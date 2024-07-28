@@ -708,11 +708,12 @@ html {
 			opacity: 0;
 			margin: 0;
 			padding: 0;
+			color: #323;
 
 			&:hover {
 				& ~ label {
 					svg path {
-						fill: none;
+						fill: currentColor;
 						color: currentColor;
 					}
 				}
@@ -741,7 +742,7 @@ html {
 					height: 100%;
 
 					path {
-						fill: none;
+						fill: currentColor;
 						color: currentColor;
 					}
 				}
@@ -863,6 +864,37 @@ div.can-revoke {
 		background-color: var(--dlx-app-admin--color-notice--error);
 	}
 }
+
+/* License Table */
+.dlx-archive-pages-pro-table {
+	box-sizing: border-box;
+	border: 0;
+	border-collapse: collapse;
+	width: 100%;
+
+	tr {
+		border-bottom: 0.0625rem solid #DDD;
+	}
+
+	th {
+		font-weight: 500;
+		padding: 0.8125rem 1.125rem;
+		font-size: 1.3em;
+		text-align: left;
+	}
+
+	tbody tr {
+		&:last-child {
+			border-bottom: 0;
+		}
+	}
+
+	td {
+		padding: 1.25rem 1.125rem;
+		text-align: left;
+	}
+}
+
 
 /* Toggle Styles */
 .components-form-toggle.is-checked .components-form-toggle__track {

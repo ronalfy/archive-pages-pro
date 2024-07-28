@@ -445,6 +445,7 @@ class Admin {
 					'licenseValid'  => $options['licenseValid'] ?? false,
 					'priceId'       => $options['priceId'] ?? '',
 					'licenseActive' => $options['licenseActive'] ?? false,
+					'licenseData'   => get_site_transient( 'app_core_license_check', array() ),
 				)
 			);
 		}

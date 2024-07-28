@@ -18,7 +18,7 @@ namespace DLXPlugins\APP;
 
 define( 'ARCHIVE_PAGES_PRO_VERSION', '1.0.0' );
 define( 'ARCHIVE_PAGES_PRO_FILE', __FILE__ );
-define( 'ARCHIVE_PAGES_PRO_PRODUCT_ID', 0 );
+define( 'ARCHIVE_PAGES_PRO_PRODUCT_ID', 38185 );
 
 // Support for site-level autoloading.
 if ( file_exists( __DIR__ . '/lib/autoload.php' ) ) {
@@ -181,6 +181,13 @@ class Archive_Pages_Pro {
 	 * @param string $taxonomy The taxonomy.
 	 */
 	public function modify_taxonomy_args( $args, $taxonomy ) {
+		// Skip if it's the app admin.
+		if ( is_admin() ) {
+			$page = filter_input( INPUT_GET, 'page', \FILTER_SANITIZE_SPECIAL_CHARS );
+			if ( 'archive-pages-pro' === $page ) {
+				return $args;
+			}
+		}
 		$options    = Options::get_options();
 		$taxonomies = $options['taxonomies'];
 		if ( ! is_array( $taxonomies ) || empty( $taxonomies ) ) {
@@ -241,6 +248,14 @@ class Archive_Pages_Pro {
 	 * @return array $args The modified post type arguments.
 	 */
 	public function modify_post_type_args( $args, $post_type ) {
+		// Skip if it's the app admin.
+		if ( is_admin() ) {
+			$page = filter_input( INPUT_GET, 'page', \FILTER_SANITIZE_SPECIAL_CHARS );
+			if ( 'archive-pages-pro' === $page ) {
+				return $args;
+			}
+		}
+
 		$options    = Options::get_options();
 		$post_types = $options['postTypes'];
 		if ( ! is_array( $post_types ) || empty( $post_types ) ) {

@@ -5043,9 +5043,10 @@ html {
   opacity: 0;
   margin: 0;
   padding: 0;
+  color: #323;
 }
 .dlx-admin__license--wrapper .dlx-admin__license--input-preview input[type=checkbox]:hover ~ label svg path {
-  fill: none;
+  fill: currentColor;
   color: currentColor;
 }
 .dlx-admin__license--wrapper .dlx-admin__license--input-preview label {
@@ -5069,7 +5070,7 @@ html {
   height: 100%;
 }
 .dlx-admin__license--wrapper .dlx-admin__license--input-preview label .dlx-app--show-hide--icon svg path {
-  fill: none;
+  fill: currentColor;
   color: currentColor;
 }
 
@@ -5162,6 +5163,30 @@ div.can-revoke {
 .has-error input.components-text-control__input {
   border: 1px solid var(--dlx-app-admin--color-notice--error-alt);
   background-color: var(--dlx-app-admin--color-notice--error);
+}
+
+/* License Table */
+.dlx-archive-pages-pro-table {
+  box-sizing: border-box;
+  border: 0;
+  border-collapse: collapse;
+  width: 100%;
+}
+.dlx-archive-pages-pro-table tr {
+  border-bottom: 0.0625rem solid #DDD;
+}
+.dlx-archive-pages-pro-table th {
+  font-weight: 500;
+  padding: 0.8125rem 1.125rem;
+  font-size: 1.3em;
+  text-align: left;
+}
+.dlx-archive-pages-pro-table tbody tr:last-child {
+  border-bottom: 0;
+}
+.dlx-archive-pages-pro-table td {
+  padding: 1.25rem 1.125rem;
+  text-align: left;
 }
 
 /* Toggle Styles */
