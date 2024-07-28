@@ -1,11 +1,11 @@
 <?php
 /**
- * Perform license actions.
+ * Admin class.
  *
- * @package GBExtras
+ * @package APP
  */
 
-namespace DLXPlugins\GBExtras;
+namespace DLXPlugins\APP;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	die( 'No direct access.' );

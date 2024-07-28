@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Admin class.
  *
@@ -33,9 +32,6 @@ class Admin {
 
 		// For resetting the options.
 		add_action( 'wp_ajax_dlx_app_reset_options', array( $this, 'ajax_reset_options' ) );
-
-		// For getting license options.
-		add_action( 'wp_ajax_dlx_app_license_get_options', array( $this, 'ajax_license_get_options' ) );
 
 		// For revoking a license.
 		add_action( 'wp_ajax_dlx_app_revoke_license', array( $this, 'ajax_revoke_license' ) );
@@ -362,7 +358,7 @@ class Admin {
 		$current_tab = Functions::get_admin_tab();
 		if ( null === $current_tab || 'settings' === $current_tab ) {
 			// Enqueue main scripts.
-			$deps = require_once Functions::get_plugin_dir( 'build/app-admin-settings.asset.php' );
+			$deps = require Functions::get_plugin_dir( 'build/app-admin-settings.asset.php' );
 			wp_enqueue_script(
 				'dlx-app-settings',
 				Functions::get_plugin_url( 'build/app-admin-settings.js' ),
@@ -430,10 +426,10 @@ class Admin {
 				)
 			);
 		} elseif ( 'license' === $current_tab ) {
-			$deps = require_once Functions::get_plugin_dir( 'build/app-license.asset.php' );
+			$deps = require Functions::get_plugin_dir( 'build/app-admin-license.asset.php' );
 			wp_enqueue_script(
 				'dlx-app-license',
-				Functions::get_plugin_url( 'build/app-license.js' ),
+				Functions::get_plugin_url( 'build/app-admin-license.js' ),
 				$deps['dependencies'],
 				$deps['version'],
 				true
@@ -442,9 +438,13 @@ class Admin {
 				'dlx-app-license',
 				'dlxAppLicense',
 				array(
-					'getNonce'    => wp_create_nonce( 'dlx-app-license-get' ),
-					'saveNonce'   => wp_create_nonce( 'dlx-app-license-save' ),
-					'revokeNonce' => wp_create_nonce( 'dlx-app-license-revoke' ),
+					'getNonce'      => wp_create_nonce( 'dlx-app-license-get' ),
+					'saveNonce'     => wp_create_nonce( 'dlx-app-license-save' ),
+					'revokeNonce'   => wp_create_nonce( 'dlx-app-license-revoke' ),
+					'licenseKey'    => $options['licenseKey'] ?? '',
+					'licenseValid'  => $options['licenseValid'] ?? false,
+					'priceId'       => $options['priceId'] ?? '',
+					'licenseActive' => $options['licenseActive'] ?? false,
 				)
 			);
 		}

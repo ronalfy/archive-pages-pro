@@ -1,11 +1,11 @@
 <?php
 /**
- * Perform license actions.
+ * Admin class.
  *
- * @package GBExtras
+ * @package APP
  */
 
-namespace DLXPlugins\GBExtras;
+namespace DLXPlugins\APP;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	die( 'No direct access.' );
@@ -102,7 +102,7 @@ class Plugin_License {
 		$api_params = array(
 			'edd_action' => $action,
 			'license'    => $this->license,
-			'item_id'    => GB_EXTRAS_PRODUCT_ID,
+			'item_id'    => ARCHIVE_PAGES_PRO_PRODUCT_ID,
 			'url'        => home_url(),
 		);
 		// Call the custom API.

@@ -114,6 +114,10 @@ class Options {
 			'postTemplatesEnabled'          => false,
 			'postCustomFieldsEnabled'       => null,
 			'pageCustomFieldsEnabled'       => null,
+			'licenseKey'    => '',
+			'licenseValid'  => false,
+			'priceId'       => '',
+			'licenseActive' => false,
 		);
 		return $defaults;
 	}
