@@ -25,6 +25,7 @@ class Yoast {
 					add_filter( 'wpseo_opengraph_title', array( $this, 'opengraph_title' ), 20, 1 );
 					add_filter( 'wpseo_twitter_title', array( $this, 'opengraph_title' ), 20, 1 );
 					add_filter( 'wpseo_opengraph_url', array( $this, 'opengraph_url' ), 20, 1 );
+					add_filter( 'wpseo_opengraph_image', array( $this, 'opengraph_image' ), 20, 1 );
 					add_filter( 'wpseo_canonical', array( $this, 'modify_canonical_url' ), 10, 2 );
 					// Disable schemas on archives.
 					add_filter( 'wpseo_json_ld_output', '__return_false' );
@@ -32,6 +33,74 @@ class Yoast {
 				}
 			}
 		);
+	}
+
+	/**
+	 * Modify the opengraph image.
+	 *
+	 * @param string $image The current image.
+	 *
+	 * @return string Updated image.
+	 */
+	public function opengraph_image( $image ) {
+		$yoast_opengraph_meta_key = '_yoast_wpseo_opengraph-image-id';
+		$archive_type             = get_query_var( 'original_archive_type' );
+		$archive_id               = get_query_var( 'original_archive_id' );
+
+		if ( 'page' === $archive_type ) {
+			$post_type_mapped = get_option( 'post-type-archive-mapping', array() );
+			$mapped_id        = absint( $post_type_mapped[ $archive_id ] );
+
+			// Get the Yoast opengraph image for the mapped ID.
+			$opengraph_image_id = get_post_meta( $mapped_id, $yoast_opengraph_meta_key, true );
+
+			if ( $opengraph_image_id && '' !== $opengraph_image_id ) {
+				$image = wp_get_attachment_image_url( $opengraph_image_id, 'full' );
+			} else {
+				// Try to get the featured image.
+				$featured_image_id = get_post_thumbnail_id( $mapped_id );
+				if ( $featured_image_id ) {
+					$image = wp_get_attachment_image_url( $featured_image_id, 'full' );
+				}
+			}
+		}
+		if ( 'term' === $archive_type ) {
+			$term_id = absint( $archive_id );
+			$term_page_id = get_term_meta( $term_id, '_term_archive_mapping', true );
+
+			// Get the Yoast opengraph image for the mapped ID.
+			$opengraph_image_id = get_post_meta( $term_page_id, $yoast_opengraph_meta_key, true );
+			if ( $opengraph_image_id && '' !== $opengraph_image_id ) {
+				$image = wp_get_attachment_image_url( $opengraph_image_id, 'full' );
+			} else {
+				// Try to get the featured image.
+				$thumbnail_image = \get_post_thumbnail_id( $term_page_id );
+				if ( $thumbnail_image ) {
+					$image = wp_get_attachment_image_url( $thumbnail_image, 'full' );
+				}
+			}
+		}
+		if ( 'author' === $archive_type ) {
+			$author_id = absint( $archive_id );
+
+			$mapped_page_id = get_user_meta( $author_id, 'app_archive_page_id', true );
+			if ( $mapped_page_id ) {
+				$mapped_page_id = absint( $mapped_page_id );
+
+				// Get the Yoast opengraph image for the mapped ID.
+				$opengraph_image_id = get_post_meta( $mapped_page_id, $yoast_opengraph_meta_key, true );
+				if ( $opengraph_image_id && '' !== $opengraph_image_id ) {
+					$image = wp_get_attachment_image_url( $opengraph_image_id, 'full' );
+				} else {
+					// Try to get the featured image.
+					$thumbnail_image = \get_post_thumbnail_id( $mapped_page_id );
+					if ( $thumbnail_image ) {
+						$image = wp_get_attachment_image_url( $thumbnail_image, 'full' );
+					}
+				}
+			}
+		}
+		return $image;
 	}
 
 	/**
@@ -55,6 +124,10 @@ class Yoast {
 		if ( 'term' === $archive_type ) {
 			$term_id   = absint( $archive_id );
 			$canonical = esc_url_raw( get_term_link( $term_id ) );
+		}
+		if ( 'author' === $archive_type ) {
+			$author_id = absint( $archive_id );
+			$canonical = esc_url_raw( get_author_posts_url( $author_id ) );
 		}
 		return $canonical;
 	}
@@ -168,11 +241,25 @@ class Yoast {
 		$archive_id   = get_query_var( 'original_archive_id' );
 
 		if ( 'page' === $archive_type ) {
-			$yoast_titles = get_option( 'wpseo_titles' );
-			$post_type    = $archive_id;
-			if ( isset( $yoast_titles[ 'metadesc-' . $post_type ] ) ) {
-				return $yoast_titles[ 'metadesc-' . $post_type ];
+			$post_type_mapped = get_option( 'post-type-archive-mapping', array() );
+			$mapped_id        = absint( $post_type_mapped[ $archive_id ] );
+
+			// Get archive title from post type object.
+			$title = get_the_title( $mapped_id );
+
+			// Get the Yoast opengraph title for the mapped ID.
+			$opengraph_description = get_post_meta( $mapped_id, '_yoast_wpseo_opengraph-description', true );
+
+			if ( $opengraph_description && '' !== $opengraph_description ) {
+				$title = $opengraph_description;
+			} else {
+				$yoast_titles = get_option( 'wpseo_titles' );
+				$post_type    = $archive_id;
+				if ( isset( $yoast_titles[ 'metadesc-' . $post_type ] ) ) {
+					$title = $yoast_titles[ 'metadesc-' . $post_type ];
+				}
 			}
+			return $title;
 		}
 		if ( 'term' === $archive_type ) {
 			$yoast_tax_meta = get_option( 'wpseo_taxonomy_meta' );
@@ -193,6 +280,19 @@ class Yoast {
 				return $yoast_term_description;
 			}
 			return wp_strip_all_tags( $term_description );
+		}
+		if ( 'author' === $archive_type ) {
+			$author_id = absint( $archive_id );
+
+			$mapped_page_id = get_user_meta( $author_id, 'app_archive_page_id', true );
+			if ( $mapped_page_id ) {
+				$mapped_page_id = absint( $mapped_page_id );
+				$description    = get_post_meta( $mapped_page_id, '_yoast_wpseo_opengraph-description', true );
+
+				if ( $description && '' !== $description ) {
+					return $description;
+				}
+			}
 		}
 		return $description;
 	}
@@ -217,6 +317,11 @@ class Yoast {
 			$url     = rawurlencode( get_term_link( $term_id ) );
 			return $url;
 		}
+		if ( 'author' === $archive_type ) {
+			$author_id = absint( $archive_id );
+			$url       = rawurlencode( get_author_posts_url( $author_id ) );
+			return $url;
+		}
 		return $url;
 	}
 
@@ -239,22 +344,30 @@ class Yoast {
 			$mapped_id        = absint( $post_type_mapped[ $archive_id ] );
 
 			// Get archive title from post type object.
-			$title = isset( $post_type_data->labels->name ) ? apply_filters( 'post_type_archive_title', $post_type_data->labels->name, $post_type ) : $title;
+			$title = get_the_title( $mapped_id );
 
-			// Get the title for the post type archive from yoast settings.
-			$yoast_options = get_option( 'wpseo_titles' );
-			if ( isset( $yoast_options[ 'title-' . $post_type ] ) ) {
-				$title_format = $yoast_options[ 'title-' . $post_type ];
+			// Get the Yoast opengraph title for the mapped ID.
+			$opengraph_title = get_post_meta( $mapped_id, '_yoast_wpseo_opengraph-title', true );
 
-				// Replace title format with actual title.
-				if ( class_exists( 'WPSEO_Replace_Vars' ) ) {
-					$replace_vars = \YoastSEO()->classes->get( \WPSEO_Replace_Vars::class );
-					$maybe_title  = $replace_vars->replace( $title_format, get_post( $mapped_id ) );
-					if ( null !== $maybe_title ) {
-						$title = $maybe_title;
+			if ( $opengraph_title && '' !== $opengraph_title ) {
+				$title = $opengraph_title;
+			} else {
+				// Get the title for the post type archive from yoast settings.
+				$yoast_options = get_option( 'wpseo_titles' );
+				if ( isset( $yoast_options[ 'title-' . $post_type ] ) ) {
+					$title_format = $yoast_options[ 'title-' . $post_type ];
+
+					// Replace title format with actual title.
+					if ( class_exists( 'WPSEO_Replace_Vars' ) ) {
+						$replace_vars = \YoastSEO()->classes->get( \WPSEO_Replace_Vars::class );
+						$maybe_title  = $replace_vars->replace( $title_format, get_post( $mapped_id ) );
+						if ( null !== $maybe_title ) {
+							$title = $maybe_title;
+						}
 					}
 				}
 			}
+
 			return $title;
 		}
 		if ( 'term' === $archive_type ) {
@@ -265,22 +378,48 @@ class Yoast {
 			}
 			$title = apply_filters( 'single_term_title', $term->name );
 
-			// Get the title from Yoast meta settings.
-			$yoast_options = get_option( 'wpseo_titles' );
-			if ( isset( $yoast_options[ 'title-tax-' . get_query_var( 'term_tax' ) ] ) ) {
-				$title_format = $yoast_options[ 'title-tax-' . get_query_var( 'term_tax' ) ];
+			$term_page_id = get_term_meta( $term_id, '_term_archive_mapping', true );
 
-				// Replace title format with actual title.
-				if ( class_exists( 'WPSEO_Replace_Vars' ) ) {
-					$replace_vars = \YoastSEO()->classes->get( \WPSEO_Replace_Vars::class );
-					$maybe_title  = $replace_vars->replace( $title_format, $term );
-					if ( null !== $maybe_title ) {
-						$title = $maybe_title;
+			// Get the Yoast opengraph title for the mapped ID.
+			$opengraph_title = get_post_meta( $term_page_id, '_yoast_wpseo_opengraph-title', true );
+
+			if ( $opengraph_title && '' !== $opengraph_title ) {
+				$title = $opengraph_title;
+			} else {
+				// Get the title from Yoast meta settings.
+				$yoast_options = get_option( 'wpseo_titles' );
+				if ( isset( $yoast_options[ 'title-tax-' . get_query_var( 'term_tax' ) ] ) ) {
+					$title_format = $yoast_options[ 'title-tax-' . get_query_var( 'term_tax' ) ];
+
+					// Replace title format with actual title.
+					if ( class_exists( 'WPSEO_Replace_Vars' ) ) {
+						$replace_vars = \YoastSEO()->classes->get( \WPSEO_Replace_Vars::class );
+						$maybe_title  = $replace_vars->replace( $title_format, $term );
+						if ( null !== $maybe_title ) {
+							$title = $maybe_title;
+						}
 					}
 				}
 			}
-
 			return $title;
+		}
+
+		// Author archives.
+		if ( 'author' === $archive_type ) {
+			$author_id = absint( $archive_id );
+
+			$mapped_page_id = get_user_meta( $author_id, 'app_archive_page_id', true );
+			if ( $mapped_page_id ) {
+				$mapped_page_id = absint( $mapped_page_id );
+				$title          = get_the_title( $mapped_page_id );
+
+				// Get the Yoast opengraph title for the mapped ID.
+				$opengraph_title = get_post_meta( $mapped_page_id, '_yoast_wpseo_opengraph-title', true );
+
+				if ( $opengraph_title && '' !== $opengraph_title ) {
+					$title = $opengraph_title;
+				}
+			}
 		}
 		return $title;
 	}
