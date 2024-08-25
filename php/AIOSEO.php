@@ -20,12 +20,6 @@ class AIOSEO {
 			'wp',
 			function () {
 				if ( get_query_var( 'original_archive_type' ) && get_query_var( 'original_archive_id' ) ) {
-					// add_filter( 'wpseo_opengraph_desc', array( $this, 'opengraph_desc' ), 20, 1 );
-					// add_filter( 'wpseo_twitter_description', array( $this, 'opengraph_desc' ), 20, 1 );
-					// add_filter( 'wpseo_opengraph_title', array( $this, 'opengraph_title' ), 20, 1 );
-					// add_filter( 'wpseo_twitter_title', array( $this, 'opengraph_title' ), 20, 1 );
-					// add_filter( 'wpseo_opengraph_url', array( $this, 'opengraph_url' ), 20, 1 );
-					// add_filter( 'wpseo_opengraph_image', array( $this, 'opengraph_image' ), 20, 1 );
 					add_filter( 'get_canonical_url', array( $this, 'modify_canonical_url' ), 10, 2 );
 				}
 			}
@@ -62,7 +56,7 @@ class AIOSEO {
 			}
 		}
 		if ( 'term' === $archive_type ) {
-			$term_id = absint( $archive_id );
+			$term_id      = absint( $archive_id );
 			$term_page_id = get_term_meta( $term_id, '_term_archive_mapping', true );
 
 			// Get the Yoast opengraph image for the mapped ID.
@@ -103,7 +97,8 @@ class AIOSEO {
 	/**
 	 * Modify the canonical URL.
 	 *
-	 * @param string $canonical The current canonical URL.
+	 * @param string  $canonical The current canonical URL.
+	 * @param WP_Post $post The current post object.
 	 *
 	 * @return string Updated canonical URL.
 	 */

@@ -65,7 +65,7 @@ class Yoast {
 			}
 		}
 		if ( 'term' === $archive_type ) {
-			$term_id = absint( $archive_id );
+			$term_id      = absint( $archive_id );
 			$term_page_id = get_term_meta( $term_id, '_term_archive_mapping', true );
 
 			// Get the Yoast opengraph image for the mapped ID.
