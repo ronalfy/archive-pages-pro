@@ -443,7 +443,7 @@ class Admin {
 					'revokeNonce'   => wp_create_nonce( 'dlx-app-license-revoke' ),
 					'licenseKey'    => $options['licenseKey'] ?? '',
 					'licenseValid'  => $options['licenseValid'] ?? false,
-					'priceId'       => $options['priceId'] ?? '',
+					'priceId'       => absint( $options['priceId'] ) ?? '',
 					'licenseActive' => $options['licenseActive'] ?? false,
 					'licenseData'   => get_site_transient( 'app_core_license_check', array() ),
 				)

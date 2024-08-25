@@ -100,6 +100,9 @@ class Archive_Pages_Pro {
 		$admin = new Admin();
 		$admin->run();
 
+		// Add init to check for licenses (only in admin).
+		add_action( 'admin_init', array( $this, 'check_license' ) );
+
 		add_action( 'admin_init', array( $this, 'init_settings_api' ) );
 		add_action( 'pre_get_posts', array( $this, 'maybe_override_archive' ) );
 
@@ -143,6 +146,35 @@ class Archive_Pages_Pro {
 
 		// Allow post types for block editor.
 		add_filter( 'use_block_editor_for_post', array( $this, 'enable_blocks_for_post_types' ), 10, 2 );
+	}
+
+	/**
+	 * Check for a license if in admin every 12 hours.
+	 */
+	public function check_license() {
+		$options = Options::get_options();
+
+		$license_key   = $options['licenseKey'];
+		$license_valid = (bool) $options['licenseValid'];
+
+		// If the license key is empty, return.
+		if ( empty( $license_key ) ) {
+			return;
+		}
+
+		// If license is invalid, return.
+		if ( ! $license_valid ) {
+			return;
+		}
+
+		// Get stored transient, which is stored for 12 hours.
+		$transient = get_site_transient( 'app_core_license_check', array() );
+
+		// If the transient is empty, do a license check.
+		if ( empty( $transient ) ) {
+			$license_helper = new Plugin_License( $license_key );
+			$license_helper->perform_action( 'check_license', $license_key, true );
+		}
 	}
 
 	/**
