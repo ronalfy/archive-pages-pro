@@ -92,6 +92,10 @@ class Archive_Pages_Pro {
 		$breadcrumb_navxt = new Breadcrumb_NavXT();
 		$breadcrumb_navxt->run();
 
+		// Init AIOSEO.
+		$aioseo = new AIOSEO();
+		$aioseo->run();
+
 		// Init admin.
 		$admin = new Admin();
 		$admin->run();
