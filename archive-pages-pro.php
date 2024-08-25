@@ -82,11 +82,15 @@ class Archive_Pages_Pro {
 
 		// Init Yoast.
 		$yoast = new Yoast();
-		$yoast->run(); 
+		$yoast->run();
 
 		// Init RankMath.
 		$rank_math = new RankMath();
 		$rank_math->run();
+
+		// Init Breadcrumb_NavXT.
+		$breadcrumb_navxt = new Breadcrumb_NavXT();
+		$breadcrumb_navxt->run();
 
 		// Init admin.
 		$admin = new Admin();
