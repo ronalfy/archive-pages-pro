@@ -425,6 +425,7 @@ class Admin {
 					'enablePageOverrides'     => (bool) $options['enablePageOverrides'],
 				)
 			);
+			\wp_set_script_translations( 'dlx-app-settings', 'archive-pages-pro' );
 		} elseif ( 'license' === $current_tab ) {
 			$deps = require Functions::get_plugin_dir( 'build/app-admin-license.asset.php' );
 			wp_enqueue_script(
@@ -448,6 +449,7 @@ class Admin {
 					'licenseData'   => get_site_transient( 'app_core_license_check', array() ),
 				)
 			);
+			\wp_set_script_translations( 'dlx-app-license', 'archive-pages-pro' );
 		}
 
 		// Enqueue admin styles.
