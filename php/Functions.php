@@ -55,6 +55,8 @@ class Functions {
 		 * Filter the default post type args.
 		 *
 		 * @param array $args Default post type args.
+		 *
+		 * @since 1.0.0
 		 */
 		$args       = apply_filters( 'archive_pages_pro_post_type_args', $args );
 		$post_types = get_post_types(
