@@ -22,7 +22,7 @@ define( 'ARCHIVE_PAGES_PRO_PRODUCT_ID', 38185 );
 
 // Support for site-level autoloading.
 if ( file_exists( __DIR__ . '/lib/autoload.php' ) ) {
-	require_once __DIR__ . '/lib/autoload.php';
+	require __DIR__ . '/lib/autoload.php';
 }
 
 /**
@@ -76,8 +76,8 @@ class Archive_Pages_Pro {
 		$enqueue = new Enqueue();
 		$enqueue->run();
 
-		// Init REST.
-		$rest = new REST();
+		// Init Rest.
+		$rest = new Rest();
 		$rest->run();
 
 		// Init Yoast.
