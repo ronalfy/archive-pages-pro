@@ -336,7 +336,6 @@ class Admin {
 			'manage_options',
 			'archive-pages-pro',
 			array( $this, 'admin_page' ),
-			4
 		);
 	}
 
