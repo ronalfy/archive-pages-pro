@@ -292,10 +292,6 @@ class Admin {
 		$default_options['saveNonce']  = $options['saveNonce'];
 		$default_options['resetNonce'] = $options['resetNonce'];
 
-		// Format empty arrays into false. This is so they can be reset at the form level.
-		$default_options['membershipLevelsToExclude'] = false;
-		$default_options['checkoutLevelsToExclude']   = false;
-
 		// Send success message.
 		wp_send_json_success(
 			array(
