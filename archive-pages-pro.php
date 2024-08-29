@@ -235,7 +235,7 @@ class Archive_Pages_Pro {
 		$options    = Options::get_options();
 		$taxonomies = $options['taxonomies'];
 		if ( ! is_array( $taxonomies ) || empty( $taxonomies ) ) {
-			return;
+			return $args;
 		}
 
 		// Check if taxonomy is in array.
@@ -303,7 +303,7 @@ class Archive_Pages_Pro {
 		$options    = Options::get_options();
 		$post_types = $options['postTypes'];
 		if ( ! is_array( $post_types ) || empty( $post_types ) ) {
-			return;
+			return $args;
 		}
 
 		// Check if post type is in array.
