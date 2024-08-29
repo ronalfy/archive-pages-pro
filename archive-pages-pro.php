@@ -737,12 +737,17 @@ class Archive_Pages_Pro {
 
 		// Let's get the page ID that is currently mapped. Note if it's `default`, the page should be stripped.
 		$maybe_mapped_page_id = sanitize_text_field( $app_user_options['page_id'] );
-		if ( '0' === $maybe_mapped_page_id ) {
+		if ( '0' === $maybe_mapped_page_id || 'NaN' === $maybe_mapped_page_id ) {
+			$user_mapped_page_id = get_user_meta( $user_id, 'app_archive_page_id', true );
+			if ( $user_mapped_page_id ) {
+				delete_post_meta( $user_mapped_page_id, '_user_mapped' );
+			}
 			delete_user_meta( $user_id, 'app_archive_page_id' );
 		} else {
 			$maybe_mapped_page_id = absint( $maybe_mapped_page_id );
 			$maybe_mapped_page_id = apply_filters( 'wpml_object_id', $maybe_mapped_page_id, 'page', true );
 			update_user_meta( $user_id, 'app_archive_page_id', $maybe_mapped_page_id );
+			update_post_meta( $maybe_mapped_page_id, '_user_mapped', $user_id );
 		}
 
 		$maybe_new_author_slug = sanitize_text_field( trim( $app_user_options['slug'] ) );
@@ -946,7 +951,10 @@ class Archive_Pages_Pro {
 		if ( current_user_can( 'edit_term', $term_id ) ) {
 			$maybe_post_id = filter_input( INPUT_POST, 'term_post_type', FILTER_VALIDATE_INT );
 			if ( ! $maybe_post_id ) {
-				delete_post_meta( $maybe_post_id, '_term_mapped' );
+				$term_mapped_page_id = get_term_meta( $term_id, '_term_archive_mapping', true );
+				if ( $term_mapped_page_id ) {
+					delete_post_meta( $term_mapped_page_id, '_term_mapped' );
+				}
 				delete_term_meta( $term_id, '_term_archive_mapping' );
 			} elseif ( $maybe_post_id ) {
 				update_post_meta( $maybe_post_id, '_term_mapped', $term_id );
@@ -1059,9 +1067,23 @@ class Archive_Pages_Pro {
 		if ( is_page() && $post_type_mapping_enabled ) {
 			$object_id = get_queried_object_id();
 			$post_meta = get_post_meta( $object_id, '_post_type_mapped', true );
+			$term_mapped_id = get_post_meta( $object_id, '_term_mapped', true );
+			$author_mapped_id = get_post_meta( $object_id, '_user_mapped', true );
 			if ( $post_meta ) {
 				if ( $post_meta && ! get_query_var( 'redirected' ) ) {
 					wp_safe_redirect( get_post_type_archive_link( $post_meta ) );
+					exit;
+				}
+			} else if ( $term_mapped_id ) {
+				if ( $term_mapped_id && ! get_query_var( 'redirected' ) ) {
+					$term = get_term( $term_mapped_id );
+					wp_safe_redirect( get_term_link( $term ) );
+					exit;
+				}
+			} else if ( $author_mapped_id ) {
+				if ( $author_mapped_id && ! get_query_var( 'redirected' ) ) {
+					$user = get_user_by( 'id', $author_mapped_id );
+					wp_safe_redirect( get_author_posts_url( $user->ID ) );
 					exit;
 				}
 			} else {

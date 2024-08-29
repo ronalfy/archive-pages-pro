@@ -67,6 +67,14 @@ class Rest {
 					'key'     => '_post_type_mapped',
 					'compare' => 'NOT EXISTS',
 				),
+				array(
+					'key'     => '_term_mapped',
+					'compare' => 'NOT EXISTS',
+				),
+				array(
+					'key'     => '_user_mapped',
+					'compare' => 'NOT EXISTS',
+				),
 			),
 		);
 		if ( empty( $search ) ) {
