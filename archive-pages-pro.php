@@ -5,7 +5,7 @@
  * Plugin URI: https://dlxplugins.com/plugins/archive-pages-pro/
  * Description: Map archives to pages with a few clicks.
  * Author: DLX Plugins
- * Version: 1.0.1
+ * Version: 1.0.2
  * Requires at least: 6.0
  * Requires PHP: 7.2
  * Author URI: https://dlxplugins.com
@@ -16,7 +16,7 @@
 
 namespace DLXPlugins\APP;
 
-define( 'ARCHIVE_PAGES_PRO_VERSION', '1.0.1' );
+define( 'ARCHIVE_PAGES_PRO_VERSION', '1.0.2' );
 define( 'ARCHIVE_PAGES_PRO_FILE', __FILE__ );
 define( 'ARCHIVE_PAGES_PRO_PRODUCT_ID', 38185 );
 
