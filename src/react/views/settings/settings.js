@@ -335,7 +335,7 @@ const Settings = ( props ) => {
 						<tbody>
 							<tr>
 								<th scope="row">
-									{ __( 'Archive Mapping', 'archive-pages-pro' ) }
+									{ __( 'Archive Layouts', 'archive-pages-pro' ) }
 								</th>
 								<td>
 									<div className="dlx-admin__row">
@@ -344,12 +344,12 @@ const Settings = ( props ) => {
 											control={ control }
 											render={ ( { field: { onChange } } ) => (
 												<ToggleControl
-													label={ __( 'Enable Post Type Mapping', 'archive-pages-pro' ) }
+													label={ __( 'Customize Post Type Archives', 'archive-pages-pro' ) }
 													checked={ getValues( 'enablePostTypeArchiveMapping' ) }
 													onChange={ ( boolValue ) => {
 														onChange( boolValue );
 													} }
-													help={ __( 'Disabling this will turn off page mapping for post type archives.', 'archive-pages-pro' ) }
+													help={ __( 'Take control of the archive layouts for your post types by assigning them to pages.', 'archive-pages-pro' ) }
 												/>
 											) }
 										/>
@@ -357,7 +357,7 @@ const Settings = ( props ) => {
 											<a
 												href={ dlxAppSettings.settingsReadingUrl }
 											>
-												{ __( 'View Settings > Reading to map archives', 'archive-pages-pro' ) }
+												{ __( 'Assign archive pages in Settings > Reading', 'archive-pages-pro' ) }
 											</a>
 										</p>
 									</div>
@@ -367,12 +367,12 @@ const Settings = ( props ) => {
 											control={ control }
 											render={ ( { field: { onChange } } ) => (
 												<ToggleControl
-													label={ __( 'Enable Term Mapping', 'archive-pages-pro' ) }
+													label={ __( 'Customize Term Archives', 'archive-pages-pro' ) }
 													checked={ getValues( 'enableTermMapping' ) }
 													onChange={ ( boolValue ) => {
 														onChange( boolValue );
 													} }
-													help={ __( 'Disabling this will turn off page mapping for term archives.', 'archive-pages-pro' ) }
+													help={ __( 'Take control of the archive layouts for your taxonomy terms by assigning them to pages.', 'archive-pages-pro' ) }
 												/>
 											) }
 										/>
@@ -383,12 +383,12 @@ const Settings = ( props ) => {
 											control={ control }
 											render={ ( { field: { onChange } } ) => (
 												<ToggleControl
-													label={ __( 'Enable 404 Mapping', 'archive-pages-pro' ) }
+													label={ __( 'Customize 404 Layouts', 'archive-pages-pro' ) }
 													checked={ getValues( 'enable404Mapping' ) }
 													onChange={ ( boolValue ) => {
 														onChange( boolValue );
 													} }
-													help={ __( 'Disabling this will turn off page mapping for 404 pages.', 'archive-pages-pro' ) }
+													help={ __( 'Replace the default 404 with your own page design.', 'archive-pages-pro' ) }
 												/>
 											) }
 										/>
@@ -396,7 +396,7 @@ const Settings = ( props ) => {
 											<a
 												href={ dlxAppSettings.settingsReadingUrl }
 											>
-												{ __( 'View Settings > Reading to map 404 archives', 'archive-pages-pro' ) }
+												{ __( 'Assign a 404 page in Settings > Reading', 'archive-pages-pro' ) }
 											</a>
 										</p>
 									</div>
@@ -404,7 +404,7 @@ const Settings = ( props ) => {
 							</tr>
 							<tr>
 								<th scope="row">
-									{ __( 'Author Mapping', 'archive-pages-pro' ) }
+									{ __( 'Author Archives', 'archive-pages-pro' ) }
 								</th>
 								<td>
 									<div className="dlx-admin__row">
@@ -413,12 +413,12 @@ const Settings = ( props ) => {
 											control={ control }
 											render={ ( { field: { onChange } } ) => (
 												<ToggleControl
-													label={ __( 'Enable Author Mapping', 'archive-pages-pro' ) }
+													label={ __( 'Customize Author Archives', 'archive-pages-pro' ) }
 													checked={ getValues( 'enableAuthorMapping' ) }
 													onChange={ ( boolValue ) => {
 														onChange( boolValue );
 													} }
-													help={ __( 'Disabling this will turn off page mapping for author archives.', 'archive-pages-pro' ) }
+													help={ __( 'Allow author archives to be customized by assigning them to pages.', 'archive-pages-pro' ) }
 												/>
 											) }
 										/>
@@ -433,12 +433,13 @@ const Settings = ( props ) => {
 											render={ ( { field: { onChange } } ) => (
 												<>
 													<TextControl
-														label={ __( 'Author Base', 'archive-pages-pro' ) }
+														label={ __( 'Author URL Base', 'archive-pages-pro' ) }
 														value={ getValues( 'authorBase' ) }
 														onChange={ ( value ) => {
 															onChange( value );
 														} }
-														help={ __( 'The base for author archives. Default is "author". Leave this blank for no override of the author base.', 'archive-pages-pro' ) }
+														placeholder={ __( 'author', 'archive-pages-pro' ) }
+														help={ __( 'Control how author pages look and where they live (e.g. /writers/ or /team/ instead of /author/).', 'archive-pages-pro' ) }
 														onBlur={ () => {
 															setValue( 'authorBase', cleanForSlug( getValues( 'authorBase' ).toLowerCase() ) );
 															trigger( 'authorBase' );
@@ -463,7 +464,7 @@ const Settings = ( props ) => {
 							</tr>
 							<tr>
 								<th scope="row">
-									{ __( 'Custom Fields Overrides', 'archive-pages-pro' ) }
+									{ __( 'REST Data Support', 'archive-pages-pro' ) }
 								</th>
 								<td>
 									<div className="dlx-admin__row">
@@ -509,7 +510,7 @@ const Settings = ( props ) => {
 							</tr>
 							<tr>
 								<th scope="row">
-									{ __( 'Post Overrides', 'archive-pages-pro' ) }
+									{ __( 'Post Behavior', 'archive-pages-pro' ) }
 								</th>
 								<td>
 									<div className="dlx-admin__row">
@@ -518,12 +519,12 @@ const Settings = ( props ) => {
 											control={ control }
 											render={ ( { field: { onChange } } ) => (
 												<ToggleControl
-													label={ __( 'Enable Post Overrides', 'archive-pages-pro' ) }
+													label={ __( 'Customize Post Behavior', 'archive-pages-pro' ) }
 													checked={ getValues( 'enablePostOverrides' ) }
 													onChange={ ( boolValue ) => {
 														onChange( boolValue );
 													} }
-													help={ __( 'Enable this to override the default settings for posts.', 'archive-pages-pro' ) }
+													help={ __( 'Control how posts behave and what they can do.', 'archive-pages-pro' ) }
 												/>
 											) }
 										/>
@@ -570,7 +571,7 @@ const Settings = ( props ) => {
 							</tr>
 							<tr>
 								<th scope="row">
-									{ __( 'Page Overrides', 'archive-pages-pro' ) }
+									{ __( 'Page Behavior', 'archive-pages-pro' ) }
 								</th>
 								<td>
 									<div className="dlx-admin__row">
@@ -579,12 +580,12 @@ const Settings = ( props ) => {
 											control={ control }
 											render={ ( { field: { onChange } } ) => (
 												<ToggleControl
-													label={ __( 'Enable Page Overrides', 'archive-pages-pro' ) }
+													label={ __( 'Customize Page Behavior', 'archive-pages-pro' ) }
 													checked={ getValues( 'enablePageOverrides' ) }
 													onChange={ ( boolValue ) => {
 														onChange( boolValue );
 													} }
-													help={ __( 'Enable this to override the default settings for pages.', 'archive-pages-pro' ) }
+													help={ __( 'Control how pages behave and what they can do.', 'archive-pages-pro' ) }
 												/>
 											) }
 										/>
@@ -615,7 +616,7 @@ const Settings = ( props ) => {
 							</tr>
 							<tr>
 								<th scope="row">
-									{ __( 'Post Type Overrides', 'archive-pages-pro' ) }
+									{ __( 'Post Type Settings', 'archive-pages-pro' ) }
 								</th>
 								<td>
 									{ getPostTypes() }
@@ -623,7 +624,7 @@ const Settings = ( props ) => {
 							</tr>
 							<tr>
 								<th scope="row">
-									{ __( 'Taxonomy Overrides', 'archive-pages-pro' ) }
+									{ __( 'Taxonomy Settings', 'archive-pages-pro' ) }
 								</th>
 								<td>
 									{ getTaxonomies() }
