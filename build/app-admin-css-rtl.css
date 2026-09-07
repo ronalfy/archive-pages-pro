@@ -39,7 +39,7 @@ button.button-reset.show-cursor {
 /* It's only used here, so no external file for mixin? */
 @keyframes app-pub-spin {
   100% {
-    transform: rotate(360deg);
+    transform: rotate(-360deg);
   }
 }
 /* Admin Interface Wrapper */
@@ -72,7 +72,7 @@ button.button-reset.show-cursor {
   width: 100%;
   position: absolute;
   top: 100%;
-  left: 0;
+  right: 0;
   max-height: 250px;
   overflow-y: auto;
 }
@@ -85,8 +85,8 @@ button.button-reset.show-cursor {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  text-align: left;
-  padding: 5px 20px 5px 40px;
+  text-align: right;
+  padding: 5px 40px 5px 20px;
   transition: all 0.4s ease-in-out;
 }
 .app-url-input .apppub-suggestions-wrapper .app-url-input__suggestion svg {
@@ -94,7 +94,7 @@ button.button-reset.show-cursor {
   width: 24px;
   height: 24px;
   top: calc(50% - 8px);
-  left: 10px;
+  right: 10px;
 }
 .app-url-input .apppub-suggestions-wrapper .app-url-input__suggestion svg path {
   fill: unset;
@@ -109,7 +109,7 @@ button.button-reset.show-cursor {
 }
 .app-url-input .apppub-suggestions-wrapper .app-url-input__suggestion .apppub-search-item {
   display: block;
-  margin-right: 8px;
+  margin-left: 8px;
   white-space: pre-wrap;
   overflow-wrap: break-word;
 }
@@ -144,7 +144,7 @@ button.button-reset.show-cursor {
   width: 100%;
 }
 .app-pub-url-input__wrapper .app-pub-url-input__suggestion-item .components-button {
-  margin-left: 8px;
+  margin-right: 8px;
 }
 .app-pub-url-input__wrapper .app-pub-url-input__input-wrapper {
   position: relative;
@@ -157,7 +157,7 @@ button.button-reset.show-cursor {
   border: 1px solid #ddd;
   border-radius: 3px;
   font-size: 13px;
-  padding: 11px 36px 11px 16px;
+  padding: 11px 16px 11px 36px;
   width: 100%;
 }
 .app-pub-url-input__wrapper .app-pub-url-input__input-wrapper .app-pub-url-input__input {
@@ -165,7 +165,7 @@ button.button-reset.show-cursor {
 }
 .app-pub-url-input__wrapper .app-pub-url-input__input-wrapper .components-spinner {
   position: absolute;
-  right: 48px;
+  left: 48px;
   height: 24px;
   top: calc(50% - 15px);
 }
@@ -190,7 +190,7 @@ button.button-reset.show-cursor {
   font-size: 12px;
   position: absolute;
   top: calc(50% - 8px);
-  right: 10px;
+  left: 10px;
   min-width: 150px;
   height: auto;
   transition: opacity 0.2s ease-in-out;
@@ -200,8 +200,8 @@ button.button-reset.show-cursor {
 /* Make interface full-width/full-height */
 #wpcontent {
   position: relative;
-  padding-left: 0 !important;
   padding-right: 0 !important;
+  padding-left: 0 !important;
   position: relative;
   background-color: #ebebeb;
 }
@@ -219,7 +219,7 @@ button.button-reset.show-cursor {
   float: unset;
   margin: 0;
   top: 20px;
-  right: 15px;
+  left: 15px;
   z-index: 1000;
 }
 
@@ -408,7 +408,7 @@ html {
   border-bottom: 1px solid #333;
 }
 .form-table .dlx-admin__row .components-panel__body.is-opened thead th {
-  padding-left: 10px;
+  padding-right: 10px;
 }
 .form-table .components-toggle-control__label,
 .form-table .components-base-control__label,
@@ -422,10 +422,10 @@ html {
 }
 
 .dlx-app-admin-buttons button {
-  margin-right: 20px;
+  margin-left: 20px;
 }
 .dlx-app-admin-buttons button:last-child {
-  margin-right: 0;
+  margin-left: 0;
 }
 .dlx-app-admin-buttons button:disabled {
   opacity: 0.5;
@@ -433,8 +433,8 @@ html {
 .dlx-app-admin-buttons button.is-primary, .dlx-app-admin-buttons button:disabled {
   background: #2271b1 !important;
   /* override core style */
-  padding-left: 15px;
   padding-right: 15px;
+  padding-left: 15px;
 }
 .dlx-app-admin-buttons button.is-primary:hover:not(:disabled), .dlx-app-admin-buttons button:disabled:hover:not(:disabled) {
   background: #135e96 !important;
@@ -457,7 +457,7 @@ html {
 .dlx-app-snackbar.components-snackbar {
   position: fixed;
   top: 32px;
-  right: 0;
+  left: 0;
   z-index: 10000;
   background: #0D3172;
   color: #FFF;
@@ -469,8 +469,8 @@ html {
 .dlx-app-snackbar.components-snackbar .components-snackbar__icon {
   position: absolute;
   top: 24px;
-  left: 28px;
-  left: 14px;
+  right: 28px;
+  right: 14px;
   top: auto;
   bottom: auto;
   line-height: 0;
@@ -518,12 +518,12 @@ html {
   display: flex;
 }
 .dlx-app-admin__notice.dlx-app-admin__notice--has-icon.dlx-app-admin__notice-appearance--inline .components-notice__content .dlx-app-admin__notice-icon {
-  margin-right: 8px;
+  margin-left: 8px;
 }
 .dlx-app-admin__notice .is-error,
 .dlx-app-admin__notice .is-critical {
   background-color: #A13844;
-  border-left-color: #A13844;
+  border-right-color: #A13844;
   color: #FFF;
 }
 .dlx-app-admin__notice .dlx-app-admin__notice-message {
@@ -532,17 +532,17 @@ html {
   font-weight: 500;
 }
 .dlx-app-admin__notice.dlx-app-admin__notice-appearance--block .components-notice {
-  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
   padding: 15px 20px;
-  padding-left: 15px;
+  padding-right: 15px;
   margin-bottom: 15px;
-  margin-left: 0;
   margin-right: 0;
+  margin-left: 0;
 }
 .dlx-app-admin__notice.dlx-app-admin__notice-appearance--inline .components-notice {
-  padding-left: 0;
-  margin-left: 0;
+  padding-right: 0;
   margin-right: 0;
+  margin-left: 0;
 }
 .dlx-app-admin__notice svg {
   display: flex;
@@ -554,7 +554,7 @@ html {
   background-color: var(--dlx-app-admin--color-notice--error);
 }
 .dlx-app-admin__notice.dlx-app-admin__notice-type--error:not(.dlx-app-admin__notice-appearance--inline) .components-notice {
-  border-left-color: var(--dlx-app-admin--color-notice--error-alt);
+  border-right-color: var(--dlx-app-admin--color-notice--error-alt);
 }
 .dlx-app-admin__notice.dlx-app-admin__notice-type--error:not(.dlx-app-admin__notice-appearance--inline) svg {
   color: var(--dlx-app-admin--color-notice--error-alt);
@@ -569,17 +569,17 @@ html {
 .dlx-app-admin__notice.dlx-app-admin__notice-type--error.dlx-app-admin__notice-appearance--inline svg {
   width: 16px;
   height: 16px;
-  margin-left: 15px;
-  margin-right: 8px;
+  margin-right: 15px;
+  margin-left: 8px;
 }
 .dlx-app-admin__notice.dlx-app-admin__notice-type--error.dlx-app-admin__notice-appearance--inline .components-notice__content {
-  padding: 8px 15px 8px 0;
+  padding: 8px 0 8px 15px;
 }
 .dlx-app-admin__notice.dlx-app-admin__notice-type--success {
   background-color: var(--dlx-app-admin--color-notice--success);
 }
 .dlx-app-admin__notice.dlx-app-admin__notice-type--success .components-notice {
-  border-left-color: var(--dlx-app-admin--color-notice--success-alt);
+  border-right-color: var(--dlx-app-admin--color-notice--success-alt);
 }
 .dlx-app-admin__notice.dlx-app-admin__notice-type--success svg path {
   fill: var(--dlx-app-admin--color-notice--success-alt);
@@ -588,7 +588,7 @@ html {
   background-color: var(--dlx-app-admin--color-notice--info);
 }
 .dlx-app-admin__notice.dlx-app-admin__notice-type--info .components-notice {
-  border-left-color: var(--dlx-app-admin--color-notice--info-alt);
+  border-right-color: var(--dlx-app-admin--color-notice--info-alt);
 }
 .dlx-app-admin__notice.dlx-app-admin__notice-type--info .dlx-app-admin__notice-icon svg:not(.lucide) path {
   fill: var(--dlx-app-admin--color-notice--info-alt);
@@ -603,7 +603,7 @@ html {
   background-color: var(--dlx-app-admin--color-notice--warning);
 }
 .dlx-app-admin__notice.dlx-app-admin__notice-type--warning .components-notice {
-  border-left-color: var(--dlx-app-admin--color-notice--warning-alt);
+  border-right-color: var(--dlx-app-admin--color-notice--warning-alt);
 }
 .dlx-app-admin__notice.dlx-app-admin__notice-type--warning svg path {
   fill: var(--dlx-app-admin--color-notice--warning-alt);
@@ -626,7 +626,7 @@ html {
   color: #b53b07;
   font-size: 1.4em;
   line-height: 1.3;
-  margin-left: 8px;
+  margin-right: 8px;
 }
 .dlx-admin__row h3:first-child {
   margin-top: 0;
@@ -681,17 +681,17 @@ button.dlx-app__btn-danger:hover {
   border-radius: 2px;
   transition: all 0.4s ease-in-out;
   border-width: 1px;
-  margin-right: 12px;
+  margin-left: 12px;
 }
 .dlx-admin-component-row-button a.dlx-app__btn-secondary:last-child,
 .dlx-admin-component-row-button a.components-button:last-child, .dlx-admin-component-row-button.dlx-app__btn-primary:last-child,
 .dlx-admin-component-row-button button:last-child {
-  margin-right: 0;
+  margin-left: 0;
 }
 .dlx-admin-component-row-button a.dlx-app__btn-secondary svg,
 .dlx-admin-component-row-button a.components-button svg, .dlx-admin-component-row-button.dlx-app__btn-primary svg,
 .dlx-admin-component-row-button button svg {
-  margin-right: 8px;
+  margin-left: 8px;
 }
 .dlx-admin-component-row-button a.dlx-app__btn-secondary:hover,
 .dlx-admin-component-row-button a.components-button:hover, .dlx-admin-component-row-button.dlx-app__btn-primary:hover,
@@ -794,7 +794,7 @@ button.dlx-app__btn-danger:hover {
 .dlx-admin-component-row-button a.components-button.sce__btn-action svg, .dlx-admin-component-row-button.dlx-app__btn-primary.sce__btn-action svg,
 .dlx-admin-component-row-button button.sce__btn-action svg {
   display: inline-block;
-  margin-right: 8px;
+  margin-left: 8px;
 }
 .dlx-admin-component-row-button a.dlx-app__btn-secondary.sce__btn-action svg path,
 .dlx-admin-component-row-button a.components-button.sce__btn-action svg path, .dlx-admin-component-row-button.dlx-app__btn-primary.sce__btn-action svg path,
@@ -813,7 +813,7 @@ button.dlx-app__btn-danger:hover {
 .dlx-admin-component-row-button button.dlx-app__btn--icon-right.is-saving svg {
   width: 24px;
   height: 24px;
-  margin-left: 8px;
+  margin-right: 8px;
   animation: app-pub-spin 1s linear infinite;
 }
 .dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn--icon-right.is-saving svg path,
@@ -833,7 +833,7 @@ button.dlx-app__btn-danger:hover {
 .dlx-admin-component-row-button button.dlx-app__btn--icon-right.is-saved svg {
   width: 24px;
   height: 24px;
-  margin-left: 14px;
+  margin-right: 14px;
 }
 .dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn--icon-right.is-saved svg path,
 .dlx-admin-component-row-button a.components-button.dlx-app__btn--icon-right.is-saved svg path, .dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn--icon-right.is-saved svg path,
@@ -883,10 +883,8 @@ button.dlx-app__btn-danger:hover {
 }
 
 .app-custom-fields-modal-row button {
-  margin-right: 12px;
+  margin-left: 12px;
 }
 .app-custom-fields-modal-row button:last-child {
-  margin-right: 0;
+  margin-left: 0;
 }
-
-/*# sourceMappingURL=app-admin-css.css.map*/

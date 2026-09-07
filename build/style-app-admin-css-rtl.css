@@ -118,16 +118,16 @@
   }
 }
 .components-animate__appear.is-from-top, .components-animate__appear.is-from-top.is-from-left {
-  transform-origin: top left;
-}
-.components-animate__appear.is-from-top.is-from-right {
   transform-origin: top right;
 }
+.components-animate__appear.is-from-top.is-from-right {
+  transform-origin: top left;
+}
 .components-animate__appear.is-from-bottom, .components-animate__appear.is-from-bottom.is-from-left {
-  transform-origin: bottom left;
+  transform-origin: bottom right;
 }
 .components-animate__appear.is-from-bottom.is-from-right {
-  transform-origin: bottom right;
+  transform-origin: bottom left;
 }
 
 @keyframes components-animate__appear-animation {
@@ -149,10 +149,10 @@
   }
 }
 .components-animate__slide-in.is-from-left {
-  transform: translateX(100%);
+  transform: translateX(-100%);
 }
 .components-animate__slide-in.is-from-right {
-  transform: translateX(-100%);
+  transform: translateX(100%);
 }
 
 @keyframes components-animate__slide-in-animation {
@@ -184,7 +184,7 @@
   display: flex;
   height: auto;
   min-height: 36px;
-  text-align: left;
+  text-align: right;
   width: 100%;
 }
 .components-autocomplete__result.components-button.is-selected {
@@ -201,13 +201,13 @@
   box-shadow: inset 0 0 0 1px #1e1e1e;
 }
 .components-button-group .components-button + .components-button {
-  margin-left: -1px;
+  margin-right: -1px;
 }
 .components-button-group .components-button:first-child {
-  border-radius: 2px 0 0 2px;
+  border-radius: 0 2px 2px 0;
 }
 .components-button-group .components-button:last-child {
-  border-radius: 0 2px 2px 0;
+  border-radius: 2px 0 0 2px;
 }
 .components-button-group .components-button:focus, .components-button-group .components-button.is-primary {
   position: relative;
@@ -304,7 +304,7 @@
   color: var(--wp-components-color-accent-inverted, #fff);
   background-size: 100px 100%;
   /* stylelint-disable */
-  background-image: linear-gradient(-45deg, var(--wp-components-color-accent, var(--wp-admin-theme-color, #007cba)) 33%, var(--wp-components-color-accent-darker-20, var(--wp-admin-theme-color-darker-20, #005a87)) 33%, var(--wp-components-color-accent-darker-20, var(--wp-admin-theme-color-darker-20, #005a87)) 70%, var(--wp-components-color-accent, var(--wp-admin-theme-color, #007cba)) 70%);
+  background-image: linear-gradient(45deg, var(--wp-components-color-accent, var(--wp-admin-theme-color, #007cba)) 33%, var(--wp-components-color-accent-darker-20, var(--wp-admin-theme-color-darker-20, #005a87)) 33%, var(--wp-components-color-accent-darker-20, var(--wp-admin-theme-color-darker-20, #005a87)) 70%, var(--wp-components-color-accent, var(--wp-admin-theme-color, #007cba)) 70%);
   /* stylelint-enable */
   border-color: var(--wp-components-color-accent, var(--wp-admin-theme-color, #007cba));
 }
@@ -354,7 +354,7 @@
   flex: 0 0 auto;
 }
 p + .components-button.is-tertiary {
-  margin-left: -6px;
+  margin-right: -6px;
 }
 .components-button.is-destructive {
   --wp-components-color-accent: #cc1818;
@@ -382,7 +382,7 @@ p + .components-button.is-tertiary {
   border-radius: 0;
   background: none;
   outline: none;
-  text-align: left;
+  text-align: right;
   color: var(--wp-components-color-accent, var(--wp-admin-theme-color, #007cba));
   text-decoration: underline;
   transition-property: border, background, color;
@@ -411,7 +411,7 @@ p + .components-button.is-tertiary {
   opacity: 1;
   background-size: 100px 100%;
   /* stylelint-disable */
-  background-image: linear-gradient(-45deg, #fafafa 33%, #e0e0e0 33%, #e0e0e0 70%, #fafafa 70%);
+  background-image: linear-gradient(45deg, #fafafa 33%, #e0e0e0 33%, #e0e0e0 70%, #fafafa 70%);
   /* stylelint-enable */
 }
 .components-button.is-small {
@@ -433,18 +433,18 @@ p + .components-button.is-tertiary {
 .components-button.has-icon .dashicon {
   display: inline-block;
   flex: 0 0 auto;
-  margin-left: 2px;
   margin-right: 2px;
+  margin-left: 2px;
 }
 .components-button.has-icon.has-text {
   justify-content: start;
-  padding-right: 12px;
+  padding-left: 12px;
 }
 .components-button.has-icon.has-text svg {
-  margin-right: 8px;
+  margin-left: 8px;
 }
 .components-button.has-icon.has-text .dashicon {
-  margin-right: 10px;
+  margin-left: 10px;
 }
 .components-button.is-pressed {
   color: var(--wp-components-color-foreground-inverted, #fff);
@@ -488,7 +488,7 @@ p + .components-button.is-tertiary {
   /* Override core line-height. To be reviewed. */
   line-height: normal;
   border: 1px solid #1e1e1e;
-  margin-right: 12px;
+  margin-left: 12px;
   transition: none;
   border-radius: 2px;
   background: #fff;
@@ -497,7 +497,7 @@ p + .components-button.is-tertiary {
   cursor: pointer;
   display: inline-block;
   line-height: 0;
-  margin: 0 4px 0 0;
+  margin: 0 0 0 4px;
   outline: 0;
   padding: 0 !important;
   text-align: center;
@@ -554,7 +554,7 @@ p + .components-button.is-tertiary {
 }
 @media (min-width: 782px) {
   .components-checkbox-control__input[type=checkbox]:checked::before, .components-checkbox-control__input[type=checkbox][aria-checked=mixed]::before {
-    margin: -4px 0 0 -5px;
+    margin: -4px -5px 0 0;
   }
 }
 .components-checkbox-control__input[type=checkbox][aria-checked=mixed] {
@@ -563,7 +563,7 @@ p + .components-button.is-tertiary {
 }
 .components-checkbox-control__input[type=checkbox][aria-checked=mixed]::before {
   content: "";
-  float: left;
+  float: right;
   display: inline-block;
   vertical-align: middle;
   width: 16px;
@@ -610,7 +610,7 @@ p + .components-button.is-tertiary {
 .components-checkbox-control__input-container {
   position: relative;
   display: inline-block;
-  margin-right: 12px;
+  margin-left: 12px;
   vertical-align: middle;
   width: 24px;
   height: 24px;
@@ -627,7 +627,7 @@ svg.components-checkbox-control__indeterminate {
   fill: #fff;
   cursor: pointer;
   position: absolute;
-  left: 0;
+  right: 0;
   top: 0;
   width: 24px;
   height: 24px;
@@ -639,7 +639,7 @@ svg.components-checkbox-control__indeterminate {
 @media (min-width: 600px) {
   svg.components-checkbox-control__checked,
 svg.components-checkbox-control__indeterminate {
-    left: -2px;
+    right: -2px;
     top: -2px;
   }
 }
@@ -693,9 +693,9 @@ svg.components-checkbox-control__indeterminate {
   content: "";
   position: absolute;
   top: 1px;
-  left: 1px;
-  bottom: 1px;
   right: 1px;
+  bottom: 1px;
+  left: 1px;
   border-radius: 50%;
   z-index: -1;
   /* stylelint-disable-next-line function-url-quotes */
@@ -731,7 +731,7 @@ svg.components-checkbox-control__indeterminate {
 }
 .components-circular-option-picker__option.is-pressed + svg {
   position: absolute;
-  left: 2px;
+  right: 2px;
   top: 2px;
   border-radius: 50%;
   z-index: 2;
@@ -741,9 +741,9 @@ svg.components-checkbox-control__indeterminate {
   content: "";
   position: absolute;
   top: -1px;
-  left: -1px;
-  bottom: -1px;
   right: -1px;
+  bottom: -1px;
+  left: -1px;
   border-radius: 50%;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
   border: 1px solid transparent;
@@ -756,7 +756,7 @@ svg.components-checkbox-control__indeterminate {
   height: 32px;
   position: absolute;
   top: -2px;
-  left: -2px;
+  right: -2px;
   border-radius: 50%;
   box-shadow: inset 0 0 0 2px #fff;
 }
@@ -772,7 +772,7 @@ svg.components-checkbox-control__indeterminate {
 }
 
 .components-circular-option-picker__dropdown-link-action {
-  margin-right: 16px;
+  margin-left: 16px;
 }
 .components-circular-option-picker__dropdown-link-action .components-button {
   line-height: 22px;
@@ -794,7 +794,7 @@ svg.components-checkbox-control__indeterminate {
   border-radius: 50%;
   display: inline-block;
   padding: 0;
-  background: #fff linear-gradient(-45deg, transparent 48%, #ddd 48%, #ddd 52%, transparent 52%);
+  background: #fff linear-gradient(45deg, transparent 48%, #ddd 48%, #ddd 52%, transparent 52%);
 }
 
 .components-combobox-control {
@@ -889,10 +889,8 @@ input.components-combobox-control__input[type=text]:focus {
   padding: 12px;
   font-family: inherit;
   width: 100%;
-  /*rtl:begin:ignore*/
   background-image: repeating-linear-gradient(45deg, #e0e0e0 25%, transparent 25%, transparent 75%, #e0e0e0 75%, #e0e0e0), repeating-linear-gradient(45deg, #e0e0e0 25%, transparent 25%, transparent 75%, #e0e0e0 75%, #e0e0e0);
   background-position: 0 0, 24px 24px;
-  /*rtl:end:ignore*/
   background-size: calc(2 * 24px) calc(2 * 24px);
   box-sizing: border-box;
   color: #fff;
@@ -906,11 +904,11 @@ input.components-combobox-control__input[type=text]:focus {
 }
 
 .components-color-palette__custom-color-name {
-  text-align: left;
+  text-align: right;
 }
 
 .components-color-palette__custom-color-value {
-  margin-left: 16px;
+  margin-right: 16px;
   text-transform: uppercase;
 }
 
@@ -927,10 +925,8 @@ input.components-combobox-control__input[type=text]:focus {
   z-index: 1;
 }
 .components-custom-gradient-picker__gradient-bar.has-gradient {
-  /*rtl:begin:ignore*/
   background-image: repeating-linear-gradient(45deg, #e0e0e0 25%, transparent 25%, transparent 75%, #e0e0e0 75%, #e0e0e0), repeating-linear-gradient(45deg, #e0e0e0 25%, transparent 25%, transparent 75%, #e0e0e0 75%, #e0e0e0);
   background-position: 0 0, 12px 12px;
-  /*rtl:end:ignore*/
   background-size: calc(2 * 12px) calc(2 * 12px);
 }
 .components-custom-gradient-picker__gradient-bar .components-custom-gradient-picker__gradient-bar-background {
@@ -940,8 +936,8 @@ input.components-combobox-control__input[type=text]:focus {
 .components-custom-gradient-picker__gradient-bar .components-custom-gradient-picker__markers-container {
   position: relative;
   width: calc(100% - 48px);
-  margin-left: auto;
   margin-right: auto;
+  margin-left: auto;
 }
 .components-custom-gradient-picker__gradient-bar .components-custom-gradient-picker__control-point-dropdown {
   position: absolute;
@@ -982,7 +978,6 @@ input.components-combobox-control__input[type=text]:focus {
 }
 
 .components-custom-gradient-picker__inserter {
-  /*rtl:ignore*/
   direction: ltr;
 }
 
@@ -997,7 +992,7 @@ input.components-combobox-control__input[type=text]:focus {
   border: none;
 }
 .components-custom-gradient-picker .components-custom-gradient-picker__toolbar > div + div {
-  margin-left: 1px;
+  margin-right: 1px;
 }
 .components-custom-gradient-picker .components-custom-gradient-picker__toolbar button.is-pressed > svg {
   background: #fff;
@@ -1017,13 +1012,13 @@ input.components-combobox-control__input[type=text]:focus {
 
 .components-custom-select-control__button {
   position: relative;
-  text-align: left;
+  text-align: right;
   outline: 0;
 }
 
 .components-custom-select-control__hint {
   color: #949494;
-  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .components-custom-select-control__menu {
@@ -1063,11 +1058,11 @@ input.components-combobox-control__input[type=text]:focus {
 }
 .components-custom-select-control__item .components-custom-select-control__item-hint {
   color: #949494;
-  text-align: right;
-  padding-right: 4px;
+  text-align: left;
+  padding-left: 4px;
 }
 .components-custom-select-control__item .components-custom-select-control__item-icon {
-  margin-left: auto;
+  margin-right: auto;
 }
 .components-custom-select-control__item:last-child {
   margin-bottom: 0;
@@ -1080,11 +1075,11 @@ input.components-combobox-control__input[type=text]:focus {
 .block-editor-dimension-control .components-base-control__label {
   display: flex;
   align-items: center;
-  margin-right: 1em;
+  margin-left: 1em;
   margin-bottom: 0;
 }
 .block-editor-dimension-control .components-base-control__label .dashicon {
-  margin-right: 0.5em;
+  margin-left: 0.5em;
 }
 .block-editor-dimension-control.is-manual .components-base-control__label {
   width: 10em;
@@ -1098,7 +1093,7 @@ body.is-dragging-components-draggable {
 
 .components-draggable__invisible-drag-image {
   position: fixed;
-  left: -1000px;
+  right: -1000px;
   height: 50px;
   width: 50px;
 }
@@ -1114,9 +1109,9 @@ body.is-dragging-components-draggable {
 .components-drop-zone {
   position: absolute;
   top: 0;
-  right: 0;
-  bottom: 0;
   left: 0;
+  bottom: 0;
+  right: 0;
   z-index: 40;
   visibility: hidden;
   opacity: 0;
@@ -1131,8 +1126,8 @@ body.is-dragging-components-draggable {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 0;
   right: 0;
+  left: 0;
   height: 100%;
   width: 100%;
   display: flex;
@@ -1200,8 +1195,8 @@ body.is-dragging-components-draggable {
   background-color: #ddd;
   position: absolute;
   top: -3px;
-  left: 0;
   right: 0;
+  left: 0;
   height: 1px;
 }
 .components-dropdown-menu__menu .components-dropdown-menu__menu-item.is-active svg,
@@ -1225,16 +1220,16 @@ body.is-dragging-components-draggable {
 .components-dropdown-menu__menu .components-menu-item__button.components-button {
   min-height: 36px;
   height: auto;
-  text-align: left;
-  padding-left: 8px;
+  text-align: right;
   padding-right: 8px;
+  padding-left: 8px;
 }
 .components-dropdown-menu__menu .components-menu-group {
   padding: 8px;
   margin-top: 0;
   margin-bottom: 0;
-  margin-left: -8px;
   margin-right: -8px;
+  margin-left: -8px;
 }
 .components-dropdown-menu__menu .components-menu-group:first-child {
   margin-top: -8px;
@@ -1256,11 +1251,11 @@ body.is-dragging-components-draggable {
 }
 
 .components-duotone-picker__color-indicator > .components-button {
-  background: linear-gradient(-45deg, transparent 48%, #ddd 48%, #ddd 52%, transparent 52%);
+  background: linear-gradient(45deg, transparent 48%, #ddd 48%, #ddd 52%, transparent 52%);
   color: transparent;
 }
 .components-duotone-picker__color-indicator > .components-button.is-pressed:hover:not(:disabled) {
-  background: linear-gradient(-45deg, transparent 48%, #ddd 48%, #ddd 52%, transparent 52%);
+  background: linear-gradient(45deg, transparent 48%, #ddd 48%, #ddd 52%, transparent 52%);
   color: transparent;
 }
 .components-duotone-picker__color-indicator > .components-button:not([aria-disabled=true]):active {
@@ -1311,7 +1306,7 @@ body.is-dragging-components-draggable {
   position: absolute;
   box-sizing: border-box;
   top: 3px;
-  left: 3px;
+  right: 3px;
   width: 12px;
   height: 12px;
   border-radius: 50%;
@@ -1338,7 +1333,7 @@ body.is-dragging-components-draggable {
 .components-form-toggle.is-checked .components-form-toggle__thumb {
   background-color: #fff;
   border-width: 0;
-  transform: translateX(18px);
+  transform: translateX(-18px);
 }
 .components-form-toggle.is-disabled, .components-disabled .components-form-toggle {
   opacity: 0.3;
@@ -1347,7 +1342,7 @@ body.is-dragging-components-draggable {
 .components-form-toggle input.components-form-toggle__input[type=checkbox] {
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   width: 100%;
   height: 100%;
   opacity: 0;
@@ -1422,7 +1417,7 @@ body.is-dragging-components-draggable {
   font-size: 16px;
   width: 100%;
   max-width: 100%;
-  margin-left: 4px;
+  margin-right: 4px;
   padding: 0;
   min-height: 24px;
   min-width: 50px;
@@ -1464,7 +1459,7 @@ body.is-dragging-components-draggable {
 }
 .components-form-token-field__token.is-borderless {
   position: relative;
-  padding: 0 24px 0 0;
+  padding: 0 0 0 24px;
 }
 .components-form-token-field__token.is-borderless .components-form-token-field__token-text {
   background: transparent;
@@ -1475,7 +1470,7 @@ body.is-dragging-components-draggable {
   color: #757575;
   position: absolute;
   top: 1px;
-  right: 0;
+  left: 0;
   padding: 0;
 }
 .components-form-token-field__token.is-borderless.is-success .components-form-token-field__token-text {
@@ -1483,8 +1478,8 @@ body.is-dragging-components-draggable {
 }
 .components-form-token-field__token.is-borderless.is-error .components-form-token-field__token-text {
   color: #cc1818;
-  border-radius: 4px 0 0 4px;
-  padding: 0 4px 0 6px;
+  border-radius: 0 4px 4px 0;
+  padding: 0 6px 0 4px;
 }
 .components-form-token-field__token.is-borderless.is-validating .components-form-token-field__token-text {
   color: #1e1e1e;
@@ -1513,8 +1508,8 @@ body.is-dragging-components-draggable {
 }
 
 .components-form-token-field__token-text {
-  border-radius: 2px 0 0 2px;
-  padding: 0 0 0 8px;
+  border-radius: 0 2px 2px 0;
+  padding: 0 8px 0 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1522,7 +1517,7 @@ body.is-dragging-components-draggable {
 
 .components-form-token-field__remove-token.components-button {
   cursor: pointer;
-  border-radius: 0 2px 2px 0;
+  border-radius: 2px 0 0 2px;
   padding: 0 2px;
   color: #1e1e1e;
   line-height: 10px;
@@ -1588,7 +1583,7 @@ body.is-dragging-components-draggable {
 }
 .components-guide .components-modal__header .components-button {
   align-self: flex-start;
-  margin: 8px 8px 0 0;
+  margin: 8px 0 0 8px;
   position: static;
 }
 .components-guide .components-modal__header .components-button:hover svg {
@@ -1664,15 +1659,15 @@ body.is-dragging-components-draggable {
   text-decoration: underline;
 }
 .components-button.components-guide__back-button {
-  left: 32px;
+  right: 32px;
 }
 .components-button.components-guide__forward-button {
-  right: 32px;
+  left: 32px;
   color: #1386bf;
   font-weight: bold;
 }
 .components-button.components-guide__finish-button {
-  right: 32px;
+  left: 32px;
 }
 
 [role=region] {
@@ -1682,8 +1677,8 @@ body.is-dragging-components-draggable {
 .is-focusing-regions [role=region]:focus::after {
   position: absolute;
   top: 0;
-  left: 0;
   right: 0;
+  left: 0;
   bottom: 0;
   content: "";
   pointer-events: none;
@@ -1729,7 +1724,7 @@ body.is-dragging-components-draggable {
 .components-menu-item__button[role=menuitemradio] .components-menu-item__item:only-child, .components-menu-item__button[role=menuitemcheckbox] .components-menu-item__item:only-child,
 .components-menu-item__button.components-button[role=menuitemradio] .components-menu-item__item:only-child,
 .components-menu-item__button.components-button[role=menuitemcheckbox] .components-menu-item__item:only-child {
-  padding-right: 48px;
+  padding-left: 48px;
   box-sizing: initial;
 }
 .components-menu-item__button .components-menu-items__item-icon,
@@ -1739,17 +1734,17 @@ body.is-dragging-components-draggable {
 }
 .components-menu-item__button .components-menu-items__item-icon.has-icon-right,
 .components-menu-item__button.components-button .components-menu-items__item-icon.has-icon-right {
-  margin-right: -2px;
-  margin-left: 24px;
+  margin-left: -2px;
+  margin-right: 24px;
 }
 .components-menu-item__button .components-menu-item__shortcut + .components-menu-items__item-icon.has-icon-right,
 .components-menu-item__button.components-button .components-menu-item__shortcut + .components-menu-items__item-icon.has-icon-right {
-  margin-left: 8px;
+  margin-right: 8px;
 }
 .components-menu-item__button .block-editor-block-icon,
 .components-menu-item__button.components-button .block-editor-block-icon {
-  margin-left: -2px;
-  margin-right: 8px;
+  margin-right: -2px;
+  margin-left: 8px;
 }
 .components-menu-item__button.is-primary,
 .components-menu-item__button.components-button.is-primary {
@@ -1757,7 +1752,7 @@ body.is-dragging-components-draggable {
 }
 .components-menu-item__button.is-primary .components-menu-item__item,
 .components-menu-item__button.components-button.is-primary .components-menu-item__item {
-  margin-right: 0;
+  margin-left: 0;
 }
 .components-menu-item__button:disabled.is-tertiary, .components-menu-item__button[aria-disabled=true].is-tertiary,
 .components-menu-item__button.components-button:disabled.is-tertiary,
@@ -1770,7 +1765,7 @@ body.is-dragging-components-draggable {
 .components-menu-item__info-wrapper {
   display: flex;
   flex-direction: column;
-  margin-right: auto;
+  margin-left: auto;
 }
 
 .components-menu-item__info {
@@ -1783,16 +1778,16 @@ body.is-dragging-components-draggable {
 .components-menu-item__item {
   white-space: nowrap;
   min-width: 160px;
-  margin-right: auto;
+  margin-left: auto;
   display: inline-flex;
   align-items: center;
 }
 
 .components-menu-item__shortcut {
   align-self: center;
-  margin-right: 0;
-  margin-left: auto;
-  padding-left: 24px;
+  margin-left: 0;
+  margin-right: auto;
+  padding-right: 24px;
   color: currentColor;
   display: none;
 }
@@ -1804,19 +1799,19 @@ body.is-dragging-components-draggable {
 
 .components-menu-items-choice svg,
 .components-menu-items-choice.components-button svg {
-  margin-right: 12px;
+  margin-left: 12px;
 }
 .components-menu-items-choice.has-icon,
 .components-menu-items-choice.components-button.has-icon {
-  padding-left: 12px;
+  padding-right: 12px;
 }
 
 .components-modal__screen-overlay {
   position: fixed;
   top: 0;
-  right: 0;
-  bottom: 0;
   left: 0;
+  bottom: 0;
+  right: 0;
   background-color: rgba(0, 0, 0, 0.35);
   z-index: 100000;
   display: flex;
@@ -1834,7 +1829,7 @@ body.is-dragging-components-draggable {
   margin: 40px 0 0 0;
   width: 100%;
   background: #fff;
-  box-shadow: 0 0.7px 1px rgba(0, 0, 0, 0.15), 0 2.7px 3.8px -0.2px rgba(0, 0, 0, 0.15), 0 5.5px 7.8px -0.3px rgba(0, 0, 0, 0.15), 0.1px 11.5px 16.4px -0.5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0.7px 1px rgba(0, 0, 0, 0.15), 0 2.7px 3.8px -0.2px rgba(0, 0, 0, 0.15), 0 5.5px 7.8px -0.3px rgba(0, 0, 0, 0.15), -0.1px 11.5px 16.4px -0.5px rgba(0, 0, 0, 0.15);
   border-radius: 8px 8px 0 0;
   overflow: hidden;
   display: flex;
@@ -1898,7 +1893,7 @@ body.is-dragging-components-draggable {
   z-index: 10;
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
 }
 .components-modal__header .components-modal__header-heading {
   font-size: 1.2rem;
@@ -1910,7 +1905,7 @@ body.is-dragging-components-draggable {
 }
 .components-modal__header .components-button {
   position: relative;
-  left: 8px;
+  right: 8px;
 }
 .components-modal__content.has-scrolled-content:not(.hide-header) .components-modal__header {
   border-bottom-color: #ddd;
@@ -1957,31 +1952,31 @@ body.is-dragging-components-draggable {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   font-size: 13px;
   background-color: #fff;
-  border-left: 4px solid var(--wp-components-color-accent, var(--wp-admin-theme-color, #007cba));
+  border-right: 4px solid var(--wp-components-color-accent, var(--wp-admin-theme-color, #007cba));
   margin: 5px 15px 2px;
   padding: 8px 12px;
   align-items: center;
 }
 .components-notice.is-dismissible {
-  padding-right: 36px;
+  padding-left: 36px;
   position: relative;
 }
 .components-notice.is-success {
-  border-left-color: #4ab866;
+  border-right-color: #4ab866;
   background-color: #eff9f1;
 }
 .components-notice.is-warning {
-  border-left-color: #f0b849;
+  border-right-color: #f0b849;
   background-color: #fef8ee;
 }
 .components-notice.is-error {
-  border-left-color: #cc1818;
+  border-right-color: #cc1818;
   background-color: #f4a2a2;
 }
 
 .components-notice__content {
   flex-grow: 1;
-  margin: 4px 25px 4px 0;
+  margin: 4px 0 4px 25px;
 }
 
 .components-notice__actions {
@@ -1990,10 +1985,10 @@ body.is-dragging-components-draggable {
 }
 
 .components-notice__action.components-button {
-  margin-right: 8px;
+  margin-left: 8px;
 }
 .components-notice__action.components-button, .components-notice__action.components-button.is-link {
-  margin-left: 12px;
+  margin-right: 12px;
 }
 .components-notice__action.components-button.is-secondary {
   vertical-align: initial;
@@ -2023,7 +2018,7 @@ body.is-dragging-components-draggable {
 }
 .components-notice-list .components-notice__action.components-button {
   display: block;
-  margin-left: 0;
+  margin-right: 0;
   margin-top: 8px;
 }
 
@@ -2104,18 +2099,16 @@ body.is-dragging-components-draggable {
 
 .components-panel__body-toggle.components-button {
   position: relative;
-  padding: 16px 48px 16px 16px;
+  padding: 16px 16px 16px 48px;
   outline: none;
   width: 100%;
   font-weight: 500;
-  text-align: left;
+  text-align: right;
   color: #1e1e1e;
   border: none;
   box-shadow: none;
   transition: 0.1s background ease-in-out;
   height: auto;
-  /* rtl:begin:ignore */
-  /* rtl:end:ignore */
 }
 @media (prefers-reduced-motion: reduce) {
   .components-panel__body-toggle.components-button {
@@ -2129,7 +2122,7 @@ body.is-dragging-components-draggable {
 }
 .components-panel__body-toggle.components-button .components-panel__arrow {
   position: absolute;
-  right: 16px;
+  left: 16px;
   top: 50%;
   transform: translateY(-50%);
   color: #1e1e1e;
@@ -2151,15 +2144,15 @@ body.rtl .components-panel__body-toggle.components-button .dashicons-arrow-right
 
 .components-panel__icon {
   color: #757575;
-  margin: -2px 0 -2px 6px;
+  margin: -2px 6px -2px 0;
 }
 
 .components-panel__body-toggle-icon {
-  margin-right: -5px;
+  margin-left: -5px;
 }
 
 .components-panel__color-title {
-  float: left;
+  float: right;
   height: 19px;
 }
 
@@ -2174,7 +2167,7 @@ body.rtl .components-panel__body-toggle.components-button .dashicons-arrow-right
   min-width: 0;
 }
 .components-panel__row label {
-  margin-right: 12px;
+  margin-left: 12px;
   flex-shrink: 0;
   max-width: 75%;
 }
@@ -2192,7 +2185,7 @@ body.rtl .components-panel__body-toggle.components-button .dashicons-arrow-right
   padding: 1em;
   min-height: 200px;
   width: 100%;
-  text-align: left;
+  text-align: right;
   margin: 0;
   color: #1e1e1e;
   -moz-font-smoothing: subpixel-antialiased;
@@ -2228,7 +2221,7 @@ body.rtl .components-panel__body-toggle.components-button .dashicons-arrow-right
 .components-placeholder__label > svg,
 .components-placeholder__label .dashicon,
 .components-placeholder__label .block-editor-block-icon {
-  margin-right: 12px;
+  margin-left: 12px;
   fill: currentColor;
 }
 @media (forced-colors: active) {
@@ -2281,7 +2274,7 @@ body.rtl .components-panel__body-toggle.components-button .dashicons-arrow-right
   font-size: 16px;
   /* Override core line-height. To be reviewed. */
   line-height: normal;
-  margin: 0 8px 0 0;
+  margin: 0 0 0 8px;
   flex: 1 1 auto;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -2323,20 +2316,20 @@ body.rtl .components-panel__body-toggle.components-button .dashicons-arrow-right
 }
 
 .components-placeholder__fieldset .components-button {
-  margin-right: 12px;
+  margin-left: 12px;
   margin-bottom: 12px;
 }
 .components-placeholder__fieldset .components-button:last-child {
   margin-bottom: 0;
-  margin-right: 0;
+  margin-left: 0;
 }
 
 .components-placeholder__fieldset .components-button:not(.is-link) ~ .components-button.is-link {
-  margin-left: 10px;
   margin-right: 10px;
+  margin-left: 10px;
 }
 .components-placeholder__fieldset .components-button:not(.is-link) ~ .components-button.is-link:last-child {
-  margin-right: 0;
+  margin-left: 0;
 }
 
 .components-placeholder.is-large .components-placeholder__label {
@@ -2352,7 +2345,7 @@ body.rtl .components-panel__body-toggle.components-button .dashicons-arrow-right
   flex-direction: column;
 }
 .components-placeholder.is-medium .components-placeholder__fieldset .components-button, .components-placeholder.is-small .components-placeholder__fieldset .components-button {
-  margin-right: auto;
+  margin-left: auto;
 }
 .components-placeholder.is-small .components-button {
   padding: 0 8px 2px;
@@ -2377,8 +2370,8 @@ body.rtl .components-panel__body-toggle.components-button .dashicons-arrow-right
 }
 .components-placeholder.has-illustration .components-placeholder__fieldset {
   width: auto;
-  margin-left: 0;
   margin-right: 0;
+  margin-left: 0;
 }
 .components-placeholder.has-illustration .components-placeholder__label,
 .components-placeholder.has-illustration .components-placeholder__instructions,
@@ -2405,9 +2398,9 @@ body.rtl .components-panel__body-toggle.components-button .dashicons-arrow-right
   content: "";
   position: absolute;
   top: 0;
-  right: 0;
-  bottom: 0;
   left: 0;
+  bottom: 0;
+  right: 0;
   pointer-events: none;
   background: currentColor;
   opacity: 0.1;
@@ -2422,8 +2415,8 @@ body.rtl .components-panel__body-toggle.components-button .dashicons-arrow-right
   box-sizing: content-box;
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  right: 50%;
+  transform: translate(50%, -50%);
   width: 100%;
   height: 100%;
   stroke: currentColor;
@@ -2437,8 +2430,8 @@ body.rtl .components-panel__body-toggle.components-button .dashicons-arrow-right
 .components-popover.is-expanded {
   position: fixed;
   top: 0;
-  left: 0;
   right: 0;
+  left: 0;
   bottom: 0;
   z-index: 1000000 !important;
 }
@@ -2476,7 +2469,7 @@ body.rtl .components-panel__body-toggle.components-button .dashicons-arrow-right
   display: flex;
   height: 48px;
   justify-content: space-between;
-  padding: 0 8px 0 16px;
+  padding: 0 16px 0 8px;
 }
 
 .components-popover__header-title {
@@ -2501,9 +2494,9 @@ body.rtl .components-panel__body-toggle.components-button .dashicons-arrow-right
   content: "";
   position: absolute;
   top: -1px;
-  left: 1px;
-  height: 2px;
   right: 1px;
+  height: 2px;
+  left: 1px;
   background-color: #fff;
 }
 .components-popover__arrow.is-top {
@@ -2511,7 +2504,6 @@ body.rtl .components-panel__body-toggle.components-button .dashicons-arrow-right
   transform: rotate(0);
 }
 .components-popover__arrow.is-right {
-  /*rtl:begin:ignore*/
   left: -14px !important;
   transform: rotate(90deg);
 }
@@ -2523,7 +2515,6 @@ body.rtl .components-panel__body-toggle.components-button .dashicons-arrow-right
   /*rtl:begin:ignore*/
   right: -14px !important;
   transform: rotate(-90deg);
-  /*rtl:end:ignore*/
 }
 
 .components-popover__triangle {
@@ -2556,13 +2547,13 @@ body.rtl .components-panel__body-toggle.components-button .dashicons-arrow-right
   /* Override core line-height. To be reviewed. */
   line-height: normal;
   border: 1px solid #1e1e1e;
-  margin-right: 12px;
+  margin-left: 12px;
   transition: none;
   border-radius: 50%;
   width: 24px;
   height: 24px;
   margin-top: 0;
-  margin-right: 6px;
+  margin-left: 6px;
 }
 @media (prefers-reduced-motion: reduce) {
   .components-radio-control__input[type=radio] {
@@ -2602,14 +2593,14 @@ body.rtl .components-panel__body-toggle.components-button .dashicons-arrow-right
   box-sizing: inherit;
   width: 8px;
   height: 8px;
-  transform: translate(7px, 7px);
+  transform: translate(-7px, 7px);
   margin: 0;
   background-color: #fff;
   border: 4px solid #fff;
 }
 @media (min-width: 600px) {
   .components-radio-control__input[type=radio]:checked::before {
-    transform: translate(5px, 5px);
+    transform: translate(-5px, 5px);
   }
 }
 .components-radio-control__input[type=radio]:focus {
@@ -2645,7 +2636,7 @@ body.rtl .components-panel__body-toggle.components-button .dashicons-arrow-right
   cursor: inherit;
   position: absolute;
   top: calc(50% - 8px);
-  right: calc(50% - 8px);
+  left: calc(50% - 8px);
   box-shadow: inset 0 0 0 var(--wp-admin-border-width-focus) var(--wp-components-color-accent, var(--wp-admin-theme-color, #007cba));
   outline: 2px solid transparent;
 }
@@ -2660,7 +2651,7 @@ body.rtl .components-panel__body-toggle.components-button .dashicons-arrow-right
   cursor: inherit;
   position: absolute;
   top: calc(50% - 1px);
-  right: calc(50% - 1px);
+  left: calc(50% - 1px);
   transition: transform 0.1s ease-in;
   will-change: transform;
   opacity: 0;
@@ -2685,9 +2676,9 @@ body.rtl .components-panel__body-toggle.components-button .dashicons-arrow-right
 .components-resizable-box__side-handle.components-resizable-box__handle-top::before,
 .components-resizable-box__side-handle.components-resizable-box__handle-bottom::before {
   width: 100%;
-  left: 0;
-  border-left: 0;
+  right: 0;
   border-right: 0;
+  border-left: 0;
 }
 
 .components-resizable-box__side-handle.components-resizable-box__handle-left,
@@ -2773,7 +2764,6 @@ See https://bugs.webkit.org/show_bug.cgi?id=187903. */
     opacity: 1;
   }
 }
-/*!rtl:begin:ignore*/
 .components-resizable-box__handle-right {
   right: calc(11.5px * -1);
 }
@@ -2789,8 +2779,6 @@ See https://bugs.webkit.org/show_bug.cgi?id=187903. */
 .components-resizable-box__handle-bottom {
   bottom: calc(11.5px * -1);
 }
-
-/*!rtl:end:ignore*/
 .components-responsive-wrapper {
   position: relative;
   max-width: 100%;
@@ -2833,13 +2821,13 @@ body.lockscroll {
   /* Override core line-height. To be reviewed. */
   line-height: normal;
   display: block;
-  padding: 16px 48px 16px 16px;
+  padding: 16px 16px 16px 48px;
   background: #f0f0f0;
   border: none;
   width: 100%;
   height: 48px;
-  margin-left: 0;
   margin-right: 0;
+  margin-left: 0;
   /* Fonts smaller than 16px causes mobile safari to zoom. */
   font-size: 16px;
 }
@@ -2893,7 +2881,7 @@ body.lockscroll {
 .components-search-control__icon {
   position: absolute;
   top: 0;
-  right: 12px;
+  left: 12px;
   bottom: 0;
   display: flex;
   align-items: center;
@@ -2943,20 +2931,20 @@ body.lockscroll {
   cursor: default;
 }
 .components-snackbar .components-snackbar__content-with-icon {
-  margin-left: 24px;
+  margin-right: 24px;
 }
 .components-snackbar .components-snackbar__icon {
   position: absolute;
   top: 24px;
-  left: 28px;
+  right: 28px;
 }
 .components-snackbar .components-snackbar__dismiss-button {
-  margin-left: 32px;
+  margin-right: 32px;
   cursor: pointer;
 }
 
 .components-snackbar__action.components-button {
-  margin-left: 32px;
+  margin-right: 32px;
   color: #fff;
   height: auto;
   flex-shrink: 0;
@@ -3015,7 +3003,7 @@ body.lockscroll {
   box-shadow: none;
   cursor: pointer;
   padding: 3px 16px;
-  margin-left: 0;
+  margin-right: 0;
   font-weight: 500;
 }
 .components-tab-panel__tabs-item:focus:not(:disabled) {
@@ -3026,9 +3014,9 @@ body.lockscroll {
 .components-tab-panel__tabs-item::after {
   content: "";
   position: absolute;
-  right: 0;
-  bottom: 0;
   left: 0;
+  bottom: 0;
+  right: 0;
   pointer-events: none;
   background: var(--wp-components-color-accent, var(--wp-admin-theme-color, #007cba));
   height: calc(0 * var(--wp-admin-border-width-focus));
@@ -3050,9 +3038,9 @@ body.lockscroll {
   content: "";
   position: absolute;
   top: 12px;
-  right: 12px;
-  bottom: 12px;
   left: 12px;
+  bottom: 12px;
+  right: 12px;
   pointer-events: none;
   box-shadow: 0 0 0 0 transparent;
   border-radius: 2px;
@@ -3210,7 +3198,7 @@ body.lockscroll {
   align-self: center;
   fill: #f0b849;
   flex-shrink: 0;
-  margin-right: 16px;
+  margin-left: 16px;
 }
 .components-tip p {
   margin: 0;
@@ -3223,7 +3211,7 @@ body.lockscroll {
   flex-shrink: 0;
 }
 .components-accessible-toolbar > .components-toolbar-group:last-child {
-  border-right: none;
+  border-left: none;
 }
 
 .components-accessible-toolbar .components-button,
@@ -3231,8 +3219,8 @@ body.lockscroll {
   position: relative;
   height: 48px;
   z-index: 1;
-  padding-left: 16px;
   padding-right: 16px;
+  padding-left: 16px;
 }
 .components-accessible-toolbar .components-button:focus:not(:disabled),
 .components-toolbar .components-button:focus:not(:disabled) {
@@ -3246,8 +3234,8 @@ body.lockscroll {
   display: block;
   border-radius: 2px;
   height: 32px;
-  left: 8px;
   right: 8px;
+  left: 8px;
   z-index: -1;
   animation: components-button__appear-animation 0.1s ease;
   animation-fill-mode: forwards;
@@ -3262,8 +3250,8 @@ body.lockscroll {
 .components-accessible-toolbar .components-button svg,
 .components-toolbar .components-button svg {
   position: relative;
-  margin-left: auto;
   margin-right: auto;
+  margin-left: auto;
 }
 .components-accessible-toolbar .components-button.is-pressed,
 .components-toolbar .components-button.is-pressed {
@@ -3284,8 +3272,8 @@ body.lockscroll {
 }
 .components-accessible-toolbar .components-button.has-icon.has-icon,
 .components-toolbar .components-button.has-icon.has-icon {
-  padding-left: 12px;
   padding-right: 12px;
+  padding-left: 12px;
   min-width: 48px;
 }
 .components-accessible-toolbar .components-button.components-tab-button,
@@ -3295,8 +3283,8 @@ body.lockscroll {
 .components-accessible-toolbar .components-button.components-tab-button span,
 .components-toolbar .components-button.components-tab-button span {
   display: inline-block;
-  padding-left: 0;
   padding-right: 0;
+  padding-left: 0;
   position: relative;
 }
 
@@ -3312,7 +3300,7 @@ body.lockscroll {
   position: relative;
 }
 .components-toolbar__control.components-button[data-subscript] svg {
-  padding: 5px 10px 5px 0;
+  padding: 5px 0 5px 10px;
 }
 .components-toolbar__control.components-button[data-subscript]::after {
   content: attr(data-subscript);
@@ -3321,7 +3309,7 @@ body.lockscroll {
   font-weight: 600;
   line-height: 12px;
   position: absolute;
-  right: 8px;
+  left: 8px;
   bottom: 10px;
 }
 .components-toolbar__control.components-button:active::before {
@@ -3333,13 +3321,13 @@ body.lockscroll {
 
 .components-toolbar-group {
   min-height: 48px;
-  border-right: 1px solid #1e1e1e;
+  border-left: 1px solid #1e1e1e;
   background-color: #fff;
   display: inline-flex;
   flex-shrink: 0;
   flex-wrap: wrap;
-  padding-left: 6px;
   padding-right: 6px;
+  padding-left: 6px;
   line-height: 0;
 }
 .components-toolbar-group .components-toolbar-group.components-toolbar-group {
@@ -3349,8 +3337,8 @@ body.lockscroll {
 .components-toolbar-group .components-button.components-button,
 .components-toolbar-group .components-button.has-icon.has-icon {
   min-width: 36px;
-  padding-left: 6px;
   padding-right: 6px;
+  padding-left: 6px;
 }
 .components-toolbar-group .components-button.components-button svg,
 .components-toolbar-group .components-button.has-icon.has-icon svg {
@@ -3358,8 +3346,8 @@ body.lockscroll {
 }
 .components-toolbar-group .components-button.components-button::before,
 .components-toolbar-group .components-button.has-icon.has-icon::before {
-  left: 2px;
   right: 2px;
+  left: 2px;
 }
 
 .components-toolbar {
@@ -3386,7 +3374,7 @@ div.components-toolbar > div {
   }
 }
 div.components-toolbar > div + div.has-left-divider {
-  margin-left: 6px;
+  margin-right: 6px;
   position: relative;
   overflow: visible;
 }
@@ -3397,7 +3385,7 @@ div.components-toolbar > div + div.has-left-divider::before {
   background-color: #ddd;
   position: absolute;
   top: 8px;
-  left: -3px;
+  right: -3px;
   width: 1px;
   height: 20px;
 }
@@ -3426,7 +3414,7 @@ div.components-toolbar > div + div.has-left-divider::before {
 
 .components-tooltip__shortcut {
   display: inline-block;
-  margin-left: 8px;
+  margin-right: 8px;
 }
 
 .disabled-element-wrapper {
@@ -3438,9 +3426,9 @@ div.components-toolbar > div + div.has-left-divider::before {
   width: 100%;
   height: 100%;
   top: 0;
-  left: 0;
-  bottom: 0;
   right: 0;
+  bottom: 0;
+  left: 0;
 }
 /*!*************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/@wordpress/dataviews/build-style/style.css ***!
@@ -3567,7 +3555,7 @@ div.components-toolbar > div + div.has-left-divider::before {
   padding: 16px 48px;
   flex-shrink: 0;
   position: sticky;
-  left: 0;
+  right: 0;
   transition: padding ease-out 0.1s;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -3594,7 +3582,7 @@ div.components-toolbar > div + div.has-left-divider::before {
 .dataviews-pagination {
   position: sticky;
   bottom: 0;
-  left: 0;
+  right: 0;
   background-color: #fff;
   padding: 12px 48px;
   border-top: 1px solid #f0f0f0;
@@ -3635,7 +3623,7 @@ div.components-toolbar > div + div.has-left-divider::before {
   font-weight: 500;
 }
 .dataviews-view-table th {
-  text-align: left;
+  text-align: right;
   color: #1e1e1e;
   font-weight: normal;
   font-size: 13px;
@@ -3647,11 +3635,11 @@ div.components-toolbar > div + div.has-left-divider::before {
 }
 .dataviews-view-table td[data-field-id=actions],
 .dataviews-view-table th[data-field-id=actions] {
-  text-align: right;
+  text-align: left;
 }
 .dataviews-view-table td.dataviews-view-table__checkbox-column,
 .dataviews-view-table th.dataviews-view-table__checkbox-column {
-  padding-right: 0;
+  padding-left: 0;
 }
 .dataviews-view-table tr {
   border-bottom: 1px solid #f0f0f0;
@@ -3661,17 +3649,17 @@ div.components-toolbar > div + div.has-left-divider::before {
 }
 .dataviews-view-table tr td:first-child,
 .dataviews-view-table tr th:first-child {
-  padding-left: 48px;
+  padding-right: 48px;
 }
 .dataviews-view-table tr td:first-child .dataviews-view-table-header-button,
 .dataviews-view-table tr td:first-child .dataviews-view-table-header,
 .dataviews-view-table tr th:first-child .dataviews-view-table-header-button,
 .dataviews-view-table tr th:first-child .dataviews-view-table-header {
-  margin-left: -8px;
+  margin-right: -8px;
 }
 .dataviews-view-table tr td:last-child,
 .dataviews-view-table tr th:last-child {
-  padding-right: 48px;
+  padding-left: 48px;
 }
 .dataviews-view-table tr:last-child {
   border-bottom: 0;
@@ -3720,13 +3708,13 @@ div.components-toolbar > div + div.has-left-divider::before {
   box-shadow: inset 0 -1px 0 #f0f0f0;
   padding-top: 8px;
   padding-bottom: 8px;
-  padding-left: 12px;
+  padding-right: 12px;
   font-size: 11px;
   text-transform: uppercase;
   font-weight: 500;
 }
 .dataviews-view-table thead th:has(.dataviews-view-table-header-button):not(:first-child) {
-  padding-left: 4px;
+  padding-right: 4px;
 }
 .dataviews-view-table tbody td {
   vertical-align: top;
@@ -3758,7 +3746,7 @@ div.components-toolbar > div + div.has-left-divider::before {
   display: none;
 }
 .dataviews-view-table .dataviews-view-table-header {
-  padding-left: 4px;
+  padding-right: 4px;
 }
 .dataviews-view-table .dataviews-view-table__actions-column {
   width: 1%;
@@ -3877,7 +3865,7 @@ div.components-toolbar > div + div.has-left-divider::before {
   content: "";
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   width: 100%;
   height: 100%;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
@@ -3943,17 +3931,17 @@ div.components-toolbar > div + div.has-left-divider::before {
 .dataviews-view-list li .dataviews-view-list__item-actions .components-button {
   opacity: 0;
   position: fixed;
-  right: 0;
+  left: 0;
 }
 .dataviews-view-list li.is-selected .dataviews-view-list__item-actions, .dataviews-view-list li.is-hovered .dataviews-view-list__item-actions, .dataviews-view-list li:focus-within .dataviews-view-list__item-actions {
-  padding-right: 24px;
+  padding-left: 24px;
 }
 .dataviews-view-list li.is-selected .dataviews-view-list__item-actions .components-button, .dataviews-view-list li.is-hovered .dataviews-view-list__item-actions .components-button, .dataviews-view-list li:focus-within .dataviews-view-list__item-actions .components-button {
   opacity: 1;
   position: static;
 }
 .dataviews-view-list li.is-selected .dataviews-view-list__item, .dataviews-view-list li.is-hovered .dataviews-view-list__item, .dataviews-view-list li:focus-within .dataviews-view-list__item {
-  padding-right: 0;
+  padding-left: 0;
 }
 .dataviews-view-list li:not(.is-selected) .dataviews-view-list__primary-field {
   color: #1e1e1e;
@@ -3979,7 +3967,7 @@ div.components-toolbar > div + div.has-left-divider::before {
   color: var(--wp-admin-theme-color);
 }
 .dataviews-view-list .dataviews-view-list__item {
-  padding: 16px 0 16px 24px;
+  padding: 16px 24px 16px 0;
   width: 100%;
   scroll-margin: 8px 0;
 }
@@ -3987,9 +3975,9 @@ div.components-toolbar > div + div.has-left-divider::before {
   position: absolute;
   content: "";
   top: calc(var(--wp-admin-border-width-focus) + 1px);
-  right: var(--wp-admin-border-width-focus);
-  bottom: var(--wp-admin-border-width-focus);
   left: var(--wp-admin-border-width-focus);
+  bottom: var(--wp-admin-border-width-focus);
+  right: var(--wp-admin-border-width-focus);
   box-shadow: inset 0 0 0 var(--wp-admin-border-width-focus) var(--wp-admin-theme-color);
   border-radius: 2px;
 }
@@ -4017,7 +4005,7 @@ div.components-toolbar > div + div.has-left-divider::before {
   content: "";
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   width: 100%;
   height: 100%;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
@@ -4043,7 +4031,7 @@ div.components-toolbar > div + div.has-left-divider::before {
   display: inline-flex;
 }
 .dataviews-view-list .dataviews-view-list__item-actions {
-  padding-right: 24px;
+  padding-left: 24px;
 }
 .dataviews-view-list + .dataviews-pagination {
   justify-content: space-between;
@@ -4163,13 +4151,13 @@ div.components-toolbar > div + div.has-left-divider::before {
   /* Override core line-height. To be reviewed. */
   line-height: normal;
   display: block;
-  padding: 0 32px 0 8px;
+  padding: 0 8px 0 32px;
   background: #f0f0f0;
   border: none;
   width: 100%;
   height: 32px;
-  margin-left: 0;
   margin-right: 0;
+  margin-left: 0;
   /* Fonts smaller than 16px causes mobile safari to zoom. */
   font-size: 16px;
 }
@@ -4221,7 +4209,7 @@ div.components-toolbar > div + div.has-left-divider::before {
 }
 .dataviews-search-widget-filter-combobox__wrapper .dataviews-search-widget-filter-combobox__icon {
   position: absolute;
-  right: 12px;
+  left: 12px;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -4288,7 +4276,7 @@ div.components-toolbar > div + div.has-left-divider::before {
   border: 0;
   padding: 0;
   position: absolute;
-  right: 4px;
+  left: 4px;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -4330,19 +4318,19 @@ div.components-toolbar > div + div.has-left-divider::before {
 
   .dataviews-view-table tr td:first-child,
 .dataviews-view-table tr th:first-child {
-    padding-left: 24px;
+    padding-right: 24px;
   }
 
   .dataviews-view-table tr td:last-child,
 .dataviews-view-table tr th:last-child {
-    padding-right: 24px;
+    padding-left: 24px;
   }
 
   .dataviews-view-grid,
 .dataviews-no-results,
 .dataviews-loading {
-    padding-left: 24px;
     padding-right: 24px;
+    padding-left: 24px;
   }
 }
 .dataviews-bulk-actions-toolbar-wrapper {
@@ -4365,8 +4353,8 @@ div.components-toolbar > div + div.has-left-divider::before {
   flex-wrap: wrap;
   width: -moz-fit-content;
   width: fit-content;
-  margin-left: auto;
   margin-right: auto;
+  margin-left: auto;
   bottom: 24px;
   z-index: 2;
 }
@@ -4385,5 +4373,3 @@ div.components-toolbar > div + div.has-left-divider::before {
   align-items: center;
   margin: 0 8px 0 8px;
 }
-
-/*# sourceMappingURL=style-app-admin-css.css.map*/
