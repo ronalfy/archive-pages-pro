@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Modal, TextControl, SelectControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { useForm, Controller, useWatch, useFormState } from 'react-hook-form';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTriangleExclamation as TriangleExclamation, faCircleCheck as CircleCheck, faInfoCircle as Info } from '@fortawesome/free-solid-svg-icons';
+import { AlertCircle } from 'lucide-react';
 import Notice from '../Notice';
 
 const objectTypes = dlxAppSettings.objectTypes;
@@ -100,7 +99,7 @@ const CustomFieldsView = ( { data, onChange } ) => {
 									status="error"
 									politeness="assertive"
 									inline={ true }
-									icon={ () => <FontAwesomeIcon icon={ TriangleExclamation } style={ { color: 'currentColor' } } /> }
+									icon={ AlertCircle }
 									message={ __( 'Custom field names can only contain letters, numbers, underscores, and hyphens.', 'archive-pages-pro' ) }
 								/>
 							) }

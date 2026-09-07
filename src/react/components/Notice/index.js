@@ -29,7 +29,7 @@ const Notice = ( props ) => {
 
 	const actions = [
 		{
-			label: __( 'Back to Top', 'wp-dlx-app-comments' ),
+			label: __( 'Back to Top', 'archive-pages-pro' ),
 			url: '#dlx-app-admin-header',
 			variant: 'link',
 			className: 'dlx-app-admin__notice-action dlx-app-admin__notice-action--to-top',

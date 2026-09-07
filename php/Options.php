@@ -1,8 +1,8 @@
 <?php
 /**
- * Admin class.
+ * Options class.
  *
- * @package GBExtras
+ * @package APP
  */
 
 namespace DLXPlugins\APP;
@@ -117,7 +117,7 @@ class Options {
 	}
 
 	/**
-	 * Get defaults for SCE options
+	 * Get defaults for Archive Pages Pro options.
 	 *
 	 * @since 1.0.0
 	 * @access public

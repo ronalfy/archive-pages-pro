@@ -237,7 +237,7 @@ class Enqueue {
 				'restNonce'                     => wp_create_nonce( 'wp_rest' ),
 				'editPostUrl'                   => admin_url( 'post.php' ),
 				'postTypeArchiveMappingEnabled' => (bool) $options['enablePostTypeArchiveMapping'],
-				'enable404Mapping'             => (bool) $options['enable404Mapping'],
+				'enable404Mapping'              => (bool) $options['enable404Mapping'],
 			)
 		);
 	}

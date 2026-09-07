@@ -1,7 +1,7 @@
 {
-	"name": "highlight-and-share",
-	"version": "1.0.0",
-	"description": "Highlight and share text.",
+	"name": "archive-pages-pro",
+	"version": "1.0.2",
+	"description": "Map archives to pages with a few clicks.",
 	"main": "index.js",
 	"sideEffects": false,
 	"scripts": {
@@ -10,17 +10,13 @@
 		"zip": "wp-scripts plugin-zip"
 	},
 	"author": "Ronald Huereca",
-	"license": "ISC",
+	"license": "GPL-2.0-or-later",
 	"devDependencies": {
 		"@babel/eslint-parser": "^7.18.2",
 		"@babel/plugin-proposal-class-properties": "^7.17.12",
 		"@babel/plugin-transform-arrow-functions": "^7.17.12",
 		"@babel/preset-env": "^7.18.2",
 		"@babel/preset-react": "^7.17.12",
-		"@fortawesome/fontawesome-svg-core": "^6.5.2",
-		"@fortawesome/free-solid-svg-icons": "^6.5.2",
-		"@fortawesome/pro-duotone-svg-icons": "^6.6.0",
-		"@fortawesome/react-fontawesome": "^0.2.2",
 		"@wordpress/block-editor": "^11.6.0",
 		"@wordpress/block-serialization-default-parser": "^4.29.0",
 		"@wordpress/blocks": "^12.6.0",
@@ -35,7 +31,6 @@
 		"axios": "^0.26.1",
 		"babel-loader": "^8.2.5",
 		"babel-plugin-lodash": "^3.3.4",
-		"babel-plugin-macros": "^3.1.0",
 		"classnames": "^2.3.1",
 		"css-loader": "^6.7.1",
 		"eslint": "^8.18.0",

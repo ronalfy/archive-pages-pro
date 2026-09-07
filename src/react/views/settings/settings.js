@@ -10,8 +10,7 @@ import { cleanForSlug } from '@wordpress/url';
 import { __, sprintf } from '@wordpress/i18n';
 import { useForm, Controller, useWatch, useFormState } from 'react-hook-form';
 import classnames from 'classnames';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTriangleExclamation as TriangleExclamation, faInfoCircle as Info } from '@fortawesome/free-solid-svg-icons';
+import { AlertCircle, Info } from 'lucide-react';
 
 // Local imports.
 import Notice from '../../components/Notice';
@@ -78,7 +77,7 @@ const Settings = ( props ) => {
 					status="info"
 					politeness="assertive"
 					inline={ false }
-					icon={ () => <FontAwesomeIcon size="1x" icon={ Info } style={ { color: 'currentColor' } } /> }
+					icon={ Info }
 				/>
 			);
 		}
@@ -207,7 +206,7 @@ const Settings = ( props ) => {
 					status="info"
 					politeness="assertive"
 					inline={ false }
-					icon={ () => <FontAwesomeIcon size="1x" icon={ Info } style={ { color: 'currentColor' } } /> }
+					icon={ Info }
 				/>
 			);
 		}
@@ -419,7 +418,7 @@ const Settings = ( props ) => {
 																status="error"
 																politeness="assertive"
 																inline={ true }
-																icon={ () => <FontAwesomeIcon icon={ TriangleExclamation } style={ { color: 'currentColor' } } /> }
+																icon={ AlertCircle }
 															/>
 														)
 													}

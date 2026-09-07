@@ -27,9 +27,9 @@ if ( file_exists( __DIR__ . '/lib/autoload.php' ) ) {
  */
 class Archive_Pages_Pro {
 	/**
-	 * Highlight and Share instance.
+	 * Plugin instance.
 	 *
-	 * @var Archive_Pages_Pro $instance Instance of Highlight and Share class.
+	 * @var Archive_Pages_Pro $instance Instance of Archive Pages Pro class.
 	 */
 	private static $instance = null;
 
@@ -50,7 +50,7 @@ class Archive_Pages_Pro {
 	/**
 	 * Return an instance of the class
 	 *
-	 * Return an instance of the Highlight and Share Class.
+	 * Return an instance of the Archive Pages Pro class.
 	 *
 	 * @since 1.0.0
 	 * @access public

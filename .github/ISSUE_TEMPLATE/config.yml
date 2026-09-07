@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/ronalfy/archive-pages-pro/security/advisories/new
+    about: Report a security issue privately. Do not file a public bug.
+  - name: Contributing guide
+    url: https://github.com/ronalfy/archive-pages-pro/blob/development/CONTRIBUTING.md
+    about: How to set up a development environment and submit a pull request.

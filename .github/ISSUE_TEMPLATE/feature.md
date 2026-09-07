@@ -1,31 +1,28 @@
 ---
 name: Feature
-about: Add a feature description/issue.
-title: ''
-labels: ''
+about: Suggest an enhancement for Archive Pages Pro
+title: '[Feature] '
+labels: 'enhancement'
 assignees: ''
 
 ---
 
-## Feature Request
+## Feature request
 
-What would you like to add or change in regards to Highlight and Share?
+What would you like to add or change in Archive Pages Pro?
 
 ## Describe any solutions you've considered
 
-Help us by discussing any solutions or alternatives you've seen that relate to the feature request.
+Alternatives or related plugins you have seen.
 
-## How important is this feature to you?
+## How would you use this?
 
-Please describe how you would use the feature on your site.
+Describe the site or workflow this would help.
 
-## Is your feature request related to a problem? Please describe.
+## Is this related to an existing issue?
 
-Is this related to a bug or other issue? Please reference them here.
+Link related bugs or discussions.
 
-## Screenshots or Videos
+## Screenshots or videos
 
-Add any screenshots or videos of the feature you'd like.
-
-## Additional context
-Add any other context about the feature request here.
+Add mockups if you have them.

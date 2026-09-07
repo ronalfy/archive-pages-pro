@@ -2,7 +2,7 @@
     "name": "dlxplugins/archive-pages-pro",
     "description": "Easily map custom post type archives, term archives, 404 pages, and user archives to a page.",
     "type": "project",
-    "license": "GPL",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Ronald Huereca",

@@ -1,49 +1,53 @@
 === Archive Pages Pro ===
 Contributors: DLXPlugins
 Tags: archive pages, author archives, custom slugs, SEO, WordPress archives
-Requires at least: 5.8
+Requires at least: 6.0
 Tested up to: 6.6.1
-Requires PHP: 7.4
-Stable tag: 1.0.0
+Requires PHP: 7.2
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Create SEO-friendly archive pages for authors with ease. Customize author slugs and map author archives to specific pages for better control and branding.
+Map post type, term, author, and 404 archives to pages. Override CPT and taxonomy behavior and keep SEO plugins in sync.
 
 == Description ==
 
-**Archive Pages Pro** is a powerful plugin designed to give you full control over author archive pages in WordPress. Whether you're running a multi-author blog or simply want to enhance your site’s SEO, this plugin allows you to map author archives to custom pages, giving you more flexibility and control over how author content is displayed.
+**Archive Pages Pro** maps WordPress archives to pages and gives you control over archive URLs and post type/taxonomy behavior.
 
 Key Features:
-* **Custom Slugs for Author Archives:** Easily change author archive slugs to match your branding or SEO strategy.
-* **Map Author Archives to Pages:** Redirect author archives to any page on your site, providing a more customized experience.
-* **Enhanced SEO:** Improve your site's SEO by creating clean, custom URLs for author pages.
-* **User-Friendly Interface:** No need for coding skills—everything can be managed right from the WordPress admin.
 
-**Why Use Archive Pages Pro?**
-- **SEO Optimization:** Create custom author archive URLs that boost your site's search engine ranking.
-- **Branding Control:** Reflect your site's branding by customizing the slugs and pages for author archives.
-- **Flexibility:** Redirect author archives to any page, including custom landing pages, category pages, or even external URLs.
+* **Post type archive mapping:** Replace a custom post type archive with any page.
+* **Term archive mapping:** Map category, tag, and custom taxonomy archives to a page.
+* **Author archive mapping:** Map an author archive to a page and optionally change the author base slug.
+* **404 mapping:** Show a chosen page instead of the theme 404 template.
+* **Post type and taxonomy overrides:** Toggle REST API, `with_front`, `has_archive`, custom fields, page templates, and the block editor.
+* **Custom fields REST support:** Register selected meta keys for the REST API.
+* **SEO compatibility:** Works with Yoast SEO, Rank Math, All in One SEO, and Breadcrumb NavXT so mapped archives keep the original archive URL.
+
+Configure the plugin under **Settings → Archive Mapping**. Post type and 404 mapping also appear on **Settings → Reading**.
 
 == Installation ==
 
 1. Upload the `archive-pages-pro` folder to the `/wp-content/plugins/` directory, or install the plugin directly through the WordPress plugins screen.
 2. Activate the plugin through the 'Plugins' screen in WordPress.
-3. Navigate to the **Archive Pages Pro** settings under the WordPress dashboard to configure the plugin.
-4. Customize author slugs and map archives to specific pages as desired.
+3. Go to **Settings → Archive Mapping** to enable mapping and overrides.
+4. Map archives on Settings → Reading, term edit screens, and user profiles as needed.
 
 == Screenshots ==
 
-1. **Settings Screen:** The user-friendly interface where you can manage author archive settings.
-2. **Custom Slug Example:** An example of how custom slugs can be configured.
-3. **Page Mapping:** Mapping author archives to specific pages.
+1. **Settings Screen:** The interface where you manage archive mapping and overrides.
+2. **Custom Slug Example:** An example of how custom author slugs can be configured.
+3. **Page Mapping:** Mapping archives to specific pages.
 
 == Changelog ==
+
+= 1.0.2 =
+* Maintenance release aligned with the public GitHub source.
 
 = 1.0.0 =
 * Initial release of Archive Pages Pro.
 
 == Upgrade Notice ==
 
-= 1.0.0 =
-This is the initial release of Archive Pages Pro.
+= 1.0.2 =
+Maintenance release. No settings migration required.

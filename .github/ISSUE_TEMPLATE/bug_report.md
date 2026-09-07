@@ -1,30 +1,44 @@
 ---
 name: Bug report
-about: Create a report to help us improve
-title: 'Bug Name: [BUG] Bug Description'
-labels: 'bug 🐛'
+about: Report unexpected behavior in Archive Pages Pro
+title: '[BUG] '
+labels: 'bug'
 assignees: ''
 
 ---
 
 ## What is the desired behavior?
 
-Describe what the expected/desired behavior of a feature/action.
+Describe what should happen.
 
 ## What is the actual behavior?
 
-What is actually happening?
+Describe what happens instead.
 
-## Steps to reproduce undesired behavior:
+## Steps to reproduce
 
-Detail how to reproduce the bug.
+1. Install and activate Archive Pages Pro
+2. Open Settings → Archive Mapping
+3. …
 
-1. Install the plugin
-2. Visit the Settings tab
-3. Click on a social network...
+## Where does it happen?
 
-## Screenshots or Video
-Add screenshots or videos to the issue. These help out immensely with diagnosing unexpected behavior.
+- [ ] Settings → Archive Mapping
+- [ ] Settings → Reading (post type / 404 mapping)
+- [ ] Term edit (category, tag, or custom taxonomy)
+- [ ] User profile (author mapping)
+- [ ] Front-end archive or 404
+- [ ] SEO / breadcrumbs (Yoast, Rank Math, AIOSEO, Breadcrumb NavXT)
 
-## Additional Comments
-Add any other context about the problem here.
+## Environment
+
+- WordPress version:
+- PHP version:
+- Theme:
+- Plugin version:
+
+## Screenshots or video
+
+Add screenshots or a short video if it helps.
+
+## Additional comments

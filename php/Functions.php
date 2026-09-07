@@ -212,10 +212,10 @@ class Functions {
 				case 'url':
 					return esc_url( $attributes[ $attribute ] );
 				case 'default':
-					return new \WP_Error( 'has_dlx_unknown_type', __( 'Unknown type.', 'archive-pages-pro' ) );
+					return new \WP_Error( 'app_unknown_type', __( 'Unknown type.', 'archive-pages-pro' ) );
 			}
 		}
-		return new \WP_Error( 'has_dlx_attribute_not_found', __( 'Attribute not found.', 'archive-pages-pro' ) );
+		return new \WP_Error( 'app_attribute_not_found', __( 'Attribute not found.', 'archive-pages-pro' ) );
 	}
 
 	/**
