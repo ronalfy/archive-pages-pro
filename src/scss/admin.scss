@@ -659,12 +659,11 @@ html {
 		}
 
 		.dlx-app-admin__notice-icon {
-			svg:not(.lucide) path {
-				fill: var(--dlx-app-admin--color-notice--info-alt);
-			}
+			svg:not(.lucide) path {}
 
 			svg.lucide {
-				color: var(--dlx-app-admin--color-notice--info-alt);
+				fill: var(--dlx-app-admin--color-notice--info-alt);
+				color: #FFF;
 			}
 		}
 

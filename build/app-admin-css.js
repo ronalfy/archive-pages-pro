@@ -1,1 +1,24 @@
-(()=>{"use strict";var e={5121(){}};const r={};function t(o){const n=r[o];if(void 0!==n)return n.exports;const s=r[o]={exports:{}};return e[o](s,s.exports,t),s.exports}t.m=e,(()=>{const e=[];t.O=(r,o,n,s)=>{if(o){s||=0;for(var i=e.length;i>0&&e[i-1][2]>s;i--)e[i]=e[i-1];return void(e[i]=[o,n,s])}let c=1/0;for(i=0;i<e.length;i++){let[o,n,s]=e[i],f=!0;for(var l=0;l<o.length;l++)1&s&&!(c>=s)||!Object.keys(t.O).every(e=>t.O[e](o[l]))?(f=!1,s<c&&(c=s)):o.splice(l--,1);if(f){e.splice(i--,1);const t=n();void 0!==t&&(r=t)}}return r}})(),t.o=(e,r)=>Object.hasOwn(e,r),(()=>{const e={800:0,687:0};t.O.j=r=>0===e[r];const r=(r,o)=>{let[n,s,i]=o;var c,l,f=0;if(n.some(r=>0!==e[r])){for(c in s)t.o(s,c)&&(t.m[c]=s[c]);if(i)var u=i(t)}for(r&&r(o);f<n.length;f++)l=n[f],t.o(e,l)&&e[l]&&e[l][0](),e[l]=0;return t.O(u)},o=globalThis.webpackChunkarchive_pages_pro||=[];o.forEach(r.bind(null,0)),o.push=r.bind(null,o.push.bind(o))})();let o=t.O(void 0,[687],()=>t(5121));o=t.O(o)})();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	// The require scope
+/******/ 	const __webpack_require__ = {};
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = (exports) => {
+/******/ 		Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/ 	
+/************************************************************************/
+let __webpack_exports__ = {};
+/*!*****************************!*\
+  !*** ./src/scss/admin.scss ***!
+  \*****************************/
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+/******/ })()
+;
+//# sourceMappingURL=app-admin-css.js.map
