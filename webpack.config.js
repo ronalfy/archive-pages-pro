@@ -18,7 +18,6 @@ module.exports = ( env ) => {
 				'app-term-edit': './src/react/views/term-edit/index.js',
 				'app-profile-edit': './src/react/views/profile-edit/index.js',
 				'app-admin-settings': [ './src/react/views/settings/index.js' ],
-				'app-admin-license': [ './src/react/views/license/index.js' ],
 				'app-admin-css': [ './src/scss/admin.scss' ],
 			},
 		},

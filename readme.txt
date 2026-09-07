@@ -46,4 +46,4 @@ Key Features:
 == Upgrade Notice ==
 
 = 1.0.0 =
-This is the initial release of Archive Pages Pro. Please read the documentation to understand how to configure the plugin.
+This is the initial release of Archive Pages Pro.

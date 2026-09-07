@@ -11,10 +11,9 @@ import { __, sprintf } from '@wordpress/i18n';
 import { useForm, Controller, useWatch, useFormState } from 'react-hook-form';
 import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTriangleExclamation as TriangleExclamation, faCircleCheck as CircleCheck, faInfoCircle as Info } from '@fortawesome/free-solid-svg-icons';
+import { faTriangleExclamation as TriangleExclamation, faInfoCircle as Info } from '@fortawesome/free-solid-svg-icons';
 
 // Local imports.
-import SendCommand from '../../utils/SendCommand';
 import Notice from '../../components/Notice';
 import SaveResetButtons from '../../components/SaveResetButtons';
 import CustomFieldsView from '../../components/CustomFieldsView';
@@ -28,7 +27,6 @@ const customFields = dlxAppSettings.customFields;
 const objectTypes = dlxAppSettings.objectTypes;
 
 const Settings = ( props ) => {
-	const [ licenseValid ] = useState( adminOptions.licenseValid );
 	const [ customFieldValues, setCustomFieldValues ] = useState( customFields );
 
 	const {
@@ -70,34 +68,6 @@ const Settings = ( props ) => {
 	const { errors, isDirty, dirtyFields } = useFormState( {
 		control,
 	} );
-
-	// Retrieve a prompt based on the license status.
-	const getPrompt = () => {
-		// Check to see if the license nag is disabled.
-		if ( 'valid' === licenseValid && ! getValues( 'enableLicenseAlerts' ) ) {
-			return null;
-		}
-		if ( 'valid' === licenseValid ) {
-			return (
-				<Notice
-					message={ __( 'Thank you for supporting this plugin. Your license key is active and you are receiving updates and support.', 'archive-pages-pro' ) }
-					status="success"
-					politeness="assertive"
-					inline={ false }
-					icon={ () => <FontAwesomeIcon icon={ CircleCheck } style={ { color: 'currentColor' } } /> }
-				/>
-			);
-		}
-		return (
-			<Notice
-				message={ __( 'Your license key is not active. Please activate your license key to receive updates and support.', 'archive-pages-pro' ) }
-				status="warning"
-				politeness="assertive"
-				inline={ false }
-				icon={ () => <FontAwesomeIcon size="1x" icon={ TriangleExclamation } style={ { color: 'currentColor' } } /> }
-			/>
-		);
-	};
 
 	const getPostTypes = () => {
 		// If there are no post types, return early.
@@ -324,9 +294,6 @@ const Settings = ( props ) => {
 						__( 'Configure the settings below for various additions to Archive Pages Pro.', 'archive-pages-pro' )
 					}
 				</p>
-				{
-					getPrompt()
-				}
 			</div>
 			{ /* eslint-disable-next-line no-unused-vars */ }
 			<form onSubmit={ handleSubmit( ( formData ) => { } ) }>

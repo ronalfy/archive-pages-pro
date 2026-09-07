@@ -83,8 +83,35 @@ class Options {
 			$options = get_option( self::$options_key, array() );
 		}
 
-		$defaults      = self::get_defaults();
-		$options       = wp_parse_args( $options, $defaults );
+		$defaults = self::get_defaults();
+		$options  = wp_parse_args( $options, $defaults );
+
+		// Strip leftover license data from older installs.
+		$license_keys = array(
+			'licenseKey',
+			'licenseValid',
+			'priceId',
+			'licenseActive',
+			'licenseActivated',
+			'licenseData',
+			'enableLicenseAlerts',
+		);
+		$had_license  = false;
+		foreach ( $license_keys as $license_key ) {
+			if ( array_key_exists( $license_key, $options ) ) {
+				unset( $options[ $license_key ] );
+				$had_license = true;
+			}
+		}
+		if ( $had_license ) {
+			delete_site_transient( 'app_core_license_check' );
+			if ( Functions::is_multisite() ) {
+				update_site_option( self::$options_key, $options );
+			} else {
+				update_option( self::$options_key, $options );
+			}
+		}
+
 		self::$options = $options;
 		return $options;
 	}
@@ -114,10 +141,6 @@ class Options {
 			'postTemplatesEnabled'          => false,
 			'postCustomFieldsEnabled'       => null,
 			'pageCustomFieldsEnabled'       => null,
-			'licenseKey'                    => '',
-			'licenseValid'                  => false,
-			'priceId'                       => '',
-			'licenseActive'                 => false,
 		);
 		return $defaults;
 	}

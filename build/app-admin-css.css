@@ -1,1 +1,892 @@
-button.button-reset,button.button-reset.components-button,button.button-reset.components-button.is-secondary,button.button-reset.components-button.is-secondary:focus,button.button-reset.components-button.is-secondary:hover,button.button-reset.components-button:focus,button.button-reset.components-button:hover,button.button-reset:focus,button.button-reset:hover{background:none;border:none;box-shadow:none;color:inherit;cursor:pointer;display:inline-block;height:unset;min-width:unset;outline:inherit;padding:0;text-transform:unset}button.button-reset.show-cursor{cursor:pointer}.button-reset button,.button-reset:focus button,.button-reset:hover button{background:none;border:none;box-shadow:none;color:inherit;cursor:pointer;display:inline-block;height:unset;min-width:unset;outline:inherit;padding:0;text-transform:unset}@keyframes app-pub-spin{to{transform:rotate(1turn)}}#app-pub-content{padding-top:18px}.app-pub-load-static-svg svg{animation:app-pub-spin;animation-duration:1.5s;animation-iteration-count:infinite;animation-timing-function:linear}.app-url-input{display:inline-block;flex-wrap:wrap;max-width:400px;position:relative;width:100%}.app-url-input .components-base-control .components-base-control__label{display:block;font-size:16px;width:100%}.app-url-input .apppub-suggestions-wrapper{left:0;max-height:250px;overflow-y:auto;position:absolute;top:100%;width:100%}.app-url-input .apppub-suggestions-wrapper .app-url-input__suggestion{align-items:center;background:#fff;border:1px solid #ddd;border-radius:0;display:flex;justify-content:flex-start;padding:5px 20px 5px 40px;position:relative;text-align:left;transition:all .4s ease-in-out;width:100%}.app-url-input .apppub-suggestions-wrapper .app-url-input__suggestion svg{height:24px;left:10px;position:absolute;top:calc(50% - 8px);width:24px}.app-url-input .apppub-suggestions-wrapper .app-url-input__suggestion svg path{fill:unset}.app-url-input .apppub-suggestions-wrapper .app-url-input__suggestion.is-selected,.app-url-input .apppub-suggestions-wrapper .app-url-input__suggestion:hover{background:#f1f1f1;border-color:var(--wp-admin-theme-color)}.app-url-input .apppub-suggestions-wrapper .app-url-input__suggestion .apppub-search-item{display:block;margin-right:8px;overflow-wrap:break-word;white-space:pre-wrap}.app-url-input .apppub-suggestions-wrapper .app-url-input__suggestion .apppub-search-item-title{display:block;font-weight:500;margin-bottom:.2em;overflow:hidden;position:relative;text-overflow:ellipsis}.app-url-input .apppub-suggestions-wrapper .app-url-input__suggestion .apppub-search-item-info{color:#757575;display:block;font-size:.9em;line-height:1.3;word-break:break-all}.app-pub-url-input__wrapper label{display:block;font-weight:600;margin-bottom:5px;width:100%}.app-pub-url-input__wrapper .app-pub-url-input__suggestion{background:#fff;border:1px solid #ddd;border-radius:3px;font-size:13px;padding:11px 16px;width:100%}.app-pub-url-input__wrapper .app-pub-url-input__suggestion-item .components-button{margin-left:8px}.app-pub-url-input__wrapper .app-pub-url-input__input-wrapper{display:grid;grid-template-columns:1fr 36px;position:relative;grid-gap:10px;width:100%}.app-pub-url-input__wrapper .app-pub-url-input__input-wrapper input[type=text]{border:1px solid #ddd;border-radius:3px;font-size:13px;padding:11px 36px 11px 16px;width:100%}.app-pub-url-input__wrapper .app-pub-url-input__input-wrapper .app-pub-url-input__input{line-height:1}.app-pub-url-input__wrapper .app-pub-url-input__input-wrapper .components-spinner{height:24px;position:absolute;right:48px;top:calc(50% - 15px)}.app-pub-url-input__wrapper .app-pub-url-input__input-wrapper .app-pub-url-input__input~.components-button{background:unset;border:unset;box-shadow:unset;position:relative}.app-pub-url-input__input~.components-button,.app-pub-url-input__suggestion-item .components-button{position:relative}.app-pub-url-input__input~.components-button .components-tooltip,.app-pub-url-input__suggestion-item .components-button .components-tooltip{background:#333;border-radius:3px;color:#fff;cursor:pointer;display:inline-block;font-size:12px;height:auto;min-width:150px;padding:8px 12px;position:absolute;right:10px;top:calc(50% - 8px);transition:opacity .2s ease-in-out}#wpcontent{background-color:#ebebeb;padding-left:0!important;padding-right:0!important;position:relative}#wpcontent .quotes-dlx-plugin{margin:0}#wpbody-content{margin:0;padding:0}#screen-meta-links{float:unset;margin:0;position:absolute;right:15px;top:20px;z-index:1000}#wpfooter,.notice{display:none}.dlx-app-admin-wrap{margin:0;padding:0;position:relative}.dlx-app-admin-wrap header{background:#4f4f4f;margin:0 auto;padding:1.5rem}.dlx-app-admin-wrap header .dlx-app-logo-wrapper{align-items:center;display:flex;justify-content:space-between;margin:0 auto;max-width:69.5rem}.dlx-app-admin-wrap header .dlx-app-logo-wrapper img{height:auto;max-width:450px}.dlx-app-admin-wrap .dlx-app-admin-body-wrapper{margin:0 auto;max-width:69.5rem;padding:2.4em 20px}.dlx-app-admin-wrap .dlx-app-body__content{background:#f0f0f1;border:1px solid #c3c4c7;border-top:0;box-shadow:0 1px 6px rgba(0,0,0,.08);margin-bottom:40px;padding:10px 35px 35px}.dlx-app-admin-buttons{align-items:center;display:flex;justify-content:space-between}.dlx-app-admin-buttons button{height:unset;padding:16px 20px}.dlx-app-admin-buttons button.is-primary{color:#fff}.header__btn-wrap{display:flex;flex-wrap:wrap;justify-content:flex-end;margin-top:15px;max-width:100%}@media(min-width:30em){.header__btn-wrap{margin-top:0;max-width:250px}}@media(min-width:48em){.header__btn-wrap{margin-top:0;max-width:250px}}@media(min-width:64em){.header__btn-wrap{margin-top:0;max-width:250px}}.header__btn-wrap.center,.header__btn-wrap.left,.header__btn-wrap.right{display:flex}.header__btn-wrap.left{justify-content:flex-start}.header__btn-wrap.center{justify-content:center}.header__btn-wrap.right{justify-content:flex-end}.header__btn-wrap .dlx-app__btn-primary,.header__btn-wrap button{background:#fff;border:2px solid #4f4f4f;border-radius:2px;color:#4f4f4f;cursor:pointer;display:inline-block;font-size:1.3em;margin-bottom:0;padding:10px 20px;text-align:center;text-decoration:none;transition:all .4s ease-in-out;width:100%}.header__btn-wrap .dlx-app__btn-primary:not([disabled]):hover,.header__btn-wrap button:not([disabled]):hover{background:#4f4f4f;border-color:#fff;border-radius:2px;color:#fff;text-decoration:none;transition:all .4s ease-in-out}.header__btn-wrap .dlx-app__btn-primary{display:block;margin-bottom:15px;width:100%}.header__btn-wrap .dlx-app__btn-primary:last-child{margin-bottom:0}html{scroll-behavior:smooth}.form-table-row-sections tr{border-bottom:1px solid #ddd}.form-table-row-sections tr:last-child{border-bottom:0}.form-table td,.form-table-row-sections td{padding-top:20px}.form-table td{padding-bottom:20px}.form-table input[type=text],.form-table select{display:block;max-width:600px!important}.form-table .dlx-admin__row{margin-bottom:20px;max-width:600px!important}.form-table .dlx-admin__row:last-child{margin-bottom:0}.form-table .dlx-admin__row .components-panel__body{background:#fff;border:1px solid #ddd;margin-top:20px}.form-table .dlx-admin__row .components-panel__body button{box-shadow:unset!important}.form-table .dlx-admin__row .components-panel__body.is-opened .components-panel__body-title button{border-bottom:1px solid #ddd;box-shadow:unset!important}.form-table .dlx-admin__row .components-panel__body.is-opened thead tr{border-bottom:1px solid #333}.form-table .dlx-admin__row .components-panel__body.is-opened thead th{padding-left:10px}.form-table .components-base-control__label,.form-table .components-input-control__label,.form-table .components-toggle-control__label{font-size:14px!important;font-weight:600!important;text-transform:capitalize!important}.dlx-app-admin-buttons button{margin-right:20px}.dlx-app-admin-buttons button:last-child{margin-right:0}.dlx-app-admin-buttons button:disabled{opacity:.5}.dlx-app-admin-buttons button.is-primary,.dlx-app-admin-buttons button:disabled{background:#2271b1!important;padding-left:15px;padding-right:15px}.dlx-app-admin-buttons button.is-primary:hover:not(:disabled),.dlx-app-admin-buttons button:disabled:hover:not(:disabled){background:#135e96!important}.dlx-app-admin-buttons button.is-resetting svg,.dlx-app-admin-buttons button.is-saving svg{animation:app-pub-spin;animation-duration:1.2s;animation-iteration-count:infinite;animation-timing-function:linear}.dlx-app-admin-buttons button svg{fill:none;color:currentColor}.dlx-app-snackbar.components-snackbar{background:#0d3172;color:#fff;position:fixed;right:0;top:32px;z-index:10000}.dlx-app-snackbar.components-snackbar .components-snackbar__content{align-items:center;display:flex}.dlx-app-snackbar.components-snackbar .components-snackbar__icon{bottom:auto;left:28px;left:14px;line-height:0;position:absolute;top:24px;top:auto}.dlx-app-snackbar.components-snackbar.dlx-app-snackbar-loading svg{animation:app-pub-spin;animation-duration:1.2s;animation-iteration-count:infinite;animation-timing-function:linear}.dlx-app-snackbar.components-snackbar.dlx-app-snackbar-success{background:#14720d;color:#fff}.dlx-app-snackbar.components-snackbar.dlx-app-snackbar-critical,.dlx-app-snackbar.components-snackbar.dlx-app-snackbar-error{background:#820000;color:#fff}.dlx-app-snackbar.components-snackbar.dlx-app-snackbar-warning{background:#ffc107;color:#000}:root{--dlx-app-admin--color-notice--info:#e3f3f7;--dlx-app-admin--color-notice--info-alt:#3a8dc4;--dlx-app-admin--color-notice--success:#eaf5ea;--dlx-app-admin--color-notice--success-alt:#49a939;--dlx-app-admin--color-notice--warning:#fef6e1;--dlx-app-admin--color-notice--warning-alt:#e8a931;--dlx-app-admin--color-notice--error:#f5e5e4;--dlx-app-admin--color-notice--error-alt:#bc2b2c}.dlx-app-admin__notice{margin:10px 0}.dlx-app-admin__notice.dlx-app-admin__notice--has-icon .components-notice__content{align-items:center;display:grid;grid-template-columns:32px 1fr 1px}.dlx-app-admin__notice.dlx-app-admin__notice--has-icon.dlx-app-admin__notice-appearance--inline .components-notice__content{display:flex}.dlx-app-admin__notice.dlx-app-admin__notice--has-icon.dlx-app-admin__notice-appearance--inline .components-notice__content .dlx-app-admin__notice-icon{margin-right:8px}.dlx-app-admin__notice .is-critical,.dlx-app-admin__notice .is-error{background-color:#a13844;border-left-color:#a13844;color:#fff}.dlx-app-admin__notice .dlx-app-admin__notice-message{font-size:1.2em;font-weight:500;line-height:1.4}.dlx-app-admin__notice.dlx-app-admin__notice-appearance--block .components-notice{border-left:4px solid transparent;margin-bottom:15px;margin-left:0;margin-right:0;padding:15px 20px 15px 15px}.dlx-app-admin__notice.dlx-app-admin__notice-appearance--inline .components-notice{margin-left:0;margin-right:0;padding-left:0}.dlx-app-admin__notice svg{align-items:center;display:flex;height:24px;width:24px}.dlx-app-admin__notice.dlx-app-admin__notice-type--error:not(.dlx-app-admin__notice-appearance--inline){background-color:var(--dlx-app-admin--color-notice--error)}.dlx-app-admin__notice.dlx-app-admin__notice-type--error:not(.dlx-app-admin__notice-appearance--inline) .components-notice{border-left-color:var(--dlx-app-admin--color-notice--error-alt)}.dlx-app-admin__notice.dlx-app-admin__notice-type--error:not(.dlx-app-admin__notice-appearance--inline) svg{color:var(--dlx-app-admin--color-notice--error-alt)}.dlx-app-admin__notice.dlx-app-admin__notice-type--error:not(.dlx-app-admin__notice-appearance--inline) svg path{fill:var(--dlx-app-admin--color-notice--error-alt)}.dlx-app-admin__notice.dlx-app-admin__notice-type--error.dlx-app-admin__notice-appearance--inline .dlx-app-admin__notice-message{color:#fff;fill:#fff}.dlx-app-admin__notice.dlx-app-admin__notice-type--error.dlx-app-admin__notice-appearance--inline svg{height:16px;margin-left:15px;margin-right:8px;width:16px}.dlx-app-admin__notice.dlx-app-admin__notice-type--error.dlx-app-admin__notice-appearance--inline .components-notice__content{padding:8px 15px 8px 0}.dlx-app-admin__notice.dlx-app-admin__notice-type--success{background-color:var(--dlx-app-admin--color-notice--success)}.dlx-app-admin__notice.dlx-app-admin__notice-type--success .components-notice{border-left-color:var(--dlx-app-admin--color-notice--success-alt)}.dlx-app-admin__notice.dlx-app-admin__notice-type--success svg path{fill:var(--dlx-app-admin--color-notice--success-alt)}.dlx-app-admin__notice.dlx-app-admin__notice-type--info{background-color:var(--dlx-app-admin--color-notice--info)}.dlx-app-admin__notice.dlx-app-admin__notice-type--info .components-notice{border-left-color:var(--dlx-app-admin--color-notice--info-alt)}.dlx-app-admin__notice.dlx-app-admin__notice-type--info .dlx-app-admin__notice-icon svg:not(.lucide) path{fill:var(--dlx-app-admin--color-notice--info-alt)}.dlx-app-admin__notice.dlx-app-admin__notice-type--info .dlx-app-admin__notice-icon svg.lucide{color:var(--dlx-app-admin--color-notice--info-alt)}.dlx-app-admin__notice.dlx-app-admin__notice-type--info svg:not(.lucide) path{fill:var(--dlx-app-admin--color-notice--info-alt)}.dlx-app-admin__notice.dlx-app-admin__notice-type--warning{background-color:var(--dlx-app-admin--color-notice--warning)}.dlx-app-admin__notice.dlx-app-admin__notice-type--warning .components-notice{border-left-color:var(--dlx-app-admin--color-notice--warning-alt)}.dlx-app-admin__notice.dlx-app-admin__notice-type--warning svg path{fill:var(--dlx-app-admin--color-notice--warning-alt)}.dlx-admin__license--wrapper .dlx-admin__text-control-license{position:relative}.dlx-admin__license--wrapper .dlx-admin__text-control-license label{font-size:.8125rem;font-weight:500}.dlx-admin__license--wrapper .dlx-admin__text-control-license label.components-base-control__label{display:inline-block}.dlx-admin__license--wrapper .dlx-admin__text-control-license.is-required label:after{color:#b53b07;content:"*";display:inline-block;font-size:1.4em;line-height:1.3;margin-left:8px;position:absolute;top:-3px;vertical-align:middle}.dlx-admin__license--wrapper .dlx-admin__text-control-license input[type=password],.dlx-admin__license--wrapper .dlx-admin__text-control-license input[type=text]{align-items:center;background-color:#fff;border-radius:3px;box-sizing:border-box;display:flex;font-family:inherit;font-size:.875rem;line-height:1.25rem;line-height:2;margin:0;max-width:100%;min-height:30px;outline-style:none;padding:.6875rem 1rem;width:100%}.dlx-admin__license--wrapper .dlx-admin__license--input-wrapper{position:relative}.dlx-admin__license--wrapper .dlx-admin__license--input-preview{font-size:0;height:32px;line-height:0;position:absolute;right:1.75rem;top:calc(.53125rem + 27px);width:32px}.dlx-admin__license--wrapper .dlx-admin__license--input-preview input[type=checkbox]{color:#323;display:block;height:100%;left:0;margin:0;opacity:0;padding:0;position:absolute;top:0;width:100%;z-index:2}.dlx-admin__license--wrapper .dlx-admin__license--input-preview input[type=checkbox]:hover~label svg path{fill:currentColor;color:currentColor}.dlx-admin__license--wrapper .dlx-admin__license--input-preview label{display:block;height:100%;left:0;position:absolute;top:0;width:100%;z-index:1}.dlx-admin__license--wrapper .dlx-admin__license--input-preview label span.dlx-app--show-hide--label{display:none}.dlx-admin__license--wrapper .dlx-admin__license--input-preview label .dlx-app--show-hide--icon{position:relative}.dlx-admin__license--wrapper .dlx-admin__license--input-preview label .dlx-app--show-hide--icon svg{display:block;height:100%;width:100%}.dlx-admin__license--wrapper .dlx-admin__license--input-preview label .dlx-app--show-hide--icon svg path{fill:currentColor;color:currentColor}.dlx-app-table{border:0;border-collapse:collapse;box-sizing:border-box;width:100%}.dlx-app-table tr{border-bottom:.0625rem solid #ddd}.dlx-app-table th{font-size:1.3em;font-weight:500;padding:.8125rem 1.125rem;text-align:left}.dlx-app-table tbody tr:last-child{border-bottom:0}.dlx-app-table td{padding:1.25rem 1.125rem;text-align:left}.dlx-admin__license--input-preview .svg-inline--fa{color:currentColor;height:32px;width:32px}#dlx-app-license-show-hide:hover~label svg path{fill:currentColor}.dlx-admin__license--input-wrapper:hover~label svg path{fill:none;color:currentColor}.components-button.button-reset.app-icon{color:gray;min-width:48px}.dlx-admin__row .is-required label{position:relative}.dlx-admin__row .is-required label:after{color:#b53b07;content:"*";display:inline-block;font-size:1.4em;line-height:1.3;margin-left:8px;position:absolute;top:-3px;vertical-align:middle}.dlx-admin__row h3:first-child{margin-top:0;padding-top:0}button.dlx-app__btn-danger{background:#fff;border-color:#822700;color:#822700}button.dlx-app__btn-danger:hover{background:#ece6e6;border-color:#822700;color:#822700}div.can-revoke{justify-content:flex-end}.dlx-admin__license--wrapper .dlx-app__btn-danger{text-align:right}.dlx-admin__license--wrapper .dlx-admin__tabs--content-actions{padding-top:0}.has-error input.components-text-control__input{background-color:var(--dlx-app-admin--color-notice--error);border:1px solid var(--dlx-app-admin--color-notice--error-alt)}.dlx-archive-pages-pro-table{border:0;border-collapse:collapse;box-sizing:border-box;width:100%}.dlx-archive-pages-pro-table tr{border-bottom:.0625rem solid #ddd}.dlx-archive-pages-pro-table th{font-size:1.3em;font-weight:500;padding:.8125rem 1.125rem;text-align:left}.dlx-archive-pages-pro-table tbody tr:last-child{border-bottom:0}.dlx-archive-pages-pro-table td{padding:1.25rem 1.125rem;text-align:left}.components-form-toggle.is-checked .components-form-toggle__track{background-color:#2271b1}.dlx-admin-component-row-button{align-items:center;display:flex;justify-content:space-between}.dlx-admin-component-row-button.no-flex{display:block}.dlx-admin-component-row-button.dlx-admin-buttons-flex-right{justify-content:flex-end}.dlx-admin-component-row-button svg.lucide path{fill:none!important}.dlx-admin-component-row-button a.components-button,.dlx-admin-component-row-button a.dlx-app__btn-secondary,.dlx-admin-component-row-button button,.dlx-admin-component-row-button.dlx-app__btn-primary{background:#fff;border:1px solid #017e01;border-radius:2px;color:#017e01;cursor:pointer;margin-right:12px;padding:10px 20px;transition:all .4s ease-in-out}.dlx-admin-component-row-button a.components-button:last-child,.dlx-admin-component-row-button a.dlx-app__btn-secondary:last-child,.dlx-admin-component-row-button button:last-child,.dlx-admin-component-row-button.dlx-app__btn-primary:last-child{margin-right:0}.dlx-admin-component-row-button a.components-button svg,.dlx-admin-component-row-button a.dlx-app__btn-secondary svg,.dlx-admin-component-row-button button svg,.dlx-admin-component-row-button.dlx-app__btn-primary svg{margin-right:8px}.dlx-admin-component-row-button a.components-button:hover,.dlx-admin-component-row-button a.dlx-app__btn-secondary:hover,.dlx-admin-component-row-button button:hover,.dlx-admin-component-row-button.dlx-app__btn-primary:hover{background:#e9ece6;border-color:#006400;border-radius:5px;color:#005200}.dlx-admin-component-row-button a.components-button.app-error,.dlx-admin-component-row-button a.dlx-app__btn-secondary.app-error,.dlx-admin-component-row-button button.app-error,.dlx-admin-component-row-button.dlx-app__btn-primary.app-error{border:1px solid #bc2b2c;box-shadow:none!important}.dlx-admin-component-row-button a.components-button.app-error:hover,.dlx-admin-component-row-button a.dlx-app__btn-secondary.app-error:hover,.dlx-admin-component-row-button button.app-error:hover,.dlx-admin-component-row-button.dlx-app__btn-primary.app-error:hover{cursor:not-allowed}.dlx-admin-component-row-button a.components-button.dlx-app__btn-white,.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn-white,.dlx-admin-component-row-button button.dlx-app__btn-white,.dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn-white{background:#fff;border-color:#111;color:#333}.dlx-admin-component-row-button a.components-button.dlx-app__btn-white:hover,.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn-white:hover,.dlx-admin-component-row-button button.dlx-app__btn-white:hover,.dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn-white:hover{background:#e6e6e6;border-color:#000;color:#111}.dlx-admin-component-row-button a.components-button.dlx-app__btn-secondary,.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn-secondary,.dlx-admin-component-row-button button.dlx-app__btn-secondary,.dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn-secondary{background:#fff;border-color:#111;color:#333;display:inline-block;height:unset;max-height:unset;padding:15px 20px}.dlx-admin-component-row-button a.components-button.dlx-app__btn-secondary:hover,.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn-secondary:hover,.dlx-admin-component-row-button button.dlx-app__btn-secondary:hover,.dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn-secondary:hover{background:#ddd;border-color:#333;color:#000}.dlx-admin-component-row-button a.components-button.dlx-app__btn-link,.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn-link,.dlx-admin-component-row-button button.dlx-app__btn-link,.dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn-link{all:unset;color:#9949cf;cursor:pointer;font-weight:600;text-decoration:underline}.dlx-admin-component-row-button a.components-button.dlx-app__btn-danger,.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn-danger,.dlx-admin-component-row-button button.dlx-app__btn-danger,.dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn-danger{background:#fff;border-color:#822700;color:#822700}.dlx-admin-component-row-button a.components-button.dlx-app__btn-danger:hover,.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn-danger:hover,.dlx-admin-component-row-button button.dlx-app__btn-danger:hover,.dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn-danger:hover{background:#ece6e6;border-color:#822700;color:#822700}.dlx-admin-component-row-button a.components-button.sce__btn-action,.dlx-admin-component-row-button a.dlx-app__btn-secondary.sce__btn-action,.dlx-admin-component-row-button button.sce__btn-action,.dlx-admin-component-row-button.dlx-app__btn-primary.sce__btn-action{align-items:center;background:#fff;border-color:#9949cf;color:#9949cf;display:flex;font-weight:600}.dlx-admin-component-row-button a.components-button.sce__btn-action:hover,.dlx-admin-component-row-button a.dlx-app__btn-secondary.sce__btn-action:hover,.dlx-admin-component-row-button button.sce__btn-action:hover,.dlx-admin-component-row-button.dlx-app__btn-primary.sce__btn-action:hover{background:#f8f7fe;border-color:#6f6f6f;color:#8019c4}.dlx-admin-component-row-button a.components-button.sce__btn-action:hover svg path,.dlx-admin-component-row-button a.dlx-app__btn-secondary.sce__btn-action:hover svg path,.dlx-admin-component-row-button button.sce__btn-action:hover svg path,.dlx-admin-component-row-button.dlx-app__btn-primary.sce__btn-action:hover svg path{fill:#8019c4}.dlx-admin-component-row-button a.components-button.sce__btn-action svg,.dlx-admin-component-row-button a.dlx-app__btn-secondary.sce__btn-action svg,.dlx-admin-component-row-button button.sce__btn-action svg,.dlx-admin-component-row-button.dlx-app__btn-primary.sce__btn-action svg{display:inline-block;margin-right:8px}.dlx-admin-component-row-button a.components-button.sce__btn-action svg path,.dlx-admin-component-row-button a.dlx-app__btn-secondary.sce__btn-action svg path,.dlx-admin-component-row-button button.sce__btn-action svg path,.dlx-admin-component-row-button.dlx-app__btn-primary.sce__btn-action svg path{fill:#9949cf}.dlx-admin-component-row-button a.components-button.dlx-app__btn--icon-right.is-saving,.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn--icon-right.is-saving,.dlx-admin-component-row-button button.dlx-app__btn--icon-right.is-saving,.dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn--icon-right.is-saving{align-items:center;display:flex;justify-content:center}.dlx-admin-component-row-button a.components-button.dlx-app__btn--icon-right.is-saving svg,.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn--icon-right.is-saving svg,.dlx-admin-component-row-button button.dlx-app__btn--icon-right.is-saving svg,.dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn--icon-right.is-saving svg{animation:app-pub-spin 1s linear infinite;height:24px;margin-left:8px;width:24px}.dlx-admin-component-row-button a.components-button.dlx-app__btn--icon-right.is-saving svg path,.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn--icon-right.is-saving svg path,.dlx-admin-component-row-button button.dlx-app__btn--icon-right.is-saving svg path,.dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn--icon-right.is-saving svg path{fill:currentColor}.dlx-admin-component-row-button a.components-button.dlx-app__btn--icon-right.is-saved,.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn--icon-right.is-saved,.dlx-admin-component-row-button button.dlx-app__btn--icon-right.is-saved,.dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn--icon-right.is-saved{align-items:center;display:flex;justify-content:center}.dlx-admin-component-row-button a.components-button.dlx-app__btn--icon-right.is-saved svg,.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn--icon-right.is-saved svg,.dlx-admin-component-row-button button.dlx-app__btn--icon-right.is-saved svg,.dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn--icon-right.is-saved svg{height:24px;margin-left:14px;width:24px}.dlx-admin-component-row-button a.components-button.dlx-app__btn--icon-right.is-saved svg path,.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn--icon-right.is-saved svg path,.dlx-admin-component-row-button button.dlx-app__btn--icon-right.is-saved svg path,.dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn--icon-right.is-saved svg path{fill:#017e01}.dlx-admin-component-row-button a.components-button.dlx-app__btn--icon-right.is-resetting,.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn--icon-right.is-resetting,.dlx-admin-component-row-button button.dlx-app__btn--icon-right.is-resetting,.dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn--icon-right.is-resetting{align-items:center;display:flex;justify-content:space-between}.dlx-admin-component-row-button a.components-button.dlx-app__btn--icon-right.is-resetting svg,.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn--icon-right.is-resetting svg,.dlx-admin-component-row-button button.dlx-app__btn--icon-right.is-resetting svg,.dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn--icon-right.is-resetting svg{animation:app-pub-spin 1s linear infinite;height:24px;width:24px}.dlx-admin-component-row-button a.components-button.dlx-app__btn--icon-right.is-resetting svg path,.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn--icon-right.is-resetting svg path,.dlx-admin-component-row-button button.dlx-app__btn--icon-right.is-resetting svg path,.dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn--icon-right.is-resetting svg path{fill:#822700}.dlx-admin-panel-area>h2~p,.dlx-info-text{font-size:16px;line-height:1.3}.form-table .inner-form td,.form-table .inner-form th{padding:8px 10px}.app-custom-fields-actions{margin-top:8px}.app-custom-fields-modal-row button{margin-right:12px}.app-custom-fields-modal-row button:last-child{margin-right:0}
+/*!****************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/@wordpress/scripts/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/scss/admin.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************/
+button.button-reset.components-button, button.button-reset.components-button:focus, button.button-reset.components-button:hover, button.button-reset.components-button.is-secondary, button.button-reset.components-button.is-secondary:focus, button.button-reset.components-button.is-secondary:hover, button.button-reset, button.button-reset:focus, button.button-reset:hover {
+  display: inline-block;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: inherit;
+  text-transform: unset;
+  box-shadow: none;
+  min-width: unset;
+  height: unset;
+}
+button.button-reset.show-cursor {
+  cursor: pointer;
+}
+
+.button-reset button,
+.button-reset:focus button,
+.button-reset:hover button {
+  display: inline-block;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: inherit;
+  text-transform: unset;
+  box-shadow: none;
+  min-width: unset;
+  height: unset;
+}
+
+/* Responsive styles - In hindsight, should've used mobile-first */
+/* Mixin from: https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/ */
+/* It's only used here, so no external file for mixin? */
+@keyframes app-pub-spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* Admin Interface Wrapper */
+#app-pub-content {
+  padding-top: 18px;
+}
+
+/* Admin loading icon */
+.app-pub-load-static-svg svg {
+  animation: app-pub-spin;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+/* Url Wrapper Input */
+.app-url-input {
+  display: inline-block;
+  max-width: 400px;
+  width: 100%;
+  flex-wrap: wrap;
+  position: relative;
+}
+.app-url-input .components-base-control .components-base-control__label {
+  font-size: 16px;
+  display: block;
+  width: 100%;
+}
+.app-url-input .apppub-suggestions-wrapper {
+  width: 100%;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  max-height: 250px;
+  overflow-y: auto;
+}
+.app-url-input .apppub-suggestions-wrapper .app-url-input__suggestion {
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 0;
+  width: 100%;
+  background: #FFF;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left;
+  padding: 5px 20px 5px 40px;
+  transition: all 0.4s ease-in-out;
+}
+.app-url-input .apppub-suggestions-wrapper .app-url-input__suggestion svg {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: calc(50% - 8px);
+  left: 10px;
+}
+.app-url-input .apppub-suggestions-wrapper .app-url-input__suggestion svg path {
+  fill: unset;
+}
+.app-url-input .apppub-suggestions-wrapper .app-url-input__suggestion:hover {
+  background: #f1f1f1;
+  border-color: var(--wp-admin-theme-color);
+}
+.app-url-input .apppub-suggestions-wrapper .app-url-input__suggestion.is-selected {
+  background: #f1f1f1;
+  border-color: var(--wp-admin-theme-color);
+}
+.app-url-input .apppub-suggestions-wrapper .app-url-input__suggestion .apppub-search-item {
+  display: block;
+  margin-right: 8px;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+.app-url-input .apppub-suggestions-wrapper .app-url-input__suggestion .apppub-search-item-title {
+  display: block;
+  margin-bottom: 0.2em;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.app-url-input .apppub-suggestions-wrapper .app-url-input__suggestion .apppub-search-item-info {
+  word-break: break-all;
+  display: block;
+  color: #757575;
+  font-size: 0.9em;
+  line-height: 1.3;
+}
+
+.app-pub-url-input__wrapper label {
+  display: block;
+  width: 100%;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.app-pub-url-input__wrapper .app-pub-url-input__suggestion {
+  background: #FFF;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-size: 13px;
+  padding: 11px 16px 11px 16px;
+  width: 100%;
+}
+.app-pub-url-input__wrapper .app-pub-url-input__suggestion-item .components-button {
+  margin-left: 8px;
+}
+.app-pub-url-input__wrapper .app-pub-url-input__input-wrapper {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 36px;
+  grid-gap: 10px;
+  width: 100%;
+}
+.app-pub-url-input__wrapper .app-pub-url-input__input-wrapper input[type=text] {
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-size: 13px;
+  padding: 11px 36px 11px 16px;
+  width: 100%;
+}
+.app-pub-url-input__wrapper .app-pub-url-input__input-wrapper .app-pub-url-input__input {
+  line-height: 1;
+}
+.app-pub-url-input__wrapper .app-pub-url-input__input-wrapper .components-spinner {
+  position: absolute;
+  right: 48px;
+  height: 24px;
+  top: calc(50% - 15px);
+}
+.app-pub-url-input__wrapper .app-pub-url-input__input-wrapper .app-pub-url-input__input ~ .components-button {
+  position: relative;
+  box-shadow: unset;
+  border: unset;
+  background: unset;
+}
+
+.app-pub-url-input__input ~ .components-button,
+.app-pub-url-input__suggestion-item .components-button {
+  position: relative;
+}
+.app-pub-url-input__input ~ .components-button .components-tooltip,
+.app-pub-url-input__suggestion-item .components-button .components-tooltip {
+  display: inline-block;
+  background: #333;
+  color: #FFF;
+  padding: 8px 12px;
+  border-radius: 3px;
+  font-size: 12px;
+  position: absolute;
+  top: calc(50% - 8px);
+  right: 10px;
+  min-width: 150px;
+  height: auto;
+  transition: opacity 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+/* Make interface full-width/full-height */
+#wpcontent {
+  position: relative;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  position: relative;
+  background-color: #ebebeb;
+}
+#wpcontent .quotes-dlx-plugin {
+  margin: 0;
+}
+
+#wpbody-content {
+  padding: 0;
+  margin: 0;
+}
+
+#screen-meta-links {
+  position: absolute;
+  float: unset;
+  margin: 0;
+  top: 20px;
+  right: 15px;
+  z-index: 1000;
+}
+
+#wpfooter {
+  display: none;
+}
+
+/* hide notices (only on our screen) */
+.notice {
+  display: none;
+}
+
+/* Admin container and header */
+.dlx-app-admin-wrap {
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+.dlx-app-admin-wrap header {
+  background: #4F4F4F;
+  padding: 1.5rem;
+  margin: 0 auto;
+}
+.dlx-app-admin-wrap header .dlx-app-logo-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 69.5rem;
+  margin: 0 auto;
+}
+.dlx-app-admin-wrap header .dlx-app-logo-wrapper img {
+  max-width: 450px;
+  height: auto;
+}
+.dlx-app-admin-wrap .dlx-app-admin-body-wrapper {
+  max-width: 69.5rem;
+  margin: 0 auto;
+  padding: 2.4em 20px;
+}
+.dlx-app-admin-wrap .dlx-app-body__content {
+  padding: 10px 35px;
+  background: #f0f0f1;
+  border: 1px solid #c3c4c7;
+  border-top: 0;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+  padding-bottom: 35px;
+  margin-bottom: 40px;
+}
+
+.dlx-app-admin-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dlx-app-admin-buttons button {
+  padding: 16px 20px;
+  height: unset;
+}
+.dlx-app-admin-buttons button.is-primary {
+  color: #FFF;
+}
+
+/* Button styles stolen from QuotesDLX */
+.header__btn-wrap {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  max-width: 100%;
+  margin-top: 15px;
+}
+@media (min-width: 30em) {
+  .header__btn-wrap {
+    max-width: 250px;
+    margin-top: 0;
+  }
+}
+@media (min-width: 48em) {
+  .header__btn-wrap {
+    max-width: 250px;
+    margin-top: 0;
+  }
+}
+@media (min-width: 64em) {
+  .header__btn-wrap {
+    max-width: 250px;
+    margin-top: 0;
+  }
+}
+.header__btn-wrap.left, .header__btn-wrap.right, .header__btn-wrap.center {
+  display: flex;
+}
+.header__btn-wrap.left {
+  justify-content: flex-start;
+}
+.header__btn-wrap.center {
+  justify-content: center;
+}
+.header__btn-wrap.right {
+  justify-content: flex-end;
+}
+.header__btn-wrap button,
+.header__btn-wrap .dlx-app__btn-primary {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0px;
+  border-radius: 2px;
+  font-size: 1.3em;
+  display: inline-block;
+  background: #fff;
+  color: #4f4f4f;
+  border: 2px solid #4f4f4f;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+  text-decoration: none;
+}
+.header__btn-wrap button:not([disabled]):hover,
+.header__btn-wrap .dlx-app__btn-primary:not([disabled]):hover {
+  border-radius: 2px;
+  background: #4f4f4f;
+  color: #fff;
+  border-color: #fff;
+  text-decoration: none;
+  transition: all 0.4s ease-in-out;
+}
+.header__btn-wrap .dlx-app__btn-primary {
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+}
+.header__btn-wrap .dlx-app__btn-primary:last-child {
+  margin-bottom: 0;
+}
+
+/**
+ * Turn on smooth scroll.
+ */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Table Styles when rows are sections */
+.form-table-row-sections tr {
+  border-bottom: 1px solid #ddd;
+}
+.form-table-row-sections tr:last-child {
+  border-bottom: 0;
+}
+.form-table-row-sections td {
+  padding-top: 20px;
+}
+
+.form-table td {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.form-table input[type=text],
+.form-table select {
+  display: block;
+  max-width: 600px !important;
+}
+.form-table .dlx-admin__row {
+  margin-bottom: 20px;
+}
+.form-table .dlx-admin__row:last-child {
+  margin-bottom: 0;
+}
+.form-table .dlx-admin__row {
+  max-width: 600px !important;
+}
+.form-table .dlx-admin__row .components-panel__body {
+  margin-top: 20px;
+  background: #FFF;
+  border: 1px solid #ddd;
+}
+.form-table .dlx-admin__row .components-panel__body button {
+  box-shadow: unset !important;
+}
+.form-table .dlx-admin__row .components-panel__body.is-opened .components-panel__body-title button {
+  box-shadow: unset !important;
+  /* override core style */
+  border-bottom: 1px solid #ddd;
+}
+.form-table .dlx-admin__row .components-panel__body.is-opened thead tr {
+  border-bottom: 1px solid #333;
+}
+.form-table .dlx-admin__row .components-panel__body.is-opened thead th {
+  padding-left: 10px;
+}
+.form-table .components-toggle-control__label,
+.form-table .components-base-control__label,
+.form-table .components-input-control__label {
+  font-weight: 600 !important;
+  /* override core style */
+  text-transform: capitalize !important;
+  /* override core style */
+  font-size: 14px !important;
+  /* override core style */
+}
+
+.dlx-app-admin-buttons button {
+  margin-right: 20px;
+}
+.dlx-app-admin-buttons button:last-child {
+  margin-right: 0;
+}
+.dlx-app-admin-buttons button:disabled {
+  opacity: 0.5;
+}
+.dlx-app-admin-buttons button.is-primary, .dlx-app-admin-buttons button:disabled {
+  background: #2271b1 !important;
+  /* override core style */
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.dlx-app-admin-buttons button.is-primary:hover:not(:disabled), .dlx-app-admin-buttons button:disabled:hover:not(:disabled) {
+  background: #135e96 !important;
+  /* override core style */
+}
+.dlx-app-admin-buttons button.is-saving svg, .dlx-app-admin-buttons button.is-resetting svg {
+  animation: app-pub-spin;
+  animation-duration: 1.2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+.dlx-app-admin-buttons button svg {
+  fill: none;
+  color: currentColor;
+}
+
+/**
+ * Snackbar styles.
+ */
+.dlx-app-snackbar.components-snackbar {
+  position: fixed;
+  top: 32px;
+  right: 0;
+  z-index: 10000;
+  background: #0D3172;
+  color: #FFF;
+}
+.dlx-app-snackbar.components-snackbar .components-snackbar__content {
+  display: flex;
+  align-items: center;
+}
+.dlx-app-snackbar.components-snackbar .components-snackbar__icon {
+  position: absolute;
+  top: 24px;
+  left: 28px;
+  left: 14px;
+  top: auto;
+  bottom: auto;
+  line-height: 0;
+}
+.dlx-app-snackbar.components-snackbar.dlx-app-snackbar-loading svg {
+  animation: app-pub-spin;
+  animation-duration: 1.2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+.dlx-app-snackbar.components-snackbar.dlx-app-snackbar-success {
+  background: #14720D;
+  color: #FFF;
+}
+.dlx-app-snackbar.components-snackbar.dlx-app-snackbar-error, .dlx-app-snackbar.components-snackbar.dlx-app-snackbar-critical {
+  background: #820000;
+  color: #FFF;
+}
+.dlx-app-snackbar.components-snackbar.dlx-app-snackbar-warning {
+  background: #FFC107;
+  color: #000;
+}
+
+:root {
+  --dlx-app-admin--color-notice--info: #e3f3f7;
+  --dlx-app-admin--color-notice--info-alt: #3a8dc4;
+  --dlx-app-admin--color-notice--success: #eaf5ea;
+  --dlx-app-admin--color-notice--success-alt: #49a939;
+  --dlx-app-admin--color-notice--warning: #fef6e1;
+  --dlx-app-admin--color-notice--warning-alt: #e8a931;
+  --dlx-app-admin--color-notice--error: #f5e5e4;
+  --dlx-app-admin--color-notice--error-alt: #bc2b2c;
+}
+
+/* Error Notices */
+.dlx-app-admin__notice {
+  margin: 10px 0;
+}
+.dlx-app-admin__notice.dlx-app-admin__notice--has-icon .components-notice__content {
+  display: grid;
+  grid-template-columns: 32px 1fr 1px;
+  align-items: center;
+}
+.dlx-app-admin__notice.dlx-app-admin__notice--has-icon.dlx-app-admin__notice-appearance--inline .components-notice__content {
+  display: flex;
+}
+.dlx-app-admin__notice.dlx-app-admin__notice--has-icon.dlx-app-admin__notice-appearance--inline .components-notice__content .dlx-app-admin__notice-icon {
+  margin-right: 8px;
+}
+.dlx-app-admin__notice .is-error,
+.dlx-app-admin__notice .is-critical {
+  background-color: #A13844;
+  border-left-color: #A13844;
+  color: #FFF;
+}
+.dlx-app-admin__notice .dlx-app-admin__notice-message {
+  font-size: 1.2em;
+  line-height: 1.4;
+  font-weight: 500;
+}
+.dlx-app-admin__notice.dlx-app-admin__notice-appearance--block .components-notice {
+  border-left: 4px solid transparent;
+  padding: 15px 20px;
+  padding-left: 15px;
+  margin-bottom: 15px;
+  margin-left: 0;
+  margin-right: 0;
+}
+.dlx-app-admin__notice.dlx-app-admin__notice-appearance--inline .components-notice {
+  padding-left: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+.dlx-app-admin__notice svg {
+  display: flex;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+}
+.dlx-app-admin__notice.dlx-app-admin__notice-type--error:not(.dlx-app-admin__notice-appearance--inline) {
+  background-color: var(--dlx-app-admin--color-notice--error);
+}
+.dlx-app-admin__notice.dlx-app-admin__notice-type--error:not(.dlx-app-admin__notice-appearance--inline) .components-notice {
+  border-left-color: var(--dlx-app-admin--color-notice--error-alt);
+}
+.dlx-app-admin__notice.dlx-app-admin__notice-type--error:not(.dlx-app-admin__notice-appearance--inline) svg {
+  color: var(--dlx-app-admin--color-notice--error-alt);
+}
+.dlx-app-admin__notice.dlx-app-admin__notice-type--error:not(.dlx-app-admin__notice-appearance--inline) svg path {
+  fill: var(--dlx-app-admin--color-notice--error-alt);
+}
+.dlx-app-admin__notice.dlx-app-admin__notice-type--error.dlx-app-admin__notice-appearance--inline .dlx-app-admin__notice-message {
+  color: #FFF;
+  fill: #FFF;
+}
+.dlx-app-admin__notice.dlx-app-admin__notice-type--error.dlx-app-admin__notice-appearance--inline svg {
+  width: 16px;
+  height: 16px;
+  margin-left: 15px;
+  margin-right: 8px;
+}
+.dlx-app-admin__notice.dlx-app-admin__notice-type--error.dlx-app-admin__notice-appearance--inline .components-notice__content {
+  padding: 8px 15px 8px 0;
+}
+.dlx-app-admin__notice.dlx-app-admin__notice-type--success {
+  background-color: var(--dlx-app-admin--color-notice--success);
+}
+.dlx-app-admin__notice.dlx-app-admin__notice-type--success .components-notice {
+  border-left-color: var(--dlx-app-admin--color-notice--success-alt);
+}
+.dlx-app-admin__notice.dlx-app-admin__notice-type--success svg path {
+  fill: var(--dlx-app-admin--color-notice--success-alt);
+}
+.dlx-app-admin__notice.dlx-app-admin__notice-type--info {
+  background-color: var(--dlx-app-admin--color-notice--info);
+}
+.dlx-app-admin__notice.dlx-app-admin__notice-type--info .components-notice {
+  border-left-color: var(--dlx-app-admin--color-notice--info-alt);
+}
+.dlx-app-admin__notice.dlx-app-admin__notice-type--info .dlx-app-admin__notice-icon svg:not(.lucide) path {
+  fill: var(--dlx-app-admin--color-notice--info-alt);
+}
+.dlx-app-admin__notice.dlx-app-admin__notice-type--info .dlx-app-admin__notice-icon svg.lucide {
+  color: var(--dlx-app-admin--color-notice--info-alt);
+}
+.dlx-app-admin__notice.dlx-app-admin__notice-type--info svg:not(.lucide) path {
+  fill: var(--dlx-app-admin--color-notice--info-alt);
+}
+.dlx-app-admin__notice.dlx-app-admin__notice-type--warning {
+  background-color: var(--dlx-app-admin--color-notice--warning);
+}
+.dlx-app-admin__notice.dlx-app-admin__notice-type--warning .components-notice {
+  border-left-color: var(--dlx-app-admin--color-notice--warning-alt);
+}
+.dlx-app-admin__notice.dlx-app-admin__notice-type--warning svg path {
+  fill: var(--dlx-app-admin--color-notice--warning-alt);
+}
+
+.components-button.button-reset.app-icon {
+  color: gray;
+  min-width: 48px;
+}
+
+.dlx-admin__row .is-required label {
+  position: relative;
+}
+.dlx-admin__row .is-required label:after {
+  position: absolute;
+  display: inline-block;
+  vertical-align: middle;
+  content: "*";
+  top: -3px;
+  color: #b53b07;
+  font-size: 1.4em;
+  line-height: 1.3;
+  margin-left: 8px;
+}
+.dlx-admin__row h3:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+button.dlx-app__btn-danger {
+  background: #fff;
+  color: #822700;
+  border-color: #822700;
+}
+button.dlx-app__btn-danger:hover {
+  background: #ece6e6;
+  color: #822700;
+  border-color: #822700;
+}
+
+.has-error input.components-text-control__input {
+  border: 1px solid var(--dlx-app-admin--color-notice--error-alt);
+  background-color: var(--dlx-app-admin--color-notice--error);
+}
+
+/* Toggle Styles */
+.components-form-toggle.is-checked .components-form-toggle__track {
+  background-color: #2271b1;
+}
+
+/* Admin Buttons */
+.dlx-admin-component-row-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dlx-admin-component-row-button.no-flex {
+  display: block;
+}
+.dlx-admin-component-row-button.dlx-admin-buttons-flex-right {
+  justify-content: flex-end;
+}
+.dlx-admin-component-row-button svg.lucide path {
+  fill: none !important;
+}
+.dlx-admin-component-row-button a.dlx-app__btn-secondary,
+.dlx-admin-component-row-button a.components-button, .dlx-admin-component-row-button.dlx-app__btn-primary,
+.dlx-admin-component-row-button button {
+  background: #fff;
+  color: #017e01;
+  border-style: solid;
+  border-color: #017e01;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.4s ease-in-out;
+  border-width: 1px;
+  margin-right: 12px;
+}
+.dlx-admin-component-row-button a.dlx-app__btn-secondary:last-child,
+.dlx-admin-component-row-button a.components-button:last-child, .dlx-admin-component-row-button.dlx-app__btn-primary:last-child,
+.dlx-admin-component-row-button button:last-child {
+  margin-right: 0;
+}
+.dlx-admin-component-row-button a.dlx-app__btn-secondary svg,
+.dlx-admin-component-row-button a.components-button svg, .dlx-admin-component-row-button.dlx-app__btn-primary svg,
+.dlx-admin-component-row-button button svg {
+  margin-right: 8px;
+}
+.dlx-admin-component-row-button a.dlx-app__btn-secondary:hover,
+.dlx-admin-component-row-button a.components-button:hover, .dlx-admin-component-row-button.dlx-app__btn-primary:hover,
+.dlx-admin-component-row-button button:hover {
+  border-radius: 5px;
+  background: #e9ece6;
+  color: #005200;
+  border-color: #006400;
+}
+.dlx-admin-component-row-button a.dlx-app__btn-secondary.app-error,
+.dlx-admin-component-row-button a.components-button.app-error, .dlx-admin-component-row-button.dlx-app__btn-primary.app-error,
+.dlx-admin-component-row-button button.app-error {
+  border: 1px solid #bc2b2c;
+  box-shadow: none !important;
+  /* override core style */
+}
+.dlx-admin-component-row-button a.dlx-app__btn-secondary.app-error:hover,
+.dlx-admin-component-row-button a.components-button.app-error:hover, .dlx-admin-component-row-button.dlx-app__btn-primary.app-error:hover,
+.dlx-admin-component-row-button button.app-error:hover {
+  cursor: not-allowed;
+}
+.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn-white,
+.dlx-admin-component-row-button a.components-button.dlx-app__btn-white, .dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn-white,
+.dlx-admin-component-row-button button.dlx-app__btn-white {
+  background: #fff;
+  color: #333;
+  border-color: #111;
+}
+.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn-white:hover,
+.dlx-admin-component-row-button a.components-button.dlx-app__btn-white:hover, .dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn-white:hover,
+.dlx-admin-component-row-button button.dlx-app__btn-white:hover {
+  background: rgb(229.5, 229.5, 229.5);
+  color: #111;
+  border-color: #000;
+}
+.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn-secondary,
+.dlx-admin-component-row-button a.components-button.dlx-app__btn-secondary, .dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn-secondary,
+.dlx-admin-component-row-button button.dlx-app__btn-secondary {
+  background: #FFF;
+  color: #333;
+  border-color: #111;
+  padding: 15px 20px;
+  display: inline-block;
+  height: unset;
+  max-height: unset;
+}
+.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn-secondary:hover,
+.dlx-admin-component-row-button a.components-button.dlx-app__btn-secondary:hover, .dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn-secondary:hover,
+.dlx-admin-component-row-button button.dlx-app__btn-secondary:hover {
+  background: #ddd;
+  color: #000;
+  border-color: #333;
+}
+.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn-link,
+.dlx-admin-component-row-button a.components-button.dlx-app__btn-link, .dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn-link,
+.dlx-admin-component-row-button button.dlx-app__btn-link {
+  all: unset;
+  cursor: pointer;
+  color: #9949cf;
+  font-weight: 600;
+  text-decoration: underline;
+}
+.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn-danger,
+.dlx-admin-component-row-button a.components-button.dlx-app__btn-danger, .dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn-danger,
+.dlx-admin-component-row-button button.dlx-app__btn-danger {
+  background: #fff;
+  color: #822700;
+  border-color: #822700;
+}
+.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn-danger:hover,
+.dlx-admin-component-row-button a.components-button.dlx-app__btn-danger:hover, .dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn-danger:hover,
+.dlx-admin-component-row-button button.dlx-app__btn-danger:hover {
+  background: #ece6e6;
+  color: #822700;
+  border-color: #822700;
+}
+.dlx-admin-component-row-button a.dlx-app__btn-secondary.sce__btn-action,
+.dlx-admin-component-row-button a.components-button.sce__btn-action, .dlx-admin-component-row-button.dlx-app__btn-primary.sce__btn-action,
+.dlx-admin-component-row-button button.sce__btn-action {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  color: #9949cf;
+  border-color: #9949cf;
+  font-weight: 600;
+}
+.dlx-admin-component-row-button a.dlx-app__btn-secondary.sce__btn-action:hover,
+.dlx-admin-component-row-button a.components-button.sce__btn-action:hover, .dlx-admin-component-row-button.dlx-app__btn-primary.sce__btn-action:hover,
+.dlx-admin-component-row-button button.sce__btn-action:hover {
+  background: rgb(248, 247, 254);
+  color: #8019c4;
+  border-color: #6f6f6f;
+}
+.dlx-admin-component-row-button a.dlx-app__btn-secondary.sce__btn-action:hover svg path,
+.dlx-admin-component-row-button a.components-button.sce__btn-action:hover svg path, .dlx-admin-component-row-button.dlx-app__btn-primary.sce__btn-action:hover svg path,
+.dlx-admin-component-row-button button.sce__btn-action:hover svg path {
+  fill: #8019c4;
+}
+.dlx-admin-component-row-button a.dlx-app__btn-secondary.sce__btn-action svg,
+.dlx-admin-component-row-button a.components-button.sce__btn-action svg, .dlx-admin-component-row-button.dlx-app__btn-primary.sce__btn-action svg,
+.dlx-admin-component-row-button button.sce__btn-action svg {
+  display: inline-block;
+  margin-right: 8px;
+}
+.dlx-admin-component-row-button a.dlx-app__btn-secondary.sce__btn-action svg path,
+.dlx-admin-component-row-button a.components-button.sce__btn-action svg path, .dlx-admin-component-row-button.dlx-app__btn-primary.sce__btn-action svg path,
+.dlx-admin-component-row-button button.sce__btn-action svg path {
+  fill: #9949cf;
+}
+.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn--icon-right.is-saving,
+.dlx-admin-component-row-button a.components-button.dlx-app__btn--icon-right.is-saving, .dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn--icon-right.is-saving,
+.dlx-admin-component-row-button button.dlx-app__btn--icon-right.is-saving {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn--icon-right.is-saving svg,
+.dlx-admin-component-row-button a.components-button.dlx-app__btn--icon-right.is-saving svg, .dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn--icon-right.is-saving svg,
+.dlx-admin-component-row-button button.dlx-app__btn--icon-right.is-saving svg {
+  width: 24px;
+  height: 24px;
+  margin-left: 8px;
+  animation: app-pub-spin 1s linear infinite;
+}
+.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn--icon-right.is-saving svg path,
+.dlx-admin-component-row-button a.components-button.dlx-app__btn--icon-right.is-saving svg path, .dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn--icon-right.is-saving svg path,
+.dlx-admin-component-row-button button.dlx-app__btn--icon-right.is-saving svg path {
+  fill: currentColor;
+}
+.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn--icon-right.is-saved,
+.dlx-admin-component-row-button a.components-button.dlx-app__btn--icon-right.is-saved, .dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn--icon-right.is-saved,
+.dlx-admin-component-row-button button.dlx-app__btn--icon-right.is-saved {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn--icon-right.is-saved svg,
+.dlx-admin-component-row-button a.components-button.dlx-app__btn--icon-right.is-saved svg, .dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn--icon-right.is-saved svg,
+.dlx-admin-component-row-button button.dlx-app__btn--icon-right.is-saved svg {
+  width: 24px;
+  height: 24px;
+  margin-left: 14px;
+}
+.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn--icon-right.is-saved svg path,
+.dlx-admin-component-row-button a.components-button.dlx-app__btn--icon-right.is-saved svg path, .dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn--icon-right.is-saved svg path,
+.dlx-admin-component-row-button button.dlx-app__btn--icon-right.is-saved svg path {
+  fill: #017e01;
+}
+.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn--icon-right.is-resetting,
+.dlx-admin-component-row-button a.components-button.dlx-app__btn--icon-right.is-resetting, .dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn--icon-right.is-resetting,
+.dlx-admin-component-row-button button.dlx-app__btn--icon-right.is-resetting {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn--icon-right.is-resetting svg,
+.dlx-admin-component-row-button a.components-button.dlx-app__btn--icon-right.is-resetting svg, .dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn--icon-right.is-resetting svg,
+.dlx-admin-component-row-button button.dlx-app__btn--icon-right.is-resetting svg {
+  width: 24px;
+  height: 24px;
+  animation: app-pub-spin 1s linear infinite;
+}
+.dlx-admin-component-row-button a.dlx-app__btn-secondary.dlx-app__btn--icon-right.is-resetting svg path,
+.dlx-admin-component-row-button a.components-button.dlx-app__btn--icon-right.is-resetting svg path, .dlx-admin-component-row-button.dlx-app__btn-primary.dlx-app__btn--icon-right.is-resetting svg path,
+.dlx-admin-component-row-button button.dlx-app__btn--icon-right.is-resetting svg path {
+  fill: #822700;
+}
+
+.dlx-info-text {
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+.dlx-admin-panel-area > h2 ~ p {
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+.form-table .inner-form th {
+  padding: 8px 10px;
+}
+
+.form-table .inner-form td {
+  padding: 8px 10px;
+}
+
+.app-custom-fields-actions {
+  margin-top: 8px;
+}
+
+.app-custom-fields-modal-row button {
+  margin-right: 12px;
+}
+.app-custom-fields-modal-row button:last-child {
+  margin-right: 0;
+}
+
+/*# sourceMappingURL=app-admin-css.css.map*/

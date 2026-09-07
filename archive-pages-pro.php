@@ -2,13 +2,11 @@
 
 /*
  * Plugin Name: Archive Pages Pro
- * Plugin URI: https://dlxplugins.com/plugins/archive-pages-pro/
  * Description: Map archives to pages with a few clicks.
  * Author: DLX Plugins
  * Version: 1.0.2
  * Requires at least: 6.0
  * Requires PHP: 7.2
- * Author URI: https://dlxplugins.com
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: archive-pages-pro
@@ -18,7 +16,6 @@ namespace DLXPlugins\APP;
 
 define( 'ARCHIVE_PAGES_PRO_VERSION', '1.0.2' );
 define( 'ARCHIVE_PAGES_PRO_FILE', __FILE__ );
-define( 'ARCHIVE_PAGES_PRO_PRODUCT_ID', 38185 );
 
 // Support for site-level autoloading.
 if ( file_exists( __DIR__ . '/lib/autoload.php' ) ) {
@@ -100,9 +97,6 @@ class Archive_Pages_Pro {
 		$admin = new Admin();
 		$admin->run();
 
-		// Add init to check for licenses (only in admin).
-		add_action( 'admin_init', array( $this, 'check_license' ) );
-
 		add_action( 'admin_init', array( $this, 'init_settings_api' ) );
 		add_action( 'pre_get_posts', array( $this, 'maybe_override_archive' ) );
 
@@ -146,35 +140,6 @@ class Archive_Pages_Pro {
 
 		// Allow post types for block editor.
 		add_filter( 'use_block_editor_for_post', array( $this, 'enable_blocks_for_post_types' ), 10, 2 );
-	}
-
-	/**
-	 * Check for a license if in admin every 12 hours.
-	 */
-	public function check_license() {
-		$options = Options::get_options();
-
-		$license_key   = $options['licenseKey'];
-		$license_valid = (bool) $options['licenseValid'];
-
-		// If the license key is empty, return.
-		if ( empty( $license_key ) ) {
-			return;
-		}
-
-		// If license is invalid, return.
-		if ( ! $license_valid ) {
-			return;
-		}
-
-		// Get stored transient, which is stored for 12 hours.
-		$transient = get_site_transient( 'app_core_license_check', array() );
-
-		// If the transient is empty, do a license check.
-		if ( empty( $transient ) ) {
-			$license_helper = new Plugin_License( $license_key );
-			$license_helper->perform_action( 'check_license', $license_key, true );
-		}
 	}
 
 	/**
@@ -1065,22 +1030,22 @@ class Archive_Pages_Pro {
 
 		// Maybe Redirect.
 		if ( is_page() && $post_type_mapping_enabled ) {
-			$object_id = get_queried_object_id();
-			$post_meta = get_post_meta( $object_id, '_post_type_mapped', true );
-			$term_mapped_id = get_post_meta( $object_id, '_term_mapped', true );
+			$object_id        = get_queried_object_id();
+			$post_meta        = get_post_meta( $object_id, '_post_type_mapped', true );
+			$term_mapped_id   = get_post_meta( $object_id, '_term_mapped', true );
 			$author_mapped_id = get_post_meta( $object_id, '_user_mapped', true );
 			if ( $post_meta ) {
 				if ( $post_meta && ! get_query_var( 'redirected' ) ) {
 					wp_safe_redirect( get_post_type_archive_link( $post_meta ) );
 					exit;
 				}
-			} else if ( $term_mapped_id ) {
+			} elseif ( $term_mapped_id ) {
 				if ( $term_mapped_id && ! get_query_var( 'redirected' ) ) {
 					$term = get_term( $term_mapped_id );
 					wp_safe_redirect( get_term_link( $term ) );
 					exit;
 				}
-			} else if ( $author_mapped_id ) {
+			} elseif ( $author_mapped_id ) {
 				if ( $author_mapped_id && ! get_query_var( 'redirected' ) ) {
 					$user = get_user_by( 'id', $author_mapped_id );
 					wp_safe_redirect( get_author_posts_url( $user->ID ) );
