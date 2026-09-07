@@ -14,7 +14,7 @@
 	"devDependencies": {
 		"@babel/eslint-parser": "^7.18.2",
 		"@babel/plugin-proposal-class-properties": "^7.17.12",
-		"@babel/plugin-transform-arrow-functions": "^7.17.12",
+		"@babel/plugin-transform-arrow-functions": "^8.0.1",
 		"@babel/preset-env": "^7.18.2",
 		"@babel/preset-react": "^7.17.12",
 		"@wordpress/block-editor": "^17.0.0",
